@@ -1,0 +1,3690 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>شلة متعوب عليها v6.0 | BY : karemyseer 2026</title>
+
+    <meta name="theme-color" content="#040d14">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="شلة متعوب عليها">
+
+    <style>
+        :root {
+            --bg-deep: #040d14;
+            --bg-card: rgba(12, 28, 43, 0.92);
+            --bg-panel: rgba(20, 44, 66, 0.84);
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.35);
+            --gold: #f59e0b;
+            --gold-bright: #fbbf24;
+            --gold-glow: rgba(251, 191, 36, 0.35);
+            --crimson: #f43f5e;
+            --cyan: #06b6d4;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-gold: rgba(251, 191, 36, 0.35);
+            --border-subtle: rgba(148, 163, 184, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, 'Segoe UI', Tahoma, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        input, textarea {
+            -webkit-user-select: text;
+            user-select: text;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #0d332e 0%, #061621 55%, #03090f 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: calc(10px + env(safe-area-inset-top, 0px)) 10px calc(155px + env(safe-area-inset-bottom, 0px)) 10px;
+            max-width: 660px;
+            margin: 0 auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .bg-suits {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            opacity: 0.07;
+        }
+        .suit-float {
+            position: absolute;
+            font-size: 36px;
+            animation: floatUp 16s infinite linear;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-15vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes pulseCrown {
+            0%, 100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px rgba(251,191,36,0.5)); }
+            50% { transform: translateY(-3px) scale(1.04); filter: drop-shadow(0 0 14px rgba(251,191,36,0.85)); }
+        }
+
+        @keyframes slideFadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .anim-in { animation: slideFadeIn 0.22s ease-out forwards; }
+
+        button, input, select, textarea {
+            font-family: inherit;
+            outline: none;
+            border: none;
+        }
+        button {
+            cursor: pointer;
+            transition: all 0.16s ease;
+        }
+        button:active { transform: scale(0.94); }
+
+        .card {
+            position: relative;
+            z-index: 1;
+            background: var(--bg-card);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border-gold);
+            border-radius: 18px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+        }
+
+        .panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 10px;
+        }
+
+        .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+        .row-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
+        .grid-7 { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #fde047 0%, #f59e0b 55%, #b45309 100%);
+            color: #040d14;
+            font-weight: 900;
+            border-radius: 12px;
+            padding: 9px 13px;
+            box-shadow: 0 4px 14px var(--gold-glow);
+        }
+        .btn-emerald {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 55%, #047857 100%);
+            color: #031c14;
+            font-weight: 900;
+            border-radius: 12px;
+            padding: 9px 13px;
+            box-shadow: 0 4px 14px var(--emerald-glow);
+        }
+        .btn-crimson {
+            background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%);
+            color: #fff;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 8px 12px;
+        }
+        .btn-dark {
+            background: rgba(22, 46, 68, 0.92);
+            color: #e2e8f0;
+            border: 1px solid var(--border-subtle);
+            border-radius: 11px;
+            padding: 8px 10px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+        .btn-dark.active {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            color: #040d14;
+            border-color: #fde047;
+            font-weight: 900;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 9px;
+            border-radius: 99px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+        .badge-gold { background: rgba(245,158,11,0.18); color: #fbbf24; border: 1px solid rgba(245,158,11,0.45); }
+        .badge-emerald { background: rgba(16,185,129,0.18); color: #34d399; border: 1px solid rgba(16,185,129,0.45); }
+        .badge-crimson { background: rgba(244,63,94,0.18); color: #fb7185; border: 1px solid rgba(244,63,94,0.45); }
+        .badge-cyan { background: rgba(6,182,212,0.18); color: #22d3ee; border: 1px solid rgba(6,182,212,0.45); }
+
+        .input-box {
+            width: 100%;
+            background: rgba(6, 17, 27, 0.92);
+            border: 1px solid rgba(251, 191, 36, 0.35);
+            color: #fff;
+            padding: 8px 11px;
+            border-radius: 11px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .score-box {
+            background: linear-gradient(180deg, rgba(10, 25, 39, 0.95) 0%, rgba(6, 16, 25, 0.95) 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 9px 5px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+        }
+        .score-box.king-active {
+            border: 2px solid var(--gold-bright);
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+        .score-num {
+            font-size: 21px;
+            font-weight: 900;
+            margin-top: 3px;
+        }
+        .pos-score { color: #34d399; }
+        .neg-score { color: #fb7185; }
+
+        /* منصة المتصدرين (المركز الأول والثاني والثالث) */
+        .podium-strip {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr 1fr;
+            gap: 6px;
+            align-items: end;
+            background: linear-gradient(180deg, rgba(15, 35, 54, 0.9) 0%, rgba(7, 18, 29, 0.95) 100%);
+            border: 1px solid rgba(251, 191, 36, 0.32);
+            border-radius: 15px;
+            padding: 9px 8px;
+            margin-bottom: 10px;
+        }
+        .podium-col {
+            border-radius: 12px;
+            padding: 7px 5px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+        .podium-1 {
+            background: linear-gradient(160deg, rgba(251, 191, 36, 0.28) 0%, rgba(180, 83, 9, 0.25) 100%);
+            border: 1.5px solid #fbbf24;
+            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.25);
+            padding: 10px 5px;
+        }
+        .podium-2 {
+            background: linear-gradient(160deg, rgba(203, 213, 225, 0.18) 0%, rgba(100, 116, 139, 0.2) 100%);
+            border: 1px solid rgba(203, 213, 225, 0.45);
+        }
+        .podium-3 {
+            background: linear-gradient(160deg, rgba(217, 119, 6, 0.18) 0%, rgba(120, 53, 15, 0.22) 100%);
+            border: 1px solid rgba(217, 119, 6, 0.5);
+        }
+
+        /* بطاقات تحديات الشلة */
+        .challenge-card {
+            background: rgba(11, 27, 42, 0.92);
+            border: 1px solid var(--border-subtle);
+            border-radius: 13px;
+            padding: 9px 11px;
+            margin-bottom: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .challenge-card.done {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(245, 158, 11, 0.16) 100%);
+            border-color: var(--emerald);
+        }
+
+        .tabs-bar {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 4px;
+            background: rgba(8, 20, 32, 0.94);
+            padding: 6px;
+            border-radius: 16px;
+            border: 1px solid var(--border-gold);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .tab-btn {
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 10px;
+            font-weight: 800;
+            padding: 7px 2px;
+            border-radius: 11px;
+            line-height: 1.25;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #fde047 0%, #f59e0b 100%);
+            color: #040d14;
+            font-weight: 900;
+        }
+
+        .contract-btn {
+            background: rgba(15, 34, 52, 0.92);
+            border: 1px solid var(--border-subtle);
+            color: #e2e8f0;
+            border-radius: 13px;
+            padding: 8px 4px;
+            font-size: 11px;
+            font-weight: 800;
+            text-align: center;
+        }
+        .contract-btn.selected {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(245, 158, 11, 0.35));
+            border: 1.5px solid var(--gold-bright);
+            color: #fef08a;
+        }
+        .contract-btn.locked {
+            opacity: 0.38;
+            text-decoration: line-through;
+        }
+
+        .tarab-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            padding: 9px 11px;
+            border-radius: 12px;
+            background: rgba(12, 28, 44, 0.92);
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+        .tarab-item.playing {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.24) 0%, rgba(16, 185, 129, 0.2) 100%);
+            border: 1.5px solid var(--gold-bright);
+        }
+
+        .media-remote-dock {
+            position: fixed;
+            bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+            left: 10px;
+            right: 10px;
+            background: linear-gradient(145deg, rgba(10, 27, 42, 0.97) 0%, rgba(4, 13, 22, 0.99) 100%);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border: 1.5px solid rgba(251, 191, 36, 0.48);
+            padding: 10px 13px;
+            z-index: 60;
+            max-width: 630px;
+            margin: 0 auto;
+            border-radius: 24px;
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.85);
+        }
+        .media-remote-dock.minimized {
+            padding: 7px 12px;
+            border-radius: 99px;
+        }
+
+        .vinyl-disc {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fbbf24 0%, #b45309 22%, #0f172a 26%, #1e293b 48%, #020617 100%);
+            border: 1.5px solid var(--gold-bright);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .vinyl-disc::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #040d14;
+            border: 1px solid #fde047;
+        }
+        .vinyl-spinning { animation: spinVinyl 3.5s linear infinite; }
+        @keyframes spinVinyl {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .media-ctrl-circle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(24, 51, 75, 0.9);
+            border: 1px solid rgba(255,255,255,0.14);
+            color: #f8fafc;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 900;
+        }
+        .media-ctrl-play {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fde047 0%, #f59e0b 55%, #b45309 100%);
+            color: #040d14;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 900;
+            box-shadow: 0 0 16px rgba(251, 191, 36, 0.55);
+        }
+
+        .app-chip {
+            padding: 5px 9px;
+            border-radius: 99px;
+            font-size: 10.5px;
+            font-weight: 900;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(15, 32, 48, 0.92);
+            color: #f1f5f9;
+        }
+        .app-chip.yt-red {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.28) 0%, rgba(225, 29, 72, 0.35) 100%);
+            border-color: rgba(251, 191, 36, 0.65);
+            color: #fef08a;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 8, 14, 0.86);
+            backdrop-filter: blur(6px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+        }
+        .modal-card {
+            background: #0b1c2c;
+            border: 2px solid var(--gold);
+            border-radius: 22px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.85);
+        }
+
+        #toastBox {
+            position: fixed;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+            border: 2px solid #34d399;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 99px;
+            font-size: 12.5px;
+            font-weight: 900;
+            z-index: 250;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.75);
+            white-space: nowrap;
+        }
+
+        .counter-ctrl {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #06121c;
+            border-radius: 10px;
+            padding: 3px;
+            border: 1px solid var(--border-subtle);
+        }
+        .counter-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background: #1a3650;
+            color: #fff;
+            font-weight: 900;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-suits">
+        <span class="suit-float" style="left: 8%; animation-delay: 0s; color: #f43f5e;">♥️</span>
+        <span class="suit-float" style="left: 28%; animation-delay: 4s; color: #fbbf24;">♠️</span>
+        <span class="suit-float" style="left: 55%; animation-delay: 2s; color: #f43f5e;">♦️</span>
+        <span class="suit-float" style="left: 78%; animation-delay: 7s; color: #34d399;">♣️</span>
+    </div>
+
+    <div id="toastBox" class="hidden"></div>
+
+    <!-- 1. الهيدر العلوي والشعار الملكي -->
+    <header class="card" style="padding: 11px 13px;">
+        <div class="row">
+            <div class="row" style="gap: 10px;">
+                <div style="animation: pulseCrown 3.2s infinite ease-in-out;">
+                    <svg id="appLogoSvg" width="50" height="50" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="72" height="72" rx="18" fill="url(#royalBg)"></rect>
+                        <rect x="2" y="2" width="68" height="68" rx="16" stroke="url(#goldRim)" stroke-width="2"></rect>
+                        <rect x="14" y="16" width="26" height="36" rx="5" transform="rotate(-12 14 16)" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5"></rect>
+                        <rect x="30" y="14" width="28" height="38" rx="5" transform="rotate(8 30 14)" fill="#ffffff" stroke="#f59e0b" stroke-width="1.5"></rect>
+                        <text x="35" y="27" fill="#e11d48" font-size="11" font-weight="900" font-family="Arial">7♥</text>
+                        <path d="M43 32C43 32 38 27 35 30C32 33 35 38 43 43C51 38 54 33 51 30C48 27 43 32 43 32Z" fill="#e11d48"></path>
+                        <path d="M14 50L22 35L36 45L50 35L58 50L54 60H18L14 50Z" fill="url(#crownGold)" stroke="#040d14" stroke-width="1.5"></path>
+                        <defs>
+                            <linearGradient id="royalBg" x1="0" y1="0" x2="72" y2="72" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#064e3b"></stop><stop offset="0.5" stop-color="#0f172a"></stop><stop offset="1" stop-color="#451a03"></stop>
+                            </linearGradient>
+                            <linearGradient id="goldRim" x1="0" y1="0" x2="72" y2="72" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#fde047"></stop><stop offset="1" stop-color="#b45309"></stop>
+                            </linearGradient>
+                            <linearGradient id="crownGold" x1="14" y1="35" x2="58" y2="60" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#fef08a"></stop><stop offset="0.5" stop-color="#f59e0b"></stop><stop offset="1" stop-color="#92400e"></stop>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div>
+                    <div class="row-wrap" style="justify-content: flex-start; gap: 5px;">
+                        <h1 style="font-size: 16.5px; font-weight: 900; color: var(--gold-bright);">شلة متعوب عليها</h1>
+                        <span class="badge badge-cyan" style="font-size: 9px; padding: 2px 7px;">v6.0 Champions</span>
+                        <span id="liveHeaderIndicator" onclick="switchTab('live')" class="badge badge-emerald" style="cursor: pointer; font-size: 9.5px;">🟢 متصل</span>
+                    </div>
+                    <p style="font-size: 10.5px; color: var(--text-muted); font-weight: 800; margin-top: 2px;">
+                        <span id="headerAccountLabel" onclick="openSyncModal()" style="color: var(--emerald); cursor: pointer; text-decoration: underline;">🦁 حساب الشلة</span> • <span onclick="openDevPortalModal()" style="color: var(--gold-bright); cursor: pointer;">BY : karemyseer 2026</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row" style="gap: 4px;">
+                <button id="tableToggleBtn" onclick="toggleActiveTableSlot()" class="btn-dark active" style="padding: 7px 8px; font-size: 10.5px;" title="تبديل الطاولة عند فتح طاولتين بموبايلين">🃏 طاولة 1</button>
+                <button onclick="openNamesModal()" class="btn-gold" style="padding: 8px 9px; font-size: 11px;">✏️ الأسماء</button>
+            </div>
+        </div>
+
+        <div id="topPlayersBar" class="grid-4" style="margin-top: 10px;"></div>
+    </header>
+
+    <!-- 2. شريط التبويبات الثمانية (مع تبويب التحديات والمتصدرين) -->
+    <nav class="tabs-bar">
+        <button onclick="switchTab('trix')" id="tab-trix" class="tab-btn active">👑<br>تركس</button>
+        <button onclick="switchTab('complex')" id="tab-complex" class="tab-btn">⚡<br>كمبلكس</button>
+        <button onclick="switchTab('syrian41')" id="tab-syrian41" class="tab-btn">🔥<br>سوري 41</button>
+        <button onclick="switchTab('classic')" id="tab-classic" class="tab-btn">🃏<br>طرنيب</button>
+        <button onclick="switchTab('challenges')" id="tab-challenges" class="tab-btn">🏆<br>التحديات</button>
+        <button onclick="switchTab('draw8')" id="tab-draw8" class="tab-btn">🎲<br>القرعة</button>
+        <button onclick="switchTab('live')" id="tab-live" class="tab-btn">📡<br>اللايف</button>
+        <button onclick="switchTab('archive')" id="tab-archive" class="tab-btn">📊<br>السجل</button>
+    </nav>
+
+    <!-- القسم 1: تركس عادي -->
+    <section id="sec-trix" class="anim-in">
+        <div class="card">
+            <div class="row-wrap" style="justify-content: space-between; margin-bottom: 8px;">
+                <div class="row" style="gap: 5px;">
+                    <button id="trixModeIndiv" onclick="setGamePlayMode('trix', 'individual')" class="btn-dark active">👤 يهودية (4 لاعبين)</button>
+                    <button id="trixModeTeams" onclick="setGamePlayMode('trix', 'teams')" class="btn-dark">🤝 شراكة (فريقين)</button>
+                </div>
+                <div class="row" style="gap: 5px;">
+                    <button onclick="startPatienceTimer()" id="timerBtn" class="btn-dark">⏱️ 30ث</button>
+                    <button onclick="openSevenHeartsModal('trix')" class="btn-crimson" style="font-size: 11px; padding: 7px 10px;">7♥️ مع مين 7 الكبة؟</button>
+                </div>
+            </div>
+
+            <!-- منصة متصدري التركس الحية (المركز 1 و 2 و 3) -->
+            <div id="trixLivePodium"></div>
+
+            <div class="row panel" style="margin-bottom: 8px; padding: 7px 10px;">
+                <span style="font-size: 11px; font-weight: 800; color: var(--gold-bright);">⚖️ حكم أكل الورقة المدبلة لنفس اللاعب/الفريق:</span>
+                <select id="trixSelfDoubleRule" onchange="updateSelfDoubleRule(this.value)" class="input-box" style="width: auto; padding: 4px 8px; font-size: 11px;">
+                    <option value="net">ينزل الصافي (-75 للشيخ / -25 للبنت)</option>
+                    <option value="full">عقوبة كاملة (-150 للشيخ / -50 للبنت)</option>
+                </select>
+            </div>
+
+            <div class="row" style="margin-bottom: 6px;">
+                <span id="trixCurrentKingdomTitle" style="font-size: 13px; font-weight: 900; color: var(--gold-bright);"></span>
+                <button onclick="unlockAllContracts('trix')" class="badge badge-gold" style="cursor: pointer;">🔓 فتح الطلبات</button>
+            </div>
+            <div id="trixKingdomsStrip" class="grid-4" style="margin-bottom: 10px;"></div>
+            <div id="trixScoreboard" style="margin-bottom: 10px;" class="grid-4"></div>
+            <div id="trixContractsBar" class="grid-5" style="margin-bottom: 10px;"></div>
+            <div id="trixCalculatorArea" class="panel" style="margin-bottom: 10px;"></div>
+
+            <div class="row">
+                <button onclick="undoLastRound('trix')" class="btn-dark" style="flex: 1;">↩️ تراجع عن جولة</button>
+                <button onclick="saveMatchToArchive('trix', 'تركس عادي')" class="btn-emerald" style="flex: 1.5;">💾 إنهاء وحفظ بأرشيف التركس</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div style="font-size: 12.5px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">📝 سجل جولات التركس الحالية:</div>
+            <div id="trixHistoryList" style="font-size: 11.5px;"></div>
+        </div>
+    </section>
+
+    <!-- القسم 2: تركس كمبلكس منفصل -->
+    <section id="sec-complex" class="hidden anim-in">
+        <div class="card">
+            <div class="row-wrap" style="justify-content: space-between; margin-bottom: 8px;">
+                <div class="row" style="gap: 5px;">
+                    <button id="complexModeIndiv" onclick="setGamePlayMode('complex', 'individual')" class="btn-dark active">👤 كمبلكس يهودية</button>
+                    <button id="complexModeTeams" onclick="setGamePlayMode('complex', 'teams')" class="btn-dark">🤝 كمبلكس شراكة</button>
+                </div>
+                <button onclick="openSevenHeartsModal('complex')" class="btn-crimson" style="font-size: 11px; padding: 7px 10px;">7♥️ مع مين 7 الكبة؟</button>
+            </div>
+
+            <!-- منصة متصدري الكمبلكس الحية -->
+            <div id="complexLivePodium"></div>
+
+            <div class="row" style="margin-bottom: 6px;">
+                <span id="complexCurrentKingdomTitle" style="font-size: 13px; font-weight: 900; color: var(--cyan);"></span>
+                <button onclick="unlockAllContracts('complex')" class="badge badge-cyan" style="cursor: pointer;">🔓 فتح الطلبين</button>
+            </div>
+            <div id="complexKingdomsStrip" class="grid-4" style="margin-bottom: 10px;"></div>
+            <div id="complexScoreboard" style="margin-bottom: 10px;" class="grid-4"></div>
+            <div id="complexContractsBar" class="grid-2" style="margin-bottom: 10px;"></div>
+            <div id="complexCalculatorArea" class="panel" style="margin-bottom: 10px;"></div>
+
+            <div class="row">
+                <button onclick="undoLastRound('complex')" class="btn-dark" style="flex: 1;">↩️ تراجع</button>
+                <button onclick="saveMatchToArchive('complex', 'تركس كمبلكس')" class="btn-emerald" style="flex: 1.5;">💾 إنهاء وحفظ بأرشيف الكمبلكس</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div style="font-size: 12.5px; font-weight: 900; color: var(--cyan); margin-bottom: 6px;">📝 سجل جولات الكمبلكس:</div>
+            <div id="complexHistoryList" style="font-size: 11.5px;"></div>
+        </div>
+    </section>
+
+    <!-- القسم 3: طرنيب سوري 41 -->
+    <section id="sec-syrian41" class="hidden anim-in">
+        <div class="card">
+            <div class="row" style="margin-bottom: 8px;">
+                <div>
+                    <h2 style="font-size: 14px; font-weight: 900; color: var(--gold-bright);">🔥 الطرنيب السوري (41)</h2>
+                    <p style="font-size: 10.5px; color: var(--text-muted);">شرط الفوز: وصول لاعب إلى 41+ وشريكه صفر أو موجب</p>
+                </div>
+                <span id="syrianTotalBidsBadge" class="badge badge-emerald">مجموع الطلبات: 12</span>
+            </div>
+
+            <!-- منصة متصدري السوري 41 الحية -->
+            <div id="syrianLivePodium"></div>
+
+            <div id="syrianFartAlert" class="panel hidden" style="border-color: var(--crimson); color: #fda4af; font-size: 11.5px; font-weight: 900; text-align: center; margin-bottom: 8px;">
+                ⚠️ مجموع الطلبات أقل من 11 — اللعبة فرطت! أعد التوزيع أو ارفع الطلبات.
+            </div>
+
+            <div id="syrianPlayersGrid" class="grid-2" style="margin-bottom: 10px;"></div>
+
+            <div class="row" style="gap: 6px;">
+                <button onclick="undoSyrianRound()" class="btn-dark">↩️ تراجع</button>
+                <button onclick="commitSyrian41Round()" class="btn-gold" style="flex: 1.5; padding: 10px;">✅ تسجيل جولة السوري 41</button>
+                <button onclick="saveMatchToArchive('syrian41', 'طرنيب سوري 41')" class="btn-emerald">💾 حفظ بالأرشيف</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div style="font-size: 12.5px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">📝 سجل جولات السوري 41:</div>
+            <div id="syrianHistoryList" style="font-size: 11.5px;"></div>
+        </div>
+    </section>
+
+    <!-- القسم 4: طرنيب عادي -->
+    <section id="sec-classic" class="hidden anim-in">
+        <div class="card">
+            <div class="row" style="margin-bottom: 10px;">
+                <span style="font-size: 14px; font-weight: 900; color: var(--gold-bright);">🃏 الطرنيب العادي (شراكة)</span>
+                <div class="row" style="gap: 5px;">
+                    <button id="clTarget31" onclick="setClassicTarget(31)" class="btn-dark active">سقف 31</button>
+                    <button id="clTarget61" onclick="setClassicTarget(61)" class="btn-dark">سقف 61</button>
+                </div>
+            </div>
+
+            <div id="classicLeaderBanner" class="panel" style="margin-bottom: 10px; font-size: 11.5px; text-align: center; border-color: var(--gold);"></div>
+
+            <div class="grid-2" style="margin-bottom: 10px;">
+                <div onclick="openNamesModal()" class="score-box" style="border-color: var(--emerald);">
+                    <div id="clTeam0Title" style="font-size: 13px; font-weight: 900; color: var(--emerald);">فريق لنا</div>
+                    <div id="clTeam0Players" style="font-size: 10px; color: var(--text-muted);"></div>
+                    <div id="clTeam0Score" class="score-num pos-score">0</div>
+                </div>
+                <div onclick="openNamesModal()" class="score-box" style="border-color: var(--crimson);">
+                    <div id="clTeam1Title" style="font-size: 13px; font-weight: 900; color: var(--crimson);">فريق لهم</div>
+                    <div id="clTeam1Players" style="font-size: 10px; color: var(--text-muted);"></div>
+                    <div id="clTeam1Score" class="score-num pos-score">0</div>
+                </div>
+            </div>
+
+            <div class="panel" style="margin-bottom: 10px;">
+                <div style="font-size: 11.5px; font-weight: 800; margin-bottom: 6px;">1. من الفريق المشتري (صاحب الطلب)؟</div>
+                <div class="grid-2" style="margin-bottom:10px;">
+                    <button id="clBidder0Btn" onclick="setClassicBidder(0)" class="btn-dark active">فريق لنا</button>
+                    <button id="clBidder1Btn" onclick="setClassicBidder(1)" class="btn-dark">فريق لهم</button>
+                </div>
+
+                <div style="font-size: 11.5px; font-weight: 800; margin-bottom: 6px;">2. قيمة الطلب (7 إلى 13 كبوت):</div>
+                <div id="classicBidGrid" class="grid-7" style="margin-bottom: 10px;"></div>
+
+                <div style="font-size: 11.5px; font-weight: 800; margin-bottom: 6px;">3. كم أكلة جاب الفريق المشتري؟</div>
+                <div id="classicTricksGrid" class="grid-5"></div>
+            </div>
+
+            <div class="row" style="gap: 6px;">
+                <button onclick="undoClassicRound()" class="btn-dark">↩️ تراجع</button>
+                <button onclick="commitClassicTarneebRound()" class="btn-gold" style="flex: 1.5; padding: 10px;">✅ تسجيل الجولة</button>
+                <button onclick="saveMatchToArchive('classic', 'طرنيب عادي')" class="btn-emerald">💾 حفظ بالأرشيف</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- القسم 5 الجديد: منصة المتصدرين التاريخية وتحديات الشلة -->
+    <section id="sec-challenges" class="hidden anim-in">
+        <div class="card">
+            <div class="row" style="margin-bottom: 8px;">
+                <div>
+                    <h2 style="font-size: 15px; font-weight: 900; color: var(--gold-bright);">🏆 منصة متصدري الشلة (الأول 🥇، الثاني 🥈، الثالث 🥉)</h2>
+                    <p style="font-size: 10.5px; color: var(--text-muted);">ترتيب ملوك الشلة حسب المباراة الحالية أو مجمل تاريخ السهرات</p>
+                </div>
+            </div>
+
+            <div id="globalChampionsPodium"></div>
+        </div>
+
+        <div class="card">
+            <div class="row-wrap" style="justify-content: space-between; margin-bottom: 8px;">
+                <div>
+                    <h3 style="font-size: 14px; font-weight: 900; color: var(--emerald);">🔥 تحديات وإنجازات الشلة</h3>
+                    <p style="font-size: 10.5px; color: var(--text-muted);">تحديات حماسية تُرصد تلقائياً أو بضغطة زر مع تحديد البطل الفائز</p>
+                </div>
+                <span id="challengesProgressBadge" class="badge badge-gold">0 / 6 مكتمل</span>
+            </div>
+
+            <!-- إضافة تحدي جديد مخصص للشلة -->
+            <div class="panel" style="margin-bottom: 10px;">
+                <div style="font-size: 11.5px; font-weight: 800; color: var(--gold-bright); margin-bottom: 6px;">➕ أضف تحدي جديد للشلة (مع جائزة شاورما / أركيلة):</div>
+                <div class="row" style="gap: 6px;">
+                    <input id="customChallengeTitle" type="text" placeholder="مثال: اللي بياكل شيخ الكبة مدبل بيعزم..." class="input-box" style="flex: 1.5;">
+                    <input id="customChallengeReward" type="text" placeholder="الجائزة: شاورما 🥙" class="input-box" style="flex: 1;">
+                    <button onclick="addCustomSquadChallenge()" class="btn-gold" style="white-space: nowrap;">+ تحدي</button>
+                </div>
+            </div>
+
+            <div id="squadChallengesList"></div>
+        </div>
+    </section>
+
+    <!-- القسم 6: قرعة 4 و 8 أشخاص -->
+    <section id="sec-draw8" class="hidden anim-in">
+        <div id="draw4CardBox" class="card">
+            <h3 style="font-size: 14px; font-weight: 900; color: var(--emerald); margin-bottom: 4px;">🎲 قرعة الـ 4 أشخاص (توزيع الشركاء 2 ضد 2 وترتيب الممالك)</h3>
+            <p style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 8px;">اخلط أسماء الـ 4 لاعبين لتوزيعهم لفريقين عشوائيين مع اقتراح ترتيب الممالك</p>
+            <div id="fourPlayersInputGrid" class="grid-2" style="margin-bottom: 10px;"></div>
+            <button onclick="run4PlayerAnimatedDraw()" class="btn-emerald" style="width: 100%; padding: 10px;">🔀 سحب قرعة الـ 4 أشخاص الآن</button>
+            <div id="fourPlayersDrawResult"></div>
+        </div>
+
+        <div id="draw8CardBox" class="card">
+            <h3 style="font-size: 14px; font-weight: 900; color: var(--gold-bright); margin-bottom: 4px;">🎲 قرعة الـ 8 أشخاص (تقسيم السهرة إلى طاولتين 4 و 4)</h3>
+            <p style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 8px;">عدّل الأسماء واضغط سحب القرعة لتوزيع الـ 8 شباب على طاولتين بالعدل (طاولة 1 وطاولة 2)</p>
+            <div id="eightPlayersInputGrid" class="grid-2" style="margin-bottom: 10px;"></div>
+            <button onclick="run8PlayerDraw()" class="btn-gold" style="width: 100%; padding: 10px; margin-bottom: 10px;">🎰 سحب قرعة الـ 8 لطاولتين (4 و 4)</button>
+            <div id="eightPlayersResultsArea" class="grid-2"></div>
+        </div>
+    </section>
+
+    <!-- القسم 7: نظام الأونلاين وحساب الشلة الموحد -->
+    <section id="sec-live" class="hidden anim-in">
+        <div class="card" style="border-color: var(--emerald);">
+            <div class="row-wrap" style="justify-content: space-between; margin-bottom: 10px;">
+                <div class="row" style="gap: 9px;">
+                    <div id="liveMyAvatarBox" onclick="openSyncModal()" style="width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, #10b981, #047857); display: flex; align-items: center; justify-content: center; font-size: 22px; cursor: pointer;">🦁</div>
+                    <div>
+                        <div id="liveMyAccountName" style="font-size: 14px; font-weight: 900; color: #fff;">شلة الشباب (SHILLA-2026)</div>
+                        <div style="font-size: 10.5px; color: var(--text-muted); margin-top: 2px;">الحالة: <span id="liveCloudPingText" style="color: var(--emerald); font-weight: 800;">متصل بحساب الشلة الموحد</span></div>
+                    </div>
+                </div>
+                <button onclick="openSyncModal()" class="btn-emerald" style="font-size: 11px; padding: 8px 12px;">🔐 إعداد حساب الشلة</button>
+            </div>
+
+            <div class="panel" style="margin-bottom: 10px; border-color: rgba(6,182,212,0.4);">
+                <div class="row" style="margin-bottom: 6px;">
+                    <span style="font-size: 11.5px; font-weight: 900; color: var(--cyan);">⚡ حالة الألعاب الأربع المفتوحة على حساب الشلة الآن:</span>
+                    <button onclick="syncNow(true)" class="badge badge-cyan" style="cursor: pointer;">🔄 مزامنة فورية</button>
+                </div>
+                <p style="font-size: 10px; color: var(--text-muted); margin-bottom: 8px;">
+                    كل لعبة وكل طاولة (طاولة 1 / طاولة 2) مستقلة تماماً؛ إذا فتح موبايلان لعبتين مختلفتين أو طاولتين بنفس الوقت، تُحفظ اللعبتان معاً على نفس حساب الشلة.
+                </p>
+                <div id="liveGamesConcurrentGrid" class="grid-2"></div>
+            </div>
+
+            <div class="panel" style="padding: 8px 10px;">
+                <div class="row" style="margin-bottom: 6px;">
+                    <span style="font-size: 11px; font-weight: 900; color: var(--gold-bright);">📱 موبايلات الشلة المتصلة على نفس الحساب:</span>
+                    <span id="onlineDevicesCountBadge" class="badge badge-emerald">1 جهاز</span>
+                </div>
+                <div id="onlineSquadMembersGrid" class="row-wrap" style="gap: 6px;"></div>
+            </div>
+        </div>
+
+        <div class="card text-center">
+            <h2 style="font-size: 15px; font-weight: 900; color: var(--gold-bright); margin-bottom: 4px;">📋 مشاركة أو نقل يدوي للنتائج (واتساب / بدون نت)</h2>
+            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">انسخ حزمة النتائج والأرشيف وابعتها للشباب، أو الصق حزمة وصلتك.</p>
+            <div class="grid-2" style="margin-bottom: 8px;">
+                <button onclick="copySyncPacketCode()" class="btn-gold" style="font-size: 11px; padding: 9px;">📋 نسخ حزمة النتائج</button>
+                <button onclick="shareRoomOnWhatsApp()" class="btn-emerald" style="font-size: 11px; padding: 9px;">📲 مشاركة واتساب</button>
+            </div>
+            <textarea id="pasteSyncPacketInput" class="input-box" rows="3" placeholder="الصق حزمة النتائج هون..." style="font-size: 11px; direction: ltr;"></textarea>
+            <button onclick="applyPastedSyncPacket()" class="btn-dark" style="width: 100%; margin-top: 6px;">⬇️ استلام ودمج الحزمة</button>
+        </div>
+    </section>
+
+    <!-- القسم 8: الأرشيف المنفصل لكل لعبة + تصدير واستيراد إكسل (Excel CSV) -->
+    <section id="sec-archive" class="hidden anim-in">
+        <div class="card">
+            <div style="font-size: 13.5px; font-weight: 900; color: var(--gold-bright); margin-bottom: 8px;">🥙 دفتر ديون وعزائم الشلة (مشترك على حساب الشلة)</div>
+            <div class="row" style="margin-bottom: 8px;">
+                <input id="debtInputText" type="text" placeholder="مثال: عصام مديون لأبو جانتي بعزيمة شاورما..." class="input-box">
+                <button onclick="addNewDebt()" class="btn-gold" style="white-space: nowrap;">+ إضافة</button>
+            </div>
+            <div id="debtsListContainer" style="font-size: 12px;"></div>
+        </div>
+
+        <div class="card">
+            <div class="row-wrap" style="justify-content: space-between; margin-bottom: 8px;">
+                <div>
+                    <h3 style="font-size: 14px; font-weight: 900; color: var(--emerald);">📊 أرشيف الشلة المنفصل + تصدير واستيراد إكسل مبسط</h3>
+                    <p style="font-size: 10.5px; color: var(--text-muted);">كل لعبة لها أرشيفها المستقل مع جدول إكسل يعرض المركز الأول والثاني والثالث</p>
+                </div>
+                <span id="archiveTotalBadge" class="badge badge-emerald">0 مباراة</span>
+            </div>
+
+            <!-- أزرار إكسل المبسطة (تصدير واستيراد Excel CSV + JSON) -->
+            <div class="grid-2" style="margin-bottom: 10px;">
+                <button onclick="exportArchiveExcelCsv()" class="btn-emerald" style="font-size: 11.5px; padding: 10px;">
+                    📊 تصدير جدول إكسل مبسط (Excel CSV)
+                </button>
+                <label class="btn-gold" style="font-size: 11.5px; padding: 10px; cursor: pointer; text-align: center; display: inline-block;">
+                    📥 استيراد ملف إكسل أو سجل (CSV / JSON)
+                    <input type="file" accept=".csv,.json,.txt" onchange="importArchiveExcelOrJsonFile(event)" class="hidden">
+                </label>
+            </div>
+
+            <!-- تبويبات الأرشيف المنفصل لكل لعبة -->
+            <div id="archiveCategoryTabs" class="grid-5" style="margin-bottom: 10px;">
+                <button onclick="setArchiveGameFilter('all')" id="archTab-all" class="btn-dark active" style="font-size: 10.5px; padding: 7px 3px;">📊 الكل</button>
+                <button onclick="setArchiveGameFilter('trix')" id="archTab-trix" class="btn-dark" style="font-size: 10.5px; padding: 7px 3px;">👑 تركس</button>
+                <button onclick="setArchiveGameFilter('complex')" id="archTab-complex" class="btn-dark" style="font-size: 10.5px; padding: 7px 3px;">⚡ كمبلكس</button>
+                <button onclick="setArchiveGameFilter('syrian41')" id="archTab-syrian41" class="btn-dark" style="font-size: 10.5px; padding: 7px 3px;">🔥 سوري 41</button>
+                <button onclick="setArchiveGameFilter('classic')" id="archTab-classic" class="btn-dark" style="font-size: 10.5px; padding: 7px 3px;">🃏 طرنيب</button>
+            </div>
+
+            <div id="archiveStatsStrip" class="panel" style="margin-bottom: 10px; font-size: 11px; color: #fde68a;"></div>
+
+            <div class="row-wrap" style="gap: 6px; margin-bottom: 10px;">
+                <input id="archiveSearchInput" type="text" oninput="renderArchiveSection()" placeholder="🔍 ابحث باسم اللاعب أو المركز الأول أو التاريخ..." class="input-box" style="flex: 1;">
+                <button onclick="exportArchiveJson()" class="btn-dark" style="font-size: 10.5px; padding: 8px 10px;" title="نسخة احتياطية JSON">💾 JSON</button>
+                <button onclick="clearCurrentArchiveCategory()" class="btn-crimson" style="font-size: 11px; padding: 8px 10px;">🗑️</button>
+            </div>
+
+            <div id="massiveArchiveContainer" style="max-height: 360px; overflow-y: auto;"></div>
+        </div>
+    </section>
+
+    <footer class="text-center" style="margin: 14px 0 32px 0; position: relative; z-index: 1;">
+        <div onclick="openDevPortalModal()" class="badge badge-gold" style="padding: 8px 18px; font-size: 12px; cursor: pointer;">
+            👑 شلة متعوب عليها • <span style="color: #22d3ee;">v6.0 Champions & Excel</span> • <strong>BY : karemyseer 2026</strong>
+        </div>
+    </footer>
+
+    <!-- ================================================================= -->
+    <!-- بار الموسيقى الزجاجي العائم الموحد (أوفلاين IndexedDB)            -->
+    <!-- ================================================================= -->
+    <div id="mediaRemoteDock" class="media-remote-dock minimized">
+        <div class="row" style="margin-bottom: 6px;">
+            <div class="row" style="gap: 9px; overflow: hidden; flex: 1;">
+                <div id="mediaVinylDisc" onclick="mediaRemoteCommand('toggle')" class="vinyl-disc" style="cursor: pointer;"></div>
+                <div style="overflow: hidden; flex: 1;">
+                    <div id="mediaControllerTitle" style="font-size: 11.5px; font-weight: 900; color: var(--gold-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">🎵 المكتبة فاضية — أضف أغاني</div>
+                    <div id="mediaSubStatus" style="font-size: 9.5px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></div>
+                </div>
+            </div>
+            <div class="row" style="gap: 5px;">
+                <button onclick="mediaRemoteCommand('toggle')" id="mediaPlayPauseBtn" class="media-ctrl-play" title="تشغيل / إيقاف">▶</button>
+                <button onclick="openYoutubeModal()" class="app-chip yt-red">🎼 المكتبة</button>
+                <button onclick="toggleMediaDockMinimize()" id="mediaDockMinBtn" class="btn-dark" style="padding: 4px 8px; font-size: 10px; border-radius: 99px;">🔼</button>
+            </div>
+        </div>
+        <div class="row" style="gap: 7px; margin-bottom: 7px; padding: 0 3px;">
+            <span id="mediaCurrentTime" style="font-size: 9.5px; color: var(--gold-bright); font-weight: 800; direction: ltr; min-width: 32px;">00:00</span>
+            <input id="mediaSeekSlider" type="range" min="0" max="100" value="0" step="0.5" oninput="seekDirectAudio(this.value)" style="flex: 1; accent-color: var(--gold-bright); height: 4px; cursor: pointer;">
+            <span id="mediaDurationTime" style="font-size: 9.5px; color: var(--text-muted); font-weight: 800; direction: ltr; min-width: 32px;">00:00</span>
+        </div>
+        <div id="mediaDockExpandedBody" class="hidden">
+            <div class="row" style="gap: 8px;">
+                <div class="row" style="gap: 5px; flex: 1; justify-content: center;">
+                    <button onclick="toggleShuffle()" id="mediaShuffleBtn" class="media-ctrl-circle" title="عشوائي">🔀</button>
+                    <button onclick="mediaRemoteCommand('prev')" class="media-ctrl-circle" title="السابق">⏮</button>
+                    <button onclick="mediaRemoteCommand('rw10')" class="media-ctrl-circle" style="font-size: 10px;">-10</button>
+                    <button onclick="mediaRemoteCommand('ff10')" class="media-ctrl-circle" style="font-size: 10px;">+10</button>
+                    <button onclick="mediaRemoteCommand('next')" class="media-ctrl-circle" title="التالي">⏭</button>
+                    <button onclick="toggleRepeat()" id="mediaRepeatBtn" class="media-ctrl-circle" title="تكرار">🔁</button>
+                </div>
+                <div class="row panel" style="gap: 4px; padding: 4px 8px; border-radius: 99px; width: 130px;">
+                    <button onclick="toggleMuteMedia()" id="mediaMuteBtn" style="background: none; color: #fff; font-size: 13px;">🔊</button>
+                    <input id="mediaVolumeSlider" type="range" min="0" max="1" step="0.05" value="1" oninput="setMediaVolumeExact(this.value)" style="flex: 1; min-width: 0; accent-color: var(--gold-bright);">
+                </div>
+            </div>
+        </div>
+        <audio id="phoneAudioBridge" class="hidden" playsinline preload="metadata"></audio>
+    </div>
+
+    <!-- نافذة تعديل الأسماء -->
+    <div id="namesModal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="row" style="margin-bottom: 12px;">
+                <h3 style="font-size: 15px; font-weight: 900; color: var(--gold-bright);">✏️ تعديل أسماء اللاعبين والفريقين</h3>
+                <button onclick="closeModal('namesModal')" class="btn-dark">✖</button>
+            </div>
+            <div style="display: grid; gap: 8px; margin-bottom: 12px;">
+                <div>
+                    <label style="font-size: 11px; color: var(--text-muted);">اللاعب الأول (فريق 1):</label>
+                    <input id="editP0" type="text" class="input-box">
+                </div>
+                <div>
+                    <label style="font-size: 11px; color: var(--text-muted);">اللاعب الثاني (شريك الأول - فريق 1):</label>
+                    <input id="editP1" type="text" class="input-box">
+                </div>
+                <div>
+                    <label style="font-size: 11px; color: var(--text-muted);">اللاعب الثالث (فريق 2):</label>
+                    <input id="editP2" type="text" class="input-box">
+                </div>
+                <div>
+                    <label style="font-size: 11px; color: var(--text-muted);">اللاعب الرابع (شريك الثالث - فريق 2):</label>
+                    <input id="editP3" type="text" class="input-box">
+                </div>
+                <div class="grid-2" style="margin-top: 4px;">
+                    <div>
+                        <label style="font-size: 11px; color: var(--emerald);">اسم الفريق الأول:</label>
+                        <input id="editT0" type="text" class="input-box">
+                    </div>
+                    <div>
+                        <label style="font-size: 11px; color: var(--crimson);">اسم الفريق الثاني:</label>
+                        <input id="editT1" type="text" class="input-box">
+                    </div>
+                </div>
+            </div>
+            <button onclick="saveEditedNames()" class="btn-gold" style="width: 100%; padding: 11px;">💾 حفظ الأسماء فوراً</button>
+        </div>
+    </div>
+
+    <!-- نافذة سبعة الكبة وترتيب الممالك -->
+    <div id="sevenHeartsModal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="row" style="margin-bottom: 10px;">
+                <h3 style="font-size: 15px; font-weight: 900; color: var(--gold-bright);">7♥️ مع مين سبعة الكبة؟ وترتيب الممالك</h3>
+                <button onclick="closeModal('sevenHeartsModal')" class="btn-dark">✖</button>
+            </div>
+            <div style="font-size: 12px; font-weight: 800; margin-bottom: 6px; color: #fda4af;">1. من طلعت معه 7♥️ (صاحب المملكة الأولى)؟</div>
+            <div id="sevenHeartsPickGrid" class="grid-2" style="margin-bottom: 14px;"></div>
+
+            <div style="font-size: 12px; font-weight: 800; margin-bottom: 6px; color: var(--gold-bright);">2. ترتيب الممالك الأربع (م1 ⬅️ م2 ⬅️ م3 ⬅️ م4):</div>
+            <div id="kingdomsOrderSelects" style="display: grid; gap: 7px; margin-bottom: 14px;"></div>
+
+            <button onclick="applyKingdomsOrder()" class="btn-gold" style="width: 100%; padding: 11px;">👑 اعتماد ترتيب الممالك</button>
+        </div>
+    </div>
+
+    <!-- نافذة حساب الشلة الموحد -->
+    <div id="syncModal" class="modal-backdrop hidden">
+        <div class="modal-card" style="border-color: var(--emerald);">
+            <div class="row" style="margin-bottom: 10px;">
+                <h3 style="font-size: 15px; font-weight: 900; color: var(--emerald);">☁️ حساب الشلة الموحد (لكل الموبايلات و APK)</h3>
+                <button onclick="closeModal('syncModal')" class="btn-dark">✖</button>
+            </div>
+            <div id="syncModalBody"></div>
+        </div>
+    </div>
+
+    <!-- نافذة المكتبة الصوتية الأوفلاين -->
+    <div id="youtubeModal" class="modal-backdrop hidden">
+        <div class="modal-card" style="border-color: var(--gold-bright);">
+            <div class="row" style="margin-bottom: 8px;">
+                <div>
+                    <h3 style="font-size: 15px; font-weight: 900; color: var(--gold-bright);">🎼 مكتبتي (أوفلاين)</h3>
+                    <p id="libStats" style="font-size: 10.5px; color: var(--text-muted);"></p>
+                </div>
+                <button onclick="closeModal('youtubeModal')" class="btn-dark">✖</button>
+            </div>
+            <div class="row-wrap" style="gap: 6px; margin-bottom: 8px;">
+                <label class="btn-gold" style="cursor: pointer; font-size: 12px; padding: 8px 12px;">📂 أضف أغاني من جهازك
+                    <input type="file" accept="audio/*,.mp3,.m4a,.aac,.wav,.ogg,.opus,.flac" multiple class="hidden" onchange="addSongsToLibrary(event)">
+                </label>
+                <button onclick="clearLibrary()" class="btn-dark" style="font-size: 11px;">🗑️ مسح المكتبة</button>
+            </div>
+            <input id="libFilterInput" type="text" placeholder="🔍 فلتر بالمكتبة..." oninput="renderCuratedTarabList()" class="input-box" style="font-size: 11.5px; margin-bottom: 8px;">
+            <div id="curatedTarabListContainer" style="max-height: 300px; overflow-y: auto; margin-bottom: 10px;"></div>
+            <details style="margin-top: 6px;">
+                <summary style="font-size: 11px; color: var(--text-muted); cursor: pointer;">🌐 بحث أونلاين (معاينات 30 ثانية — بدها إنترنت)</summary>
+                <div class="row" style="gap: 5px; margin: 8px 0;">
+                    <input id="tarabLiveSearchInput" type="text" placeholder="اسم أغنية أو مطرب..." class="input-box" style="font-size: 11.5px;">
+                    <button onclick="searchRealSongsInApp()" class="btn-gold" style="white-space: nowrap; font-size: 11px;">بحث</button>
+                </div>
+                <div id="onlineListContainer" style="max-height: 180px; overflow-y: auto;"></div>
+            </details>
+        </div>
+    </div>
+
+    <!-- بوابة المطور السرية (1970) -->
+    <div id="devPortalModal" class="modal-backdrop hidden">
+        <div class="modal-card" style="border-color: var(--cyan);">
+            <div class="row" style="margin-bottom: 10px;">
+                <h3 style="font-size: 15px; font-weight: 900; color: var(--cyan);">🔒 بوابة المطور الخاصة (karemyseer 2026)</h3>
+                <button onclick="closeModal('devPortalModal')" class="btn-dark">✖</button>
+            </div>
+            <div id="devPinEntryBox">
+                <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 8px;">أدخل الرقم السري للمطور (1970) للوصول إلى حزمة الـ ZIP وإعدادات السيرفر:</p>
+                <div class="row" style="gap: 6px;">
+                    <input id="devPinInput" type="password" placeholder="••••" class="input-box" style="text-align: center; font-size: 16px; letter-spacing: 4px;">
+                    <button onclick="verifyDevPin()" class="btn-gold">دخول</button>
+                </div>
+            </div>
+            <div id="devUnlockedBox" class="hidden">
+                <div class="panel" style="margin-bottom: 10px;">
+                    <div style="font-size: 12px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">📦 تصدير حزمة التطبيق للـ APK (WebIntoApp / Capacitor)</div>
+                    <div class="grid-2">
+                        <button onclick="downloadFullZipPackage()" class="btn-emerald" style="padding: 10px; font-size: 11.5px;">📦 تنزيل shilla-app.zip</button>
+                        <button onclick="downloadStandaloneHtml()" class="btn-gold" style="padding: 10px; font-size: 11.5px;">📄 تنزيل index.html</button>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div style="font-size: 12px; font-weight: 900; color: var(--cyan); margin-bottom: 6px;">☁️ إعدادات Firebase الاختيارية</div>
+                    <input id="devFbApiKey" class="input-box" placeholder="Firebase apiKey" style="margin-bottom: 6px; font-size: 11.5px;">
+                    <input id="devFbProjectId" class="input-box" placeholder="Firebase projectId" style="margin-bottom: 8px; font-size: 11.5px;">
+                    <button onclick="saveCustomFirebaseKeys()" class="btn-dark" style="width: 100%; padding: 8px;">💾 حفظ مفاتيح Firebase في الجهاز</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'SHILLA_KAREMYSEER_2026_V6_CHAMPIONS';
+        const E = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+        const DEFAULT_CHALLENGES = [
+            { id: 'ch_sheikh', icon: '🎯', title: 'قناص الشيخ (+75)', desc: 'تدبيل شيخ الكبة على الخصم وأخذ مكافأة +75 نقطة', reward: 'كاسة متة أو شاي ملكي 🧉', done: false, winner: '' },
+            { id: 'ch_trix1', icon: '👑', title: 'ملك الترتيب (+200)', desc: 'الفوز بالمركز الأول في طلب التركس مرتين في نفس اللعبة', reward: 'معفى من التوزيع جولة 🃏', done: false, winner: '' },
+            { id: 'ch_clean', icon: '🛡️', title: 'مملكة نظيفة (صفر لطوش)', desc: 'إنهاء جولة اللطوش أو الديناري بصفر أكلات سالبة', reward: 'لقب الحريف 🛡️', done: false, winner: '' },
+            { id: 'ch_sy45', icon: '🔥', title: 'كاسر الأربعين (سوري 41)', desc: 'الفوز بمباراة طرنيب سوري برصيد فوق 45 نقطة', reward: 'عزيمة شاورما على الخسران 🥙', done: false, winner: '' },
+            { id: 'ch_kaboot', icon: '⚡', title: 'كبوت الأساطير (13 أكلة)', desc: 'طلب أو تحقيق كبوت 13 أكلة كاملة في الطرنيب', reward: 'نفس أركيلة على الخصم 💨', done: false, winner: '' },
+            { id: 'ch_hattrick', icon: '🏆', title: 'هاتريك السهرة (3 انتصارات)', desc: 'تصدر المركز الأول 🥇 في 3 مباريات محفوظة بالسجل', reward: 'تاج السهرة الذهبي 👑', done: false, winner: '' }
+        ];
+
+        function makeFreshGamesObject() {
+            return {
+                players: ['أبو جانتي', 'عصام', 'أبو ليلى', 'حكمت'],
+                teams: ['فريق لنا', 'فريق لهم'],
+                trix: {
+                    mode: 'individual',
+                    indivScores: [0, 0, 0, 0],
+                    teamScores: [0, 0],
+                    kingdomOrder: [0, 1, 2, 3],
+                    currentKingdomIdx: 0,
+                    activeContract: 'sheikh',
+                    lockedContracts: [[], [], [], []],
+                    history: [],
+                    sheikh: { eater: 0, doubled: false, owner: 1 },
+                    banat: [
+                        { eater: null, doubled: false, owner: 0 },
+                        { eater: null, doubled: false, owner: 0 },
+                        { eater: null, doubled: false, owner: 0 },
+                        { eater: null, doubled: false, owner: 0 }
+                    ],
+                    dinari: [4, 3, 3, 3],
+                    latoosh: [4, 3, 3, 3],
+                    trixRank: []
+                },
+                complex: {
+                    mode: 'individual',
+                    indivScores: [0, 0, 0, 0],
+                    teamScores: [0, 0],
+                    kingdomOrder: [0, 1, 2, 3],
+                    currentKingdomIdx: 0,
+                    activeContract: 'complexAll',
+                    lockedContracts: [[], [], [], []],
+                    history: [],
+                    temp: {
+                        sheikhEater: 0,
+                        sheikhDoubled: false,
+                        sheikhOwner: 1,
+                        banatCount: [1, 1, 1, 1],
+                        dinariCount: [4, 3, 3, 3],
+                        latooshCount: [4, 3, 3, 3],
+                        trixRank: []
+                    }
+                },
+                syrian41: {
+                    scores: [0, 0, 0, 0],
+                    bids: [3, 3, 3, 3],
+                    won: [true, true, true, true],
+                    doubled: [false, false, false, false],
+                    history: []
+                },
+                classic: {
+                    target: 31,
+                    scores: [0, 0],
+                    bidder: 0,
+                    bid: 7,
+                    tricks: 7,
+                    history: []
+                }
+            };
+        }
+
+        const defaultState = Object.assign(makeFreshGamesObject(), {
+            eightPlayers: ['أبو جانتي', 'عصام', 'أبو ليلى', 'حكمت', 'أبو شهاب', 'معتز', 'أبو حاتم', 'النمس'],
+            selfDoubleRule: 'net',
+            activeTableSlot: 'table1',
+            tableSlots: {
+                table1: makeFreshGamesObject(),
+                table2: Object.assign(makeFreshGamesObject(), {
+                    players: ['أبو شهاب', 'معتز', 'أبو حاتم', 'النمس'],
+                    teams: ['طاولة2 فريق1', 'طاولة2 فريق2']
+                })
+            },
+            gameTimestamps: {
+                table1: { trix: 0, complex: 0, syrian41: 0, classic: 0, players: 0 },
+                table2: { trix: 0, complex: 0, syrian41: 0, classic: 0, players: 0 }
+            },
+            squadAccount: {
+                squadCode: 'SHILLA-2026',
+                squadPass: '2026',
+                deviceName: 'موبايل ' + Math.floor(10 + Math.random() * 89),
+                deviceId: 'DEV-' + Math.random().toString(36).slice(2, 9).toUpperCase(),
+                avatar: '🦁'
+            },
+            challenges: JSON.parse(JSON.stringify(DEFAULT_CHALLENGES)),
+            archiveFilter: 'all',
+            archiveByGame: {
+                trix: [],
+                complex: [],
+                syrian41: [],
+                classic: []
+            },
+            archive: [],
+            debts: [
+                { id: 1, text: 'عصام مديون للشلة بعزيمة شاورما 🥙', done: false }
+            ],
+            lastSyncTimestamp: 0
+        });
+
+        let state = loadState();
+        let activeSevenHeartsGame = 'trix';
+
+        // دالة حساب المراكز (الأول 🥇، الثاني 🥈، الثالث 🥉، الرابع) لأي لعبة
+        function computeRankedStandings(namesArr, scoresArr) {
+            const list = namesArr.map((name, idx) => ({
+                idx,
+                name: name || ('لاعب ' + (idx + 1)),
+                score: Number(scoresArr[idx] || 0)
+            }));
+            list.sort((a, b) => b.score - a.score);
+            const topScore = list[0] ? list[0].score : 0;
+            return list.map((item, rankIndex) => ({
+                rank: rankIndex + 1,
+                medal: rankIndex === 0 ? '🥇' : rankIndex === 1 ? '🥈' : rankIndex === 2 ? '🥉' : '4️⃣',
+                label: rankIndex === 0 ? 'المركز الأول' : rankIndex === 1 ? 'المركز الثاني' : rankIndex === 2 ? 'المركز الثالث' : 'المركز الرابع',
+                name: item.name,
+                score: item.score,
+                diffFromFirst: item.score - topScore
+            }));
+        }
+
+        function buildLivePodiumHtml(standings, isTeamsMode) {
+            if (isTeamsMode || standings.length < 3) {
+                const first = standings[0] || { name: '-', score: 0 };
+                const second = standings[1] || { name: '-', score: 0 };
+                const diff = Math.abs(first.score - second.score);
+                return `
+                    <div class="panel" style="margin-bottom: 9px; padding: 8px 10px; border-color: rgba(251,191,36,0.4);">
+                        <div class="row-wrap" style="justify-content: space-between; font-size: 11.5px;">
+                            <span>🥇 <strong>المركز الأول:</strong> <strong style="color:var(--gold-bright);">${E(first.name)}</strong> (${first.score})</span>
+                            <span>🥈 <strong>المركز الثاني:</strong> <strong>${E(second.name)}</strong> (${second.score})</span>
+                            <span class="badge badge-emerald">الفارق: ${diff}</span>
+                        </div>
+                    </div>
+                `;
+            }
+            const first = standings[0];
+            const second = standings[1];
+            const third = standings[2];
+            const fourth = standings[3];
+            return `
+                <div class="podium-strip">
+                    <div class="podium-col podium-2">
+                        <div style="font-size: 14px;">🥈</div>
+                        <div style="font-size: 9.5px; color: #cbd5e1; font-weight: 800;">المركز الثاني</div>
+                        <div style="font-size: 11.5px; font-weight: 900; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${E(second.name)}</div>
+                        <div style="font-size: 13px; font-weight: 900; color: #e2e8f0;">${second.score}</div>
+                        <div style="font-size: 8.5px; color: var(--text-muted);">(${second.diffFromFirst})</div>
+                    </div>
+                    <div class="podium-col podium-1">
+                        <div style="font-size: 18px;">👑🥇</div>
+                        <div style="font-size: 10px; color: var(--gold-bright); font-weight: 900;">المركز الأول (المتصدر)</div>
+                        <div style="font-size: 13px; font-weight: 900; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${E(first.name)}</div>
+                        <div style="font-size: 16px; font-weight: 900; color: #34d399;">${first.score}</div>
+                        <div style="font-size: 9px; color: #fde68a;">متصدر بفارق +${first.score - second.score}</div>
+                    </div>
+                    <div class="podium-col podium-3">
+                        <div style="font-size: 14px;">🥉</div>
+                        <div style="font-size: 9.5px; color: #fdba74; font-weight: 800;">المركز الثالث</div>
+                        <div style="font-size: 11.5px; font-weight: 900; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${E(third.name)}</div>
+                        <div style="font-size: 13px; font-weight: 900; color: #fed7aa;">${third.score}</div>
+                        <div style="font-size: 8.5px; color: var(--text-muted);">${fourth ? `الرابع: ${E(fourth.name)} (${fourth.score})` : `(${third.diffFromFirst})`}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function normalizeArchiveCategories(st) {
+            if (!st.archiveByGame || typeof st.archiveByGame !== 'object') {
+                st.archiveByGame = { trix: [], complex: [], syrian41: [], classic: [] };
+            }
+            ['trix', 'complex', 'syrian41', 'classic'].forEach(k => {
+                if (!Array.isArray(st.archiveByGame[k])) st.archiveByGame[k] = [];
+            });
+            if (Array.isArray(st.archive) && st.archive.length) {
+                st.archive.forEach(item => {
+                    if (!item || !item.id) return;
+                    let gKey = item.gameKey || 'trix';
+                    if (!item.gameKey && item.game) {
+                        if (item.game.includes('كمبلكس')) gKey = 'complex';
+                        else if (item.game.includes('سوري')) gKey = 'syrian41';
+                        else if (item.game.includes('طرنيب')) gKey = 'classic';
+                        else gKey = 'trix';
+                    }
+                    if (!st.archiveByGame[gKey].some(x => x.id === item.id)) {
+                        st.archiveByGame[gKey].push(Object.assign({}, item, { gameKey: gKey }));
+                    }
+                });
+            }
+            ['trix', 'complex', 'syrian41', 'classic'].forEach(k => {
+                st.archiveByGame[k].sort((a, b) => (b.id || 0) - (a.id || 0));
+            });
+        }
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY)
+                    || localStorage.getItem('SHILLA_KAREMYSEER_2026_V5_SQUAD')
+                    || localStorage.getItem('SHILLA_KAREMYSEER_2026_V4_CLEAN');
+                if (!raw) return JSON.parse(JSON.stringify(defaultState));
+                const parsed = JSON.parse(raw);
+                const merged = Object.assign(JSON.parse(JSON.stringify(defaultState)), parsed);
+                if (!Array.isArray(merged.players) || merged.players.length < 4) merged.players = [...defaultState.players];
+                if (!Array.isArray(merged.teams) || merged.teams.length < 2) merged.teams = [...defaultState.teams];
+                if (!Array.isArray(merged.eightPlayers) || merged.eightPlayers.length < 8) merged.eightPlayers = [...defaultState.eightPlayers];
+                if (!merged.trix || !Array.isArray(merged.trix.lockedContracts)) merged.trix = JSON.parse(JSON.stringify(defaultState.trix));
+                if (!merged.complex || !Array.isArray(merged.complex.lockedContracts)) merged.complex = JSON.parse(JSON.stringify(defaultState.complex));
+                if (!merged.syrian41 || !Array.isArray(merged.syrian41.scores)) merged.syrian41 = JSON.parse(JSON.stringify(defaultState.syrian41));
+                if (!merged.classic || !Array.isArray(merged.classic.scores)) merged.classic = JSON.parse(JSON.stringify(defaultState.classic));
+                if (!merged.tableSlots) merged.tableSlots = JSON.parse(JSON.stringify(defaultState.tableSlots));
+                if (!merged.gameTimestamps) merged.gameTimestamps = JSON.parse(JSON.stringify(defaultState.gameTimestamps));
+                if (!merged.squadAccount) merged.squadAccount = JSON.parse(JSON.stringify(defaultState.squadAccount));
+                if (!Array.isArray(merged.challenges) || !merged.challenges.length) merged.challenges = JSON.parse(JSON.stringify(DEFAULT_CHALLENGES));
+                if (!Array.isArray(merged.debts)) merged.debts = [...defaultState.debts];
+                normalizeArchiveCategories(merged);
+                return merged;
+            } catch (e) {
+                return JSON.parse(JSON.stringify(defaultState));
+            }
+        }
+
+        function syncActiveSlotStore(changedGameKey) {
+            const slot = state.activeTableSlot || 'table1';
+            if (!state.tableSlots) state.tableSlots = { table1: makeFreshGamesObject(), table2: makeFreshGamesObject() };
+            if (!state.gameTimestamps) state.gameTimestamps = { table1: {}, table2: {} };
+            state.tableSlots[slot] = {
+                players: JSON.parse(JSON.stringify(state.players)),
+                teams: JSON.parse(JSON.stringify(state.teams)),
+                trix: JSON.parse(JSON.stringify(state.trix)),
+                complex: JSON.parse(JSON.stringify(state.complex)),
+                syrian41: JSON.parse(JSON.stringify(state.syrian41)),
+                classic: JSON.parse(JSON.stringify(state.classic))
+            };
+            const now = Date.now();
+            if (changedGameKey && state.gameTimestamps[slot]) {
+                state.gameTimestamps[slot][changedGameKey] = now;
+            }
+        }
+
+        function loadSlotIntoActiveView(slotName) {
+            const slot = slotName || state.activeTableSlot || 'table1';
+            const data = (state.tableSlots && state.tableSlots[slot]) ? state.tableSlots[slot] : makeFreshGamesObject();
+            state.players = JSON.parse(JSON.stringify(data.players || defaultState.players));
+            state.teams = JSON.parse(JSON.stringify(data.teams || defaultState.teams));
+            state.trix = JSON.parse(JSON.stringify(data.trix || defaultState.trix));
+            state.complex = JSON.parse(JSON.stringify(data.complex || defaultState.complex));
+            state.syrian41 = JSON.parse(JSON.stringify(data.syrian41 || defaultState.syrian41));
+            state.classic = JSON.parse(JSON.stringify(data.classic || defaultState.classic));
+        }
+
+        function toggleActiveTableSlot() {
+            syncActiveSlotStore();
+            state.activeTableSlot = state.activeTableSlot === 'table2' ? 'table1' : 'table2';
+            loadSlotIntoActiveView(state.activeTableSlot);
+            const btn = document.getElementById('tableToggleBtn');
+            if (btn) {
+                btn.textContent = state.activeTableSlot === 'table2' ? '🃏 طاولة 2' : '🃏 طاولة 1';
+            }
+            saveState('players', true);
+            renderAll();
+            showToast(state.activeTableSlot === 'table2' ? '🃏 انتقلت إلى الطاولة 2 (مستقلة على نفس حساب الشلة)' : '🃏 انتقلت إلى الطاولة 1');
+        }
+
+        let _saveWarned = false;
+        function saveState(changedKey, skipBroadcast) {
+            try {
+                const key = (typeof changedKey === 'string') ? changedKey : null;
+                const skip = (typeof changedKey === 'boolean') ? changedKey : !!skipBroadcast;
+                state.lastSyncTimestamp = Date.now();
+                syncActiveSlotStore(key);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                saveArchiveToIndexedDB(getAllArchivedMatches());
+                if (!skip) broadcastSquadUpdate(key || 'all');
+            } catch (e) {
+                if (!_saveWarned) {
+                    _saveWarned = true;
+                    showToast('⚠️ تعذّر الحفظ (التخزين ممتلئ) — صدّر السجل');
+                }
+            }
+        }
+
+        function showToast(msg, ms) {
+            const box = document.getElementById('toastBox');
+            if (!box) return;
+            box.textContent = msg;
+            box.classList.remove('hidden');
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => box.classList.add('hidden'), ms || 2800);
+        }
+
+        function openModal(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.remove('hidden');
+        }
+        function closeModal(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('hidden');
+        }
+
+        function gotoKingdom(g, k) {
+            const o = state[g];
+            o.currentKingdomIdx = k;
+            const order = g === 'trix' ? ['sheikh','banat','dinari','latoosh','trix'] : ['complexAll','trix'];
+            const nxt = order.find(id => !o.lockedContracts[k].includes(id));
+            if (nxt) o.activeContract = nxt;
+            saveState(g);
+            renderAll();
+        }
+
+        function checkGameOver(g) {
+            const o = state[g];
+            const size = g === 'trix' ? 5 : 2;
+            if (o.currentKingdomIdx !== 3 || (o.lockedContracts[3] || []).length < size) return false;
+            const st = o.mode === 'teams'
+                ? computeRankedStandings(state.teams, o.teamScores)
+                : computeRankedStandings(state.players, o.indivScores);
+            const msg = `🏆 انتهت اللعبة! 🥇 الأول: ${st[0].name} (${st[0].score}) | 🥈 الثاني: ${st[1].name} (${st[1].score})${st[2] ? ` | 🥉 الثالث: ${st[2].name} (${st[2].score})` : ''}`;
+            showToast(msg, 8000);
+            return true;
+        }
+
+        function anyGameProgress() {
+            return state.trix.history.length || state.complex.history.length || state.syrian41.history.length || state.classic.history.length;
+        }
+
+        function resetAllGames() {
+            const d = makeFreshGamesObject();
+            state.trix = d.trix;
+            state.complex = d.complex;
+            state.syrian41 = d.syrian41;
+            state.classic = d.classic;
+        }
+
+        // =================================================================
+        // 1. التنقل وتعديل الأسماء
+        // =================================================================
+        function switchTab(tabId) {
+            ['trix', 'complex', 'syrian41', 'classic', 'challenges', 'draw8', 'live', 'archive'].forEach(id => {
+                const sec = document.getElementById('sec-' + id);
+                const btn = document.getElementById('tab-' + id);
+                if (sec) sec.classList.toggle('hidden', id !== tabId);
+                if (btn) btn.classList.toggle('active', id === tabId);
+            });
+            renderAll();
+        }
+
+        function renderTopPlayersBar() {
+            const bar = document.getElementById('topPlayersBar');
+            if (!bar) return;
+            const st = computeRankedStandings(state.players, state.trix.indivScores);
+            const rankMap = {};
+            st.forEach(r => { rankMap[r.name] = r.medal; });
+            bar.innerHTML = state.players.map(p => `
+                <button onclick="openNamesModal()" class="btn-dark" style="padding: 5px 4px; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    ${rankMap[p] || '👤'} ${E(p)}
+                </button>
+            `).join('');
+            const tBtn = document.getElementById('tableToggleBtn');
+            if (tBtn) tBtn.textContent = state.activeTableSlot === 'table2' ? '🃏 طاولة 2' : '🃏 طاولة 1';
+        }
+
+        function openNamesModal() {
+            state.players.forEach((p, i) => {
+                const inp = document.getElementById('editP' + i);
+                if (inp) inp.value = p;
+            });
+            document.getElementById('editT0').value = state.teams[0];
+            document.getElementById('editT1').value = state.teams[1];
+            openModal('namesModal');
+        }
+
+        function saveEditedNames() {
+            for (let i = 0; i < 4; i++) {
+                const val = document.getElementById('editP' + i).value.trim();
+                if (val) {
+                    state.players[i] = val;
+                    if (state.activeTableSlot === 'table1') state.eightPlayers[i] = val;
+                    else state.eightPlayers[i + 4] = val;
+                }
+            }
+            const t0 = document.getElementById('editT0').value.trim();
+            const t1 = document.getElementById('editT1').value.trim();
+            if (t0) state.teams[0] = t0;
+            if (t1) state.teams[1] = t1;
+            saveState('players');
+            renderAll();
+            closeModal('namesModal');
+            showToast('✅ تم تحديث الأسماء ومزامنتها مع الشلة!');
+        }
+
+        // =================================================================
+        // 2. سبعة الكبة (7♥️) وترتيب الممالك
+        // =================================================================
+        function openSevenHeartsModal(gameKey) {
+            activeSevenHeartsGame = gameKey || 'trix';
+            const gState = state[activeSevenHeartsGame];
+            const pickGrid = document.getElementById('sevenHeartsPickGrid');
+            pickGrid.innerHTML = state.players.map((p, pIdx) => `
+                <button onclick="selectSevenHeartsHolder(${pIdx})" class="btn-dark ${gState.kingdomOrder[0] === pIdx ? 'active' : ''}" style="padding: 10px;">
+                    7♥️ مع ${E(p)}
+                </button>
+            `).join('');
+            renderKingdomsOrderSelects(gState.kingdomOrder);
+            openModal('sevenHeartsModal');
+        }
+
+        function selectSevenHeartsHolder(firstPlayerIdx) {
+            const newOrder = [
+                firstPlayerIdx,
+                (firstPlayerIdx + 1) % 4,
+                (firstPlayerIdx + 2) % 4,
+                (firstPlayerIdx + 3) % 4
+            ];
+            state[activeSevenHeartsGame].kingdomOrder = newOrder;
+            state[activeSevenHeartsGame].currentKingdomIdx = 0;
+            renderKingdomsOrderSelects(newOrder);
+            saveState(activeSevenHeartsGame);
+            renderAll();
+            showToast(`7♥️ بدأت المملكة الأولى عند: ${state.players[firstPlayerIdx]}`);
+        }
+
+        function renderKingdomsOrderSelects(orderArr) {
+            const box = document.getElementById('kingdomsOrderSelects');
+            box.innerHTML = [0, 1, 2, 3].map(kIdx => `
+                <div class="row panel" style="padding: 6px 10px;">
+                    <span style="font-size: 12px; font-weight: 900; color: var(--gold-bright);">المملكة ${kIdx + 1}:</span>
+                    <select id="kOrderSel_${kIdx}" class="input-box" style="width: 65%; padding: 5px 8px;">
+                        ${state.players.map((p, pIdx) => `<option value="${pIdx}" ${orderArr[kIdx] === pIdx ? 'selected' : ''}>${E(p)}</option>`).join('')}
+                    </select>
+                </div>
+            `).join('');
+        }
+
+        function applyKingdomsOrder() {
+            const newOrder = [0, 1, 2, 3].map(kIdx => parseInt(document.getElementById('kOrderSel_' + kIdx).value, 10));
+            state[activeSevenHeartsGame].kingdomOrder = newOrder;
+            saveState(activeSevenHeartsGame);
+            renderAll();
+            closeModal('sevenHeartsModal');
+            showToast('👑 تم اعتماد ترتيب الممالك الأربعة');
+        }
+
+        // =================================================================
+        // 3. حاسبة التركس العادي (5 طلبات) + منصة المتصدرين
+        // =================================================================
+        function updateSelfDoubleRule(val) {
+            state.selfDoubleRule = val;
+            saveState('trix');
+            renderAll();
+        }
+
+        function setGamePlayMode(gameKey, mode) {
+            state[gameKey].mode = mode;
+            saveState(gameKey);
+            renderAll();
+        }
+
+        function unlockAllContracts(gameKey) {
+            const kIdx = state[gameKey].currentKingdomIdx;
+            state[gameKey].lockedContracts[kIdx] = [];
+            saveState(gameKey);
+            renderAll();
+            showToast('🔓 تم فتح جميع طلبات المملكة الحالية');
+        }
+
+        function renderTrixSection() {
+            const tx = state.trix;
+            document.getElementById('trixModeIndiv').classList.toggle('active', tx.mode === 'individual');
+            document.getElementById('trixModeTeams').classList.toggle('active', tx.mode === 'teams');
+            document.getElementById('trixSelfDoubleRule').value = state.selfDoubleRule;
+
+            // منصة المتصدرين (الأول 🥇، الثاني 🥈، الثالث 🥉)
+            const standings = tx.mode === 'individual'
+                ? computeRankedStandings(state.players, tx.indivScores)
+                : computeRankedStandings(state.teams, tx.teamScores);
+            document.getElementById('trixLivePodium').innerHTML = buildLivePodiumHtml(standings, tx.mode === 'teams');
+
+            const currentKingPlayer = state.players[tx.kingdomOrder[tx.currentKingdomIdx]] || state.players[0];
+            document.getElementById('trixCurrentKingdomTitle').textContent = `👑 المملكة ${tx.currentKingdomIdx + 1} — الملك: ${currentKingPlayer}`;
+
+            document.getElementById('trixKingdomsStrip').innerHTML = [0, 1, 2, 3].map(kIdx => {
+                const pName = state.players[tx.kingdomOrder[kIdx]];
+                const doneCount = (tx.lockedContracts[kIdx] || []).length;
+                return `
+                    <button onclick="gotoKingdom('trix',${kIdx})" class="btn-dark ${tx.currentKingdomIdx === kIdx ? 'active' : ''}" style="font-size: 10.5px; padding: 6px 3px;">
+                        م${kIdx + 1}: ${E(pName)}<br><span style="font-size:9px;opacity:0.8;">(${doneCount}/5)</span>
+                    </button>
+                `;
+            }).join('');
+
+            const rankMedalByIdx = {};
+            standings.forEach(s => { rankMedalByIdx[s.name] = s.medal; });
+
+            const sb = document.getElementById('trixScoreboard');
+            if (tx.mode === 'individual') {
+                sb.className = 'grid-4';
+                sb.innerHTML = state.players.map((p, idx) => {
+                    const sc = tx.indivScores[idx];
+                    const isKing = tx.kingdomOrder[tx.currentKingdomIdx] === idx;
+                    return `
+                        <div onclick="openNamesModal()" class="score-box ${isKing ? 'king-active' : ''}">
+                            <div style="font-size: 10.5px; font-weight: 900;">${rankMedalByIdx[p] || ''} ${isKing ? '👑 ' : ''}${E(p)}</div>
+                            <div class="score-num ${sc >= 0 ? 'pos-score' : 'neg-score'}">${sc}</div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                sb.className = 'grid-2';
+                sb.innerHTML = [0, 1].map(tIdx => {
+                    const sc = tx.teamScores[tIdx];
+                    const pNames = tIdx === 0 ? `${E(state.players[0])} + ${E(state.players[1])}` : `${E(state.players[2])} + ${E(state.players[3])}`;
+                    return `
+                        <div onclick="openNamesModal()" class="score-box">
+                            <div style="font-size: 12.5px; font-weight: 900; color: ${tIdx === 0 ? 'var(--emerald)' : 'var(--crimson)'};">${rankMedalByIdx[state.teams[tIdx]] || ''} ${E(state.teams[tIdx])}</div>
+                            <div style="font-size: 10px; color: var(--text-muted);">${pNames}</div>
+                            <div class="score-num ${sc >= 0 ? 'pos-score' : 'neg-score'}">${sc}</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            const contracts = [
+                { id: 'sheikh', name: 'شيخ الكبة', icon: '♥️ -75' },
+                { id: 'banat', name: 'البنات', icon: '👸 -100' },
+                { id: 'dinari', name: 'الديناري', icon: '♦️ -130' },
+                { id: 'latoosh', name: 'اللطوش', icon: '🃏 -195' },
+                { id: 'trix', name: 'التركس', icon: '👑 +500' }
+            ];
+            const locked = tx.lockedContracts[tx.currentKingdomIdx] || [];
+            document.getElementById('trixContractsBar').innerHTML = contracts.map(c => {
+                const isLocked = locked.includes(c.id);
+                const isSel = tx.activeContract === c.id;
+                return `
+                    <button onclick="state.trix.activeContract='${c.id}';renderTrixSection();" class="contract-btn ${isSel ? 'selected' : ''} ${isLocked ? 'locked' : ''}">
+                        <div>${c.name}</div>
+                        <div style="font-size: 9.5px; color: var(--gold-bright); margin-top: 2px;">${c.icon}</div>
+                    </button>
+                `;
+            }).join('');
+
+            renderTrixCalculatorWidget();
+
+            const hBox = document.getElementById('trixHistoryList');
+            hBox.innerHTML = tx.history.length
+                ? tx.history.slice(0, 8).map(h => `<div style="padding: 5px 0; border-bottom: 1px solid var(--border-subtle);">✅ <strong>${E(h.contractName)}</strong> (مملكة ${E(h.king)}): ${E(h.summary)}</div>`).join('')
+                : `<div style="color: var(--text-muted); text-align: center;">لم يتم تسجيل أي جولة بعد</div>`;
+        }
+
+        function renderTrixCalculatorWidget() {
+            const tx = state.trix;
+            const box = document.getElementById('trixCalculatorArea');
+            const c = tx.activeContract;
+
+            if (c === 'sheikh') {
+                box.innerHTML = `
+                    <div style="font-size: 12px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">♥️ من أكل شيخ الكبة (-75 / مدبل -150)؟</div>
+                    <div class="grid-4" style="margin-bottom: 8px;">
+                        ${state.players.map((p, i) => `
+                            <button onclick="state.trix.sheikh.eater=${i};renderTrixCalculatorWidget();" class="btn-dark ${tx.sheikh.eater === i ? 'active' : ''}">${E(p)}</button>
+                        `).join('')}
+                    </div>
+                    <div class="row" style="margin-bottom: 8px;">
+                        <button onclick="state.trix.sheikh.doubled=!state.trix.sheikh.doubled;renderTrixCalculatorWidget();" class="btn-dark ${tx.sheikh.doubled ? 'active' : ''}" style="width: 100%;">
+                            🔥 تدبيل شيخ الكبة (الآكل -150 وصاحب الورقة +75)
+                        </button>
+                    </div>
+                    ${tx.sheikh.doubled ? `
+                        <div style="font-size: 11.5px; font-weight: 800; color: var(--emerald); margin-bottom: 5px;">✨ من دبل (صاحب شيخ الكبة +75)؟</div>
+                        <div class="grid-4" style="margin-bottom: 8px;">
+                            ${state.players.map((p, i) => `
+                                <button onclick="state.trix.sheikh.owner=${i};renderTrixCalculatorWidget();" class="btn-dark ${tx.sheikh.owner === i ? 'active' : ''}">${E(p)}</button>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    <button onclick="commitTrixRound()" class="btn-gold" style="width: 100%; padding: 10px;">✅ تسجيل شيخ الكبة</button>
+                `;
+            } else if (c === 'banat') {
+                const suits = ['بنت الكبة ♥️', 'بنت البستوني ♠️', 'بنت الديناري ♦️', 'بنت السباتي ♣️'];
+                box.innerHTML = `
+                    <div style="font-size: 12px; font-weight: 900; color: var(--gold-bright); margin-bottom: 8px;">👸 توزيع البنات الأربع (-25 / المدبلة -50 وصاحبها +25):</div>
+                    ${suits.map((sName, bIdx) => {
+                        const b = tx.banat[bIdx];
+                        return `
+                            <div class="panel" style="margin-bottom: 6px; padding: 7px;">
+                                <div class="row" style="margin-bottom: 5px;">
+                                    <span style="font-size: 11.5px; font-weight: 900;">${sName}</span>
+                                    <button onclick="state.trix.banat[${bIdx}].doubled=!state.trix.banat[${bIdx}].doubled;renderTrixCalculatorWidget();" class="badge ${b.doubled ? 'badge-crimson' : 'badge-gold'}" style="cursor:pointer;">
+                                        ${b.doubled ? '🔥 مدبلة (-50/+25)' : 'تدبيل البنت'}
+                                    </button>
+                                </div>
+                                <div class="grid-4">
+                                    ${state.players.map((p, pIdx) => `
+                                        <button onclick="state.trix.banat[${bIdx}].eater=${pIdx};renderTrixCalculatorWidget();" class="btn-dark ${b.eater === pIdx ? 'active' : ''}" style="font-size:10.5px;padding:5px;">أكلها ${E(p)}</button>
+                                    `).join('')}
+                                </div>
+                                ${b.doubled ? `
+                                    <div style="font-size: 10.5px; color: var(--emerald); margin: 5px 0 3px 0;">صاحب البنت (+25):</div>
+                                    <div class="grid-4">
+                                        ${state.players.map((p, pIdx) => `
+                                            <button onclick="state.trix.banat[${bIdx}].owner=${pIdx};renderTrixCalculatorWidget();" class="btn-dark ${b.owner === pIdx ? 'active' : ''}" style="font-size:10px;padding:4px;">${E(p)}</button>
+                                        `).join('')}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                    }).join('')}
+                    <button onclick="commitTrixRound()" class="btn-gold" style="width: 100%; padding: 10px;">✅ تسجيل جولة البنات</button>
+                `;
+            } else if (c === 'dinari' || c === 'latoosh') {
+                const arrKey = c === 'dinari' ? 'dinari' : 'latoosh';
+                const unitVal = c === 'dinari' ? -10 : -15;
+                const title = c === 'dinari' ? '♦️ الديناري (13 ورقة × -10)' : '🃏 اللطوش (13 أكلة × -15)';
+                const sum = tx[arrKey].reduce((a, b) => a + b, 0);
+                box.innerHTML = `
+                    <div class="row" style="margin-bottom: 8px;">
+                        <span style="font-size: 12px; font-weight: 900; color: var(--gold-bright);">${title}</span>
+                        <span class="badge ${sum === 13 ? 'badge-emerald' : 'badge-crimson'}">المجموع: ${sum} / 13</span>
+                    </div>
+                    <div class="grid-2" style="margin-bottom: 8px;">
+                        ${state.players.map((p, idx) => `
+                            <div class="panel" style="padding: 7px;">
+                                <div class="row" style="margin-bottom: 4px;">
+                                    <span style="font-size: 11.5px; font-weight: 900;">${E(p)}</span>
+                                    <span style="font-size: 11px; color: var(--crimson); font-weight: 900;">${tx[arrKey][idx] * unitVal}</span>
+                                </div>
+                                <div class="counter-ctrl">
+                                    <button onclick="adjustTrixCount('${arrKey}', ${idx}, -1)" class="counter-btn">-</button>
+                                    <span style="font-size: 15px; font-weight: 900;">${tx[arrKey][idx]}</span>
+                                    <button onclick="adjustTrixCount('${arrKey}', ${idx}, 1)" class="counter-btn">+</button>
+                                </div>
+                                <button onclick="fillRemaining13('${arrKey}', ${idx})" class="badge badge-gold" style="width: 100%; justify-content: center; margin-top: 5px; cursor: pointer;">إكمال الباقي للـ 13</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button onclick="commitTrixRound()" class="btn-gold" style="width: 100%; padding: 10px;">✅ تسجيل (${sum}/13)</button>
+                `;
+            } else if (c === 'trix') {
+                const pts = [200, 150, 100, 50];
+                box.innerHTML = `
+                    <div class="row" style="margin-bottom: 8px;">
+                        <span style="font-size: 12px; font-weight: 900; color: var(--gold-bright);">👑 اضغط على اللاعبين بالترتيب (الأول +200، الثاني +150، الثالث +100، الرابع +50):</span>
+                        <button onclick="state.trix.trixRank=[];renderTrixCalculatorWidget();" class="badge badge-crimson" style="cursor:pointer;">إعادة</button>
+                    </div>
+                    <div class="grid-2" style="margin-bottom: 8px;">
+                        ${state.players.map((p, pIdx) => {
+                            const pos = tx.trixRank.indexOf(pIdx);
+                            return `
+                                <button onclick="pickTrixRankOrder('trix', ${pIdx})" class="btn-dark ${pos !== -1 ? 'active' : ''}" style="padding: 10px;">
+                                    ${E(p)} ${pos !== -1 ? `— المركز ${pos + 1} (+${pts[pos]})` : ''}
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+                    <button onclick="commitTrixRound()" class="btn-gold" style="width: 100%; padding: 10px;">✅ تسجيل جولة التركس</button>
+                `;
+            }
+        }
+
+        function adjustTrixCount(arrKey, idx, delta) {
+            state.trix[arrKey][idx] = Math.max(0, Math.min(13, state.trix[arrKey][idx] + delta));
+            renderTrixCalculatorWidget();
+        }
+
+        function fillRemaining13(arrKey, targetIdx) {
+            const others = state.trix[arrKey].reduce((acc, v, i) => i === targetIdx ? acc : acc + v, 0);
+            state.trix[arrKey][targetIdx] = Math.max(0, 13 - others);
+            renderTrixCalculatorWidget();
+        }
+
+        function pickTrixRankOrder(gameKey, pIdx) {
+            const arr = gameKey === 'trix' ? state.trix.trixRank : state.complex.temp.trixRank;
+            if (!arr.includes(pIdx)) {
+                arr.push(pIdx);
+                if (arr.length === 3) {
+                    const last = [0, 1, 2, 3].find(x => !arr.includes(x));
+                    if (last !== undefined) arr.push(last);
+                }
+            }
+            if (gameKey === 'trix') renderTrixCalculatorWidget();
+            else renderComplexSection();
+        }
+
+        function applyDualScoreDelta(gameObj, deltaIndiv) {
+            for (let i = 0; i < 4; i++) gameObj.indivScores[i] += deltaIndiv[i];
+            gameObj.teamScores[0] = gameObj.indivScores[0] + gameObj.indivScores[1];
+            gameObj.teamScores[1] = gameObj.indivScores[2] + gameObj.indivScores[3];
+        }
+
+        function isSameSide(p1, p2, mode) {
+            if (p1 === p2) return true;
+            if (mode === 'teams') {
+                return (p1 <= 1 && p2 <= 1) || (p1 >= 2 && p2 >= 2);
+            }
+            return false;
+        }
+
+        function autoCompleteChallenge(chId, winnerName) {
+            if (!Array.isArray(state.challenges)) return;
+            const ch = state.challenges.find(x => x.id === chId);
+            if (ch && !ch.done) {
+                ch.done = true;
+                ch.winner = winnerName || '';
+                showToast(`🏆 تحدي مكتمل: ${ch.title} — البطل: ${ch.winner}!`, 4200);
+            }
+        }
+
+        function commitTrixRound() {
+            const tx = state.trix;
+            const c = tx.activeContract;
+            if ((tx.lockedContracts[tx.currentKingdomIdx] || []).includes(c)) {
+                showToast('🔒 هاد الطلب مسجّل بهالمملكة — اختار طلب تاني');
+                return;
+            }
+            let kMsg = '';
+            const delta = [0, 0, 0, 0];
+            let cName = '';
+
+            if (c === 'sheikh') {
+                cName = 'شيخ الكبة';
+                const e = tx.sheikh.eater;
+                const o = tx.sheikh.owner;
+                if (!tx.sheikh.doubled) {
+                    delta[e] -= 75;
+                } else {
+                    if (isSameSide(e, o, tx.mode)) {
+                        delta[e] -= (state.selfDoubleRule === 'net' ? 75 : 150);
+                    } else {
+                        delta[e] -= 150;
+                        delta[o] += 75;
+                        autoCompleteChallenge('ch_sheikh', state.players[o]);
+                    }
+                }
+            } else if (c === 'banat') {
+                cName = 'البنات';
+                for (let i = 0; i < 4; i++) {
+                    if (tx.banat[i].eater === null) {
+                        showToast('⚠️ حدد من أكل كل البنات الأربع أولاً!');
+                        return;
+                    }
+                    const e = tx.banat[i].eater;
+                    const o = tx.banat[i].owner;
+                    if (!tx.banat[i].doubled) {
+                        delta[e] -= 25;
+                    } else {
+                        if (isSameSide(e, o, tx.mode)) {
+                            delta[e] -= (state.selfDoubleRule === 'net' ? 25 : 50);
+                        } else {
+                            delta[e] -= 50;
+                            delta[o] += 25;
+                        }
+                    }
+                }
+            } else if (c === 'dinari') {
+                cName = 'الديناري';
+                if (tx.dinari.reduce((a, b) => a + b, 0) !== 13) {
+                    showToast('⚠️ مجموع الديناري يجب أن يكون 13 ورقة!');
+                    return;
+                }
+                for (let i = 0; i < 4; i++) {
+                    delta[i] = tx.dinari[i] * -10;
+                    if (tx.dinari[i] === 0) autoCompleteChallenge('ch_clean', state.players[i]);
+                }
+            } else if (c === 'latoosh') {
+                cName = 'اللطوش';
+                if (tx.latoosh.reduce((a, b) => a + b, 0) !== 13) {
+                    showToast('⚠️ مجموع اللطوش يجب أن يكون 13 أكلة!');
+                    return;
+                }
+                for (let i = 0; i < 4; i++) {
+                    delta[i] = tx.latoosh[i] * -15;
+                    if (tx.latoosh[i] === 0) autoCompleteChallenge('ch_clean', state.players[i]);
+                }
+            } else if (c === 'trix') {
+                cName = 'التركس';
+                if (tx.trixRank.length < 4) {
+                    showToast('⚠️ حدد ترتيب اللاعبين الأربعة أولاً!');
+                    return;
+                }
+                const pts = [200, 150, 100, 50];
+                tx.trixRank.forEach((pIdx, rankIdx) => { delta[pIdx] += pts[rankIdx]; });
+                autoCompleteChallenge('ch_trix1', state.players[tx.trixRank[0]]);
+            }
+
+            applyDualScoreDelta(tx, delta);
+            const kIdx = tx.currentKingdomIdx;
+            if (!tx.lockedContracts[kIdx].includes(c)) tx.lockedContracts[kIdx].push(c);
+
+            tx.history.unshift({
+                kIdx,
+                cid: c,
+                contractName: cName,
+                king: state.players[tx.kingdomOrder[kIdx]],
+                delta,
+                summary: state.players.map((p, i) => `${p}(${delta[i] >= 0 ? '+' + delta[i] : delta[i]})`).join(' ، ')
+            });
+
+            tx.sheikh = { eater: 0, doubled: false, owner: 1 };
+            tx.banat = [
+                { eater: null, doubled: false, owner: 0 },
+                { eater: null, doubled: false, owner: 0 },
+                { eater: null, doubled: false, owner: 0 },
+                { eater: null, doubled: false, owner: 0 }
+            ];
+            tx.trixRank = [];
+
+            const allOrder = ['sheikh', 'banat', 'dinari', 'latoosh', 'trix'];
+            const nextAvail = allOrder.find(id => !tx.lockedContracts[kIdx].includes(id));
+            if (nextAvail) {
+                tx.activeContract = nextAvail;
+            } else if (tx.currentKingdomIdx < 3) {
+                tx.currentKingdomIdx++;
+                tx.activeContract = 'sheikh';
+                kMsg = `👑 انتهت المملكة! بدأت مملكة ${state.players[tx.kingdomOrder[tx.currentKingdomIdx]]}`;
+            }
+
+            saveState('trix');
+            renderTrixSection();
+            showToast(kMsg || `✅ تم تسجيل ${cName} ومزامنتها`);
+            checkGameOver('trix');
+        }
+
+        function undoLastRound(gameKey) {
+            const g = state[gameKey];
+            if (!g.history.length) {
+                showToast('⚠️ لا توجد جولات للتراجع عنها');
+                return;
+            }
+            const last = g.history.shift();
+            applyDualScoreDelta(g, last.delta.map(x => -x));
+            const k = last.kIdx !== undefined ? last.kIdx : g.currentKingdomIdx;
+            if (last.cid) {
+                g.lockedContracts[k] = g.lockedContracts[k].filter(x => x !== last.cid);
+                g.activeContract = last.cid;
+            } else {
+                g.lockedContracts[k].pop();
+            }
+            g.currentKingdomIdx = k;
+            saveState(gameKey);
+            renderAll();
+            showToast('↩️ تم التراجع عن آخر جولة');
+        }
+
+        // =================================================================
+        // 4. حاسبة التركس كمبلكس (لعبة منفصلة) + منصة المتصدرين
+        // =================================================================
+        function renderComplexSection() {
+            const cx = state.complex;
+            document.getElementById('complexModeIndiv').classList.toggle('active', cx.mode === 'individual');
+            document.getElementById('complexModeTeams').classList.toggle('active', cx.mode === 'teams');
+
+            const standings = cx.mode === 'individual'
+                ? computeRankedStandings(state.players, cx.indivScores)
+                : computeRankedStandings(state.teams, cx.teamScores);
+            document.getElementById('complexLivePodium').innerHTML = buildLivePodiumHtml(standings, cx.mode === 'teams');
+
+            const currentKingPlayer = state.players[cx.kingdomOrder[cx.currentKingdomIdx]] || state.players[0];
+            document.getElementById('complexCurrentKingdomTitle').textContent = `👑 مملكة الكمبلكس ${cx.currentKingdomIdx + 1} — الملك: ${currentKingPlayer}`;
+
+            document.getElementById('complexKingdomsStrip').innerHTML = [0, 1, 2, 3].map(kIdx => {
+                const pName = state.players[cx.kingdomOrder[kIdx]];
+                const doneCount = (cx.lockedContracts[kIdx] || []).length;
+                return `
+                    <button onclick="gotoKingdom('complex',${kIdx})" class="btn-dark ${cx.currentKingdomIdx === kIdx ? 'active' : ''}" style="font-size: 10.5px; padding: 6px 3px;">
+                        م${kIdx + 1}: ${E(pName)}<br><span style="font-size:9px;">(${doneCount}/2)</span>
+                    </button>
+                `;
+            }).join('');
+
+            const rankMedalByIdx = {};
+            standings.forEach(s => { rankMedalByIdx[s.name] = s.medal; });
+
+            const sb = document.getElementById('complexScoreboard');
+            if (cx.mode === 'individual') {
+                sb.className = 'grid-4';
+                sb.innerHTML = state.players.map((p, idx) => {
+                    const sc = cx.indivScores[idx];
+                    return `
+                        <div onclick="openNamesModal()" class="score-box">
+                            <div style="font-size: 11px; font-weight: 900;">${rankMedalByIdx[p] || ''} ${E(p)}</div>
+                            <div class="score-num ${sc >= 0 ? 'pos-score' : 'neg-score'}">${sc}</div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                sb.className = 'grid-2';
+                sb.innerHTML = [0, 1].map(tIdx => {
+                    const sc = cx.teamScores[tIdx];
+                    return `
+                        <div onclick="openNamesModal()" class="score-box">
+                            <div style="font-size: 12.5px; font-weight: 900; color: ${tIdx === 0 ? 'var(--emerald)' : 'var(--crimson)'};">${rankMedalByIdx[state.teams[tIdx]] || ''} ${E(state.teams[tIdx])}</div>
+                            <div class="score-num ${sc >= 0 ? 'pos-score' : 'neg-score'}">${sc}</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            const locked = cx.lockedContracts[cx.currentKingdomIdx] || [];
+            document.getElementById('complexContractsBar').innerHTML = [
+                { id: 'complexAll', name: '⚡ كمبلكس شامل (شيخ + بنات + ديناري + لطوش)', sub: '-500 نقطة' },
+                { id: 'trix', name: '👑 تركس', sub: '+500 نقطة' }
+            ].map(c => `
+                <button onclick="state.complex.activeContract='${c.id}';renderComplexSection();" class="contract-btn ${cx.activeContract === c.id ? 'selected' : ''} ${locked.includes(c.id) ? 'locked' : ''}">
+                    <div>${c.name}</div>
+                    <div style="font-size:10px;color:var(--gold-bright);">${c.sub}</div>
+                </button>
+            `).join('');
+
+            const calc = document.getElementById('complexCalculatorArea');
+            if (cx.activeContract === 'complexAll') {
+                const t = cx.temp;
+                calc.innerHTML = `
+                    <div style="font-size: 12px; font-weight: 900; color: var(--cyan); margin-bottom: 6px;">1. من أكل شيخ الكبة؟</div>
+                    <div class="grid-4" style="margin-bottom: 8px;">
+                        ${state.players.map((p, i) => `
+                            <button onclick="state.complex.temp.sheikhEater=${i};renderComplexSection();" class="btn-dark ${t.sheikhEater === i ? 'active' : ''}">${E(p)}</button>
+                        `).join('')}
+                    </div>
+                    <div style="font-size: 12px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">2. توزيع البنات والديناري واللطوش لكل لاعب:</div>
+                    <div class="grid-2" style="margin-bottom: 8px;">
+                        ${state.players.map((p, i) => `
+                            <div class="panel" style="padding: 7px;">
+                                <div style="font-weight: 900; font-size: 11.5px; margin-bottom: 4px; color: var(--gold-bright);">${E(p)}</div>
+                                <div class="row" style="font-size: 10.5px; margin-bottom: 3px;">
+                                    <span>👸 بنات:</span>
+                                    <input type="number" min="0" max="4" value="${t.banatCount[i]}" onchange="state.complex.temp.banatCount[${i}]=Math.max(0,parseInt(this.value)||0)" class="input-box" style="width: 55px; padding: 3px; text-align: center;">
+                                </div>
+                                <div class="row" style="font-size: 10.5px; margin-bottom: 3px;">
+                                    <span>♦️ ديناري:</span>
+                                    <input type="number" min="0" max="13" value="${t.dinariCount[i]}" onchange="state.complex.temp.dinariCount[${i}]=Math.max(0,parseInt(this.value)||0)" class="input-box" style="width: 55px; padding: 3px; text-align: center;">
+                                </div>
+                                <div class="row" style="font-size: 10.5px;">
+                                    <span>🃏 لطوش:</span>
+                                    <input type="number" min="0" max="13" value="${t.latooshCount[i]}" onchange="state.complex.temp.latooshCount[${i}]=Math.max(0,parseInt(this.value)||0)" class="input-box" style="width: 55px; padding: 3px; text-align: center;">
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button onclick="commitComplexRound()" class="btn-gold" style="width: 100%; padding: 10px;">✅ تسجيل جولة الكمبلكس الشاملة</button>
+                `;
+            } else {
+                const pts = [200, 150, 100, 50];
+                calc.innerHTML = `
+                    <div class="row" style="margin-bottom: 8px;">
+                        <span style="font-size: 12px; font-weight: 900; color: var(--gold-bright);">👑 ترتيب الفائزين بالتركس:</span>
+                        <button onclick="state.complex.temp.trixRank=[];renderComplexSection();" class="badge badge-crimson" style="cursor:pointer;">إعادة</button>
+                    </div>
+                    <div class="grid-2" style="margin-bottom: 8px;">
+                        ${state.players.map((p, pIdx) => {
+                            const pos = cx.temp.trixRank.indexOf(pIdx);
+                            return `
+                                <button onclick="pickTrixRankOrder('complex', ${pIdx})" class="btn-dark ${pos !== -1 ? 'active' : ''}" style="padding: 10px;">
+                                    ${E(p)} ${pos !== -1 ? `— المركز ${pos + 1} (+${pts[pos]})` : ''}
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+                    <button onclick="commitComplexRound()" class="btn-gold" style="width: 100%; padding: 10px;">✅ تسجيل تركس الكمبلكس</button>
+                `;
+            }
+
+            const hBox = document.getElementById('complexHistoryList');
+            hBox.innerHTML = cx.history.length
+                ? cx.history.slice(0, 8).map(h => `<div style="padding: 5px 0; border-bottom: 1px solid var(--border-subtle);">⚡ <strong>${E(h.contractName)}</strong>: ${E(h.summary)}</div>`).join('')
+                : `<div style="color: var(--text-muted); text-align: center;">لا توجد جولات مسجلة بعد</div>`;
+        }
+
+        function commitComplexRound() {
+            const cx = state.complex, c = cx.activeContract, kIdx = cx.currentKingdomIdx;
+            if ((cx.lockedContracts[kIdx] || []).includes(c)) {
+                showToast('🔒 هاد الطلب مسجّل بهالمملكة — اختار طلب تاني');
+                return;
+            }
+            const delta = [0, 0, 0, 0];
+            let cName = '';
+            const sum = a => a.reduce((x, y) => x + (y || 0), 0);
+            if (c === 'complexAll') {
+                cName = 'كمبلكس شامل';
+                const t = cx.temp;
+                if (sum(t.banatCount) !== 4) { showToast('⚠️ مجموع البنات لازم يكون 4'); return; }
+                if (sum(t.dinariCount) !== 13) { showToast('⚠️ مجموع الديناري لازم يكون 13'); return; }
+                if (sum(t.latooshCount) !== 13) { showToast('⚠️ مجموع اللطوش لازم يكون 13'); return; }
+                delta[t.sheikhEater] -= 75;
+                for (let i = 0; i < 4; i++) {
+                    delta[i] += (t.banatCount[i] * -25) + (t.dinariCount[i] * -10) + (t.latooshCount[i] * -15);
+                }
+            } else {
+                cName = 'تركس';
+                if (cx.temp.trixRank.length < 4) { showToast('⚠️ حدد ترتيب اللاعبين الأربعة أولاً!'); return; }
+                const pts = [200, 150, 100, 50];
+                cx.temp.trixRank.forEach((pIdx, r) => { delta[pIdx] += pts[r]; });
+            }
+            applyDualScoreDelta(cx, delta);
+            cx.lockedContracts[kIdx].push(c);
+            cx.history.unshift({
+                kIdx,
+                cid: c,
+                contractName: cName,
+                king: state.players[cx.kingdomOrder[kIdx]],
+                delta,
+                summary: state.players.map((p, i) => `${p}(${delta[i] >= 0 ? '+' + delta[i] : delta[i]})`).join(' ، ')
+            });
+            cx.temp.trixRank = [];
+            cx.temp.sheikhEater = 0;
+            cx.temp.banatCount = [1, 1, 1, 1];
+            cx.temp.dinariCount = [4, 3, 3, 3];
+            cx.temp.latooshCount = [4, 3, 3, 3];
+            const nxt = ['complexAll', 'trix'].find(id => !cx.lockedContracts[kIdx].includes(id));
+            let kMsg = '';
+            if (nxt) cx.activeContract = nxt;
+            else if (cx.currentKingdomIdx < 3) {
+                cx.currentKingdomIdx++;
+                cx.activeContract = 'complexAll';
+                kMsg = `👑 انتهت المملكة! بدأت مملكة ${state.players[cx.kingdomOrder[cx.currentKingdomIdx]]}`;
+            }
+            saveState('complex');
+            renderComplexSection();
+            showToast(kMsg || `✅ تم تسجيل ${cName} ومزامنتها`);
+            checkGameOver('complex');
+        }
+
+        // =================================================================
+        // 5. الطرنيب السوري 41 والطرنيب العادي + منصة المتصدرين
+        // =================================================================
+        function getMinSyrianBid(sc) {
+            if (sc >= 50) return 5;
+            if (sc >= 40) return 4;
+            if (sc >= 30) return 3;
+            return 2;
+        }
+
+        function renderSyrian41Section() {
+            const sy = state.syrian41;
+            const totalBids = sy.bids.reduce((a, b) => a + b, 0);
+            const badge = document.getElementById('syrianTotalBidsBadge');
+            badge.textContent = `مجموع الطلبات: ${totalBids}`;
+            badge.className = `badge ${totalBids >= 11 ? 'badge-emerald' : 'badge-crimson'}`;
+            document.getElementById('syrianFartAlert').classList.toggle('hidden', totalBids >= 11);
+
+            const standings = computeRankedStandings(state.players, sy.scores);
+            document.getElementById('syrianLivePodium').innerHTML = buildLivePodiumHtml(standings, false);
+            const rankMedalByIdx = {};
+            standings.forEach(s => { rankMedalByIdx[s.name] = s.medal; });
+
+            document.getElementById('syrianPlayersGrid').innerHTML = state.players.map((p, idx) => {
+                const sc = sy.scores[idx];
+                const minB = getMinSyrianBid(sc);
+                if (sy.bids[idx] < minB) sy.bids[idx] = minB;
+                const partnerName = state.players[idx % 2 === 0 ? idx + 1 : idx - 1];
+                return `
+                    <div class="panel">
+                        <div class="row" style="margin-bottom: 4px;">
+                            <span onclick="openNamesModal()" style="font-size: 12.5px; font-weight: 900; cursor: pointer;">${rankMedalByIdx[p] || ''} ${E(p)}</span>
+                            <span style="font-size: 9.5px; color: var(--text-muted);">شريك ${E(partnerName)}</span>
+                        </div>
+                        <div class="score-num ${sc >= 0 ? 'pos-score' : 'neg-score'}" style="margin-bottom: 6px;">${sc}</div>
+                        <div style="font-size: 10px; color: var(--gold-bright); margin-bottom: 4px;">الطلب (الحد الأدنى ${minB}):</div>
+                        <div class="counter-ctrl" style="margin-bottom: 6px;">
+                            <button onclick="adjustSyrianBid(${idx}, -1)" class="counter-btn">-</button>
+                            <span style="font-size: 15px; font-weight: 900;">${sy.bids[idx]}</span>
+                            <button onclick="adjustSyrianBid(${idx}, 1)" class="counter-btn">+</button>
+                        </div>
+                        <div class="grid-2">
+                            <button onclick="state.syrian41.won[${idx}]=!state.syrian41.won[${idx}];renderSyrian41Section();" class="${sy.won[idx] ? 'btn-emerald' : 'btn-crimson'}" style="font-size: 10.5px; padding: 6px;">
+                                ${sy.won[idx] ? '✔️ جابها' : '✖️ انكسر'}
+                            </button>
+                            <button onclick="state.syrian41.doubled[${idx}]=!state.syrian41.doubled[${idx}];renderSyrian41Section();" class="btn-dark ${sy.doubled[idx] ? 'active' : ''}" style="font-size: 10.5px; padding: 6px;">
+                                🔥 دبل x2
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const hBox = document.getElementById('syrianHistoryList');
+            hBox.innerHTML = sy.history.length
+                ? sy.history.slice(0, 8).map(h => `<div style="padding: 5px 0; border-bottom: 1px solid var(--border-subtle);">🔥 ${E(h.summary)}</div>`).join('')
+                : `<div style="color: var(--text-muted); text-align: center;">لا توجد جولات مسجلة بعد</div>`;
+        }
+
+        function adjustSyrianBid(idx, delta) {
+            const minB = getMinSyrianBid(state.syrian41.scores[idx]);
+            state.syrian41.bids[idx] = Math.max(minB, Math.min(13, state.syrian41.bids[idx] + delta));
+            renderSyrian41Section();
+        }
+
+        function commitSyrian41Round() {
+            const sy = state.syrian41;
+            const total = sy.bids.reduce((a, b) => a + b, 0);
+            if (total < 11) {
+                showToast('⚠️ مجموع الطلبات أقل من 11 — اللعبة فرطت!');
+                return;
+            }
+            const delta = [0, 0, 0, 0];
+            for (let i = 0; i < 4; i++) {
+                const mult = sy.doubled[i] ? 2 : 1;
+                delta[i] = (sy.won[i] ? sy.bids[i] : -sy.bids[i]) * mult;
+                sy.scores[i] += delta[i];
+                if (sy.scores[i] >= 45) autoCompleteChallenge('ch_sy45', state.players[i]);
+            }
+            sy.history.unshift({
+                delta,
+                summary: state.players.map((p, i) => `${p}: ${delta[i] >= 0 ? '+' + delta[i] : delta[i]}`).join(' | ')
+            });
+            sy.won = [true, true, true, true];
+            sy.doubled = [false, false, false, false];
+            saveState('syrian41');
+            renderSyrian41Section();
+            showToast('✅ تم تسجيل جولة الطرنيب السوري 41');
+            const mx = Math.max(...sy.scores);
+            if (mx >= 41) showToast(`🏆 🥇 المتصدر ${state.players[sy.scores.indexOf(mx)]} وصل ${mx} — فاز! احفظ المباراة بالأرشيف`, 8000);
+        }
+
+        function undoSyrianRound() {
+            const sy = state.syrian41;
+            if (!sy.history.length) return;
+            const last = sy.history.shift();
+            for (let i = 0; i < 4; i++) sy.scores[i] -= last.delta[i];
+            saveState('syrian41');
+            renderSyrian41Section();
+            showToast('↩️ تم التراجع');
+        }
+
+        function setClassicTarget(val) {
+            state.classic.target = val;
+            saveState('classic');
+            renderClassicSection();
+        }
+        function setClassicBidder(idx) {
+            state.classic.bidder = idx;
+            renderClassicSection();
+        }
+
+        function renderClassicSection() {
+            const cl = state.classic;
+            document.getElementById('clTarget31').classList.toggle('active', cl.target === 31);
+            document.getElementById('clTarget61').classList.toggle('active', cl.target === 61);
+            document.getElementById('clTeam0Title').textContent = state.teams[0];
+            document.getElementById('clTeam1Title').textContent = state.teams[1];
+            document.getElementById('clTeam0Players').textContent = `${state.players[0]} + ${state.players[1]}`;
+            document.getElementById('clTeam1Players').textContent = `${state.players[2]} + ${state.players[3]}`;
+            document.getElementById('clTeam0Score').textContent = cl.scores[0];
+            document.getElementById('clTeam1Score').textContent = cl.scores[1];
+            document.getElementById('clBidder0Btn').textContent = state.teams[0];
+            document.getElementById('clBidder1Btn').textContent = state.teams[1];
+            document.getElementById('clBidder0Btn').classList.toggle('active', cl.bidder === 0);
+            document.getElementById('clBidder1Btn').classList.toggle('active', cl.bidder === 1);
+
+            const st = computeRankedStandings(state.teams, cl.scores);
+            const banner = document.getElementById('classicLeaderBanner');
+            if (banner) {
+                banner.innerHTML = `🥇 <strong>المركز الأول:</strong> <span style="color:var(--gold-bright);">${E(st[0].name)}</span> (${st[0].score}) &nbsp;|&nbsp; 🥈 <strong>المركز الثاني:</strong> ${E(st[1].name)} (${st[1].score})`;
+            }
+
+            document.getElementById('classicBidGrid').innerHTML = [7, 8, 9, 10, 11, 12, 13].map(b => `
+                <button onclick="state.classic.bid=${b};state.classic.tricks=${b};renderClassicSection();" class="btn-dark ${cl.bid === b ? 'active' : ''}">${b === 13 ? '13 كبوت' : b}</button>
+            `).join('');
+
+            document.getElementById('classicTricksGrid').innerHTML = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(tr => `
+                <button onclick="state.classic.tricks=${tr};renderClassicSection();" class="btn-dark ${cl.tricks === tr ? 'active' : ''}" style="padding: 6px 2px;">${tr} أكلة</button>
+            `).join('');
+        }
+
+        function commitClassicTarneebRound() {
+            const cl = state.classic;
+            const bTeam = cl.bidder;
+            const oTeam = 1 - bTeam;
+            const delta = [0, 0];
+
+            if (cl.tricks >= cl.bid) {
+                delta[bTeam] = cl.tricks === 13 ? (cl.bid === 13 ? 26 : 16) : cl.tricks;
+                delta[oTeam] = 13 - cl.tricks;
+                if (cl.tricks === 13) autoCompleteChallenge('ch_kaboot', state.teams[bTeam]);
+            } else {
+                delta[bTeam] = -(cl.bid === 13 ? 26 : cl.bid);
+                delta[oTeam] = 13 - cl.tricks;
+            }
+            cl.scores[0] += delta[0];
+            cl.scores[1] += delta[1];
+            cl.history.unshift({ delta });
+            saveState('classic');
+            renderClassicSection();
+            showToast('✅ تم تسجيل جولة الطرنيب العادي');
+            const mx = Math.max(...cl.scores);
+            if (mx >= cl.target) showToast(`🏆 🥇 الفائز: ${state.teams[cl.scores.indexOf(mx)]} (${mx}/${cl.target}) — احفظ المباراة بالأرشيف`, 8000);
+        }
+
+        function undoClassicRound() {
+            const cl = state.classic;
+            if (!cl.history.length) return;
+            const last = cl.history.shift();
+            cl.scores[0] -= last.delta[0];
+            cl.scores[1] -= last.delta[1];
+            saveState('classic');
+            renderClassicSection();
+            showToast('↩️ تم التراجع');
+        }
+
+        // =================================================================
+        // 6. قسم المتصدرين التاريخيين وتحديات الشلة (Squad Challenges & Champions)
+        // =================================================================
+        function renderChallengesSection() {
+            // حساب المتصدرين عبر كل الأرشيف + اللعبة الحالية
+            const allMatches = getAllArchivedMatches();
+            const winStats = {};
+            state.players.forEach(p => { winStats[p] = { wins: 0, second: 0, third: 0, totalPts: 0 }; });
+
+            allMatches.forEach(m => {
+                if (m.firstPlace) {
+                    if (!winStats[m.firstPlace]) winStats[m.firstPlace] = { wins: 0, second: 0, third: 0, totalPts: 0 };
+                    winStats[m.firstPlace].wins++;
+                }
+                if (m.secondPlace) {
+                    if (!winStats[m.secondPlace]) winStats[m.secondPlace] = { wins: 0, second: 0, third: 0, totalPts: 0 };
+                    winStats[m.secondPlace].second++;
+                }
+                if (m.thirdPlace) {
+                    if (!winStats[m.thirdPlace]) winStats[m.thirdPlace] = { wins: 0, second: 0, third: 0, totalPts: 0 };
+                    winStats[m.thirdPlace].third++;
+                }
+            });
+
+            // إضافة نقاط الجولة الحالية للترتيب الحي في حال عدم وجود أرشيف بعد
+            state.players.forEach((p, idx) => {
+                if (!winStats[p]) winStats[p] = { wins: 0, second: 0, third: 0, totalPts: 0 };
+                winStats[p].totalPts += (state.trix.indivScores[idx] || 0) + (state.complex.indivScores[idx] || 0) + (state.syrian41.scores[idx] || 0);
+            });
+
+            const sortedChamps = Object.entries(winStats)
+                .map(([name, st]) => ({ name, wins: st.wins, second: st.second, third: st.third, totalPts: st.totalPts }))
+                .sort((a, b) => (b.wins !== a.wins) ? (b.wins - a.wins) : (b.totalPts - a.totalPts));
+
+            // فحص تحدي الهاتريك (3 انتصارات)
+            if (sortedChamps[0] && sortedChamps[0].wins >= 3) {
+                autoCompleteChallenge('ch_hattrick', sortedChamps[0].name);
+            }
+
+            const c1 = sortedChamps[0] || { name: state.players[0], wins: 0, totalPts: 0 };
+            const c2 = sortedChamps[1] || { name: state.players[1], wins: 0, totalPts: 0 };
+            const c3 = sortedChamps[2] || { name: state.players[2], wins: 0, totalPts: 0 };
+            const c4 = sortedChamps[3] || { name: state.players[3], wins: 0, totalPts: 0 };
+
+            const podBox = document.getElementById('globalChampionsPodium');
+            if (podBox) {
+                podBox.innerHTML = `
+                    <div class="podium-strip">
+                        <div class="podium-col podium-2">
+                            <div style="font-size: 16px;">🥈</div>
+                            <div style="font-size: 10px; color: #cbd5e1; font-weight: 800;">المركز الثاني</div>
+                            <div style="font-size: 12px; font-weight: 900; color: #fff;">${E(c2.name)}</div>
+                            <div style="font-size: 11px; color: #34d399; font-weight: 900;">${c2.wins} فوز 🥇</div>
+                            <div style="font-size: 9.5px; color: var(--text-muted);">مجموع: ${c2.totalPts}</div>
+                        </div>
+                        <div class="podium-col podium-1">
+                            <div style="font-size: 21px;">👑🥇</div>
+                            <div style="font-size: 10.5px; color: var(--gold-bright); font-weight: 900;">المركز الأول (متصدر الشلة)</div>
+                            <div style="font-size: 14px; font-weight: 900; color: #fff;">${E(c1.name)}</div>
+                            <div style="font-size: 13px; color: #34d399; font-weight: 900;">${c1.wins} فوز 🥇</div>
+                            <div style="font-size: 10px; color: #fde68a;">مجموع النقاط: ${c1.totalPts}</div>
+                        </div>
+                        <div class="podium-col podium-3">
+                            <div style="font-size: 16px;">🥉</div>
+                            <div style="font-size: 10px; color: #fdba74; font-weight: 800;">المركز الثالث</div>
+                            <div style="font-size: 12px; font-weight: 900; color: #fff;">${E(c3.name)}</div>
+                            <div style="font-size: 11px; color: #fed7aa; font-weight: 900;">${c3.wins} فوز 🥇</div>
+                            <div style="font-size: 9.5px; color: var(--text-muted);">مجموع: ${c3.totalPts}</div>
+                        </div>
+                    </div>
+                    <div class="panel row" style="font-size: 11px; padding: 7px 10px;">
+                        <span>4️⃣ <strong>المركز الرابع:</strong> ${E(c4.name)} (${c4.wins} فوز • مجموع: ${c4.totalPts})</span>
+                        <span class="badge badge-cyan">إجمالي السجل: ${allMatches.length} مباراة</span>
+                    </div>
+                `;
+            }
+
+            if (!Array.isArray(state.challenges)) state.challenges = JSON.parse(JSON.stringify(DEFAULT_CHALLENGES));
+            const doneCount = state.challenges.filter(x => x.done).length;
+            const progBadge = document.getElementById('challengesProgressBadge');
+            if (progBadge) progBadge.textContent = `${doneCount} / ${state.challenges.length} مكتمل`;
+
+            const listEl = document.getElementById('squadChallengesList');
+            if (listEl) {
+                listEl.innerHTML = state.challenges.map((ch, idx) => `
+                    <div class="challenge-card ${ch.done ? 'done' : ''}">
+                        <div style="flex: 1;">
+                            <div class="row-wrap" style="gap: 6px; margin-bottom: 3px;">
+                                <span style="font-size: 15px;">${ch.icon || '🔥'}</span>
+                                <span style="font-size: 12.5px; font-weight: 900; color: ${ch.done ? '#34d399' : 'var(--gold-bright)'};">${E(ch.title)}</span>
+                                ${ch.done && ch.winner ? `<span class="badge badge-emerald">🏆 البطل: ${E(ch.winner)}</span>` : ''}
+                            </div>
+                            <div style="font-size: 11px; color: #cbd5e1; margin-bottom: 3px;">${E(ch.desc)}</div>
+                            <div style="font-size: 10px; color: #fde68a; font-weight: 800;">🎁 الجائزة / الحكم: ${E(ch.reward || 'شاورما')}</div>
+                        </div>
+                        <div class="row" style="gap: 4px;">
+                            <select onchange="assignChallengeWinner(${idx}, this.value)" class="input-box" style="width: 92px; padding: 5px; font-size: 10.5px;">
+                                <option value="">من أنجزه؟</option>
+                                ${state.players.map(p => `<option value="${E(p)}" ${ch.winner === p ? 'selected' : ''}>${E(p)}</option>`).join('')}
+                            </select>
+                            <button onclick="toggleChallengeDone(${idx})" class="${ch.done ? 'btn-emerald' : 'btn-dark'}" style="padding: 7px 10px;">
+                                ${ch.done ? '✔️ تم' : 'إنجاز'}
+                            </button>
+                            ${ch.custom ? `<button onclick="deleteCustomChallenge(${idx})" class="btn-dark" style="color:var(--crimson);padding:7px;">✖</button>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function toggleChallengeDone(idx) {
+            const ch = state.challenges[idx];
+            if (!ch) return;
+            ch.done = !ch.done;
+            if (ch.done && !ch.winner) ch.winner = state.players[0];
+            saveState('challenges');
+            renderChallengesSection();
+            if (ch.done) showToast(`🏆 كفو! تم إنجاز تحدي (${ch.title}) بواسطة ${ch.winner}`);
+        }
+
+        function assignChallengeWinner(idx, playerName) {
+            const ch = state.challenges[idx];
+            if (!ch) return;
+            ch.winner = playerName;
+            ch.done = !!playerName;
+            saveState('challenges');
+            renderChallengesSection();
+            if (playerName) showToast(`🥇 تم تسجيل التحدي باسم ${playerName}!`);
+        }
+
+        function addCustomSquadChallenge() {
+            const tInp = document.getElementById('customChallengeTitle');
+            const rInp = document.getElementById('customChallengeReward');
+            const title = (tInp.value || '').trim();
+            const reward = (rInp.value || '').trim() || 'عزيمة شاورما 🥙';
+            if (!title) {
+                showToast('⚠️ اكتب عنوان التحدي أولاً');
+                return;
+            }
+            state.challenges.unshift({
+                id: 'cust_' + Date.now(),
+                icon: '⚡',
+                title: title,
+                desc: 'تحدي خاص مضاف من الشلة',
+                reward: reward,
+                done: false,
+                winner: '',
+                custom: true
+            });
+            tInp.value = '';
+            rInp.value = '';
+            saveState('challenges');
+            renderChallengesSection();
+            showToast('🔥 تمت إضافة التحدي الجديد للشلة!');
+        }
+
+        function deleteCustomChallenge(idx) {
+            state.challenges.splice(idx, 1);
+            saveState('challenges');
+            renderChallengesSection();
+        }
+
+        // =================================================================
+        // 7. قرعة الـ 4 أشخاص وقرعة الـ 8 أشخاص
+        // =================================================================
+        function renderDraw8Section() {
+            const g4 = document.getElementById('fourPlayersInputGrid');
+            if (g4) {
+                g4.innerHTML = state.players.map((p, idx) => `
+                    <div class="row panel" style="padding: 6px 9px;">
+                        <span style="font-size: 11px; color: var(--emerald); font-weight: 900;">${idx + 1}.</span>
+                        <input type="text" value="${E(p)}" oninput="state.players[${idx}]=this.value;saveState('players');renderTopPlayersBar();" class="input-box" style="padding: 5px 8px; font-size: 12px;">
+                    </div>
+                `).join('');
+            }
+
+            const g8 = document.getElementById('eightPlayersInputGrid');
+            if (g8) {
+                g8.innerHTML = state.eightPlayers.map((name, idx) => `
+                    <div class="row panel" style="padding: 6px 9px;">
+                        <span style="font-size: 11px; color: var(--gold-bright); font-weight: 900;">${idx + 1}.</span>
+                        <input type="text" value="${E(name)}" oninput="state.eightPlayers[${idx}]=this.value;saveState('players');" class="input-box" style="padding: 5px 8px; font-size: 12px;">
+                    </div>
+                `).join('');
+            }
+        }
+
+        function run4PlayerAnimatedDraw() {
+            const arr = [...state.players];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            state.players = arr;
+            resetAllGames();
+            saveState('players');
+            renderAll();
+            document.getElementById('fourPlayersDrawResult').innerHTML = `
+                <div class="panel anim-in" style="margin-top: 10px; border-color: var(--emerald);">
+                    <div class="grid-2">
+                        <div style="font-size: 12px;"><strong style="color:var(--emerald);">🤝 الفريق الأول:</strong><br>${E(arr[0])} + ${E(arr[1])}</div>
+                        <div style="font-size: 12px;"><strong style="color:var(--crimson);">🤝 الفريق الثاني:</strong><br>${E(arr[2])} + ${E(arr[3])}</div>
+                    </div>
+                </div>`;
+            showToast('🎲 تم توزيع الـ 4 لاعبين واعتمادهم في الطاولة!');
+        }
+
+        function run8PlayerDraw() {
+            const arr = [...state.eightPlayers];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            const table1 = arr.slice(0, 4);
+            const table2 = arr.slice(4, 8);
+            window._drawnTables = [table1, table2];
+
+            document.getElementById('eightPlayersResultsArea').innerHTML = [table1, table2].map((tbl, tIdx) => `
+                <div class="panel anim-in" style="border-color: ${tIdx === 0 ? 'var(--emerald)' : 'var(--gold)'};">
+                    <div style="font-size: 13px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">🃏 الطاولة ${tIdx + 1}</div>
+                    <div style="font-size: 11.5px; margin-bottom: 4px;">🤝 <strong>فريق 1:</strong> ${E(tbl[0])} + ${E(tbl[1])}</div>
+                    <div style="font-size: 11.5px; margin-bottom: 8px;">🤝 <strong>فريق 2:</strong> ${E(tbl[2])} + ${E(tbl[3])}</div>
+                    <button onclick="applyDrawnTableToCalculator(${tIdx})" class="btn-emerald" style="width: 100%; font-size: 11px; padding: 7px;">اعتماد في طاولة ${tIdx + 1}</button>
+                </div>
+            `).join('');
+            showToast('🎰 تم توزيع الـ 8 لاعبين على طاولتين!');
+        }
+
+        function applyDrawnTableToCalculator(tIdx) {
+            if (!window._drawnTables || !window._drawnTables[tIdx]) return;
+            const targetSlot = tIdx === 0 ? 'table1' : 'table2';
+            state.activeTableSlot = targetSlot;
+            loadSlotIntoActiveView(targetSlot);
+            state.players = [...window._drawnTables[tIdx]];
+            resetAllGames();
+            saveState('players');
+            renderAll();
+            switchTab('trix');
+            showToast(`✅ تم اعتماد لاعبي الطاولة ${tIdx + 1} في (${targetSlot === 'table1' ? 'طاولة 1' : 'طاولة 2'})!`);
+        }
+
+        // =================================================================
+        // 8. مكتبة الصوت الأوفلاين (IndexedDB)
+        // =================================================================
+        let lib = [], onlineTracks = [], qKind = 'lib', curIdx = -1, curUrl = null;
+        let shuffleOn = false, repeatMode = 'all', isRemotePlaying = false, isMediaDockMinimized = true, _adb = null, _audioBound = false;
+        const $a = () => document.getElementById('phoneAudioBridge');
+        const curQ = () => (qKind === 'lib' ? lib : onlineTracks);
+
+        function audioDB() {
+            if (!_adb) _adb = new Promise((res, rej) => {
+                const r = indexedDB.open('ShillaAudioLib_2026', 1);
+                r.onupgradeneeded = e => {
+                    const d = e.target.result;
+                    d.createObjectStore('meta', { keyPath: 'id' });
+                    d.createObjectStore('blobs', { keyPath: 'id' });
+                };
+                r.onsuccess = e => res(e.target.result);
+                r.onerror = () => rej(r.error);
+            });
+            return _adb;
+        }
+        function idbTx(stores, mode, fn) {
+            return audioDB().then(db => new Promise((res, rej) => {
+                const t = db.transaction(stores, mode);
+                let out;
+                try { out = fn(t); } catch (e) { rej(e); return; }
+                t.oncomplete = () => res(out && out.result !== undefined ? out.result : undefined);
+                t.onerror = t.onabort = () => rej(t.error);
+            }));
+        }
+        async function libLoad() {
+            try {
+                lib = (await idbTx('meta', 'readonly', t => t.objectStore('meta').getAll())) || [];
+                lib.sort((a, b) => a.added - b.added);
+            } catch (e) { lib = []; }
+        }
+        async function saveTrackFile(file, title, artist) {
+            const key = file.name + '|' + file.size;
+            if (lib.some(t => t.key === key)) return 'dup';
+            const base = file.name.replace(/\.[^/.]+$/, '').replace(/_/g, ' ').trim();
+            let ti = title || base, ar = artist || 'مكتبتي';
+            if (!title) {
+                const m = base.split(/\s[-–—]\s/);
+                if (m.length > 1) { ar = m[0].trim(); ti = m.slice(1).join(' - ').trim(); }
+            }
+            const id = 't' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+            const meta = { id, key, title: ti.slice(0, 120), artist: ar.slice(0, 80), size: file.size, added: Date.now() };
+            await idbTx(['meta', 'blobs'], 'readwrite', t => {
+                t.objectStore('meta').put(meta);
+                t.objectStore('blobs').put({ id, blob: file });
+            });
+            lib.push(meta);
+            return 'ok';
+        }
+        async function addSongsToLibrary(ev) {
+            const files = [...ev.target.files].filter(f => (f.type || '').startsWith('audio/') || /\.(mp3|m4a|aac|wav|ogg|opus|flac|wma)$/i.test(f.name));
+            ev.target.value = '';
+            if (!files.length) { showToast('⚠️ ما اخترت ملفات صوت'); return; }
+            let ok = 0, dup = 0;
+            for (const f of files) {
+                try {
+                    const r = await saveTrackFile(f);
+                    if (r === 'ok') ok++; else dup++;
+                    showToast(`⏳ عم يتحفظ ${ok + dup}/${files.length}`);
+                } catch (e) {
+                    showToast('⚠️ فشل الحفظ: ' + f.name, 4000);
+                    break;
+                }
+            }
+            renderCuratedTarabList();
+            updateStorageStats();
+            showToast(`✅ انحفظ ${ok} أغنية بالتطبيق`, 3500);
+        }
+        async function deleteTrack(id) {
+            const i = lib.findIndex(t => t.id === id);
+            if (i < 0) return;
+            await idbTx(['meta', 'blobs'], 'readwrite', t => {
+                t.objectStore('meta').delete(id);
+                t.objectStore('blobs').delete(id);
+            });
+            const wasPlaying = qKind === 'lib' && curIdx === i;
+            lib.splice(i, 1);
+            if (wasPlaying) stopAudio();
+            else if (qKind === 'lib' && curIdx > i) curIdx--;
+            renderCuratedTarabList();
+            updateStorageStats();
+            updateMediaDockUI();
+        }
+        async function clearLibrary() {
+            if (!lib.length) return;
+            await idbTx(['meta', 'blobs'], 'readwrite', t => {
+                t.objectStore('meta').clear();
+                t.objectStore('blobs').clear();
+            });
+            lib = [];
+            stopAudio();
+            renderCuratedTarabList();
+            updateStorageStats();
+            updateMediaDockUI();
+        }
+        function stopAudio() {
+            const a = $a();
+            a.pause();
+            a.removeAttribute('src');
+            a.load();
+            if (curUrl) { URL.revokeObjectURL(curUrl); curUrl = null; }
+            curIdx = -1;
+            isRemotePlaying = false;
+        }
+        async function updateStorageStats() {
+            const el = document.getElementById('libStats');
+            if (!el) return;
+            const mb = lib.reduce((s, t) => s + (t.size || 0), 0) / 1048576;
+            el.textContent = `📴 ${lib.length} أغنية محفوظة بالتطبيق • ${mb.toFixed(1)} MB`;
+        }
+
+        async function playAt(i, kind) {
+            if (kind) qKind = kind;
+            const q = curQ();
+            if (!q.length) return;
+            curIdx = ((i % q.length) + q.length) % q.length;
+            const m = q[curIdx], a = $a();
+            try {
+                if (qKind === 'lib') {
+                    const rec = await idbTx('blobs', 'readonly', t => t.objectStore('blobs').get(m.id));
+                    if (!rec || !rec.blob) { showToast('⚠️ الملف مفقود'); return; }
+                    if (curUrl) URL.revokeObjectURL(curUrl);
+                    curUrl = URL.createObjectURL(rec.blob);
+                    a.src = curUrl;
+                    try { localStorage.setItem('SHILLA_LAST_TRACK', m.id); } catch (e) {}
+                } else {
+                    if (curUrl) { URL.revokeObjectURL(curUrl); curUrl = null; }
+                    a.src = m.url;
+                }
+                await a.play();
+            } catch (e) {
+                if (e && e.name !== 'NotAllowedError' && e.name !== 'AbortError') showToast('⚠️ تعذّر تشغيل الأغنية');
+            }
+            updateMediaDockUI();
+            renderCuratedTarabList();
+        }
+        function stepTrack(dir) {
+            const q = curQ();
+            if (!q.length) return;
+            let n = curIdx + dir;
+            if (shuffleOn && q.length > 1) {
+                do { n = Math.floor(Math.random() * q.length); } while (n === curIdx);
+            }
+            playAt(n);
+        }
+        function fmtT(sec) {
+            if (!sec || !isFinite(sec) || sec < 0) return '00:00';
+            return String(Math.floor(sec / 60)).padStart(2, '0') + ':' + String(Math.floor(sec % 60)).padStart(2, '0');
+        }
+        function seekDirectAudio(p) {
+            const a = $a();
+            if (a.duration && isFinite(a.duration)) a.currentTime = (parseFloat(p) / 100) * a.duration;
+        }
+
+        function bindAudioEvents() {
+            if (_audioBound) return;
+            _audioBound = true;
+            const a = $a();
+            a.addEventListener('timeupdate', () => {
+                document.getElementById('mediaCurrentTime').textContent = fmtT(a.currentTime);
+                if (a.duration) {
+                    document.getElementById('mediaDurationTime').textContent = fmtT(a.duration);
+                    document.getElementById('mediaSeekSlider').value = ((a.currentTime / a.duration) * 100).toFixed(1);
+                }
+            });
+            a.addEventListener('loadedmetadata', () => {
+                document.getElementById('mediaDurationTime').textContent = fmtT(a.duration);
+            });
+            a.addEventListener('play', () => { isRemotePlaying = true; updateMediaDockUI(); renderCuratedTarabList(); });
+            a.addEventListener('pause', () => { isRemotePlaying = false; updateMediaDockUI(); renderCuratedTarabList(); });
+            a.addEventListener('ended', () => {
+                if (repeatMode === 'one') { a.currentTime = 0; a.play(); return; }
+                if (repeatMode === 'off' && !shuffleOn && curIdx >= curQ().length - 1) {
+                    isRemotePlaying = false;
+                    updateMediaDockUI();
+                    return;
+                }
+                stepTrack(1);
+            });
+        }
+        function mediaRemoteCommand(cmd) {
+            const a = $a();
+            if (cmd === 'toggle') {
+                if (!a.getAttribute('src')) {
+                    if (!lib.length) { showToast('📂 أضف أغانيك من المكتبة أول'); openYoutubeModal(); return; }
+                    const last = localStorage.getItem('SHILLA_LAST_TRACK');
+                    const li = lib.findIndex(t => t.id === last);
+                    playAt(li >= 0 ? li : 0, 'lib');
+                    return;
+                }
+                if (a.paused) a.play().catch(() => {}); else a.pause();
+            } else if (cmd === 'prev') {
+                if (a.currentTime > 3) a.currentTime = 0; else stepTrack(-1);
+            } else if (cmd === 'next') stepTrack(1);
+            else if (cmd === 'rw10') a.currentTime = Math.max(0, a.currentTime - 10);
+            else if (cmd === 'ff10' && a.duration) a.currentTime = Math.min(a.duration, a.currentTime + 10);
+        }
+        function toggleShuffle() { shuffleOn = !shuffleOn; updateMediaDockUI(); }
+        function toggleRepeat() { repeatMode = repeatMode === 'all' ? 'one' : repeatMode === 'one' ? 'off' : 'all'; updateMediaDockUI(); }
+
+        function updateMediaDockUI() {
+            const q = curQ(), m = curIdx >= 0 ? q[curIdx] : null;
+            document.getElementById('mediaPlayPauseBtn').textContent = isRemotePlaying ? '⏸' : '▶';
+            document.getElementById('mediaVinylDisc').classList.toggle('vinyl-spinning', isRemotePlaying);
+            document.getElementById('mediaControllerTitle').textContent = m ? `🎵 ${m.artist} - ${m.title}` : (lib.length ? '🎵 اضغط ▶ للتشغيل' : '🎵 المكتبة فاضية — أضف أغاني');
+            document.getElementById('mediaSubStatus').textContent = m ? `${curIdx + 1}/${q.length} • ${qKind === 'lib' ? '📴 أوفلاين' : '🌐 معاينة 30ث'}` : `${lib.length} أغنية محفوظة`;
+        }
+        function applyDockMin() {
+            document.getElementById('mediaRemoteDock').classList.toggle('minimized', isMediaDockMinimized);
+            document.getElementById('mediaDockExpandedBody').classList.toggle('hidden', isMediaDockMinimized);
+            document.getElementById('mediaDockMinBtn').textContent = isMediaDockMinimized ? '🔼' : '🔽';
+        }
+        function toggleMediaDockMinimize() { isMediaDockMinimized = !isMediaDockMinimized; applyDockMin(); }
+        function toggleMuteMedia() { const a = $a(); a.muted = !a.muted; document.getElementById('mediaMuteBtn').textContent = a.muted ? '🔇' : '🔊'; }
+        function setMediaVolumeExact(v) { $a().volume = parseFloat(v); }
+        function openYoutubeModal() { renderCuratedTarabList(); updateStorageStats(); openModal('youtubeModal'); }
+
+        function renderCuratedTarabList() {
+            const c = document.getElementById('curatedTarabListContainer');
+            if (!c) return;
+            const fq = ((document.getElementById('libFilterInput') || {}).value || '').trim().toLowerCase();
+            const pid = (qKind === 'lib' && curIdx >= 0 && lib[curIdx]) ? lib[curIdx].id : null;
+            const rows = lib.map((t, i) => ({ t, i })).filter(({ t }) => !fq || (t.title + ' ' + t.artist).toLowerCase().includes(fq));
+            c.innerHTML = rows.length ? rows.map(({ t, i }) => `
+                <div onclick="playAt(${i},'lib')" class="tarab-item ${t.id === pid ? 'playing' : ''}">
+                    <div class="row" style="gap: 9px; overflow: hidden; flex: 1;">
+                        <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(255,255,255,0.08); color: #fbbf24; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">${t.id === pid && isRemotePlaying ? '🔊' : '▶'}</div>
+                        <div style="overflow: hidden;">
+                            <div style="font-size: 12px; font-weight: 900; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${E(t.title)}</div>
+                            <div style="font-size: 10px; color: var(--gold-bright); font-weight: 700;">${E(t.artist)} • <span style="color: var(--text-muted);">${((t.size || 0) / 1048576).toFixed(1)} MB</span></div>
+                        </div>
+                    </div>
+                    <button onclick="event.stopPropagation();deleteTrack('${t.id}')" class="btn-dark" style="padding: 4px 8px; color: var(--crimson);">✖</button>
+                </div>`).join('')
+                : `<div style="color: var(--text-muted); text-align: center; padding: 14px; font-size: 12px;">${lib.length ? 'ما في نتائج' : 'المكتبة فاضية — اضغط "أضف أغاني من جهازك"'}</div>`;
+            const o = document.getElementById('onlineListContainer');
+            if (o) o.innerHTML = onlineTracks.map((t, i) => `<div onclick="playAt(${i},'net')" class="tarab-item"><div><div style="font-size: 12px; font-weight: 900;">${E(t.title)}</div><div style="font-size: 10px; color: var(--gold-bright);">${E(t.artist)}</div></div><span class="badge badge-gold">30ث</span></div>`).join('');
+        }
+
+        async function fetchAndPlayRealArtist(query, label) {
+            if (!navigator.onLine) { showToast('⚠️ ما في إنترنت — المكتبة المحفوظة بتشتغل أوفلاين'); return; }
+            showToast(`⏳ عم دوّر على ${label}...`);
+            try {
+                const r = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=song&limit=15`);
+                const d = await r.json();
+                const t = (d.results || []).filter(x => x.previewUrl).map(x => ({ id: 'it' + x.trackId, artist: label || x.artistName, title: x.trackName, url: x.previewUrl }));
+                if (!t.length) { showToast('⚠️ ما لقيت نتائج'); return; }
+                onlineTracks = t;
+                playAt(0, 'net');
+            } catch (e) { showToast('⚠️ تعذّر الاتصال'); }
+        }
+        function searchRealSongsInApp() {
+            const q = document.getElementById('tarabLiveSearchInput').value.trim();
+            if (q) fetchAndPlayRealArtist(q, q);
+        }
+
+        async function initAudioLibrary() {
+            bindAudioEvents();
+            applyDockMin();
+            await libLoad();
+            renderCuratedTarabList();
+            updateStorageStats();
+            updateMediaDockUI();
+        }
+
+        // =================================================================
+        // 9. الأرشيف المنفصل لكل لعبة + تصدير واستيراد إكسل المبسط (Excel CSV)
+        // =================================================================
+        function getAllArchivedMatches() {
+            normalizeArchiveCategories(state);
+            const all = [
+                ...state.archiveByGame.trix,
+                ...state.archiveByGame.complex,
+                ...state.archiveByGame.syrian41,
+                ...state.archiveByGame.classic
+            ];
+            return all.sort((a, b) => (b.id || 0) - (a.id || 0));
+        }
+
+        function setArchiveGameFilter(cat) {
+            state.archiveFilter = cat;
+            renderArchiveSection();
+        }
+
+        function openArchiveIndexedDB(cb) {
+            try {
+                const req = indexedDB.open('ShillaMassiveArchiveDB_2026', 1);
+                req.onupgradeneeded = (e) => {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains('matches')) {
+                        db.createObjectStore('matches', { keyPath: 'id' });
+                    }
+                };
+                req.onsuccess = (e) => cb(e.target.result);
+            } catch (e) {}
+        }
+
+        function saveArchiveToIndexedDB(arr) {
+            openArchiveIndexedDB(db => {
+                try {
+                    const tx = db.transaction('matches', 'readwrite');
+                    const st = tx.objectStore('matches');
+                    (arr || []).forEach(i => { if (i && i.id) st.put(i); });
+                    tx.oncomplete = () => db.close();
+                } catch (e) {}
+            });
+        }
+
+        function loadArchiveFromIndexedDB() {
+            openArchiveIndexedDB(db => {
+                try {
+                    const req = db.transaction('matches', 'readonly').objectStore('matches').getAll();
+                    req.onsuccess = () => {
+                        const items = req.result || [];
+                        if (items.length) {
+                            state.archive = items;
+                            normalizeArchiveCategories(state);
+                            renderArchiveSection();
+                        }
+                        db.close();
+                    };
+                } catch (e) {}
+            });
+        }
+
+        function saveMatchToArchive(gameKey, gameTitle) {
+            let standings = [];
+            let summary = '';
+            if (gameKey === 'classic') {
+                standings = computeRankedStandings(state.teams, state.classic.scores);
+                summary = state.teams.map((t, i) => `${t}: ${state.classic.scores[i]}`).join(' | ');
+            } else if (gameKey === 'syrian41') {
+                standings = computeRankedStandings(state.players, state.syrian41.scores);
+                summary = state.players.map((p, i) => `${p}: ${state.syrian41.scores[i]}`).join(' | ');
+            } else {
+                const g = gameKey === 'complex' ? state.complex : state.trix;
+                if (g.mode === 'teams') {
+                    standings = computeRankedStandings(state.teams, g.teamScores);
+                    summary = state.teams.map((t, i) => `${t}: ${g.teamScores[i]}`).join(' | ');
+                } else {
+                    standings = computeRankedStandings(state.players, g.indivScores);
+                    summary = state.players.map((p, i) => `${p}: ${g.indivScores[i]}`).join(' | ');
+                }
+            }
+
+            const firstPlace = standings[0] ? `${standings[0].name} (${standings[0].score})` : '';
+            const secondPlace = standings[1] ? `${standings[1].name} (${standings[1].score})` : '';
+            const thirdPlace = standings[2] ? `${standings[2].name} (${standings[2].score})` : '-';
+
+            normalizeArchiveCategories(state);
+            const record = {
+                id: Date.now() + Math.floor(Math.random() * 999),
+                gameKey: gameKey,
+                game: gameTitle,
+                tableSlot: state.activeTableSlot === 'table2' ? 'طاولة 2' : 'طاولة 1',
+                device: state.squadAccount.deviceName,
+                winner: standings[0] ? standings[0].name : '',
+                firstPlace: standings[0] ? standings[0].name : '',
+                secondPlace: standings[1] ? standings[1].name : '',
+                thirdPlace: standings[2] ? standings[2].name : '',
+                firstFull: firstPlace,
+                secondFull: secondPlace,
+                thirdFull: thirdPlace,
+                date: new Date().toLocaleString('ar-SY'),
+                summary: summary
+            };
+            state.archiveByGame[gameKey].unshift(record);
+            state.archive = getAllArchivedMatches();
+
+            const d = makeFreshGamesObject();
+            if (gameKey === 'trix') { const m = state.trix.mode; state.trix = d.trix; state.trix.mode = m; }
+            else if (gameKey === 'complex') { const m = state.complex.mode; state.complex = d.complex; state.complex.mode = m; }
+            else if (gameKey === 'syrian41') state.syrian41 = d.syrian41;
+            else if (gameKey === 'classic') { const t = state.classic.target; state.classic = d.classic; state.classic.target = t; }
+
+            saveState('archive');
+            renderAll();
+            showToast(`🏆 تم الحفظ! 🥇 الأول: ${firstPlace} | 🥈 الثاني: ${secondPlace}`, 4500);
+        }
+
+        function renderArchiveSection() {
+            normalizeArchiveCategories(state);
+            const dBox = document.getElementById('debtsListContainer');
+            if (dBox) {
+                dBox.innerHTML = state.debts.map((d, idx) => `
+                    <div class="panel row" style="margin-bottom: 5px; padding: 7px 10px;">
+                        <span style="${d.done ? 'text-decoration:line-through;color:var(--text-muted);' : 'font-weight:800;'}">${E(d.text)}</span>
+                        <div class="row" style="gap: 4px;">
+                            <button onclick="state.debts[${idx}].done=!state.debts[${idx}].done;saveState('debts');renderArchiveSection();" class="btn-dark" style="padding:4px 8px;">✓</button>
+                            <button onclick="state.debts.splice(${idx},1);saveState('debts');renderArchiveSection();" class="btn-dark" style="padding:4px 8px;color:var(--crimson);">✖</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const cat = state.archiveFilter || 'all';
+            ['all', 'trix', 'complex', 'syrian41', 'classic'].forEach(k => {
+                const b = document.getElementById('archTab-' + k);
+                if (b) {
+                    const count = k === 'all' ? getAllArchivedMatches().length : (state.archiveByGame[k] || []).length;
+                    const labels = { all: '📊 الكل', trix: '👑 تركس', complex: '⚡ كمبلكس', syrian41: '🔥 سوري 41', classic: '🃏 طرنيب' };
+                    b.innerHTML = `${labels[k]}<br><span style="font-size:9px;opacity:0.85;">(${count})</span>`;
+                    b.classList.toggle('active', cat === k);
+                }
+            });
+
+            const listForCat = cat === 'all' ? getAllArchivedMatches() : (state.archiveByGame[cat] || []);
+            document.getElementById('archiveTotalBadge').textContent = `${listForCat.length} مباراة`;
+
+            const statsStrip = document.getElementById('archiveStatsStrip');
+            if (statsStrip) {
+                const winCounts = {};
+                listForCat.forEach(m => {
+                    const w = m.firstPlace || m.winner;
+                    if (w) winCounts[w] = (winCounts[w] || 0) + 1;
+                });
+                const sortedW = Object.entries(winCounts).sort((a, b) => b[1] - a[1]);
+                const catNames = { all: 'جميع الألعاب', trix: 'التركس العادي', complex: 'تركس كمبلكس', syrian41: 'الطرنيب السوري 41', classic: 'الطرنيب العادي' };
+                statsStrip.innerHTML = `📌 <strong>أرشيف ${catNames[cat]}:</strong> ${listForCat.length} مباراة
+                    ${sortedW[0] ? ` • 🥇 الأول: <strong>${E(sortedW[0][0])}</strong> (${sortedW[0][1]})` : ''}
+                    ${sortedW[1] ? ` • 🥈 الثاني: <strong>${E(sortedW[1][0])}</strong> (${sortedW[1][1]})` : ''}
+                    ${sortedW[2] ? ` • 🥉 الثالث: <strong>${E(sortedW[2][0])}</strong> (${sortedW[2][1]})` : ''}`;
+            }
+
+            const searchEl = document.getElementById('archiveSearchInput');
+            const query = (searchEl && searchEl.value ? searchEl.value : '').trim().toLowerCase();
+            const filtered = query
+                ? listForCat.filter(item =>
+                    (item.game && item.game.toLowerCase().includes(query)) ||
+                    (item.summary && item.summary.toLowerCase().includes(query)) ||
+                    (item.winner && item.winner.toLowerCase().includes(query)) ||
+                    (item.firstFull && item.firstFull.toLowerCase().includes(query)) ||
+                    (item.date && item.date.toLowerCase().includes(query))
+                )
+                : listForCat;
+
+            const aBox = document.getElementById('massiveArchiveContainer');
+            if (!filtered.length) {
+                aBox.innerHTML = `<div style="color: var(--text-muted); text-align: center; padding: 14px;">لا توجد مباريات محفوظة في هذا القسم بعد</div>`;
+                return;
+            }
+            aBox.innerHTML = filtered.map(item => `
+                <div class="panel" style="margin-bottom: 6px;">
+                    <div class="row" style="margin-bottom: 4px;">
+                        <div class="row-wrap" style="gap:5px;">
+                            <span style="font-weight: 900; color: var(--gold-bright);">${E(item.game)}</span>
+                            ${item.tableSlot ? `<span class="badge badge-cyan" style="font-size:9px;padding:1px 6px;">${E(item.tableSlot)}</span>` : ''}
+                        </div>
+                        <span style="font-size: 10px; color: var(--text-muted);">${E(item.date)}</span>
+                    </div>
+                    ${(item.firstFull || item.winner) ? `
+                        <div class="row-wrap" style="gap: 5px; margin-bottom: 4px; font-size: 10.5px;">
+                            <span class="badge badge-gold">🥇 الأول: ${E(item.firstFull || item.winner)}</span>
+                            ${item.secondFull ? `<span class="badge badge-emerald">🥈 الثاني: ${E(item.secondFull)}</span>` : ''}
+                            ${item.thirdFull && item.thirdFull !== '-' ? `<span class="badge badge-cyan">🥉 الثالث: ${E(item.thirdFull)}</span>` : ''}
+                        </div>
+                    ` : ''}
+                    <div style="font-size: 11.5px; color: #e2e8f0;">${E(item.summary)}</div>
+                </div>
+            `).join('');
+        }
+
+        function addNewDebt() {
+            const inp = document.getElementById('debtInputText');
+            if (!inp.value.trim()) return;
+            state.debts.unshift({ id: Date.now(), text: inp.value.trim(), done: false });
+            inp.value = '';
+            saveState('debts');
+            renderArchiveSection();
+            showToast('🥙 تمت إضافة العزيمة ومزامنتها');
+        }
+
+        // تصدير النتائج والسجل كملف إكسل مبسط (UTF-8 BOM CSV يفتح مباشرة في Excel بالعربي)
+        function csvEscape(val) {
+            const s = String(val == null ? '' : val).replace(/"/g, '""');
+            return `"${s}"`;
+        }
+
+        function exportArchiveExcelCsv() {
+            const list = getAllArchivedMatches();
+            const headers = [
+                'رقم المباراة',
+                'اللعبة',
+                'الطاولة',
+                'التاريخ',
+                'المركز الأول 🥇',
+                'المركز الثاني 🥈',
+                'المركز الثالث 🥉',
+                'النتيجة الكاملة',
+                'المعرف'
+            ];
+            const rows = [headers.map(csvEscape).join(',')];
+
+            if (!list.length) {
+                // إذا كان السجل فارغاً، نصدّر النتيجة الحية الحالية على الطاولة
+                const st = computeRankedStandings(state.players, state.trix.indivScores);
+                rows.push([
+                    1,
+                    'تركس عادي (جارية)',
+                    state.activeTableSlot === 'table2' ? 'طاولة 2' : 'طاولة 1',
+                    new Date().toLocaleString('ar-SY'),
+                    `${st[0].name} (${st[0].score})`,
+                    `${st[1].name} (${st[1].score})`,
+                    `${st[2].name} (${st[2].score})`,
+                    state.players.map((p, i) => `${p}: ${state.trix.indivScores[i]}`).join(' | '),
+                    Date.now()
+                ].map(csvEscape).join(','));
+            } else {
+                list.forEach((m, idx) => {
+                    rows.push([
+                        idx + 1,
+                        m.game || 'تركس عادي',
+                        m.tableSlot || 'طاولة 1',
+                        m.date || '',
+                        m.firstFull || m.winner || '',
+                        m.secondFull || '',
+                        m.thirdFull || '',
+                        m.summary || '',
+                        m.id || (Date.now() - idx)
+                    ].map(csvEscape).join(','));
+                });
+            }
+
+            // إضافة UTF-8 BOM (\uFEFF) لكي يفتح برنامج Microsoft Excel الحروف العربية بشكل سليم 100%
+            const csvContent = '\uFEFF' + rows.join('\r\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `shilla_results_excel_${state.squadAccount.squadCode}_${Date.now()}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 2000);
+            showToast('📊 تم تنزيل ملف الإكسل المبسط (يفتح مباشرة في Excel)!');
+        }
+
+        function parseCsvLine(line) {
+            const out = [];
+            let cur = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                const ch = line[i];
+                if (ch === '"') {
+                    if (inQuotes && line[i + 1] === '"') {
+                        cur += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if ((ch === ',' || ch === ';') && !inQuotes) {
+                    out.push(cur.trim());
+                    cur = '';
+                } else {
+                    cur += ch;
+                }
+            }
+            out.push(cur.trim());
+            return out;
+        }
+
+        // استيراد ذكي يقبل ملفات الإكسل (.CSV) أو ملفات (.JSON)
+        function importArchiveExcelOrJsonFile(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const text = String(e.target.result || '').replace(/^\uFEFF/, '').trim();
+                if (!text) return;
+
+                // فحص إذا كان الملف JSON
+                if (text.startsWith('{') || text.startsWith('[')) {
+                    try {
+                        const parsed = JSON.parse(text);
+                        if (parsed.archiveByGame) mergeRemoteArchiveByGame(parsed.archiveByGame);
+                        const raw = Array.isArray(parsed) ? parsed : (parsed.archive || []);
+                        if (raw.length) {
+                            state.archive = [...raw, ...getAllArchivedMatches()];
+                            normalizeArchiveCategories(state);
+                        }
+                        saveState('archive');
+                        renderAll();
+                        showToast('📥 تم استيراد ملف السجل بنجاح!');
+                        return;
+                    } catch (err) {}
+                }
+
+                // تحليل ملف الإكسل CSV المبسط
+                try {
+                    const lines = text.split(/\r?\n/).filter(l => l.trim());
+                    if (lines.length < 2) {
+                        showToast('⚠️ ملف الإكسل فارغ');
+                        return;
+                    }
+                    let importedCount = 0;
+                    normalizeArchiveCategories(state);
+
+                    for (let i = 1; i < lines.length; i++) {
+                        const cols = parseCsvLine(lines[i]);
+                        if (cols.length < 4) continue;
+                        const gameTitle = cols[1] || 'تركس عادي';
+                        const tableSlot = cols[2] || 'طاولة 1';
+                        const dateStr = cols[3] || new Date().toLocaleString('ar-SY');
+                        const firstFull = cols[4] || '';
+                        const secondFull = cols[5] || '';
+                        const thirdFull = cols[6] || '';
+                        const summary = cols[7] || `${firstFull} | ${secondFull} | ${thirdFull}`;
+                        const idVal = Number(cols[8]) || (Date.now() + i * 11);
+
+                        let gKey = 'trix';
+                        if (gameTitle.includes('كمبلكس')) gKey = 'complex';
+                        else if (gameTitle.includes('سوري')) gKey = 'syrian41';
+                        else if (gameTitle.includes('طرنيب')) gKey = 'classic';
+
+                        const cleanWinner = firstFull.split('(')[0].trim();
+                        if (!state.archiveByGame[gKey].some(x => x.id === idVal)) {
+                            state.archiveByGame[gKey].push({
+                                id: idVal,
+                                gameKey: gKey,
+                                game: gameTitle,
+                                tableSlot: tableSlot,
+                                date: dateStr,
+                                winner: cleanWinner,
+                                firstPlace: cleanWinner,
+                                firstFull: firstFull,
+                                secondFull: secondFull,
+                                thirdFull: thirdFull,
+                                summary: summary
+                            });
+                            importedCount++;
+                        }
+                    }
+
+                    state.archive = getAllArchivedMatches();
+                    saveState('archive');
+                    renderAll();
+                    showToast(`📊 تم استيراد ${importedCount} مباراة من ملف الإكسل بنجاح!`);
+                } catch (err) {
+                    showToast('⚠️ تعذّر قراءة ملف الإكسل');
+                }
+            };
+            reader.readAsText(file, 'UTF-8');
+            event.target.value = '';
+        }
+
+        function exportArchiveJson() {
+            const payload = {
+                app: 'شلة متعوب عليها',
+                squadCode: state.squadAccount.squadCode,
+                archiveByGame: state.archiveByGame,
+                archive: getAllArchivedMatches(),
+                challenges: state.challenges,
+                debts: state.debts
+            };
+            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `shilla_backup_${state.squadAccount.squadCode}_${Date.now()}.json`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 2000);
+            showToast('💾 تم تصدير نسخة JSON الاحتياطية');
+        }
+
+        function deleteArchiveIdsFromIndexedDB(ids) {
+            openArchiveIndexedDB(db => {
+                try {
+                    const tx = db.transaction('matches', 'readwrite');
+                    const st = tx.objectStore('matches');
+                    (ids || []).forEach(id => st.delete(id));
+                    tx.oncomplete = () => db.close();
+                } catch (e) {}
+            });
+        }
+
+        function clearCurrentArchiveCategory() {
+            const cat = state.archiveFilter || 'all';
+            deleteArchiveIdsFromIndexedDB(
+                (cat === 'all' ? getAllArchivedMatches() : (state.archiveByGame[cat] || [])).map(x => x.id)
+            );
+            if (cat === 'all') {
+                state.archiveByGame = { trix: [], complex: [], syrian41: [], classic: [] };
+                state.archive = [];
+            } else {
+                state.archiveByGame[cat] = [];
+                state.archive = getAllArchivedMatches();
+            }
+            saveState('archive');
+            renderArchiveSection();
+            showToast('🗑️ تم مسح الأرشيف المحدد');
+        }
+
+        // =================================================================
+        // 10. نظام الأونلاين وحساب الشلة الموحد (WebSockets + APK Sync)
+        // =================================================================
+        let squadWs = null;
+        let wsConnected = false;
+        let onlineDevicesMap = {};
+
+        function getSquadTopicHash() {
+            const code = (state.squadAccount.squadCode || 'SHILLA-2026').trim().toUpperCase();
+            const pass = (state.squadAccount.squadPass || '2026').trim();
+            return 'shilla_karemyseer_v6_' + btoa(unescape(encodeURIComponent(code + '::' + pass))).replace(/[^a-zA-Z0-9]/g, '');
+        }
+
+        function mergeRemoteArchiveByGame(remoteArch) {
+            if (!remoteArch || typeof remoteArch !== 'object') return false;
+            normalizeArchiveCategories(state);
+            let added = false;
+            ['trix', 'complex', 'syrian41', 'classic'].forEach(gKey => {
+                const incoming = Array.isArray(remoteArch[gKey]) ? remoteArch[gKey] : [];
+                const existingIds = new Set(state.archiveByGame[gKey].map(x => x.id));
+                incoming.forEach(item => {
+                    if (item && item.id && !existingIds.has(item.id)) {
+                        state.archiveByGame[gKey].push(item);
+                        existingIds.add(item.id);
+                        added = true;
+                    }
+                });
+                state.archiveByGame[gKey].sort((a, b) => (b.id || 0) - (a.id || 0));
+            });
+            if (added) state.archive = getAllArchivedMatches();
+            return added;
+        }
+
+        function mergeIncomingSquadPacket(pkt) {
+            if (!pkt || pkt.senderId === state.squadAccount.deviceId) return;
+            onlineDevicesMap[pkt.senderId] = {
+                name: pkt.deviceName || 'موبايل من الشلة',
+                table: pkt.activeTableSlot === 'table2' ? 'طاولة 2' : 'طاولة 1',
+                lastSeen: Date.now()
+            };
+
+            let changed = false;
+            if (pkt.tableSlots && pkt.gameTimestamps) {
+                ['table1', 'table2'].forEach(slot => {
+                    if (!pkt.tableSlots[slot] || !pkt.gameTimestamps[slot]) return;
+                    if (!state.tableSlots[slot]) state.tableSlots[slot] = makeFreshGamesObject();
+                    if (!state.gameTimestamps[slot]) state.gameTimestamps[slot] = { trix: 0, complex: 0, syrian41: 0, classic: 0, players: 0 };
+
+                    ['players', 'trix', 'complex', 'syrian41', 'classic'].forEach(gKey => {
+                        const remoteTs = Number(pkt.gameTimestamps[slot][gKey] || 0);
+                        const localTs = Number(state.gameTimestamps[slot][gKey] || 0);
+                        if (remoteTs > localTs) {
+                            if (gKey === 'players') {
+                                state.tableSlots[slot].players = pkt.tableSlots[slot].players;
+                                state.tableSlots[slot].teams = pkt.tableSlots[slot].teams;
+                            } else if (pkt.tableSlots[slot][gKey]) {
+                                state.tableSlots[slot][gKey] = pkt.tableSlots[slot][gKey];
+                            }
+                            state.gameTimestamps[slot][gKey] = remoteTs;
+                            changed = true;
+                        }
+                    });
+                });
+            }
+
+            if (pkt.archiveByGame && mergeRemoteArchiveByGame(pkt.archiveByGame)) {
+                changed = true;
+            }
+
+            if (Array.isArray(pkt.debts)) {
+                const localIds = new Set(state.debts.map(d => d.id));
+                pkt.debts.forEach(d => {
+                    if (d && d.id && !localIds.has(d.id)) {
+                        state.debts.unshift(d);
+                        changed = true;
+                    }
+                });
+            }
+
+            if (changed) {
+                loadSlotIntoActiveView(state.activeTableSlot);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                saveArchiveToIndexedDB(getAllArchivedMatches());
+                renderAll();
+            } else {
+                renderLiveSection();
+            }
+        }
+
+        function buildSquadSyncPayload(changedKey) {
+            syncActiveSlotStore();
+            return {
+                app: 'SHILLA_V6',
+                senderId: state.squadAccount.deviceId,
+                deviceName: state.squadAccount.deviceName,
+                activeTableSlot: state.activeTableSlot,
+                changedKey: changedKey || 'all',
+                ts: Date.now(),
+                tableSlots: state.tableSlots,
+                gameTimestamps: state.gameTimestamps,
+                archiveByGame: state.archiveByGame,
+                debts: state.debts
+            };
+        }
+
+        function connectSquadRealtimeBridge() {
+            try {
+                if (squadWs) {
+                    try { squadWs.close(); } catch (e) {}
+                    squadWs = null;
+                }
+                const topic = getSquadTopicHash();
+                const wsUrl = `wss://ntfy.sh/${topic}/ws`;
+                squadWs = new WebSocket(wsUrl);
+                squadWs.onopen = () => {
+                    wsConnected = true;
+                    onlineDevicesMap[state.squadAccount.deviceId] = {
+                        name: state.squadAccount.deviceName + ' (أنت)',
+                        table: state.activeTableSlot === 'table2' ? 'طاولة 2' : 'طاولة 1',
+                        lastSeen: Date.now()
+                    };
+                    renderLiveSection();
+                    broadcastSquadUpdate('hello');
+                };
+                squadWs.onmessage = (ev) => {
+                    try {
+                        const wrapper = JSON.parse(ev.data);
+                        if (wrapper && wrapper.event === 'message' && wrapper.message) {
+                            const pkt = JSON.parse(wrapper.message);
+                            mergeIncomingSquadPacket(pkt);
+                        }
+                    } catch (e) {}
+                };
+                squadWs.onclose = () => {
+                    wsConnected = false;
+                    renderLiveSection();
+                };
+                squadWs.onerror = () => {
+                    wsConnected = false;
+                    renderLiveSection();
+                };
+            } catch (e) {
+                wsConnected = false;
+            }
+        }
+
+        let _broadcastTimer = null;
+        function broadcastSquadUpdate(changedKey) {
+            clearTimeout(_broadcastTimer);
+            _broadcastTimer = setTimeout(async () => {
+                if (!navigator.onLine) return;
+                const topic = getSquadTopicHash();
+                const payload = buildSquadSyncPayload(changedKey);
+                try {
+                    await fetch(`https://ntfy.sh/${topic}`, {
+                        method: 'POST',
+                        body: JSON.stringify(payload)
+                    });
+                } catch (e) {}
+            }, 350);
+        }
+
+        async function syncNow(manual) {
+            if (!navigator.onLine) {
+                if (manual) showToast('⚠️ لا يوجد اتصال بالإنترنت حالياً');
+                return;
+            }
+            if (!wsConnected) connectSquadRealtimeBridge();
+            broadcastSquadUpdate('manual');
+            if (manual) showToast('🔄 تم إرسال واستقبال أحدث نتائج الشلة!');
+        }
+
+        function renderLiveSection() {
+            const ind = document.getElementById('liveHeaderIndicator');
+            const code = state.squadAccount.squadCode || 'SHILLA-2026';
+            if (ind) {
+                ind.textContent = wsConnected ? `🟢 ${code}` : (navigator.onLine ? `🟡 ${code}` : '⚪ أوفلاين');
+                ind.className = 'badge ' + (wsConnected ? 'badge-emerald' : 'badge-gold');
+            }
+            const hl = document.getElementById('headerAccountLabel');
+            if (hl) hl.textContent = `${state.squadAccount.avatar || '🦁'} ${code} (${state.squadAccount.deviceName})`;
+            const lm = document.getElementById('liveMyAccountName');
+            if (lm) lm.textContent = `حساب الشلة: ${code} • ${state.squadAccount.deviceName}`;
+
+            const cg = document.getElementById('liveGamesConcurrentGrid');
+            if (cg) {
+                const gamesInfo = [
+                    { key: 'trix', title: '👑 تركس عادي', rounds: state.trix.history.length, summary: state.players.map((p, i) => `${p}:${state.trix.indivScores[i]}`).join(' | ') },
+                    { key: 'complex', title: '⚡ تركس كمبلكس', rounds: state.complex.history.length, summary: state.players.map((p, i) => `${p}:${state.complex.indivScores[i]}`).join(' | ') },
+                    { key: 'syrian41', title: '🔥 طرنيب سوري 41', rounds: state.syrian41.history.length, summary: state.players.map((p, i) => `${p}:${state.syrian41.scores[i]}`).join(' | ') },
+                    { key: 'classic', title: '🃏 طرنيب عادي', rounds: state.classic.history.length, summary: `${state.teams[0]}:${state.classic.scores[0]} | ${state.teams[1]}:${state.classic.scores[1]}` }
+                ];
+                cg.innerHTML = gamesInfo.map(g => `
+                    <div onclick="switchTab('${g.key}')" class="panel" style="padding: 7px; cursor: pointer; border-color: ${g.rounds > 0 ? 'var(--emerald)' : 'var(--border-subtle)'};">
+                        <div class="row" style="margin-bottom: 3px;">
+                            <span style="font-size: 11px; font-weight: 900; color: var(--gold-bright);">${g.title}</span>
+                            <span class="badge ${g.rounds > 0 ? 'badge-emerald' : 'badge-gold'}" style="font-size: 9px; padding: 1px 6px;">${g.rounds > 0 ? `${g.rounds} جولة نشطة` : 'جاهزة'}</span>
+                        </div>
+                        <div style="font-size: 9.5px; color: #cbd5e1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${E(g.summary)}</div>
+                    </div>
+                `).join('');
+            }
+
+            onlineDevicesMap[state.squadAccount.deviceId] = {
+                name: state.squadAccount.deviceName + ' (جهازك)',
+                table: state.activeTableSlot === 'table2' ? 'طاولة 2' : 'طاولة 1',
+                lastSeen: Date.now()
+            };
+            const devs = Object.values(onlineDevicesMap);
+            const cntBadge = document.getElementById('onlineDevicesCountBadge');
+            if (cntBadge) cntBadge.textContent = `${devs.length} موبايل`;
+            const mGrid = document.getElementById('onlineSquadMembersGrid');
+            if (mGrid) {
+                mGrid.innerHTML = devs.map(d => `
+                    <span class="badge badge-emerald">📱 ${E(d.name)} • ${E(d.table)}</span>
+                `).join('');
+            }
+        }
+
+        function openSyncModal() {
+            const b = document.getElementById('syncModalBody');
+            if (!b) return;
+            const acc = state.squadAccount;
+            b.innerHTML = `
+                <div class="panel" style="margin-bottom: 10px; font-size: 11.5px; color: #a7f3d0; line-height: 1.6;">
+                    💡 <strong>نظام الحساب الموحد للشلة:</strong><br>
+                    اكتب نفس <strong>كود الشلة</strong> ونفس <strong>كلمة السر</strong> على كل موبايلات الشباب. أي لعبة أو طاولة تفتحونها أو تحفظونها بالأرشيف ستظهر وتُحفظ عند الجميع تلقائياً حتى داخل تطبيق <strong>APK</strong>.
+                </div>
+                <div style="display: grid; gap: 8px; margin-bottom: 12px;">
+                    <div>
+                        <label style="font-size: 11px; color: var(--gold-bright); font-weight: 800;">1. كود / اسم حساب الشلة الموحد:</label>
+                        <input id="inpSquadCode" type="text" value="${E(acc.squadCode)}" placeholder="مثال: SHILLA-2026" class="input-box" style="text-align: center; font-size: 15px; letter-spacing: 1px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 11px; color: var(--gold-bright); font-weight: 800;">2. كلمة سر الشلة المشتركة:</label>
+                        <input id="inpSquadPass" type="text" value="${E(acc.squadPass)}" placeholder="مثال: 2026" class="input-box" style="text-align: center;">
+                    </div>
+                    <div>
+                        <label style="font-size: 11px; color: var(--text-muted);">3. اسم هذا الموبايل:</label>
+                        <input id="inpDeviceName" type="text" value="${E(acc.deviceName)}" placeholder="مثال: موبايل كريم" class="input-box">
+                    </div>
+                </div>
+                <button onclick="saveSquadUnifiedAccount()" class="btn-emerald" style="width: 100%; padding: 11px; margin-bottom: 8px;">✅ حفظ والاتصال بحساب الشلة فوراً</button>
+                <button onclick="shareSquadCredentialsWhatsApp()" class="btn-gold" style="width: 100%; padding: 9px; font-size: 11.5px;">📲 إرسال كود الحساب للشباب على واتساب</button>
+            `;
+            openModal('syncModal');
+        }
+
+        function saveSquadUnifiedAccount() {
+            const code = (document.getElementById('inpSquadCode').value || '').trim().toUpperCase();
+            const pass = (document.getElementById('inpSquadPass').value || '').trim();
+            const dev = (document.getElementById('inpDeviceName').value || '').trim();
+            if (!code || !pass) {
+                showToast('⚠️ أدخل كود الشلة وكلمة السر أولاً');
+                return;
+            }
+            state.squadAccount.squadCode = code;
+            state.squadAccount.squadPass = pass;
+            if (dev) state.squadAccount.deviceName = dev;
+            onlineDevicesMap = {};
+            saveState('players', true);
+            connectSquadRealtimeBridge();
+            renderAll();
+            closeModal('syncModal');
+            showToast(`🟢 تم ربط الموبايل بحساب الشلة (${code})!`);
+        }
+
+        function shareSquadCredentialsWhatsApp() {
+            const acc = state.squadAccount;
+            const msg = `👑 *شلة متعوب عليها*\nادخلوا على نفس حساب الشلة الموحد لتكون النتائج والأرشيف مشتركة عند الكل:\n🔹 كود الشلة: *${acc.squadCode}*\n🔑 كلمة السر: *${acc.squadPass}*`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function copySyncPacketCode() {
+            const packet = btoa(unescape(encodeURIComponent(JSON.stringify(buildSquadSyncPayload('manual_packet')))));
+            const tmp = document.createElement('textarea');
+            tmp.value = packet;
+            document.body.appendChild(tmp);
+            tmp.select();
+            try { document.execCommand('copy'); showToast('📋 تم نسخ حزمة النتائج والأرشيف للحافظة!'); } catch (e) {}
+            tmp.remove();
+        }
+
+        function applyPastedSyncPacket() {
+            const raw = document.getElementById('pasteSyncPacketInput').value.trim();
+            if (!raw) return;
+            try {
+                const pkt = JSON.parse(decodeURIComponent(escape(atob(raw))));
+                pkt.senderId = 'MANUAL-PASTE';
+                mergeIncomingSquadPacket(pkt);
+                document.getElementById('pasteSyncPacketInput').value = '';
+                showToast('✅ تم استلام ودمج النتائج والأرشيف بنجاح!');
+            } catch (e) {
+                showToast('⚠️ الكود غير صالح');
+            }
+        }
+
+        function shareRoomOnWhatsApp() {
+            const st = computeRankedStandings(state.players, state.trix.indivScores);
+            const text = `👑 شلة متعوب عليها (${state.squadAccount.squadCode})\n🥇 الأول: ${st[0].name} (${st[0].score})\n🥈 الثاني: ${st[1].name} (${st[1].score})\n🥉 الثالث: ${st[2].name} (${st[2].score})`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        // =================================================================
+        // 11. بوابة المطور السرية (1970) وتصدير ملف ZIP للـ APK
+        // =================================================================
+        function openDevPortalModal() {
+            document.getElementById('devPinInput').value = '';
+            document.getElementById('devPinEntryBox').classList.remove('hidden');
+            document.getElementById('devUnlockedBox').classList.add('hidden');
+            openModal('devPortalModal');
+        }
+
+        function verifyDevPin() {
+            const pin = document.getElementById('devPinInput').value.trim();
+            if (pin === '1970') {
+                document.getElementById('devPinEntryBox').classList.add('hidden');
+                document.getElementById('devUnlockedBox').classList.remove('hidden');
+                const fb = window.SHILLA_FIREBASE || {};
+                document.getElementById('devFbApiKey').value = fb.apiKey || '';
+                document.getElementById('devFbProjectId').value = fb.projectId || '';
+                showToast('🔓 أهلاً بك يا كريم في بوابة المطور');
+            } else {
+                showToast('⚠️ الرقم السري غير صحيح');
+            }
+        }
+
+        function saveCustomFirebaseKeys() {
+            const apiKey = document.getElementById('devFbApiKey').value.trim();
+            const projectId = document.getElementById('devFbProjectId').value.trim();
+            window.SHILLA_FIREBASE = { apiKey, projectId };
+            localStorage.setItem('SHILLA_CUSTOM_FIREBASE', JSON.stringify(window.SHILLA_FIREBASE));
+            showToast('✅ تم حفظ مفاتيح Firebase بنجاح');
+        }
+
+        function downloadStandaloneHtml() {
+            const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'index.html';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 2000);
+            showToast('📄 تم تنزيل ملف index.html');
+        }
+
+        function createUncompressedZip(files) {
+            const enc = new TextEncoder();
+            const crcTable = new Uint32Array(256);
+            for (let n = 0; n < 256; n++) {
+                let c = n;
+                for (let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+                crcTable[n] = c;
+            }
+            const crc32 = (bytes) => {
+                let c = 0xFFFFFFFF;
+                for (let i = 0; i < bytes.length; i++) c = crcTable[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
+                return (c ^ 0xFFFFFFFF) >>> 0;
+            };
+
+            const localParts = [];
+            const centralParts = [];
+            let offset = 0;
+
+            files.forEach(f => {
+                const nameBytes = enc.encode(f.name);
+                const dataBytes = typeof f.content === 'string' ? enc.encode(f.content) : f.content;
+                const crc = crc32(dataBytes);
+
+                const local = new Uint8Array(30 + nameBytes.length + dataBytes.length);
+                const lv = new DataView(local.buffer);
+                lv.setUint32(0, 0x04034b50, true);
+                lv.setUint16(4, 20, true);
+                lv.setUint16(8, 0, true);
+                lv.setUint32(14, crc, true);
+                lv.setUint32(18, dataBytes.length, true);
+                lv.setUint32(22, dataBytes.length, true);
+                lv.setUint16(26, nameBytes.length, true);
+                local.set(nameBytes, 30);
+                local.set(dataBytes, 30 + nameBytes.length);
+                localParts.push(local);
+
+                const central = new Uint8Array(46 + nameBytes.length);
+                const cv = new DataView(central.buffer);
+                cv.setUint32(0, 0x02014b50, true);
+                cv.setUint16(4, 20, true);
+                cv.setUint16(6, 20, true);
+                cv.setUint32(16, crc, true);
+                cv.setUint32(20, dataBytes.length, true);
+                cv.setUint32(24, dataBytes.length, true);
+                cv.setUint16(28, nameBytes.length, true);
+                cv.setUint32(42, offset, true);
+                central.set(nameBytes, 46);
+                centralParts.push(central);
+
+                offset += local.length;
+            });
+
+            const centralSize = centralParts.reduce((s, p) => s + p.length, 0);
+            const eocd = new Uint8Array(22);
+            const ev = new DataView(eocd.buffer);
+            ev.setUint32(0, 0x06054b50, true);
+            ev.setUint16(8, files.length, true);
+            ev.setUint16(10, files.length, true);
+            ev.setUint32(12, centralSize, true);
+            ev.setUint32(16, offset, true);
+
+            return new Blob([...localParts, ...centralParts, eocd], { type: 'application/zip' });
+        }
+
+        function downloadFullZipPackage() {
+            const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+            const manifestObj = {
+                name: "شلة متعوب عليها",
+                short_name: "شلة متعوب",
+                lang: "ar",
+                dir: "rtl",
+                start_url: "index.html",
+                display: "standalone",
+                orientation: "portrait",
+                background_color: "#040d14",
+                theme_color: "#040d14"
+            };
+            const fb = window.SHILLA_FIREBASE || { apiKey: "", projectId: "", publicUrl: "" };
+            const syncCfg = `window.SHILLA_FIREBASE = ${JSON.stringify(fb, null, 2)};\n`;
+            const zipBlob = createUncompressedZip([
+                { name: 'index.html', content: htmlContent },
+                { name: 'manifest.json', content: JSON.stringify(manifestObj, null, 2) },
+                { name: 'sync-config.js', content: syncCfg }
+            ]);
+            const url = URL.createObjectURL(zipBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'shilla-app.zip';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 2000);
+            showToast('📦 تم تنزيل shilla-app.zip الجاهز لتحويل APK!');
+        }
+
+        let patienceTimerInt = null;
+        function startPatienceTimer() {
+            const btn = document.getElementById('timerBtn');
+            if (patienceTimerInt) {
+                clearInterval(patienceTimerInt);
+                patienceTimerInt = null;
+                btn.textContent = '⏱️ 30ث';
+                return;
+            }
+            let left = 30;
+            btn.textContent = `⏱️ ${left}ث`;
+            patienceTimerInt = setInterval(() => {
+                left--;
+                btn.textContent = `⏱️ ${left}ث`;
+                if (left <= 0) {
+                    clearInterval(patienceTimerInt);
+                    patienceTimerInt = null;
+                    btn.textContent = '⏱️ 30ث';
+                    showToast('⏰ انتهى وقت التفكير! ارمي ورقتك يا غالي');
+                }
+            }, 1000);
+        }
+
+        function renderAll() {
+            renderTopPlayersBar();
+            renderTrixSection();
+            renderComplexSection();
+            renderSyrian41Section();
+            renderClassicSection();
+            renderChallengesSection();
+            renderDraw8Section();
+            renderLiveSection();
+            renderArchiveSection();
+            renderCuratedTarabList();
+        }
+
+        if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+            window.addEventListener('load', () => {
+                try { navigator.serviceWorker.register('sw.js').catch(() => {}); } catch (e) {}
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                const savedFb = JSON.parse(localStorage.getItem('SHILLA_CUSTOM_FIREBASE') || 'null');
+                if (savedFb && savedFb.apiKey) window.SHILLA_FIREBASE = savedFb;
+            } catch (e) {}
+            renderAll();
+            loadArchiveFromIndexedDB();
+            initAudioLibrary();
+            connectSquadRealtimeBridge();
+        });
+    </script>
+</body>
+</html>

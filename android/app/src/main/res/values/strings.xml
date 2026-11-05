@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Shilla</string>
+    <string name="title_activity_main">Shilla</string>
+    <string name="package_name">com.shilla.app</string>
+    <string name="custom_url_scheme">com.shilla.app</string>
+</resources>
