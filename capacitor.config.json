@@ -1,5 +1,9 @@
 {
-  "appId": "com.shilla.app",
-  "appName": "Shilla",
-  "webDir": "www"
+  "appId": "com.techzone.shillaplus",
+  "appName": "شِلّة بلس",
+  "webDir": "www",
+  "backgroundColor": "#040814",
+  "server": {
+    "androidScheme": "https"
+  }
 }

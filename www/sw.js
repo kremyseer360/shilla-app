@@ -1,4 +1,4 @@
-const CACHE = 'shilla-v6-shell-1';
+const CACHE = 'shilla-v12-1';
 const SHELL = ['./', './index.html', './manifest.json', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', e => {

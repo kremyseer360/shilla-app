@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>شلة متعوب عليها v6.0 | BY : karemyseer 2026</title>
+    <title>شِلّة بلس | SHILLA PLUS</title>
 
     <meta name="theme-color" content="#040d14">
     <link rel="manifest" href="manifest.json">
@@ -12,347 +12,806 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="شلة متعوب عليها">
+    <meta name="apple-mobile-web-app-title" content="شِلّة بلس">
 
-    <style>
+            <style>
+        /* =================================================================
+           SHILLA PLUS v11.0 — ROYAL AURORA & ULTRA-MODERN APK UI REBUILD
+           BY : karemyseer 2026 | TECH ZONE STORE
+           ================================================================= */
         :root {
-            --bg-deep: #040d14;
-            --bg-card: rgba(12, 28, 43, 0.92);
-            --bg-panel: rgba(20, 44, 66, 0.84);
+            --bg-deep: #040814;
+            --bg-surface: #0a1124;
+            --bg-card: rgba(14, 23, 45, 0.88);
+            --bg-panel: rgba(21, 34, 64, 0.78);
+            --bg-elevated: #1c2e54;
             --emerald: #10b981;
-            --emerald-glow: rgba(16, 185, 129, 0.35);
+            --emerald-bright: #34d399;
+            --emerald-glow: rgba(16, 185, 129, 0.32);
             --gold: #f59e0b;
             --gold-bright: #fbbf24;
-            --gold-glow: rgba(251, 191, 36, 0.35);
+            --gold-soft: #fde68a;
+            --gold-glow: rgba(251, 191, 36, 0.30);
             --crimson: #f43f5e;
-            --cyan: #06b6d4;
-            --text-main: #f8fafc;
+            --crimson-soft: #fda4af;
+            --cyan: #38bdf8;
+            --purple-glow: rgba(139, 92, 246, 0.22);
+            --text-main: #ffffff;
+            --text-secondary: #e2e8f0;
             --text-muted: #94a3b8;
-            --border-gold: rgba(251, 191, 36, 0.35);
-            --border-subtle: rgba(148, 163, 184, 0.2);
+            --border-subtle: rgba(148, 163, 184, 0.22);
+            --border-gold: rgba(251, 191, 36, 0.40);
+            --radius-xl: 24px;
+            --radius-lg: 18px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: system-ui, -apple-system, 'Segoe UI', Tahoma, Arial, sans-serif;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans Arabic', Tahoma, Arial, sans-serif;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
-        input, textarea {
+        input, textarea, select {
             -webkit-user-select: text;
             user-select: text;
         }
 
+        html {
+            background: var(--bg-deep);
+            font-size: 16px;
+        }
+
         body {
-            background: radial-gradient(circle at 50% 0%, #0d332e 0%, #061621 55%, #03090f 100%);
+            background: var(--bg-deep);
             color: var(--text-main);
             min-height: 100vh;
-            padding: calc(10px + env(safe-area-inset-top, 0px)) 10px calc(155px + env(safe-area-inset-bottom, 0px)) 10px;
-            max-width: 660px;
+            padding: calc(10px + env(safe-area-inset-top, 0px)) 12px calc(100px + env(safe-area-inset-bottom, 0px)) 12px;
+            max-width: 720px;
             margin: 0 auto;
             overflow-x: hidden;
             position: relative;
+            line-height: 1.45;
         }
 
+        /* =================================================================
+           1. الخلفية المتحركة الفخمة (Royal Aurora + 3D Floating Suits)
+           ================================================================= */
         .bg-suits {
             position: fixed;
             inset: 0;
             pointer-events: none;
             z-index: 0;
             overflow: hidden;
-            opacity: 0.07;
+            background:
+                radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.22) 0%, transparent 45%),
+                radial-gradient(circle at 85% 20%, rgba(245, 158, 11, 0.16) 0%, transparent 42%),
+                radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.14) 0%, transparent 50%),
+                linear-gradient(165deg, #040814 0%, #091229 52%, #050914 100%);
         }
+
+        .aurora-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(55px);
+            opacity: 0.55;
+            animation: auroraDrift 16s infinite alternate ease-in-out;
+        }
+        .aurora-orb.orb-1 {
+            width: 300px;
+            height: 300px;
+            top: -80px;
+            right: -60px;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.35), transparent 70%);
+        }
+        .aurora-orb.orb-2 {
+            width: 340px;
+            height: 340px;
+            bottom: 10%;
+            left: -90px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.28), transparent 70%);
+            animation-duration: 22s;
+            animation-delay: -5s;
+        }
+        .aurora-orb.orb-3 {
+            width: 260px;
+            height: 260px;
+            top: 42%;
+            right: 20%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.22), transparent 70%);
+            animation-duration: 19s;
+            animation-delay: -9s;
+        }
+
+        @keyframes auroraDrift {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(-25px, 30px, 0) scale(1.12); }
+            100% { transform: translate3d(25px, -20px, 0) scale(0.94); }
+        }
+
+        .bg-grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+            background-size: 36px 36px;
+            mask-image: radial-gradient(circle at 50% 35%, black 25%, transparent 85%);
+            -webkit-mask-image: radial-gradient(circle at 50% 35%, black 25%, transparent 85%);
+        }
+
         .suit-float {
             position: absolute;
-            font-size: 36px;
-            animation: floatUp 16s infinite linear;
+            font-size: clamp(24px, 5vw, 40px);
+            opacity: 0;
+            filter: drop-shadow(0 0 12px currentColor);
+            animation: floatRoyalSuit 20s infinite linear;
         }
-        @keyframes floatUp {
-            0% { transform: translateY(105vh) rotate(0deg); opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { transform: translateY(-15vh) rotate(360deg); opacity: 0; }
+
+        @keyframes floatRoyalSuit {
+            0% { transform: translate3d(0, 106vh, 0) rotate(0deg) scale(0.8); opacity: 0; }
+            15% { opacity: 0.45; }
+            85% { opacity: 0.36; }
+            100% { transform: translate3d(24px, -12vh, 0) rotate(360deg) scale(1.08); opacity: 0; }
         }
 
         @keyframes pulseCrown {
-            0%, 100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 8px rgba(251,191,36,0.5)); }
-            50% { transform: translateY(-3px) scale(1.04); filter: drop-shadow(0 0 14px rgba(251,191,36,0.85)); }
+            0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 4px 12px rgba(251, 191, 36, 0.45)); }
+            50% { transform: translateY(-2px) scale(1.04); filter: drop-shadow(0 6px 18px rgba(251, 191, 36, 0.8)); }
         }
 
         @keyframes slideFadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .anim-in { animation: slideFadeIn 0.22s ease-out forwards; }
+        .anim-in { animation: slideFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
+        /* =================================================================
+           2. العناصر الأساسية والأزرار والبطاقات الزجاجية (Glassmorphism)
+           ================================================================= */
         button, input, select, textarea {
             font-family: inherit;
             outline: none;
             border: none;
         }
+
         button {
             cursor: pointer;
-            transition: all 0.16s ease;
+            transition: transform 0.12s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+            min-height: 44px;
+            font-size: 14px;
+            font-weight: 800;
+            border-radius: var(--radius-md);
         }
-        button:active { transform: scale(0.94); }
+        button:active { transform: scale(0.95); }
 
         .card {
             position: relative;
             z-index: 1;
-            background: var(--bg-card);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid var(--border-gold);
-            border-radius: 18px;
-            padding: 12px;
-            margin-bottom: 10px;
-            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(155deg, rgba(19, 31, 60, 0.90) 0%, rgba(10, 17, 36, 0.94) 100%);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            border-radius: var(--radius-xl);
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
 
         .panel {
-            background: var(--bg-panel);
-            border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 10px;
+            background: rgba(21, 35, 66, 0.76);
+            border: 1px solid rgba(148, 163, 184, 0.20);
+            border-radius: var(--radius-lg);
+            padding: 12px;
         }
 
         .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-        .row-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
-        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
-        .grid-7 { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+        .row-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+        .grid-5 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; }
+        .grid-7 { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px; }
         .hidden { display: none !important; }
         .text-center { text-align: center; }
 
         .btn-gold {
-            background: linear-gradient(135deg, #fde047 0%, #f59e0b 55%, #b45309 100%);
-            color: #040d14;
-            font-weight: 900;
-            border-radius: 12px;
-            padding: 9px 13px;
-            box-shadow: 0 4px 14px var(--gold-glow);
+            background: linear-gradient(135deg, #fef08a 0%, #fbbf24 45%, #d97706 100%);
+            color: #060d1a !important;
+            font-weight: 950;
+            font-size: 14.5px;
+            border-radius: var(--radius-md);
+            padding: 11px 16px;
+            box-shadow: 0 6px 18px var(--gold-glow), inset 0 1px 0 rgba(255, 255, 255, 0.45);
         }
+
         .btn-emerald {
-            background: linear-gradient(135deg, #34d399 0%, #10b981 55%, #047857 100%);
-            color: #031c14;
-            font-weight: 900;
-            border-radius: 12px;
-            padding: 9px 13px;
-            box-shadow: 0 4px 14px var(--emerald-glow);
+            background: linear-gradient(135deg, #6ee7b7 0%, #10b981 50%, #047857 100%);
+            color: #03150e !important;
+            font-weight: 950;
+            font-size: 14px;
+            border-radius: var(--radius-md);
+            padding: 11px 16px;
+            box-shadow: 0 6px 18px var(--emerald-glow), inset 0 1px 0 rgba(255, 255, 255, 0.35);
         }
+
         .btn-crimson {
-            background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%);
-            color: #fff;
-            font-weight: 800;
-            border-radius: 12px;
-            padding: 8px 12px;
+            background: linear-gradient(135deg, #fda4af 0%, #f43f5e 50%, #be123c 100%);
+            color: #ffffff !important;
+            font-weight: 900;
+            font-size: 13.5px;
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+            box-shadow: 0 5px 15px rgba(244, 63, 94, 0.28);
         }
+
         .btn-dark {
-            background: rgba(22, 46, 68, 0.92);
-            color: #e2e8f0;
-            border: 1px solid var(--border-subtle);
-            border-radius: 11px;
-            padding: 8px 10px;
-            font-weight: 700;
-            font-size: 12px;
+            background: rgba(28, 46, 84, 0.85);
+            color: var(--text-main);
+            border: 1px solid rgba(148, 163, 184, 0.28);
+            border-radius: var(--radius-md);
+            padding: 10px 12px;
+            font-weight: 850;
+            font-size: 13.5px;
         }
         .btn-dark.active {
-            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
-            color: #040d14;
-            border-color: #fde047;
-            font-weight: 900;
+            background: linear-gradient(135deg, #fde047 0%, #f59e0b 100%);
+            color: #060d1a !important;
+            border-color: #fef08a;
+            font-weight: 950;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.32);
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            padding: 4px 9px;
-            border-radius: 99px;
-            font-size: 11px;
-            font-weight: 800;
+            gap: 5px;
+            padding: 5px 11px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 900;
+            line-height: 1.2;
         }
-        .badge-gold { background: rgba(245,158,11,0.18); color: #fbbf24; border: 1px solid rgba(245,158,11,0.45); }
-        .badge-emerald { background: rgba(16,185,129,0.18); color: #34d399; border: 1px solid rgba(16,185,129,0.45); }
-        .badge-crimson { background: rgba(244,63,94,0.18); color: #fb7185; border: 1px solid rgba(244,63,94,0.45); }
-        .badge-cyan { background: rgba(6,182,212,0.18); color: #22d3ee; border: 1px solid rgba(6,182,212,0.45); }
+        .badge-gold { background: rgba(245, 158, 11, 0.20); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.48); }
+        .badge-emerald { background: rgba(16, 185, 129, 0.20); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.48); }
+        .badge-crimson { background: rgba(244, 63, 94, 0.20); color: #fda4af; border: 1px solid rgba(251, 113, 133, 0.48); }
+        .badge-cyan { background: rgba(56, 189, 248, 0.20); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.48); }
 
         .input-box {
             width: 100%;
-            background: rgba(6, 17, 27, 0.92);
-            border: 1px solid rgba(251, 191, 36, 0.35);
-            color: #fff;
-            padding: 8px 11px;
-            border-radius: 11px;
-            font-size: 13px;
-            font-weight: 700;
+            min-height: 44px;
+            background: rgba(7, 13, 28, 0.92);
+            border: 1.5px solid rgba(148, 163, 184, 0.32);
+            color: #ffffff;
+            padding: 10px 13px;
+            border-radius: var(--radius-md);
+            font-size: 14.5px;
+            font-weight: 850;
+        }
+        .input-box:focus {
+            border-color: var(--gold-bright);
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.20);
         }
 
-        .score-box {
-            background: linear-gradient(180deg, rgba(10, 25, 39, 0.95) 0%, rgba(6, 16, 25, 0.95) 100%);
-            border: 1px solid var(--border-subtle);
+        /* =================================================================
+           3. الهيدر الملكي الجديد وشريط اللاعبين
+           ================================================================= */
+        header.card {
+            padding: 13px 15px !important;
+            border-radius: 22px;
+            margin-bottom: 12px;
+            background: linear-gradient(145deg, rgba(22, 36, 70, 0.94) 0%, rgba(11, 19, 39, 0.96) 100%);
+            border: 1.5px solid rgba(251, 191, 36, 0.35);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+        .logo-badge-wrap {
+            position: relative;
+            width: 54px;
+            height: 54px;
+            flex-shrink: 0;
+            animation: pulseCrown 3.4s infinite ease-in-out;
+        }
+        header h1 {
+            font-size: 19px !important;
+            font-weight: 950 !important;
+            background: linear-gradient(90deg, #ffffff 0%, #fde047 60%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.2px;
+        }
+        #topPlayersBar {
+            gap: 7px !important;
+            margin-top: 11px !important;
+        }
+        #topPlayersBar button {
+            min-height: 40px;
+            font-size: 13px !important;
+            font-weight: 900 !important;
+            padding: 6px 8px !important;
+            background: rgba(26, 43, 78, 0.92);
+            border: 1px solid rgba(251, 191, 36, 0.24);
+            color: #ffffff;
+            border-radius: 12px;
+        }
+
+        /* =================================================================
+           4. شريط التنقل السفلي العصري (Modern App Bottom Dock)
+           ================================================================= */
+        .primary-nav {
+            position: fixed;
+            bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+            left: 10px;
+            right: 10px;
+            max-width: 696px;
+            margin: 0 auto;
+            z-index: 65;
+            display: grid !important;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            padding: 6px;
+            background: rgba(8, 14, 30, 0.96);
+            border: 1.5px solid rgba(251, 191, 36, 0.34);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.8);
+        }
+        .primary-nav button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            min-height: 50px;
+            padding: 5px 2px;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 11.5px;
+            font-weight: 900;
             border-radius: 14px;
-            padding: 9px 5px;
+        }
+        .primary-nav button span {
+            font-size: 18px;
+            line-height: 1.05;
+        }
+        .primary-nav button.active {
+            background: linear-gradient(135deg, #fde047 0%, #f59e0b 100%);
+            color: #060d1a !important;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+        }
+
+        /* شريط اختيار اللعبة العلوي عند الدخول للألعاب */
+        .tabs-bar {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 6px;
+            background: rgba(12, 21, 43, 0.94);
+            padding: 7px;
+            border-radius: 18px;
+            border: 1px solid rgba(251, 191, 36, 0.30);
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 5;
+        }
+        .tab-btn {
+            min-height: 52px;
+            background: rgba(24, 38, 70, 0.8);
+            color: var(--text-secondary);
+            font-size: 12.5px;
+            font-weight: 900;
+            padding: 6px 4px;
+            border-radius: 13px;
+            line-height: 1.25;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+        }
+        .tab-btn::first-line { font-size: 17px; }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #fde047 0%, #f59e0b 100%);
+            color: #060d1a !important;
+            border-color: #fef08a;
+            font-weight: 950;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.30);
+        }
+
+        /* =================================================================
+           5. واجهة الصفحة الرئيسية (VIP Lounge Dashboard)
+           ================================================================= */
+        .home-dashboard { display: grid; gap: 14px; margin-bottom: 14px; position: relative; z-index: 1; }
+        .home-welcome {
+            position: relative;
+            overflow: hidden;
+            padding: 22px 18px;
+            border-radius: 24px;
+            background:
+                radial-gradient(circle at 0% 0%, rgba(251, 191, 36, 0.24) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.18) 0%, transparent 50%),
+                linear-gradient(135deg, #192d58 0%, #0d1832 100%);
+            border: 1.5px solid rgba(251, 191, 36, 0.45);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+        }
+        .home-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 99px;
+            background: rgba(251, 191, 36, 0.16);
+            border: 1px solid rgba(251, 191, 36, 0.4);
+            font-size: 11px;
+            font-weight: 950;
+            color: var(--gold-bright);
+            margin-bottom: 10px;
+        }
+        .home-welcome h2 {
+            font-size: 25px;
+            line-height: 1.3;
+            font-weight: 950;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+        .home-welcome p {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-weight: 750;
+        }
+        .home-actions {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 9px;
+        }
+        .home-actions button {
+            min-height: 48px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 950;
+            padding: 10px 12px;
+        }
+        .home-primary {
+            background: linear-gradient(135deg, #fef08a 0%, #f59e0b 100%);
+            color: #060d1a;
+            box-shadow: 0 6px 18px rgba(245, 158, 11, 0.30);
+        }
+        .home-secondary {
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.26);
+            color: #ffffff;
+        }
+
+        .home-section-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2px 4px;
+        }
+        .home-section-head span {
+            font-size: 17px;
+            font-weight: 950;
+            color: #ffffff;
+        }
+        .home-section-head small {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 700;
+        }
+        .home-live-dot {
+            font-size: 12px !important;
+            color: #34d399 !important;
+            font-weight: 900;
+        }
+
+        .home-game-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 11px;
+        }
+        .home-game-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: right;
+            min-height: 148px;
+            padding: 16px;
+            border-radius: 22px;
+            background:
+                radial-gradient(circle at 10% 15%, var(--game-tint) 0%, transparent 60%),
+                linear-gradient(155deg, rgba(24, 40, 76, 0.95) 0%, rgba(11, 19, 38, 0.98) 100%);
+            border: 1.5px solid var(--game-border, rgba(251, 191, 36, 0.32));
+            color: #ffffff;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.36);
+        }
+        .home-game-card .game-symbol {
+            display: grid;
+            place-items: center;
+            width: 46px;
+            height: 46px;
+            margin-bottom: 10px;
+            border-radius: 14px;
+            background: var(--game-tint);
+            color: var(--game-color);
+            font-size: 24px;
+            font-weight: 950;
+            border: 1px solid var(--game-border);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+        .home-game-card .game-name {
+            font-size: 18.5px;
+            font-weight: 950;
+            margin-bottom: 3px;
+            color: #ffffff;
+        }
+        .home-game-card small {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 750;
+        }
+        .home-game-card b {
+            margin-top: auto;
+            padding-top: 10px;
+            font-size: 13px;
+            color: var(--game-color);
+            font-weight: 950;
+        }
+        .game-trix { --game-color: #fde047; --game-tint: rgba(251, 191, 36, 0.22); --game-border: rgba(251, 191, 36, 0.45); }
+        .game-complex { --game-color: #7dd3fc; --game-tint: rgba(56, 189, 248, 0.22); --game-border: rgba(56, 189, 248, 0.45); }
+        .game-syrian { --game-color: #6ee7b7; --game-tint: rgba(16, 185, 129, 0.22); --game-border: rgba(52, 211, 153, 0.45); }
+        .game-tarneeb { --game-color: #fda4af; --game-tint: rgba(244, 63, 94, 0.22); --game-border: rgba(251, 113, 133, 0.45); }
+
+        .home-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 9px;
+        }
+        .home-tools-grid button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            min-height: 86px;
+            padding: 10px 6px;
+            background: linear-gradient(150deg, rgba(23, 38, 72, 0.92), rgba(12, 21, 42, 0.95));
+            border: 1px solid rgba(148, 163, 184, 0.26);
+            border-radius: 18px;
+            color: #ffffff;
+        }
+        .home-tools-grid button span { font-size: 23px; }
+        .home-tools-grid button strong { font-size: 13.5px; font-weight: 950; }
+        .home-tools-grid button small { font-size: 11px; color: var(--text-secondary); font-weight: 700; }
+
+        .home-footer-note {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 14px;
+            border-radius: 15px;
+            background: rgba(21, 35, 66, 0.78);
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            font-size: 12.5px;
+            font-weight: 850;
+            color: var(--text-secondary);
+        }
+
+        /* =================================================================
+           6. لوحة النتائج، الممالك، والعقود
+           ================================================================= */
+        .score-box {
+            background: linear-gradient(180deg, rgba(24, 41, 78, 0.95) 0%, rgba(11, 20, 40, 0.98) 100%);
+            border: 1.5px solid rgba(148, 163, 184, 0.26);
+            border-radius: var(--radius-lg);
+            padding: 12px 6px;
             text-align: center;
             cursor: pointer;
             position: relative;
         }
         .score-box.king-active {
             border: 2px solid var(--gold-bright);
-            box-shadow: 0 0 15px var(--gold-glow);
+            background: linear-gradient(180deg, rgba(251, 191, 36, 0.22) 0%, rgba(14, 24, 48, 0.98) 100%);
+            box-shadow: 0 0 18px var(--gold-glow);
         }
         .score-num {
-            font-size: 21px;
-            font-weight: 900;
-            margin-top: 3px;
+            font-size: 28px !important;
+            font-weight: 950 !important;
+            margin-top: 4px;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.5px;
         }
         .pos-score { color: #34d399; }
         .neg-score { color: #fb7185; }
 
-        /* منصة المتصدرين (المركز الأول والثاني والثالث) */
+        #trixLivePodium, #complexLivePodium, #syrianLivePodium {
+            display: none !important;
+        }
+
         .podium-strip {
             display: grid;
-            grid-template-columns: 1fr 1.15fr 1fr;
-            gap: 6px;
-            align-items: end;
-            background: linear-gradient(180deg, rgba(15, 35, 54, 0.9) 0%, rgba(7, 18, 29, 0.95) 100%);
-            border: 1px solid rgba(251, 191, 36, 0.32);
-            border-radius: 15px;
-            padding: 9px 8px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+            align-items: stretch;
+            background: rgba(13, 24, 46, 0.95);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-lg);
+            padding: 10px;
             margin-bottom: 10px;
         }
         .podium-col {
-            border-radius: 12px;
-            padding: 7px 5px;
+            border-radius: var(--radius-md);
+            padding: 10px 6px;
             text-align: center;
-            position: relative;
-            transition: transform 0.2s ease;
         }
         .podium-1 {
-            background: linear-gradient(160deg, rgba(251, 191, 36, 0.28) 0%, rgba(180, 83, 9, 0.25) 100%);
+            background: linear-gradient(160deg, rgba(251, 191, 36, 0.28) 0%, rgba(180, 83, 9, 0.22) 100%);
             border: 1.5px solid #fbbf24;
-            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.25);
-            padding: 10px 5px;
         }
         .podium-2 {
-            background: linear-gradient(160deg, rgba(203, 213, 225, 0.18) 0%, rgba(100, 116, 139, 0.2) 100%);
-            border: 1px solid rgba(203, 213, 225, 0.45);
+            background: rgba(203, 213, 225, 0.14);
+            border: 1px solid rgba(203, 213, 225, 0.38);
         }
         .podium-3 {
-            background: linear-gradient(160deg, rgba(217, 119, 6, 0.18) 0%, rgba(120, 53, 15, 0.22) 100%);
-            border: 1px solid rgba(217, 119, 6, 0.5);
+            background: rgba(217, 119, 6, 0.16);
+            border: 1px solid rgba(217, 119, 6, 0.42);
         }
 
-        /* بطاقات تحديات الشلة */
-        .challenge-card {
-            background: rgba(11, 27, 42, 0.92);
-            border: 1px solid var(--border-subtle);
-            border-radius: 13px;
-            padding: 9px 11px;
-            margin-bottom: 7px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .trix-toolbar {
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 8px;
         }
-        .challenge-card.done {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(245, 158, 11, 0.16) 100%);
-            border-color: var(--emerald);
-        }
-
-        .tabs-bar {
+        .trix-mode-tools, .trix-quick-tools {
             display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 4px;
-            background: rgba(8, 20, 32, 0.94);
-            padding: 6px;
-            border-radius: 16px;
-            border: 1px solid var(--border-gold);
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
         }
-        .tab-btn {
-            background: transparent;
-            color: var(--text-muted);
-            font-size: 10px;
-            font-weight: 800;
-            padding: 7px 2px;
-            border-radius: 11px;
-            line-height: 1.25;
-        }
-        .tab-btn.active {
-            background: linear-gradient(135deg, #fde047 0%, #f59e0b 100%);
-            color: #040d14;
-            font-weight: 900;
+        .trix-toolbar button {
+            min-height: 46px;
+            padding: 10px 8px !important;
+            font-size: 13px !important;
+            font-weight: 900 !important;
         }
 
         .contract-btn {
-            background: rgba(15, 34, 52, 0.92);
-            border: 1px solid var(--border-subtle);
-            color: #e2e8f0;
-            border-radius: 13px;
-            padding: 8px 4px;
-            font-size: 11px;
-            font-weight: 800;
+            background: rgba(22, 38, 72, 0.92);
+            border: 1.5px solid rgba(148, 163, 184, 0.26);
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 10px 6px;
+            min-height: 70px;
+            font-size: 14px;
+            font-weight: 950;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
         }
         .contract-btn.selected {
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(245, 158, 11, 0.35));
-            border: 1.5px solid var(--gold-bright);
-            color: #fef08a;
+            background: linear-gradient(145deg, rgba(251, 191, 36, 0.32), rgba(217, 119, 6, 0.42));
+            border: 2px solid var(--gold-bright);
+            color: #ffffff;
+            box-shadow: 0 5px 16px rgba(251, 191, 36, 0.28);
         }
         .contract-btn.locked {
-            opacity: 0.38;
+            opacity: 0.35;
             text-decoration: line-through;
         }
 
-        .tarab-item {
+        #trixContractsBar {
+            display: grid !important;
+            grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+            gap: 7px !important;
+        }
+        @media (max-width: 560px) {
+            #trixContractsBar {
+                grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            }
+        }
+
+        .counter-ctrl {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 6px;
-            padding: 9px 11px;
+            background: #071020;
             border-radius: 12px;
-            background: rgba(12, 28, 44, 0.92);
-            border: 1px solid var(--border-subtle);
-            margin-bottom: 6px;
-            cursor: pointer;
+            padding: 4px;
+            border: 1px solid rgba(148, 163, 184, 0.28);
         }
-        .tarab-item.playing {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.24) 0%, rgba(16, 185, 129, 0.2) 100%);
-            border: 1.5px solid var(--gold-bright);
+        .counter-btn {
+            width: 38px;
+            height: 38px;
+            min-height: 38px;
+            border-radius: 10px;
+            background: #233b69;
+            color: #ffffff;
+            font-weight: 950;
+            font-size: 18px;
         }
 
+        .challenge-card {
+            background: rgba(17, 30, 58, 0.92);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .challenge-card.done {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(245, 158, 11, 0.16) 100%);
+            border-color: var(--emerald-bright);
+        }
+
+        .archive-player-list { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; }
+        .archive-player-row {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 9px 12px !important;
+            border-radius: 12px !important;
+            background: #081224 !important;
+            border: 1px solid rgba(148, 163, 184, 0.22) !important;
+        }
+        .archive-player-name { font-size: 13.5px !important; font-weight: 900 !important; color: #ffffff !important; }
+        .archive-player-score {
+            font-size: 16px !important;
+            font-weight: 950 !important;
+            color: #34d399 !important;
+            direction: ltr !important;
+        }
+
+        /* =================================================================
+           7. مشغل الموسيقى العائم المدمج فوق شريط التنقل السفلي
+           ================================================================= */
         .media-remote-dock {
             position: fixed;
-            bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+            bottom: calc(74px + env(safe-area-inset-bottom, 0px));
             left: 10px;
             right: 10px;
-            background: linear-gradient(145deg, rgba(10, 27, 42, 0.97) 0%, rgba(4, 13, 22, 0.99) 100%);
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
-            border: 1.5px solid rgba(251, 191, 36, 0.48);
+            background: linear-gradient(145deg, rgba(15, 26, 52, 0.97) 0%, rgba(8, 14, 30, 0.99) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1.5px solid rgba(251, 191, 36, 0.42);
             padding: 10px 13px;
             z-index: 60;
-            max-width: 630px;
+            max-width: 696px;
             margin: 0 auto;
-            border-radius: 24px;
-            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75);
         }
         .media-remote-dock.minimized {
             padding: 7px 12px;
-            border-radius: 99px;
+            border-radius: 18px;
+        }
+        .media-remote-dock.minimized .media-seek-row {
+            display: none !important;
+        }
+        #mediaControllerTitle {
+            font-size: 13px !important;
+            font-weight: 900 !important;
+            color: var(--gold-bright) !important;
+        }
+        #mediaSubStatus {
+            font-size: 11px !important;
+            color: var(--text-secondary) !important;
         }
 
         .vinyl-disc {
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: radial-gradient(circle, #fbbf24 0%, #b45309 22%, #0f172a 26%, #1e293b 48%, #020617 100%);
             border: 1.5px solid var(--gold-bright);
@@ -376,55 +835,69 @@
         }
 
         .media-ctrl-circle {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: rgba(24, 51, 75, 0.9);
-            border: 1px solid rgba(255,255,255,0.14);
-            color: #f8fafc;
+            width: 36px;
+            height: 36px;
+            min-height: 36px;
+            border-radius: 11px;
+            background: #1c2e52;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #ffffff;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 900;
         }
         .media-ctrl-play {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #fde047 0%, #f59e0b 55%, #b45309 100%);
-            color: #040d14;
+            width: 38px;
+            height: 38px;
+            min-height: 38px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #fde047 0%, #f59e0b 100%);
+            color: #08101d;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            font-weight: 900;
-            box-shadow: 0 0 16px rgba(251, 191, 36, 0.55);
+            font-size: 15px;
+            font-weight: 950;
         }
 
         .app-chip {
-            padding: 5px 9px;
-            border-radius: 99px;
-            font-size: 10.5px;
+            padding: 6px 10px;
+            min-height: 34px;
+            border-radius: 11px;
+            font-size: 12px;
             font-weight: 900;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            border: 1px solid rgba(255,255,255,0.14);
-            background: rgba(15, 32, 48, 0.92);
-            color: #f1f5f9;
+            gap: 5px;
+            border: 1px solid rgba(251, 191, 36, 0.5);
+            background: rgba(245, 158, 11, 0.18);
+            color: #fde047;
         }
-        .app-chip.yt-red {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.28) 0%, rgba(225, 29, 72, 0.35) 100%);
-            border-color: rgba(251, 191, 36, 0.65);
-            color: #fef08a;
+
+        .tarab-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 11px 12px;
+            border-radius: 14px;
+            background: #111e38;
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 7px;
+            cursor: pointer;
+        }
+        .tarab-item.playing {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.24) 0%, rgba(16, 185, 129, 0.2) 100%);
+            border: 1.5px solid var(--gold-bright);
         }
 
         .modal-backdrop {
             position: fixed;
             inset: 0;
-            background: rgba(2, 8, 14, 0.86);
-            backdrop-filter: blur(6px);
+            background: rgba(3, 8, 18, 0.88);
+            backdrop-filter: blur(8px);
             z-index: 100;
             display: flex;
             align-items: center;
@@ -432,61 +905,170 @@
             padding: 14px;
         }
         .modal-card {
-            background: #0b1c2c;
+            background: #0e192f;
             border: 2px solid var(--gold);
             border-radius: 22px;
             width: 100%;
             max-width: 500px;
             max-height: 90vh;
             overflow-y: auto;
-            padding: 16px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.85);
+            padding: 18px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
         }
 
         #toastBox {
             position: fixed;
-            top: 14px;
+            top: calc(14px + env(safe-area-inset-top, 0px));
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+            background: #064e3b;
             border: 2px solid #34d399;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 99px;
-            font-size: 12.5px;
-            font-weight: 900;
+            color: #ffffff;
+            padding: 11px 20px;
+            border-radius: 999px;
+            font-size: 13.5px;
+            font-weight: 950;
             z-index: 250;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.75);
-            white-space: nowrap;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            max-width: 92vw;
+            text-align: center;
         }
 
-        .counter-ctrl {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #06121c;
-            border-radius: 10px;
-            padding: 3px;
-            border: 1px solid var(--border-subtle);
+        @media (max-width: 420px) {
+            body { padding-left: 10px; padding-right: 10px; }
+            .home-welcome h2 { font-size: 21px; }
+            .score-num { font-size: 24px !important; }
+            .archive-player-list { grid-template-columns: 1fr !important; }
         }
-        .counter-btn {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            background: #1a3650;
-            color: #fff;
-            font-weight: 900;
-            font-size: 16px;
-        }
+
+/* ===== v11.1: بار الموسيقى + وضع اللعب + شاشات الإعداد ===== */
+body{padding-bottom:calc(150px + env(safe-area-inset-bottom,0px))}
+body.in-game{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+.media-remote-dock:not(.minimized){animation:dockUp .22s ease-out}
+@keyframes dockUp{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
+#mediaDockExpandedBody>.row{flex-wrap:wrap;justify-content:center}
+#mediaDockExpandedBody .panel{width:100%!important}
+body.in-game .media-remote-dock{display:none}
+body.in-game.music-pop .media-remote-dock{display:block;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:80}
+.hdr-music{display:none!important}
+body.in-game .hdr-music{display:inline-flex!important}
+body.in-game header.card{padding:7px 11px!important}
+body.in-game header.card svg#appLogoSvg{width:36px;height:36px}
+body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!important}
+.aurora-orb{will-change:transform}
+.setup-screen{padding:18px 14px!important;border-color:var(--border-gold)!important}
+.setup-screen .row{flex-wrap:wrap}
+.setup-screen #trixSetupModes button,.setup-screen #complexSetupModes button,.setup-screen #classicSetupModes button{flex:1;padding:14px 8px;font-size:13px}
+.setup-screen .setup-rule{margin-top:6px}
+.setup-screen .setup-rule select{max-width:100%}
+.setup-on>*:not(.setup-screen){display:none!important}
+.setup-label{font-size:11px;font-weight:800;color:var(--text-muted);margin:12px 2px 6px}
+.start-game-btn{width:100%;padding:16px;font-size:16px;font-weight:900;margin-top:14px;border-radius:16px}
+
+/* ===== v12.0: نظام بطاقات QR للشلة + الماسح بالكاميرا + سجل الحسابات المحفوظة ===== */
+.qr-pass-card {
+    background: radial-gradient(circle at 50% 0%, rgba(251, 191, 36, 0.22) 0%, rgba(13, 24, 48, 0.98) 70%);
+    border: 1.5px solid rgba(251, 191, 36, 0.48);
+    border-radius: 22px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+    margin-bottom: 12px;
+}
+.qr-frame-box {
+    display: inline-block;
+    padding: 12px;
+    background: #ffffff;
+    border-radius: 20px;
+    border: 3px solid var(--gold-bright);
+    box-shadow: 0 8px 26px rgba(251, 191, 36, 0.28);
+    margin: 10px auto;
+}
+.squad-saved-pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(18, 32, 62, 0.92);
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    margin-bottom: 7px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.squad-saved-pill.active-squad {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.24) 0%, rgba(245, 158, 11, 0.18) 100%);
+    border: 1.5px solid var(--emerald-bright);
+}
+.scanner-box {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    margin: 10px auto;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 2px solid var(--cyan);
+    background: #040814;
+    aspect-ratio: 1 / 1;
+}
+.scanner-box video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.scanner-laser {
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #38bdf8, #fde047, #38bdf8, transparent);
+    box-shadow: 0 0 12px #38bdf8;
+    animation: scanLaserMove 2.2s infinite ease-in-out;
+}
+@keyframes scanLaserMove {
+    0%, 100% { top: 12%; }
+    50% { top: 88%; }
+}
+.avatar-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 6px;
+    margin-top: 6px;
+}
+.avatar-chip {
+    min-height: 38px;
+    border-radius: 10px;
+    background: rgba(24, 40, 74, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.avatar-chip.selected {
+    border: 2px solid var(--gold-bright);
+    background: rgba(251, 191, 36, 0.25);
+}
+
     </style>
 </head>
 <body>
 
     <div class="bg-suits">
-        <span class="suit-float" style="left: 8%; animation-delay: 0s; color: #f43f5e;">♥️</span>
-        <span class="suit-float" style="left: 28%; animation-delay: 4s; color: #fbbf24;">♠️</span>
-        <span class="suit-float" style="left: 55%; animation-delay: 2s; color: #f43f5e;">♦️</span>
-        <span class="suit-float" style="left: 78%; animation-delay: 7s; color: #34d399;">♣️</span>
+        <div class="aurora-orb orb-1"></div>
+        <div class="aurora-orb orb-2"></div>
+        <div class="aurora-orb orb-3"></div>
+        <div class="bg-grid-overlay"></div>
+        <span class="suit-float" style="left: 10%; animation-delay: 0s; color: #fb7185;">♥️</span>
+        <span class="suit-float" style="left: 32%; animation-delay: 5s; color: #fbbf24;">👑</span>
+        <span class="suit-float" style="left: 58%; animation-delay: 2.5s; color: #38bdf8;">♠️</span>
+        <span class="suit-float" style="left: 82%; animation-delay: 8s; color: #34d399;">♦️</span>
+        <span class="suit-float" style="left: 22%; animation-delay: 11s; color: #38bdf8;">♣️</span>
+        <span class="suit-float" style="left: 45%; animation-delay: 14s; color: #fb7185;">♥️</span>
+        <span class="suit-float" style="left: 70%; animation-delay: 17s; color: #fbbf24;">♠️</span>
+        <span class="suit-float" style="left: 92%; animation-delay: 6s; color: #34d399;">👑</span>
     </div>
 
     <div id="toastBox" class="hidden"></div>
@@ -496,40 +1078,64 @@
         <div class="row">
             <div class="row" style="gap: 10px;">
                 <div style="animation: pulseCrown 3.2s infinite ease-in-out;">
-                    <svg id="appLogoSvg" width="50" height="50" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="72" height="72" rx="18" fill="url(#royalBg)"></rect>
-                        <rect x="2" y="2" width="68" height="68" rx="16" stroke="url(#goldRim)" stroke-width="2"></rect>
-                        <rect x="14" y="16" width="26" height="36" rx="5" transform="rotate(-12 14 16)" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5"></rect>
-                        <rect x="30" y="14" width="28" height="38" rx="5" transform="rotate(8 30 14)" fill="#ffffff" stroke="#f59e0b" stroke-width="1.5"></rect>
-                        <text x="35" y="27" fill="#e11d48" font-size="11" font-weight="900" font-family="Arial">7♥</text>
-                        <path d="M43 32C43 32 38 27 35 30C32 33 35 38 43 43C51 38 54 33 51 30C48 27 43 32 43 32Z" fill="#e11d48"></path>
-                        <path d="M14 50L22 35L36 45L50 35L58 50L54 60H18L14 50Z" fill="url(#crownGold)" stroke="#040d14" stroke-width="1.5"></path>
+                    <svg id="appLogoSvg" width="54" height="54" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="80" rx="22" fill="url(#royalBgV10)"/>
+                        <rect x="2" y="2" width="76" height="76" rx="20" stroke="url(#goldRimV10)" stroke-width="2.5"/>
+                        <circle cx="40" cy="38" r="24" fill="url(#centerGlowV10)" opacity="0.55"/>
+                        <!-- Left Dark Royal Card -->
+                        <g transform="rotate(-14 26 28)">
+                            <rect x="15" y="13" width="26" height="36" rx="5" fill="#0f1b38" stroke="#fbbf24" stroke-width="1.8"/>
+                            <path d="M28 24L33 31L28 38L23 31L28 24Z" fill="#fbbf24"/>
+                        </g>
+                        <!-- Right White 7 of Hearts Card -->
+                        <g transform="rotate(12 52 28)">
+                            <rect x="37" y="12" width="27" height="37" rx="5" fill="#ffffff" stroke="#f59e0b" stroke-width="1.8"/>
+                            <path d="M50.5 28C50.5 28 46.5 23.5 44 26C41.5 28.5 44 33 50.5 37.5C57 33 59.5 28.5 57 26C54.5 23.5 50.5 28 50.5 28Z" fill="#e11d48"/>
+                        </g>
+                        <!-- 3D Golden Crown Foreground -->
+                        <path d="M14 55L20 35L32 45L40 29L48 45L60 35L66 55H14Z" fill="url(#crownGoldV10)" stroke="#fef08a" stroke-width="1.6" stroke-linejoin="round"/>
+                        <rect x="16" y="57" width="48" height="6" rx="3" fill="#d97706" stroke="#fef08a" stroke-width="1.2"/>
+                        <circle cx="20" cy="33" r="3" fill="#fef08a"/>
+                        <circle cx="40" cy="27" r="3.6" fill="#fef08a"/>
+                        <circle cx="60" cy="33" r="3" fill="#fef08a"/>
+                        <path d="M40 41L43.5 46.5L40 52L36.5 46.5L40 41Z" fill="#e11d48" stroke="#fef08a" stroke-width="1"/>
                         <defs>
-                            <linearGradient id="royalBg" x1="0" y1="0" x2="72" y2="72" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#064e3b"></stop><stop offset="0.5" stop-color="#0f172a"></stop><stop offset="1" stop-color="#451a03"></stop>
+                            <linearGradient id="royalBgV10" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#132347"/>
+                                <stop offset="0.55" stop-color="#091126"/>
+                                <stop offset="1" stop-color="#050914"/>
                             </linearGradient>
-                            <linearGradient id="goldRim" x1="0" y1="0" x2="72" y2="72" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#fde047"></stop><stop offset="1" stop-color="#b45309"></stop>
+                            <linearGradient id="goldRimV10" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#fef08a"/>
+                                <stop offset="0.5" stop-color="#f59e0b"/>
+                                <stop offset="1" stop-color="#b45309"/>
                             </linearGradient>
-                            <linearGradient id="crownGold" x1="14" y1="35" x2="58" y2="60" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#fef08a"></stop><stop offset="0.5" stop-color="#f59e0b"></stop><stop offset="1" stop-color="#92400e"></stop>
+                            <radialGradient id="centerGlowV10" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(40 38) scale(24)">
+                                <stop stop-color="#fbbf24"/>
+                                <stop offset="1" stop-color="#fbbf24" stop-opacity="0"/>
+                            </radialGradient>
+                            <linearGradient id="crownGoldV10" x1="14" y1="29" x2="66" y2="60" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#fef08a"/>
+                                <stop offset="0.45" stop-color="#fbbf24"/>
+                                <stop offset="1" stop-color="#b45309"/>
                             </linearGradient>
                         </defs>
                     </svg>
                 </div>
                 <div>
                     <div class="row-wrap" style="justify-content: flex-start; gap: 5px;">
-                        <h1 style="font-size: 16.5px; font-weight: 900; color: var(--gold-bright);">شلة متعوب عليها</h1>
-                        <span class="badge badge-cyan" style="font-size: 9px; padding: 2px 7px;">v6.0 Champions</span>
+                        <h1 style="font-size: 16.5px; font-weight: 900; color: var(--gold-bright);">شِلّة بلس</h1>
+                        <span class="badge badge-cyan" style="font-size: 9px; padding: 2px 7px;">v12.1 Android & QR</span>
                         <span id="liveHeaderIndicator" onclick="switchTab('live')" class="badge badge-emerald" style="cursor: pointer; font-size: 9.5px;">🟢 متصل</span>
                     </div>
                     <p style="font-size: 10.5px; color: var(--text-muted); font-weight: 800; margin-top: 2px;">
-                        <span id="headerAccountLabel" onclick="openSyncModal()" style="color: var(--emerald); cursor: pointer; text-decoration: underline;">🦁 حساب الشلة</span> • <span onclick="openDevPortalModal()" style="color: var(--gold-bright); cursor: pointer;">BY : karemyseer 2026</span>
+                        <span id="headerAccountLabel" onclick="openSyncModal()" style="color: var(--emerald); cursor: pointer; text-decoration: underline;">🦁 حساب الشلة</span> • <span onclick="openDevPortalModal()" style="color: var(--gold-bright); cursor: pointer;">SHILLA PLUS</span>
                     </p>
                 </div>
             </div>
             <div class="row" style="gap: 4px;">
                 <button id="tableToggleBtn" onclick="toggleActiveTableSlot()" class="btn-dark active" style="padding: 7px 8px; font-size: 10.5px;" title="تبديل الطاولة عند فتح طاولتين بموبايلين">🃏 طاولة 1</button>
+                <button onclick="event.stopPropagation();showGameMusic()" class="btn-dark hdr-music" style="padding: 8px 10px; font-size: 14px;">🎵</button>
                 <button onclick="openNamesModal()" class="btn-gold" style="padding: 8px 9px; font-size: 11px;">✏️ الأسماء</button>
             </div>
         </div>
@@ -537,29 +1143,58 @@
         <div id="topPlayersBar" class="grid-4" style="margin-top: 10px;"></div>
     </header>
 
-    <!-- 2. شريط التبويبات الثمانية (مع تبويب التحديات والمتصدرين) -->
+    <!-- 2. شريط اختيار الألعاب الأربع + شريط التنقل السفلي الدائم -->
     <nav class="tabs-bar">
         <button onclick="switchTab('trix')" id="tab-trix" class="tab-btn active">👑<br>تركس</button>
         <button onclick="switchTab('complex')" id="tab-complex" class="tab-btn">⚡<br>كمبلكس</button>
         <button onclick="switchTab('syrian41')" id="tab-syrian41" class="tab-btn">🔥<br>سوري 41</button>
         <button onclick="switchTab('classic')" id="tab-classic" class="tab-btn">🃏<br>طرنيب</button>
-        <button onclick="switchTab('challenges')" id="tab-challenges" class="tab-btn">🏆<br>التحديات</button>
-        <button onclick="switchTab('draw8')" id="tab-draw8" class="tab-btn">🎲<br>القرعة</button>
-        <button onclick="switchTab('live')" id="tab-live" class="tab-btn">📡<br>اللايف</button>
-        <button onclick="switchTab('archive')" id="tab-archive" class="tab-btn">📊<br>السجل</button>
     </nav>
+    <nav class="primary-nav" aria-label="التنقل الرئيسي">
+        <button data-primary-nav="home" onclick="switchTab('home')"><span>🏠</span>الرئيسية</button>
+        <button data-primary-nav="games" onclick="switchTab('trix')"><span>🎮</span>الألعاب</button>
+        <button data-primary-nav="challenges" id="tab-challenges" onclick="switchTab('challenges')"><span>🏆</span>التحديات</button>
+        <button data-primary-nav="live" id="tab-live" onclick="switchTab('live')"><span>📡</span>الأونلاين</button>
+        <button data-primary-nav="archive" id="tab-archive" onclick="switchTab('archive')"><span>📊</span>السجل</button>
+    </nav>
+
+    <!-- SHILLA PLUS 8.0: new product home / navigation layer -->
+    <section id="sec-home" class="home-dashboard anim-in">
+        <div class="home-welcome card">
+            <div class="home-kicker">مساحة لعبتك • SHILLA PLUS</div>
+            <h2>اللعب أحلى مع الشِلّة.</h2>
+            <p>جهّز جلستك، اختار لعبتك، وخلي الحساب علينا.</p>
+            <div class="home-actions">
+                <button class="home-primary" onclick="switchTab('trix')">▶ ابدأ جلسة تركس</button>
+                <button class="home-secondary" onclick="switchTab('live')">⌁ الغرف والأونلاين</button>
+            </div>
+        </div>
+        <div class="home-section-head"><div><span>اختار لعبتك</span><small>كل لعبة بواجهة وأدوات تناسبها</small></div><span class="home-live-dot">● جاهز للعب</span></div>
+        <div class="home-game-grid">
+            <button class="home-game-card game-trix" onclick="switchTab('trix')"><span class="game-symbol">♛</span><span class="game-name">تركس</span><small>يهودية • شراكة • تدبيل</small><b>ابدأ اللعب <i>←</i></b></button>
+            <button class="home-game-card game-complex" onclick="switchTab('complex')"><span class="game-symbol">✦</span><span class="game-name">كمبلكس</span><small>كل العقود بحساب واحد</small><b>ابدأ اللعب <i>←</i></b></button>
+            <button class="home-game-card game-syrian" onclick="switchTab('syrian41')"><span class="game-symbol">٤١</span><span class="game-name">سوري 41</span><small>تابع النقاط والجولات</small><b>ابدأ اللعب <i>←</i></b></button>
+            <button class="home-game-card game-tarneeb" onclick="switchTab('classic')"><span class="game-symbol">♠</span><span class="game-name">طرنيب</span><small>فرق وطلبات ونتائج</small><b>ابدأ اللعب <i>←</i></b></button>
+        </div>
+        <div class="home-tools-grid">
+            <button onclick="switchTab('challenges')"><span>🏆</span><strong>التحديات</strong><small>نافس الشِلّة</small></button>
+            <button onclick="switchTab('draw8')"><span>🎲</span><strong>القرعة</strong><small>وزّع اللاعبين</small></button>
+            <button onclick="switchTab('archive')"><span>◷</span><strong>الأرشيف</strong><small>نتائجك السابقة</small></button>
+        </div>
+        <div class="home-footer-note"><span>♬</span> موسيقاك بترافقك بكل الجلسات من المشغّل السفلي</div>
+    </section>
 
     <!-- القسم 1: تركس عادي -->
     <section id="sec-trix" class="anim-in">
         <div class="card">
-            <div class="row-wrap" style="justify-content: space-between; margin-bottom: 8px;">
-                <div class="row" style="gap: 5px;">
+            <div class="trix-toolbar" style="margin-bottom: 10px;">
+                <div class="trix-mode-tools">
                     <button id="trixModeIndiv" onclick="setGamePlayMode('trix', 'individual')" class="btn-dark active">👤 يهودية (4 لاعبين)</button>
                     <button id="trixModeTeams" onclick="setGamePlayMode('trix', 'teams')" class="btn-dark">🤝 شراكة (فريقين)</button>
                 </div>
-                <div class="row" style="gap: 5px;">
-                    <button onclick="startPatienceTimer()" id="timerBtn" class="btn-dark">⏱️ 30ث</button>
-                    <button onclick="openSevenHeartsModal('trix')" class="btn-crimson" style="font-size: 11px; padding: 7px 10px;">7♥️ مع مين 7 الكبة؟</button>
+                <div class="trix-quick-tools">
+                    <button onclick="startPatienceTimer()" id="timerBtn" class="btn-dark">⏱️ مؤقّت 30 ثانية</button>
+                    <button onclick="openSevenHeartsModal('trix')" class="btn-crimson">♥️ تحديد 7 الكبة</button>
                 </div>
             </div>
 
@@ -592,8 +1227,23 @@
         <div class="card">
             <div style="font-size: 12.5px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">📝 سجل جولات التركس الحالية:</div>
             <div id="trixHistoryList" style="font-size: 11.5px;"></div>
+            <button type="button" onclick="openTrixVerticalHistory()" class="btn-gold" style="width:100%; margin-top:10px; padding:11px 12px; font-size:13px; font-weight:900;">📋 عرض السجل الكامل بشكل طولي</button>
         </div>
     </section>
+
+    <!-- نافذة سجل التركس الطولي: عرض فقط، ولا تغيّر بيانات اللعب أو المزامنة -->
+    <div id="trixVerticalHistoryModal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="trixVerticalHistoryTitle" style="position:fixed; inset:0; z-index:9999; background:rgba(2,8,15,.96); padding: max(12px, env(safe-area-inset-top)) 10px max(14px, env(safe-area-inset-bottom)); overflow-y:auto;">
+        <div style="max-width:760px; margin:0 auto; min-height:100%;">
+            <div class="card" style="position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px; margin-bottom:12px; background:#0c1c2b;">
+                <div>
+                    <div id="trixVerticalHistoryTitle" style="font-size:17px; font-weight:900; color:var(--gold-bright);">📋 سجل التركس الكامل</div>
+                    <div id="trixVerticalHistoryMeta" style="font-size:11px; color:var(--text-muted); margin-top:4px;"></div>
+                </div>
+                <button type="button" onclick="closeTrixVerticalHistory()" class="btn-dark" style="padding:9px 13px; white-space:nowrap;">✕ إغلاق</button>
+            </div>
+            <div id="trixVerticalHistoryContent"></div>
+        </div>
+    </div>
 
     <!-- القسم 2: تركس كمبلكس منفصل -->
     <section id="sec-complex" class="hidden anim-in">
@@ -766,49 +1416,105 @@
         </div>
     </section>
 
-    <!-- القسم 7: نظام الأونلاين وحساب الشلة الموحد -->
+    <!-- القسم 7: نظام الأونلاين المطور + بطاقة QR للشلة + الحسابات المتعددة -->
     <section id="sec-live" class="hidden anim-in">
+        <!-- البطاقة 1: حالة الاتصال والمزامنة الفورية -->
         <div class="card" style="border-color: var(--emerald);">
-            <div class="row-wrap" style="justify-content: space-between; margin-bottom: 10px;">
-                <div class="row" style="gap: 9px;">
-                    <div id="liveMyAvatarBox" onclick="openSyncModal()" style="width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, #10b981, #047857); display: flex; align-items: center; justify-content: center; font-size: 22px; cursor: pointer;">🦁</div>
+            <div class="row-wrap" style="justify-content: space-between; margin-bottom: 12px;">
+                <div class="row" style="gap: 10px;">
+                    <div id="liveMyAvatarBox" onclick="openSyncModal()" style="width: 48px; height: 48px; border-radius: 15px; background: linear-gradient(135deg, #10b981, #047857); display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; box-shadow: 0 4px 14px rgba(16,185,129,0.35);">🦁</div>
                     <div>
-                        <div id="liveMyAccountName" style="font-size: 14px; font-weight: 900; color: #fff;">شلة الشباب (SHILLA-2026)</div>
-                        <div style="font-size: 10.5px; color: var(--text-muted); margin-top: 2px;">الحالة: <span id="liveCloudPingText" style="color: var(--emerald); font-weight: 800;">متصل بحساب الشلة الموحد</span></div>
+                        <div id="liveMyAccountName" style="font-size: 15px; font-weight: 950; color: #fff;">شلة الشباب (SHILLA-2026)</div>
+                        <div style="font-size: 11.5px; color: var(--text-secondary); margin-top: 2px;">الحالة: <span id="liveCloudPingText" style="color: var(--emerald-bright); font-weight: 900;">متصل ومشفر تلقائياً 🔒</span></div>
                     </div>
                 </div>
-                <button onclick="openSyncModal()" class="btn-emerald" style="font-size: 11px; padding: 8px 12px;">🔐 إعداد حساب الشلة</button>
+                <div class="row" style="gap: 6px;">
+                    <button onclick="openSyncModal()" class="btn-gold" style="font-size: 12px; padding: 9px 12px;">⚙️ إدارة الحسابات</button>
+                </div>
             </div>
 
-            <div class="panel" style="margin-bottom: 10px; border-color: rgba(6,182,212,0.4);">
+            <!-- أزرار التحكم السحابي المباشر وتحميل النتائج -->
+            <div class="grid-2" style="margin-bottom: 12px;">
+                <button onclick="pullCloudHistorySnapshot(true)" class="btn-emerald" style="font-size: 12.5px; padding: 11px 10px;">⬇️ تحميل أحدث النتائج من السحابة</button>
+                <button onclick="syncNow(true)" class="btn-dark" style="font-size: 12.5px; padding: 11px 10px; border-color: var(--cyan); color: var(--cyan);">📤 رفع ومزامنة نتائجي الآن</button>
+            </div>
+
+            <div class="panel" style="margin-bottom: 10px; border-color: rgba(56,189,248,0.4);">
                 <div class="row" style="margin-bottom: 6px;">
-                    <span style="font-size: 11.5px; font-weight: 900; color: var(--cyan);">⚡ حالة الألعاب الأربع المفتوحة على حساب الشلة الآن:</span>
-                    <button onclick="syncNow(true)" class="badge badge-cyan" style="cursor: pointer;">🔄 مزامنة فورية</button>
+                    <span style="font-size: 12.5px; font-weight: 900; color: var(--cyan);">⚡ الألعاب والطاولات المفتوحة بحساب الشلة:</span>
+                    <span id="lastCloudSyncTimeBadge" class="badge badge-cyan" style="font-size: 10px;">مزامنة حية</span>
                 </div>
-                <p style="font-size: 10px; color: var(--text-muted); margin-bottom: 8px;">
-                    كل لعبة وكل طاولة (طاولة 1 / طاولة 2) مستقلة تماماً؛ إذا فتح موبايلان لعبتين مختلفتين أو طاولتين بنفس الوقت، تُحفظ اللعبتان معاً على نفس حساب الشلة.
-                </p>
                 <div id="liveGamesConcurrentGrid" class="grid-2"></div>
             </div>
 
-            <div class="panel" style="padding: 8px 10px;">
+            <div class="panel" style="padding: 10px 12px;">
                 <div class="row" style="margin-bottom: 6px;">
-                    <span style="font-size: 11px; font-weight: 900; color: var(--gold-bright);">📱 موبايلات الشلة المتصلة على نفس الحساب:</span>
-                    <span id="onlineDevicesCountBadge" class="badge badge-emerald">1 جهاز</span>
+                    <span style="font-size: 12px; font-weight: 900; color: var(--gold-bright);">📱 موبايلات الشلة المتصلة الآن:</span>
+                    <span id="onlineDevicesCountBadge" class="badge badge-emerald">1 موبايل</span>
                 </div>
                 <div id="onlineSquadMembersGrid" class="row-wrap" style="gap: 6px;"></div>
             </div>
         </div>
 
-        <div class="card text-center">
-            <h2 style="font-size: 15px; font-weight: 900; color: var(--gold-bright); margin-bottom: 4px;">📋 مشاركة أو نقل يدوي للنتائج (واتساب / بدون نت)</h2>
-            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">انسخ حزمة النتائج والأرشيف وابعتها للشباب، أو الصق حزمة وصلتك.</p>
-            <div class="grid-2" style="margin-bottom: 8px;">
-                <button onclick="copySyncPacketCode()" class="btn-gold" style="font-size: 11px; padding: 9px;">📋 نسخ حزمة النتائج</button>
-                <button onclick="shareRoomOnWhatsApp()" class="btn-emerald" style="font-size: 11px; padding: 9px;">📲 مشاركة واتساب</button>
+        <!-- البطاقة 2: بطاقة QR الملكية للانضمام السريع وتحميل النتائج بمسحة واحدة -->
+        <div class="qr-pass-card">
+            <div class="row" style="margin-bottom: 6px;">
+                <span class="badge badge-gold">📲 بطاقة QR الذكية للشلة</span>
+                <span id="qrModeStatusBadge" class="badge badge-emerald">شامل الحساب + النتائج</span>
             </div>
-            <textarea id="pasteSyncPacketInput" class="input-box" rows="3" placeholder="الصق حزمة النتائج هون..." style="font-size: 11px; direction: ltr;"></textarea>
-            <button onclick="applyPastedSyncPacket()" class="btn-dark" style="width: 100%; margin-top: 6px;">⬇️ استلام ودمج الحزمة</button>
+            <h3 style="font-size: 16px; font-weight: 950; color: #fff; margin-bottom: 4px;">امسح الكود من أي موبايل تاني للانضمام وتحميل النتائج فوراً!</h3>
+            <p style="font-size: 11.5px; color: var(--text-secondary); margin-bottom: 8px;">ما في داعي تكتب الكود أو كلمة السر يدوياً — افتح الكاميرا أو ارفع صورة الـ QR وبتنزل كل الحسابات والنتائج تلقائياً.</p>
+
+            <!-- مربع عرض الـ QR المولد أوفلاين -->
+            <div id="squadQrDisplayBox" class="qr-frame-box"></div>
+            <div id="squadQrCaptionText" style="font-size: 12px; font-weight: 900; color: var(--gold-bright); margin-bottom: 10px;"></div>
+
+            <div class="grid-2" style="margin-bottom: 8px;">
+                <button onclick="shareSquadQrCardAsImage()" class="btn-gold" style="font-size: 12.5px;">🖼️ مشاركة بطاقة الـ QR كصورة</button>
+                <button onclick="toggleCameraQrScanner()" id="btnToggleCameraScan" class="btn-emerald" style="font-size: 12.5px;">📷 مسح QR بالكاميرا</button>
+            </div>
+
+            <div class="grid-2">
+                <label class="btn-dark" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-size:12px;">
+                    📂 قراءة QR من صورة بالمعرض
+                    <input type="file" accept="image/*" class="hidden" onchange="scanQrFromUploadedImage(event)">
+                </label>
+                <button onclick="shareSquadInviteLinkWhatsApp()" class="btn-dark" style="font-size: 12px; border-color: rgba(52,211,153,0.45); color: #6ee7b7;">💬 إرسال كود دعوة واتساب</button>
+            </div>
+
+            <!-- منطقة الكاميرا لماسح الـ QR المباشر -->
+            <div id="qrCameraScannerArea" class="hidden" style="margin-top: 12px;">
+                <div class="scanner-box">
+                    <video id="qrScannerVideo" playsinline muted></video>
+                    <div class="scanner-laser"></div>
+                </div>
+                <p id="qrScannerHint" style="font-size: 11.5px; color: var(--cyan); font-weight: 800; margin-top: 6px;">وجّه الكاميرا على كود الـ QR بموبايل رفيقك...</p>
+                <button onclick="stopCameraQrScanner()" class="btn-crimson" style="margin-top: 8px; width: 100%;">✖ إغلاق الكاميرا</button>
+            </div>
+        </div>
+
+        <!-- البطاقة 3: دفتر حسابات الشلل المحفوظة (التبديل السريع بين أكثر من شلة) -->
+        <div class="card">
+            <div class="row" style="margin-bottom: 8px;">
+                <div>
+                    <h3 style="font-size: 14.5px; font-weight: 950; color: var(--gold-bright);">🗂️ حسابات الشلل المحفوظة على جهازك</h3>
+                    <p style="font-size: 11px; color: var(--text-secondary);">بدّل بضغطة زر بين شلة الكافيه، شلة البيت، أو أنشئ غرفة جديدة</p>
+                </div>
+                <button onclick="createNewRandomSquadRoom()" class="badge badge-gold" style="cursor: pointer; padding: 7px 11px;">➕ غرفة جديدة</button>
+            </div>
+            <div id="savedSquadProfilesList"></div>
+        </div>
+
+        <!-- البطاقة 4: النسخ واللصق اليدوي السريع (بدون كاميرا وبدون نت) -->
+        <div class="card text-center">
+            <h2 style="font-size: 14.5px; font-weight: 900; color: var(--gold-bright); margin-bottom: 4px;">📋 نقل شامل بضغطة (كود الحزمة الذكية)</h2>
+            <p style="font-size: 11px; color: var(--text-secondary); margin-bottom: 10px;">انسخ الكود وابعته عالواتساب إذا ما بدك تصور QR، وبمجرد لصقه هون بيدخل بالحساب وبيحمل كل النتائج.</p>
+            <div class="grid-2" style="margin-bottom: 8px;">
+                <button onclick="copySyncPacketCode()" class="btn-gold" style="font-size: 12px; padding: 10px;">📋 نسخ حزمة الحساب والنتائج</button>
+                <button onclick="shareRoomOnWhatsApp()" class="btn-emerald" style="font-size: 12px; padding: 10px;">📲 إرسال الترتيب عالواتساب</button>
+            </div>
+            <textarea id="pasteSyncPacketInput" class="input-box" rows="2" placeholder="الصق كود الحزمة أو رابط الشلة هون..." style="font-size: 12px; direction: ltr;"></textarea>
+            <button onclick="applyPastedSyncPacket()" class="btn-dark" style="width: 100%; margin-top: 8px;">⬇️ تفعيل الحساب ودمج النتائج فوراً</button>
         </div>
     </section>
 
@@ -826,21 +1532,16 @@
         <div class="card">
             <div class="row-wrap" style="justify-content: space-between; margin-bottom: 8px;">
                 <div>
-                    <h3 style="font-size: 14px; font-weight: 900; color: var(--emerald);">📊 أرشيف الشلة المنفصل + تصدير واستيراد إكسل مبسط</h3>
-                    <p style="font-size: 10.5px; color: var(--text-muted);">كل لعبة لها أرشيفها المستقل مع جدول إكسل يعرض المركز الأول والثاني والثالث</p>
+                    <h3 style="font-size: 14px; font-weight: 900; color: var(--emerald);">📚 أرشيف الشلة ونتائج المباريات</h3>
+                    <p style="font-size: 10.5px; color: var(--text-muted);">كل مباراة محفوظة بشكل مستقل ضمن أرشيف اللعبة، مع ترتيب اللاعبين ونتائجهم</p>
                 </div>
                 <span id="archiveTotalBadge" class="badge badge-emerald">0 مباراة</span>
             </div>
 
-            <!-- أزرار إكسل المبسطة (تصدير واستيراد Excel CSV + JSON) -->
-            <div class="grid-2" style="margin-bottom: 10px;">
-                <button onclick="exportArchiveExcelCsv()" class="btn-emerald" style="font-size: 11.5px; padding: 10px;">
-                    📊 تصدير جدول إكسل مبسط (Excel CSV)
-                </button>
-                <label class="btn-gold" style="font-size: 11.5px; padding: 10px; cursor: pointer; text-align: center; display: inline-block;">
-                    📥 استيراد ملف إكسل أو سجل (CSV / JSON)
-                    <input type="file" accept=".csv,.json,.txt" onchange="importArchiveExcelOrJsonFile(event)" class="hidden">
-                </label>
+            <!-- مشاركة الأرشيف كصورة جاهزة للإرسال -->
+            <div style="margin-bottom:10px;">
+                <button onclick="shareArchiveAsImage()" class="btn-emerald" style="width:100%;font-size:12px;padding:11px;">🖼️ مشاركة نتائج المباريات كصورة</button>
+                <p style="font-size:10px;color:var(--text-muted);margin-top:5px;">تنشأ صورة مرتبة باسم اللعبة واللاعبين والنتائج والتاريخ، ويمكن مشاركتها أو حفظها.</p>
             </div>
 
             <!-- تبويبات الأرشيف المنفصل لكل لعبة -->
@@ -866,7 +1567,7 @@
 
     <footer class="text-center" style="margin: 14px 0 32px 0; position: relative; z-index: 1;">
         <div onclick="openDevPortalModal()" class="badge badge-gold" style="padding: 8px 18px; font-size: 12px; cursor: pointer;">
-            👑 شلة متعوب عليها • <span style="color: #22d3ee;">v6.0 Champions & Excel</span> • <strong>BY : karemyseer 2026</strong>
+            👑 شِلّة بلس • <span style="color: #22d3ee;">v12.1 Android & QR</span> • <strong>SHILLA PLUS</strong> • <span style="color:#fde047;">BY : karemyseer 2026</span><br><span style="display:block;margin-top:7px;font-size:11px;line-height:1.9;color:var(--text-muted);">للتواصل: <a href="tel:0991134433" style="color:var(--cyan);text-decoration:none;direction:ltr;display:inline-block;">0991134433</a><br><strong style="color:var(--gold-bright);letter-spacing:.5px;">TECH ZONE STORE</strong></span>
         </div>
     </footer>
 
@@ -877,18 +1578,18 @@
         <div class="row" style="margin-bottom: 6px;">
             <div class="row" style="gap: 9px; overflow: hidden; flex: 1;">
                 <div id="mediaVinylDisc" onclick="mediaRemoteCommand('toggle')" class="vinyl-disc" style="cursor: pointer;"></div>
-                <div style="overflow: hidden; flex: 1;">
+                <div class="md-info" style="overflow: hidden; flex: 1;">
                     <div id="mediaControllerTitle" style="font-size: 11.5px; font-weight: 900; color: var(--gold-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">🎵 المكتبة فاضية — أضف أغاني</div>
                     <div id="mediaSubStatus" style="font-size: 9.5px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></div>
                 </div>
             </div>
-            <div class="row" style="gap: 5px;">
+            <div class="row md-btns" style="gap: 5px;">
                 <button onclick="mediaRemoteCommand('toggle')" id="mediaPlayPauseBtn" class="media-ctrl-play" title="تشغيل / إيقاف">▶</button>
                 <button onclick="openYoutubeModal()" class="app-chip yt-red">🎼 المكتبة</button>
                 <button onclick="toggleMediaDockMinimize()" id="mediaDockMinBtn" class="btn-dark" style="padding: 4px 8px; font-size: 10px; border-radius: 99px;">🔼</button>
             </div>
         </div>
-        <div class="row" style="gap: 7px; margin-bottom: 7px; padding: 0 3px;">
+        <div class="row media-seek-row" style="gap: 7px; margin-bottom: 7px; padding: 0 3px;">
             <span id="mediaCurrentTime" style="font-size: 9.5px; color: var(--gold-bright); font-weight: 800; direction: ltr; min-width: 32px;">00:00</span>
             <input id="mediaSeekSlider" type="range" min="0" max="100" value="0" step="0.5" oninput="seekDirectAudio(this.value)" style="flex: 1; accent-color: var(--gold-bright); height: 4px; cursor: pointer;">
             <span id="mediaDurationTime" style="font-size: 9.5px; color: var(--text-muted); font-weight: 800; direction: ltr; min-width: 32px;">00:00</span>
@@ -997,14 +1698,10 @@
             </div>
             <input id="libFilterInput" type="text" placeholder="🔍 فلتر بالمكتبة..." oninput="renderCuratedTarabList()" class="input-box" style="font-size: 11.5px; margin-bottom: 8px;">
             <div id="curatedTarabListContainer" style="max-height: 300px; overflow-y: auto; margin-bottom: 10px;"></div>
-            <details style="margin-top: 6px;">
-                <summary style="font-size: 11px; color: var(--text-muted); cursor: pointer;">🌐 بحث أونلاين (معاينات 30 ثانية — بدها إنترنت)</summary>
-                <div class="row" style="gap: 5px; margin: 8px 0;">
-                    <input id="tarabLiveSearchInput" type="text" placeholder="اسم أغنية أو مطرب..." class="input-box" style="font-size: 11.5px;">
-                    <button onclick="searchRealSongsInApp()" class="btn-gold" style="white-space: nowrap; font-size: 11px;">بحث</button>
-                </div>
-                <div id="onlineListContainer" style="max-height: 180px; overflow-y: auto;"></div>
-            </details>
+            <div class="panel" style="margin:8px 0;">
+                <div style="font-size:12px;font-weight:900;color:var(--gold-bright);margin-bottom:6px;">🎧 أغاني شِلّة المضمّنة داخل التطبيق</div>
+                <div id="staticMusicListContainer" style="max-height:150px;overflow-y:auto;"><span style="font-size:11px;color:var(--text-muted);">الأغاني الثابتة تُضاف بوضع ملفات MP3 داخل www/assets/music ثم تشغيل prepare_music.py قبل بناء التطبيق.</span></div>
+            </div>
         </div>
     </div>
 
@@ -1075,7 +1772,8 @@
                     ],
                     dinari: [4, 3, 3, 3],
                     latoosh: [4, 3, 3, 3],
-                    trixRank: []
+                    trixRank: [],
+                    breakRuleEnabled: false
                 },
                 complex: {
                     mode: 'individual',
@@ -1180,43 +1878,25 @@
                 const diff = Math.abs(first.score - second.score);
                 return `
                     <div class="panel" style="margin-bottom: 9px; padding: 8px 10px; border-color: rgba(251,191,36,0.4);">
-                        <div class="row-wrap" style="justify-content: space-between; font-size: 11.5px;">
-                            <span>🥇 <strong>المركز الأول:</strong> <strong style="color:var(--gold-bright);">${E(first.name)}</strong> (${first.score})</span>
-                            <span>🥈 <strong>المركز الثاني:</strong> <strong>${E(second.name)}</strong> (${second.score})</span>
+                        <div class="row-wrap" style="justify-content: space-between; font-size: 12px;">
+                            <span>🥇 <strong>الأول:</strong> <strong style="color:var(--gold-bright);">${E(first.name)}</strong> (${first.score})</span>
+                            <span>🥈 <strong>الثاني:</strong> <strong>${E(second.name)}</strong> (${second.score})</span>
                             <span class="badge badge-emerald">الفارق: ${diff}</span>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             }
-            const first = standings[0];
-            const second = standings[1];
-            const third = standings[2];
-            const fourth = standings[3];
-            return `
-                <div class="podium-strip">
-                    <div class="podium-col podium-2">
-                        <div style="font-size: 14px;">🥈</div>
-                        <div style="font-size: 9.5px; color: #cbd5e1; font-weight: 800;">المركز الثاني</div>
-                        <div style="font-size: 11.5px; font-weight: 900; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${E(second.name)}</div>
-                        <div style="font-size: 13px; font-weight: 900; color: #e2e8f0;">${second.score}</div>
-                        <div style="font-size: 8.5px; color: var(--text-muted);">(${second.diffFromFirst})</div>
-                    </div>
-                    <div class="podium-col podium-1">
-                        <div style="font-size: 18px;">👑🥇</div>
-                        <div style="font-size: 10px; color: var(--gold-bright); font-weight: 900;">المركز الأول (المتصدر)</div>
-                        <div style="font-size: 13px; font-weight: 900; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${E(first.name)}</div>
-                        <div style="font-size: 16px; font-weight: 900; color: #34d399;">${first.score}</div>
-                        <div style="font-size: 9px; color: #fde68a;">متصدر بفارق +${first.score - second.score}</div>
-                    </div>
-                    <div class="podium-col podium-3">
-                        <div style="font-size: 14px;">🥉</div>
-                        <div style="font-size: 9.5px; color: #fdba74; font-weight: 800;">المركز الثالث</div>
-                        <div style="font-size: 11.5px; font-weight: 900; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${E(third.name)}</div>
-                        <div style="font-size: 13px; font-weight: 900; color: #fed7aa;">${third.score}</div>
-                        <div style="font-size: 8.5px; color: var(--text-muted);">${fourth ? `الرابع: ${E(fourth.name)} (${fourth.score})` : `(${third.diffFromFirst})`}</div>
-                    </div>
-                </div>
-            `;
+            const medals = ['🥇','🥈','🥉','🏅'];
+            const classes = ['podium-1','podium-2','podium-3','podium-4'];
+            const labels = ['الأول','الثاني','الثالث','الرابع'];
+            return `<div class="podium-strip">${[0,1,2,3].map(i => {
+                const p = standings[i] || {name:'—', score:'—'};
+                return `<div class="podium-col ${classes[i]}" style="min-width:0;">
+                    <div style="font-size:${i===0?18:15}px">${medals[i]}</div>
+                    <div style="font-size:9px;color:${i===0?'var(--gold-bright)':'#cbd5e1'};font-weight:900">${labels[i]}</div>
+                    <div style="font-size:11px;font-weight:950;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${E(p.name)}</div>
+                    <div style="font-size:${i===0?16:14}px;font-weight:950;color:${i===0?'#34d399':'#e2e8f0'}">${p.score}</div>
+                </div>`;
+            }).join('')}</div>`;
         }
 
         function normalizeArchiveCategories(st) {
@@ -1258,6 +1938,7 @@
                 if (!Array.isArray(merged.teams) || merged.teams.length < 2) merged.teams = [...defaultState.teams];
                 if (!Array.isArray(merged.eightPlayers) || merged.eightPlayers.length < 8) merged.eightPlayers = [...defaultState.eightPlayers];
                 if (!merged.trix || !Array.isArray(merged.trix.lockedContracts)) merged.trix = JSON.parse(JSON.stringify(defaultState.trix));
+                merged.trix.breakRuleEnabled = false;
                 if (!merged.complex || !Array.isArray(merged.complex.lockedContracts)) merged.complex = JSON.parse(JSON.stringify(defaultState.complex));
                 if (!merged.syrian41 || !Array.isArray(merged.syrian41.scores)) merged.syrian41 = JSON.parse(JSON.stringify(defaultState.syrian41));
                 if (!merged.classic || !Array.isArray(merged.classic.scores)) merged.classic = JSON.parse(JSON.stringify(defaultState.classic));
@@ -1389,12 +2070,30 @@
         // 1. التنقل وتعديل الأسماء
         // =================================================================
         function switchTab(tabId) {
+            const validTabs = ['home','trix','complex','syrian41','classic','challenges','draw8','live','archive'];
+            if (!validTabs.includes(tabId)) tabId = 'home';
+            const _ps = document.getElementById('sec-' + tabId); const wasHidden = !_ps || _ps.classList.contains('hidden');
+            const home = document.getElementById('sec-home');
+            if (home) home.classList.toggle('hidden', tabId !== 'home');
             ['trix', 'complex', 'syrian41', 'classic', 'challenges', 'draw8', 'live', 'archive'].forEach(id => {
                 const sec = document.getElementById('sec-' + id);
                 const btn = document.getElementById('tab-' + id);
                 if (sec) sec.classList.toggle('hidden', id !== tabId);
                 if (btn) btn.classList.toggle('active', id === tabId);
             });
+            const isGame = ['trix','complex','syrian41','classic'].includes(tabId);
+            document.body.classList.remove('in-game', 'music-pop');
+            isMediaDockMinimized = true; applyDockMin();
+            const gameNav = document.querySelector('.tabs-bar');
+            const primaryNav = document.querySelector('.primary-nav');
+            if (gameNav) gameNav.classList.add('hidden');
+            if (isGame) { if (wasHidden) openGameSetupScreen(tabId); else syncGameChrome(tabId); }
+            if (primaryNav) primaryNav.classList.remove('hidden');
+            const topPlayers = document.getElementById('topPlayersBar');
+            if (topPlayers) topPlayers.classList.toggle('hidden', tabId === 'home');
+            const activePrimary = isGame ? 'games' : (tabId === 'draw8' ? 'home' : tabId);
+            document.querySelectorAll('[data-primary-nav]').forEach(b => b.classList.toggle('active', b.dataset.primaryNav === activePrimary));
+            window.scrollTo({top:0, behavior:'smooth'});
             renderAll();
         }
 
@@ -1600,6 +2299,65 @@
                 : `<div style="color: var(--text-muted); text-align: center;">لم يتم تسجيل أي جولة بعد</div>`;
         }
 
+        function openTrixVerticalHistory() {
+            renderTrixVerticalHistory();
+            const modal = document.getElementById('trixVerticalHistoryModal');
+            if (modal) { modal.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+        }
+
+        function closeTrixVerticalHistory() {
+            const modal = document.getElementById('trixVerticalHistoryModal');
+            if (modal) modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // واجهة قراءة فقط مبنية مباشرة من state.trix.history المتزامن حالياً بين الأجهزة.
+        // لا نضيف حقولاً جديدة ولا نغيّر payload أو timestamps أو آلية ntfy/WebSocket.
+        function renderTrixVerticalHistory() {
+            const tx = state.trix;
+            const rounds = Array.isArray(tx.history) ? tx.history : [];
+            const content = document.getElementById('trixVerticalHistoryContent');
+            const meta = document.getElementById('trixVerticalHistoryMeta');
+            if (!content) return;
+            if (meta) meta.textContent = `${rounds.length} جولة مسجلة • عرض حسب اللاعب`;
+            if (!rounds.length) {
+                content.innerHTML = '<div class="card" style="text-align:center; padding:28px 14px; color:var(--text-muted);">ما في جولات مسجلة حالياً.</div>';
+                return;
+            }
+            const players = Array.isArray(state.players) ? state.players : [];
+            content.innerHTML = players.map((player, playerIdx) => {
+                const rows = rounds.map((round, roundIdx) => {
+                    const delta = Array.isArray(round.delta) ? Number(round.delta[playerIdx] || 0) : 0;
+                    const sign = delta > 0 ? '+' : '';
+                    const color = delta > 0 ? 'var(--emerald)' : delta < 0 ? 'var(--crimson)' : 'var(--text-muted)';
+                    const kingdom = Number.isInteger(round.kIdx) ? `مملكة ${round.kIdx + 1}` : (round.king ? `الملك: ${E(round.king)}` : '—');
+                    return `<tr>
+                        <td style="padding:10px 7px; border-bottom:1px solid var(--border-subtle); text-align:center; white-space:nowrap;">${rounds.length - roundIdx}</td>
+                        <td style="padding:10px 7px; border-bottom:1px solid var(--border-subtle);">${E(round.contractName || 'جولة')}</td>
+                        <td style="padding:10px 7px; border-bottom:1px solid var(--border-subtle); color:var(--text-muted); font-size:11px;">${kingdom}</td>
+                        <td style="padding:10px 7px; border-bottom:1px solid var(--border-subtle); text-align:center; font-weight:900; color:${color}; direction:ltr;">${sign}${delta}</td>
+                    </tr>`;
+                }).join('');
+                const total = rounds.reduce((sum, round) => sum + (Array.isArray(round.delta) ? Number(round.delta[playerIdx] || 0) : 0), 0);
+                const totalColor = total > 0 ? 'var(--emerald)' : total < 0 ? 'var(--crimson)' : 'var(--text-main)';
+                return `<section class="card" style="margin-bottom:12px; padding:13px; border-color:rgba(245,158,11,.38);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px;">
+                        <div style="font-size:16px; font-weight:900; color:var(--gold-bright);">👤 ${E(player)}</div>
+                        <div style="font-size:12px; font-weight:900; color:${totalColor};">المجموع: ${total > 0 ? '+' : ''}${total}</div>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table style="width:100%; border-collapse:collapse; font-size:12px; min-width:270px;">
+                            <thead><tr style="color:var(--gold-bright); background:rgba(245,158,11,.09);">
+                                <th style="padding:9px 5px;">#</th><th style="padding:9px 5px; text-align:right;">اللعبة</th><th style="padding:9px 5px; text-align:right;">المملكة</th><th style="padding:9px 5px;">النتيجة</th>
+                            </tr></thead>
+                            <tbody>${rows}</tbody>
+                        </table>
+                    </div>
+                </section>`;
+            }).join('');
+        }
+
+        let trixBreakRuleEnabled = false; // إعداد مؤقت: مطفأ افتراضياً ولا يُحفظ مع النتائج
         function renderTrixCalculatorWidget() {
             const tx = state.trix;
             const box = document.getElementById('trixCalculatorArea');
@@ -1692,22 +2450,90 @@
                 const pts = [200, 150, 100, 50];
                 box.innerHTML = `
                     <div class="row" style="margin-bottom: 8px;">
-                        <span style="font-size: 12px; font-weight: 900; color: var(--gold-bright);">👑 اضغط على اللاعبين بالترتيب (الأول +200، الثاني +150، الثالث +100، الرابع +50):</span>
-                        <button onclick="state.trix.trixRank=[];renderTrixCalculatorWidget();" class="badge badge-crimson" style="cursor:pointer;">إعادة</button>
+                        <span style="font-size: 13px; font-weight: 950; color: var(--gold-bright);">👑 طلب التركس — ترتيب اللاعبين</span>
+                        <button onclick="state.trix.trixRank=[];renderTrixCalculatorWidget();" class="badge badge-crimson" style="cursor:pointer;">إعادة الترتيب</button>
                     </div>
-                    <div class="grid-2" style="margin-bottom: 8px;">
+                    <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">اضغط على اللاعبين حسب الترتيب: الأول +200، الثاني +150، الثالث +100، الرابع +50.</div>
+                    <div class="grid-2" style="margin-bottom: 10px;">
                         ${state.players.map((p, pIdx) => {
                             const pos = tx.trixRank.indexOf(pIdx);
                             return `
-                                <button onclick="pickTrixRankOrder('trix', ${pIdx})" class="btn-dark ${pos !== -1 ? 'active' : ''}" style="padding: 10px;">
-                                    ${E(p)} ${pos !== -1 ? `— المركز ${pos + 1} (+${pts[pos]})` : ''}
+                                <button onclick="pickTrixRankOrder('trix', ${pIdx})" class="btn-dark ${pos !== -1 ? 'active' : ''}" style="padding: 12px 9px; min-height:46px; font-size:13px;">
+                                    ${E(p)} ${pos !== -1 ? `<br><span style="font-size:11px">المركز ${pos + 1} (+${pts[pos]})</span>` : ''}
                                 </button>
                             `;
                         }).join('')}
                     </div>
-                    <button onclick="commitTrixRound()" class="btn-gold" style="width: 100%; padding: 10px;">✅ تسجيل جولة التركس</button>
+                    <button onclick="commitTrixRound()" class="btn-gold" style="width: 100%; padding: 12px; font-size:14px;">✅ تسجيل جولة التركس</button>
+                    <div class="panel" style="margin-top:12px; border-color:rgba(251,191,36,.4); padding:11px;">
+                        <div class="row" style="gap:8px; margin-bottom:8px;">
+                            <strong style="font-size:13px;color:var(--gold-bright);">⚠️ كسر التركس عند التخبيص</strong>
+                            <label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;">
+                                <input type="checkbox" ${trixBreakRuleEnabled ? 'checked' : ''} onchange="setTrixBreakRule(this.checked)" style="width:18px;height:18px;accent-color:#fbbf24;">
+                                تفعيل
+                            </label>
+                        </div>
+                        ${trixBreakRuleEnabled ? `
+                            <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">إذا خربط لاعب بطلب التركس، تنخصم منه 50 نقطة فقط، بدون إضافة أو خصم أي شيء لباقي اللاعبين.</div>
+                            <label style="display:block;font-size:11px;font-weight:800;margin-bottom:5px;">اللاعب الذي خربط</label>
+                            <select id="trixBreakPlayer" class="input-box" style="margin-bottom:8px;">${state.players.map((p,i)=>`<option value="${i}">${E(p)}</option>`).join('')}</select>
+                            <label style="display:block;font-size:11px;font-weight:800;margin-bottom:5px;">إعادة اللعب في</label>
+                            <select id="trixBreakKingdom" class="input-box" style="margin-bottom:9px;">
+                                <option value="same">نفس المملكة (م${tx.currentKingdomIdx+1})</option>
+                                ${[0,1,2,3].filter(k=>k!==tx.currentKingdomIdx).map(k=>`<option value="${k}">مملكة ${k+1} — ${E(state.players[tx.kingdomOrder[k]])}</option>`).join('')}
+                            </select>
+                            <button onclick="recordTrixBreak()" class="btn-crimson" style="width:100%;padding:11px;font-size:13px;">🛑 تسجيل الكسر وخصم 50 وإعادة اللعب</button>
+                        ` : `<div style="font-size:11px;color:var(--text-muted);">الخيار متوقف حالياً.</div>`}
+                    </div>
                 `;
             }
+        }
+
+
+        function setTrixBreakRule(enabled) {
+            trixBreakRuleEnabled = !!enabled;
+            renderTrixCalculatorWidget();
+        }
+
+        function recordTrixBreak() {
+            const tx = state.trix;
+            if (tx.activeContract !== 'trix' || !trixBreakRuleEnabled) {
+                showToast('⚠️ خيار كسر التركس متاح ضمن طلب التركس فقط');
+                return;
+            }
+            const playerSelect = document.getElementById('trixBreakPlayer');
+            const kingdomSelect = document.getElementById('trixBreakKingdom');
+            if (!playerSelect || !kingdomSelect) return;
+            const offender = Math.max(0, Math.min(3, Number(playerSelect.value) || 0));
+            const targetValue = kingdomSelect.value;
+            const targetKingdom = targetValue === 'same' ? tx.currentKingdomIdx : Number(targetValue);
+            if (!Number.isInteger(targetKingdom) || targetKingdom < 0 || targetKingdom > 3) {
+                showToast('⚠️ اختر المملكة التي ستُعاد فيها اللعبة');
+                return;
+            }
+            if (!confirm(`تأكيد كسر التركس؟ سيتم خصم 50 نقطة من ${state.players[offender]} فقط، ولن تتغير نقاط بقية اللاعبين.`)) return;
+
+            const delta = [0, 0, 0, 0];
+            delta[offender] = -50;
+            applyDualScoreDelta(tx, delta);
+            tx.history.unshift({
+                kIdx: tx.currentKingdomIdx,
+                cid: 'trix-break',
+                contractName: 'كسر التركس (تخبيص)',
+                king: state.players[tx.kingdomOrder[tx.currentKingdomIdx]],
+                delta: [...delta],
+                summary: state.players.map((p, i) => `${p}(${delta[i] >= 0 ? '+' + delta[i] : delta[i]})`).join(' ، '),
+                note: `اللاعب ${state.players[offender]} خربط — خصم 50 نقطة فقط`
+            });
+
+            tx.currentKingdomIdx = targetKingdom;
+            tx.activeContract = 'trix';
+            tx.trixRank = [];
+            // إذا اختيرت مملكة سبق تسجيل طلب التركس فيها، نفتح طلب التركس وحده لإعادة اللعب دون المساس بباقي الطلبات.
+            tx.lockedContracts[targetKingdom] = (tx.lockedContracts[targetKingdom] || []).filter(id => id !== 'trix');
+            saveState('trix');
+            renderTrixSection();
+            showToast(`🛑 انكسر التركس: -50 على ${state.players[offender]} فقط. أُعيد طلب التركس في المملكة ${targetKingdom + 1}.`, 4200);
         }
 
         function adjustTrixCount(arrKey, idx, delta) {
@@ -2493,10 +3319,10 @@
         // =================================================================
         // 8. مكتبة الصوت الأوفلاين (IndexedDB)
         // =================================================================
-        let lib = [], onlineTracks = [], qKind = 'lib', curIdx = -1, curUrl = null;
+        let lib = [], onlineTracks = [], staticTracks = [], qKind = 'lib', curIdx = -1, curUrl = null;
         let shuffleOn = false, repeatMode = 'all', isRemotePlaying = false, isMediaDockMinimized = true, _adb = null, _audioBound = false;
         const $a = () => document.getElementById('phoneAudioBridge');
-        const curQ = () => (qKind === 'lib' ? lib : onlineTracks);
+        const curQ = () => (qKind === 'lib' ? lib : qKind === 'static' ? staticTracks : onlineTracks);
 
         function audioDB() {
             if (!_adb) _adb = new Promise((res, rej) => {
@@ -2679,10 +3505,10 @@
             const a = $a();
             if (cmd === 'toggle') {
                 if (!a.getAttribute('src')) {
-                    if (!lib.length) { showToast('📂 أضف أغانيك من المكتبة أول'); openYoutubeModal(); return; }
+                    if (!lib.length && !staticTracks.length) { showToast('📂 أضف أغانيك من المكتبة أول'); openYoutubeModal(); return; }
                     const last = localStorage.getItem('SHILLA_LAST_TRACK');
                     const li = lib.findIndex(t => t.id === last);
-                    playAt(li >= 0 ? li : 0, 'lib');
+                    playAt(li >= 0 ? li : 0, lib.length ? 'lib' : 'static');
                     return;
                 }
                 if (a.paused) a.play().catch(() => {}); else a.pause();
@@ -2696,15 +3522,17 @@
         function toggleRepeat() { repeatMode = repeatMode === 'all' ? 'one' : repeatMode === 'one' ? 'off' : 'all'; updateMediaDockUI(); }
 
         function updateMediaDockUI() {
+            try { if ('mediaSession' in navigator) { const _q = curQ(), _m = curIdx >= 0 ? _q[curIdx] : null; if (_m) { navigator.mediaSession.metadata = new MediaMetadata({ title: _m.title, artist: _m.artist || '' }); navigator.mediaSession.setActionHandler('nexttrack', () => stepTrack(1)); navigator.mediaSession.setActionHandler('previoustrack', () => stepTrack(-1)); } } } catch (e) {}
             const q = curQ(), m = curIdx >= 0 ? q[curIdx] : null;
             document.getElementById('mediaPlayPauseBtn').textContent = isRemotePlaying ? '⏸' : '▶';
             document.getElementById('mediaVinylDisc').classList.toggle('vinyl-spinning', isRemotePlaying);
-            document.getElementById('mediaControllerTitle').textContent = m ? `🎵 ${m.artist} - ${m.title}` : (lib.length ? '🎵 اضغط ▶ للتشغيل' : '🎵 المكتبة فاضية — أضف أغاني');
-            document.getElementById('mediaSubStatus').textContent = m ? `${curIdx + 1}/${q.length} • ${qKind === 'lib' ? '📴 أوفلاين' : '🌐 معاينة 30ث'}` : `${lib.length} أغنية محفوظة`;
+            document.getElementById('mediaControllerTitle').textContent = m ? `🎵 ${m.artist} - ${m.title}` : (lib.length || staticTracks.length ? '🎵 اضغط ▶ للتشغيل' : '🎵 المكتبة فاضية — أضف أغاني');
+            document.getElementById('mediaSubStatus').textContent = m ? `${curIdx + 1}/${q.length} • ${qKind === 'lib' ? '📴 أوفلاين' : qKind === 'static' ? '📴 مضمّنة بالتطبيق' : '🌐 معاينة 30ث'}` : `${lib.length} أغنية محفوظة • ${staticTracks.length} مضمّنة`;
         }
         function applyDockMin() {
             document.getElementById('mediaRemoteDock').classList.toggle('minimized', isMediaDockMinimized);
             document.getElementById('mediaDockExpandedBody').classList.toggle('hidden', isMediaDockMinimized);
+            if (isMediaDockMinimized) document.body.classList.remove('music-pop');
             document.getElementById('mediaDockMinBtn').textContent = isMediaDockMinimized ? '🔼' : '🔽';
         }
         function toggleMediaDockMinimize() { isMediaDockMinimized = !isMediaDockMinimized; applyDockMin(); }
@@ -2730,30 +3558,125 @@
                     <button onclick="event.stopPropagation();deleteTrack('${t.id}')" class="btn-dark" style="padding: 4px 8px; color: var(--crimson);">✖</button>
                 </div>`).join('')
                 : `<div style="color: var(--text-muted); text-align: center; padding: 14px; font-size: 12px;">${lib.length ? 'ما في نتائج' : 'المكتبة فاضية — اضغط "أضف أغاني من جهازك"'}</div>`;
-            const o = document.getElementById('onlineListContainer');
-            if (o) o.innerHTML = onlineTracks.map((t, i) => `<div onclick="playAt(${i},'net')" class="tarab-item"><div><div style="font-size: 12px; font-weight: 900;">${E(t.title)}</div><div style="font-size: 10px; color: var(--gold-bright);">${E(t.artist)}</div></div><span class="badge badge-gold">30ث</span></div>`).join('');
+            const sm = document.getElementById('staticMusicListContainer');
+            if (sm) sm.innerHTML = staticTracks.length ? staticTracks.map((t,i)=>`<div onclick="playAt(${i},'static')" class="tarab-item"><div style="font-size:12px;font-weight:900;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">▶ ${E(t.title)}</div><span class="badge badge-emerald">📴 ثابتة</span></div>`).join('') : staticHint();
+
         }
 
-        async function fetchAndPlayRealArtist(query, label) {
-            if (!navigator.onLine) { showToast('⚠️ ما في إنترنت — المكتبة المحفوظة بتشتغل أوفلاين'); return; }
-            showToast(`⏳ عم دوّر على ${label}...`);
+
+        let staticStatus = 'init';
+        async function loadStaticMusic() {
+            if (location.protocol === 'file:') { staticStatus = 'file'; staticTracks = []; return; }
             try {
-                const r = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&entity=song&limit=15`);
-                const d = await r.json();
-                const t = (d.results || []).filter(x => x.previewUrl).map(x => ({ id: 'it' + x.trackId, artist: label || x.artistName, title: x.trackName, url: x.previewUrl }));
-                if (!t.length) { showToast('⚠️ ما لقيت نتائج'); return; }
-                onlineTracks = t;
-                playAt(0, 'net');
-            } catch (e) { showToast('⚠️ تعذّر الاتصال'); }
+                const r = await fetch('assets/music/manifest.json', { cache: 'no-store' });
+                if (!r.ok) { staticStatus = 'nofile'; return; }
+                const data = await r.json();
+                staticTracks = (Array.isArray(data.tracks) ? data.tracks : []).filter(t => t && t.file)
+                    .map((t,i) => {
+                        const file = String(t.file).replace(/^\/+/, '');
+                        const filenameTitle = decodeURIComponent(file.split('/').pop()).replace(/\.(mp3|m4a|aac|wav|ogg|opus|flac)$/i, '').replace(/[_]+/g, ' ').trim();
+                        return { id: t.id || `static-${i}`, title: t.title || filenameTitle || `مقطوعة ${i+1}`, artist: '', url: 'assets/music/' + file.split('/').map(encodeURIComponent).join('/') };
+                    });
+            staticStatus = staticTracks.length ? 'ok' : 'empty';
+            } catch (e) { staticTracks = []; staticStatus = 'error'; }
         }
-        function searchRealSongsInApp() {
-            const q = document.getElementById('tarabLiveSearchInput').value.trim();
-            if (q) fetchAndPlayRealArtist(q, q);
+        function staticHint() {
+            const m = {
+                file: '⚠️ فتحت الملف مباشرة (file://) — الأغاني المضمّنة ما بتشتغل هيك. ابنِ الـ APK عبر GitHub أو شغّل سيرفر محلي بعد تشغيل prepare_music.py',
+                empty: '⚠️ ما في ولا أغنية بالقائمة (manifest.json فاضي). شغّل prepare_music.py أو ابنِ عبر GitHub (بيشتغل لحالو)، وتأكد الأغاني بـ www/assets/music',
+                nofile: '⚠️ ما لقيت assets/music/manifest.json — شغّل prepare_music.py',
+                error: '⚠️ صار خطأ بقراءة قائمة الأغاني المضمّنة'
+            };
+            return '<span style="font-size:11px;color:var(--gold-bright);line-height:1.7;display:block">' + (m[staticStatus] || 'جاري التحميل…') + '</span>';
+        }
+        // واجهة إعداد مختصرة ثم الانتقال إلى شاشة اللعب التفصيلية
+        function buildGameSetupScreens() {
+                        ['trix','complex'].forEach(key => {
+                const section = document.getElementById('sec-' + key);
+                if (!section || section.dataset.setupBuilt === '1') return;
+                const original = section.querySelector(':scope > .card');
+                if (!original) return;
+                const children = Array.from(original.children);
+                const modeRow = children.find(el => el.classList.contains('row-wrap') && el.querySelector('#' + key + 'ModeIndiv'));
+                const podium = document.getElementById(key + 'LivePodium');
+                const rule = key === 'trix' ? document.getElementById('trixSelfDoubleRule')?.parentElement : null;
+                const setup = document.createElement('div');
+                setup.className = 'card setup-screen anim-in';
+                setup.id = key + 'SetupScreen';
+                setup.innerHTML = `<div style="text-align:center;margin-bottom:12px;"><div style="font-size:25px;margin-bottom:4px;">${key === 'trix' ? '👑' : '⚡'}</div><div style="font-size:17px;font-weight:900;color:var(--gold-bright);">إعداد ${key === 'trix' ? 'التركس' : 'الكمبلكس'}</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">حدد نمط اللعب والقواعد قبل البدء</div></div><div class="setup-label">👥 نمط اللعب</div><div id="${key}SetupModes" class="row" style="gap:8px;margin-bottom:12px;"></div><div id="${key}SetupPodium" style="margin-bottom:10px;"></div><div id="${key}SetupRule"></div><button class="btn-gold start-game-btn" onclick="openGamePlayScreen('${key}')">▶ ابدأ اللعبة</button>`;
+                original.parentNode.insertBefore(setup, original);
+                if (modeRow) {
+                    const modeButtons = modeRow.querySelectorAll('#' + key + 'ModeIndiv, #' + key + 'ModeTeams');
+                    modeButtons.forEach(b => document.getElementById(key + 'SetupModes').appendChild(b));
+                    if (modeRow.children.length === 0) modeRow.remove();
+                }
+                if (podium) document.getElementById(key + 'SetupPodium').appendChild(podium);
+                if (rule) {
+                    rule.classList.add('setup-rule');
+                    document.getElementById(key + 'SetupRule').appendChild(rule);
+                }
+                original.classList.add('game-screen');
+                original.id = key + 'GameScreen';
+                original.classList.add('hidden');
+                const back = document.createElement('button');
+                back.className = 'btn-dark'; back.style.cssText = 'width:100%;margin-bottom:9px;padding:11px;';
+                back.textContent = '↩ العودة لإعدادات اللعبة';
+                back.onclick = () => openGameSetupScreen(key);
+                original.insertBefore(back, original.firstChild);
+                section.dataset.setupBuilt = '1';
+            });
+        }
+        const SETUP_GAMES = ['trix', 'complex', 'classic', 'syrian41'];
+        function setupVisible(k) { const e = document.getElementById(k + 'SetupScreen'); return !!e && !e.classList.contains('hidden'); }
+        function syncGameChrome(k) {
+            const sv = setupVisible(k);
+            document.querySelectorAll('section.setup-on').forEach(x => x.classList.remove('setup-on'));
+            const _sec = document.getElementById('sec-' + k); if (_sec) _sec.classList.toggle('setup-on', sv);
+            document.body.classList.toggle('in-game', !sv);
+            document.body.classList.remove('music-pop');
+            const nav = document.querySelector('.tabs-bar'); if (nav) nav.classList.toggle('hidden', !sv);
+        }
+        function buildExtraSetupScreens() {
+            const mk = (key, icon, title, sub, controls) => {
+                const section = document.getElementById('sec-' + key);
+                if (!section || section.dataset.setupBuilt === '1') return;
+                const original = section.querySelector(':scope > .card'); if (!original) return;
+                const setup = document.createElement('div');
+                setup.className = 'card setup-screen anim-in'; setup.id = key + 'SetupScreen';
+                setup.innerHTML = `<div style="text-align:center;margin-bottom:12px;"><div style="font-size:30px;margin-bottom:4px;">${icon}</div><div style="font-size:18px;font-weight:900;color:var(--gold-bright);">${title}</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">${sub}</div></div>${controls}<button class="btn-gold start-game-btn" onclick="openGamePlayScreen('${key}')">▶ ابدأ اللعبة</button>`;
+                original.parentNode.insertBefore(setup, original);
+                original.id = key + 'GameScreen'; original.classList.add('game-screen', 'hidden');
+                const back = document.createElement('button');
+                back.className = 'btn-dark'; back.style.cssText = 'width:100%;margin-bottom:9px;padding:11px;';
+                back.textContent = '↩ العودة لإعدادات اللعبة'; back.onclick = () => openGameSetupScreen(key);
+                original.insertBefore(back, original.firstChild);
+                section.dataset.setupBuilt = '1';
+            };
+            ['trix', 'complex'].forEach(k => { const box = document.getElementById(k + 'SetupModes'); if (box) [k + 'ModeIndiv', k + 'ModeTeams'].forEach(id => { const b = document.getElementById(id); if (b && b.parentNode !== box) box.appendChild(b); }); });
+            mk('classic', '🃏', 'إعداد الطرنيب', 'اختار سقف الفوز قبل البدء', '<div class="setup-label">🏁 سقف الفوز</div><div id="classicSetupModes" class="row" style="gap:8px;"></div>');
+            const cm = document.getElementById('classicSetupModes');
+            if (cm) ['clTarget31', 'clTarget61'].forEach(id => { const b = document.getElementById(id); if (b) cm.appendChild(b); });
+            mk('syrian41', '🔥', 'إعداد سوري 41', 'شرط الفوز: وصول لاعب إلى 41+ وشريكه صفر أو موجب', '');
+        }
+        function showGameMusic() { isMediaDockMinimized = false; applyDockMin(); document.body.classList.add('music-pop'); }
+        function openGamePlayScreen(key) {
+            document.getElementById(key + 'SetupScreen')?.classList.add('hidden');
+            document.getElementById(key + 'GameScreen')?.classList.remove('hidden');
+            renderAll();
+            syncGameChrome(key);
+            window.scrollTo({top:0,behavior:'smooth'});
+        }
+        function openGameSetupScreen(key) {
+            document.getElementById(key + 'GameScreen')?.classList.add('hidden');
+            document.getElementById(key + 'SetupScreen')?.classList.remove('hidden');
+            renderAll(); syncGameChrome(key);
+            window.scrollTo({top:0,behavior:'smooth'});
         }
 
         async function initAudioLibrary() {
             bindAudioEvents();
             applyDockMin();
+            await loadStaticMusic();
             await libLoad();
             renderCuratedTarabList();
             updateStorageStats();
@@ -2952,9 +3875,78 @@
                             ${item.thirdFull && item.thirdFull !== '-' ? `<span class="badge badge-cyan">🥉 الثالث: ${E(item.thirdFull)}</span>` : ''}
                         </div>
                     ` : ''}
-                    <div style="font-size: 11.5px; color: #e2e8f0;">${E(item.summary)}</div>
+                    <div class="archive-player-list" style="display:grid;grid-template-columns:1fr;gap:7px;margin-top:8px;">
+                        ${(String(item.summary || '').split('|').map(part => part.trim()).filter(Boolean).map(part => {
+                            const cut = part.lastIndexOf(':');
+                            const player = cut >= 0 ? part.slice(0,cut).trim() : part;
+                            const score = cut >= 0 ? part.slice(cut+1).trim() : '';
+                            return `<div class="archive-player-row"><span class="archive-player-name">${E(player)}</span><span class="archive-player-score">${E(score || '—')}</span></div>`;
+                        }).join('')) || `<div style="font-size:11px;color:#e2e8f0;">${E(item.summary || 'لا توجد تفاصيل للنتيجة')}</div>`}
+                    </div>
                 </div>
             `).join('');
+        }
+
+        async function shareArchiveAsImage() {
+            const list = (state.archiveFilter && state.archiveFilter !== 'all')
+                ? (state.archiveByGame[state.archiveFilter] || []) : getAllArchivedMatches();
+            if (!list.length) { showToast('⚠️ ما في نتائج محفوظة لمشاركتها'); return; }
+            const selected = list.slice(0, 10);
+            const width = 1080, headerH = 230, cardH = 300, gap = 22;
+            const canvas = document.createElement('canvas');
+            canvas.width = width; canvas.height = headerH + selected.length * (cardH + gap) + 55;
+            const ctx = canvas.getContext('2d');
+            const grad = ctx.createLinearGradient(0,0,width,canvas.height);
+            grad.addColorStop(0,'#102c3d'); grad.addColorStop(1,'#030a12');
+            ctx.fillStyle = grad; ctx.fillRect(0,0,width,canvas.height);
+            ctx.textAlign='center'; ctx.direction='rtl';
+            ctx.fillStyle='#fbbf24'; ctx.font='bold 56px Arial';
+            ctx.fillText('شِلّة متعوب عليها',width/2,82);
+            ctx.fillStyle='#e2e8f0'; ctx.font='bold 31px Arial';
+            const cat=state.archiveFilter||'all';
+            const catNames={all:'أرشيف جميع الألعاب',trix:'أرشيف تركس',complex:'أرشيف كمبلكس',syrian41:'أرشيف سوري 41',classic:'أرشيف طرنيب'};
+            ctx.fillText(catNames[cat]||'نتائج المباريات',width/2,135);
+            ctx.fillStyle='#94a3b8'; ctx.font='24px Arial';
+            ctx.fillText('سجل المباريات والنتائج',width/2,180);
+            selected.forEach((m,idx)=>{
+                const y=headerH+idx*(cardH+gap);
+                ctx.fillStyle='rgba(255,255,255,.055)'; ctx.fillRect(42,y,width-84,cardH);
+                ctx.strokeStyle='rgba(251,191,36,.48)'; ctx.lineWidth=2; ctx.strokeRect(42,y,width-84,cardH);
+                ctx.textAlign='right'; ctx.fillStyle='#fbbf24'; ctx.font='bold 31px Arial';
+                ctx.fillText(String(m.game||'مباراة')+(m.tableSlot?' • '+m.tableSlot:''),width-76,y+48);
+                ctx.textAlign='left'; ctx.fillStyle='#94a3b8'; ctx.font='21px Arial';
+                ctx.fillText(String(m.date||''),72,y+48);
+                const parts=String(m.summary||'').split('|').map(x=>x.trim()).filter(Boolean).slice(0,4);
+                const colW=(width-150)/Math.max(1,parts.length);
+                parts.forEach((part,i)=>{
+                    const cut=part.lastIndexOf(':');
+                    const name=cut>=0?part.slice(0,cut).trim():part;
+                    const score=cut>=0?part.slice(cut+1).trim():'—';
+                    const x=width-75-i*colW, top=y+82;
+                    ctx.fillStyle='rgba(3,14,24,.78)'; ctx.fillRect(x-colW+12,top,colW-12,190);
+                    ctx.strokeStyle='rgba(148,163,184,.22)'; ctx.strokeRect(x-colW+12,top,colW-12,190);
+                    ctx.textAlign='center'; ctx.fillStyle='#f8fafc'; ctx.font='bold 25px Arial';
+                    ctx.fillText(name.slice(0,18),x-colW/2+6,top+58);
+                    ctx.fillStyle='#34d399'; ctx.font='bold 42px Arial';
+                    ctx.fillText(score.slice(0,12),x-colW/2+6,top+125);
+                    ctx.fillStyle='#94a3b8'; ctx.font='19px Arial';
+                    ctx.fillText('النتيجة',x-colW/2+6,top+162);
+                });
+            });
+            ctx.textAlign='center'; ctx.fillStyle='#64748b'; ctx.font='18px Arial';
+            ctx.fillText('تم الإنشاء في '+new Date().toLocaleString('ar-SY'),width/2,canvas.height-20);
+            const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
+            if(!blob){showToast('⚠️ تعذّر إنشاء الصورة');return;}
+            const file=new File([blob],`shilla-results-${Date.now()}.png`,{type:'image/png'});
+            try{
+                if(navigator.canShare&&navigator.canShare({files:[file]})&&navigator.share)
+                    await navigator.share({title:'نتائج شِلّة',text:'نتائج مباريات الشلة',files:[file]});
+                else{
+                    const url=URL.createObjectURL(blob),a=document.createElement('a');
+                    a.href=url;a.download=file.name;document.body.appendChild(a);a.click();a.remove();
+                    setTimeout(()=>URL.revokeObjectURL(url),3000);showToast('🖼️ تم تنزيل صورة النتائج');
+                }
+            }catch(e){if(e&&e.name!=='AbortError')showToast('⚠️ تعذّرت المشاركة، جرّب التنزيل مرة ثانية');}
         }
 
         function addNewDebt() {
@@ -3142,7 +4134,7 @@
 
         function exportArchiveJson() {
             const payload = {
-                app: 'شلة متعوب عليها',
+                app: 'شِلّة بلس',
                 squadCode: state.squadAccount.squadCode,
                 archiveByGame: state.archiveByGame,
                 archive: getAllArchivedMatches(),
@@ -3196,10 +4188,38 @@
         let wsConnected = false;
         let onlineDevicesMap = {};
 
-        function getSquadTopicHash() {
+        let _sqTopic = '', _sqKey = null, _sqSig = '';
+        async function ensureSquadKeys() {
             const code = (state.squadAccount.squadCode || 'SHILLA-2026').trim().toUpperCase();
             const pass = (state.squadAccount.squadPass || '2026').trim();
-            return 'shilla_karemyseer_v6_' + btoa(unescape(encodeURIComponent(code + '::' + pass))).replace(/[^a-zA-Z0-9]/g, '');
+            const sig = code + '::' + pass;
+            if (_sqSig === sig) return;
+            if (!(window.crypto && crypto.subtle)) { _sqKey = null; _sqTopic = 'shilla_' + btoa(unescape(encodeURIComponent(sig))).replace(/[^a-zA-Z0-9]/g, ''); _sqSig = sig; return; }
+            const te = new TextEncoder();
+            const h = await crypto.subtle.digest('SHA-256', te.encode('topic:' + sig));
+            _sqTopic = 'sh2' + [...new Uint8Array(h)].slice(0, 16).map(b => b.toString(16).padStart(2, '0')).join('');
+            const km = await crypto.subtle.importKey('raw', te.encode(pass), 'PBKDF2', false, ['deriveKey']);
+            _sqKey = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt: te.encode('shilla:' + code), iterations: 100000, hash: 'SHA-256' }, km, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+            _sqSig = sig;
+        }
+        function getSquadTopicHash() { return _sqTopic; }
+        async function sealPacket(obj) {
+            if (!_sqKey) return 'P' + JSON.stringify(obj);
+            let data = new TextEncoder().encode(JSON.stringify(obj)), z = '0';
+            if (window.CompressionStream) { try { data = new Uint8Array(await new Response(new Blob([data]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer()); z = '1'; } catch (e) {} }
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, _sqKey, data));
+            const b = u => { let s = ''; for (let i = 0; i < u.length; i += 8192) s += String.fromCharCode.apply(null, u.subarray(i, i + 8192)); return btoa(s); };
+            return 'E' + z + '.' + b(iv) + '.' + b(ct);
+        }
+        async function unsealPacket(msg) {
+            if (msg[0] === 'P') return JSON.parse(msg.slice(1));
+            if (msg[0] !== 'E' || !_sqKey) return null;
+            const [h, i, c] = msg.split('.');
+            const u = s => Uint8Array.from(atob(s), x => x.charCodeAt(0));
+            let data = new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: u(i) }, _sqKey, u(c)));
+            if (h === 'E1') data = new Uint8Array(await new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer());
+            return JSON.parse(new TextDecoder().decode(data));
         }
 
         function mergeRemoteArchiveByGame(remoteArch) {
@@ -3294,17 +4314,30 @@
             };
         }
 
-        function connectSquadRealtimeBridge() {
+        let _wsReconnectTimer = null, _wsReconnectDelay = 1800;
+        function scheduleSquadReconnect() {
+            if (_wsReconnectTimer || !navigator.onLine) return;
+            _wsReconnectTimer = setTimeout(() => {
+                _wsReconnectTimer = null;
+                connectSquadRealtimeBridge();
+            }, _wsReconnectDelay);
+            _wsReconnectDelay = Math.min(30000, Math.round(_wsReconnectDelay * 1.7));
+        }
+        async function connectSquadRealtimeBridge() { try { await ensureSquadKeys(); } catch (e) {} _connectSquadBridgeCore(); }
+        function _connectSquadBridgeCore() {
             try {
-                if (squadWs) {
-                    try { squadWs.close(); } catch (e) {}
-                    squadWs = null;
-                }
+                if (!navigator.onLine) return;
+                if (squadWs && (squadWs.readyState === WebSocket.OPEN || squadWs.readyState === WebSocket.CONNECTING)) return;
+                if (squadWs) { try { squadWs.close(); } catch (e) {} }
                 const topic = getSquadTopicHash();
-                const wsUrl = `wss://ntfy.sh/${topic}/ws`;
-                squadWs = new WebSocket(wsUrl);
-                squadWs.onopen = () => {
+                const wsUrl = `wss://ntfy.sh/${topic}/ws?since=12h`;
+                const socket = new WebSocket(wsUrl);
+                squadWs = socket;
+                socket.onopen = () => {
+                    if (squadWs !== socket) return;
                     wsConnected = true;
+                    _wsReconnectDelay = 1800;
+                    if (_wsReconnectTimer) { clearTimeout(_wsReconnectTimer); _wsReconnectTimer = null; }
                     onlineDevicesMap[state.squadAccount.deviceId] = {
                         name: state.squadAccount.deviceName + ' (أنت)',
                         table: state.activeTableSlot === 'table2' ? 'طاولة 2' : 'طاولة 1',
@@ -3313,25 +4346,30 @@
                     renderLiveSection();
                     broadcastSquadUpdate('hello');
                 };
-                squadWs.onmessage = (ev) => {
+                socket.onmessage = (ev) => {
+                    if (squadWs !== socket) return;
                     try {
                         const wrapper = JSON.parse(ev.data);
                         if (wrapper && wrapper.event === 'message' && wrapper.message) {
-                            const pkt = JSON.parse(wrapper.message);
-                            mergeIncomingSquadPacket(pkt);
+                            unsealPacket(wrapper.message).then(p => { if (p) mergeIncomingSquadPacket(p); }).catch(() => {});
                         }
                     } catch (e) {}
                 };
-                squadWs.onclose = () => {
+                socket.onclose = () => {
+                    if (squadWs !== socket) return;
                     wsConnected = false;
                     renderLiveSection();
+                    scheduleSquadReconnect();
                 };
-                squadWs.onerror = () => {
+                socket.onerror = () => {
+                    if (squadWs !== socket) return;
                     wsConnected = false;
                     renderLiveSection();
+                    try { socket.close(); } catch(e) { scheduleSquadReconnect(); }
                 };
             } catch (e) {
                 wsConnected = false;
+                scheduleSquadReconnect();
             }
         }
 
@@ -3340,12 +4378,13 @@
             clearTimeout(_broadcastTimer);
             _broadcastTimer = setTimeout(async () => {
                 if (!navigator.onLine) return;
+                await ensureSquadKeys();
                 const topic = getSquadTopicHash();
                 const payload = buildSquadSyncPayload(changedKey);
                 try {
                     await fetch(`https://ntfy.sh/${topic}`, {
                         method: 'POST',
-                        body: JSON.stringify(payload)
+                        body: await sealPacket(payload)
                     });
                 } catch (e) {}
             }, 350);
@@ -3361,7 +4400,608 @@
             if (manual) showToast('🔄 تم إرسال واستقبال أحدث نتائج الشلة!');
         }
 
+        // =================================================================
+        // 10-B. مولد وماسح QR أوفلاين المصلح 100% + نظام الحسابات المتعددة + سحب السحابة (v12.1)
+        // =================================================================
+        const QRGen = (() => {
+            const EXP = new Uint8Array(512), LOG = new Uint8Array(256);
+            let x = 1;
+            for (let i = 0; i < 255; i++) {
+                EXP[i] = x; LOG[x] = i;
+                x = (x << 1) ^ (x & 128 ? 0x11d : 0);
+            }
+            for (let i = 255; i < 512; i++) EXP[i] = EXP[i - 255];
+
+            function polyMul(a, b) {
+                const res = new Uint8Array(a.length + b.length - 1);
+                for (let i = 0; i < a.length; i++) {
+                    if (!a[i]) continue;
+                    const la = LOG[a[i]];
+                    for (let j = 0; j < b.length; j++)
+                        if (b[j]) res[i + j] ^= EXP[la + LOG[b[j]]];
+                }
+                return res;
+            }
+
+            function rsEncode(data, ecLen) {
+                let gen = new Uint8Array([1]);
+                for (let i = 0; i < ecLen; i++) gen = polyMul(gen, new Uint8Array([1, EXP[i]]));
+                const msg = new Uint8Array(data.length + ecLen);
+                msg.set(data);
+                for (let i = 0; i < data.length; i++) {
+                    const coef = msg[i];
+                    if (coef) {
+                        const lc = LOG[coef];
+                        for (let j = 0; j < gen.length; j++)
+                            msg[i + j] ^= EXP[lc + LOG[gen[j]]];
+                    }
+                }
+                return msg.slice(data.length);
+            }
+
+            const VINFO = [
+                null,
+                [19, 7, 1, []],
+                [34, 10, 1, [6, 18]],
+                [55, 15, 1, [6, 22]],
+                [80, 20, 1, [6, 26]],
+                [108, 26, 1, [6, 30]],
+                [136, 18, 2, [6, 34]],
+                [156, 20, 2, [6, 22, 38]],
+                [194, 24, 2, [6, 24, 42]],
+                [232, 30, 2, [6, 26, 46]],
+                [274, 18, 4, [6, 28, 50]],
+                [324, 20, 4, [6, 30, 54]],
+                [370, 24, 4, [6, 32, 58]],
+                [428, 26, 4, [6, 34, 62]],
+                [461, 30, 4, [6, 26, 46, 66]],
+                [523, 22, 6, [6, 26, 48, 70]]
+            ];
+
+            function makeMatrix(text) {
+                const bytes = new TextEncoder().encode(text);
+                let ver = 1;
+                while (ver <= 15 && VINFO[ver][0] < bytes.length + (ver <= 9 ? 2 : 3)) ver++;
+                if (ver > 15) return null;
+                const [totalData, ecLen, blocks, align] = VINFO[ver];
+                const bits = [];
+                const pushBits = (val, n) => { for (let i = n - 1; i >= 0; i--) bits.push((val >> i) & 1); };
+                pushBits(0b0100, 4);
+                pushBits(bytes.length, ver <= 9 ? 8 : 16);
+                for (const b of bytes) pushBits(b, 8);
+                for (let i = 0; i < 4 && bits.length < totalData * 8; i++) bits.push(0);
+                while (bits.length & 7) bits.push(0);
+                const dataBytes = new Uint8Array(totalData);
+                for (let i = 0; i < bits.length >> 3; i++) {
+                    let v = 0;
+                    for (let b = 0; b < 8; b++) v = (v << 1) | bits[i * 8 + b];
+                    dataBytes[i] = v;
+                }
+                let padIdx = bits.length >> 3;
+                for (let p = 0; padIdx < totalData; p++) dataBytes[padIdx++] = (p & 1) ? 0x11 : 0xec;
+
+                const dBlocks = [], eBlocks = [];
+                const baseLen = Math.floor(totalData / blocks), extra = totalData % blocks;
+                let offset = 0;
+                for (let b = 0; b < blocks; b++) {
+                    const len = baseLen + (b >= blocks - extra ? 1 : 0);
+                    const slice = dataBytes.slice(offset, offset + len);
+                    offset += len;
+                    dBlocks.push(slice);
+                    eBlocks.push(rsEncode(slice, ecLen));
+                }
+                const finalBytes = [];
+                const maxDLen = baseLen + (extra ? 1 : 0);
+                for (let i = 0; i < maxDLen; i++)
+                    for (let b = 0; b < blocks; b++)
+                        if (i < dBlocks[b].length) finalBytes.push(dBlocks[b][i]);
+                for (let i = 0; i < ecLen; i++)
+                    for (let b = 0; b < blocks; b++)
+                        finalBytes.push(eBlocks[b][i]);
+
+                const size = ver * 4 + 17;
+                const mat = Array.from({ length: size }, () => new Int8Array(size).fill(-1));
+                const isRes = Array.from({ length: size }, () => new Uint8Array(size));
+
+                const setMod = (r, c, v) => { mat[r][c] = v ? 1 : 0; isRes[r][c] = 1; };
+                const finder = (R, C) => {
+                    for (let r = -1; r <= 7; r++)
+                        for (let c = -1; c <= 7; c++) {
+                            const rr = R + r, cc = C + c;
+                            if (rr < 0 || rr >= size || cc < 0 || cc >= size) continue;
+                            const on = (r >= 0 && r <= 6 && (c === 0 || c === 6)) ||
+                                       (c >= 0 && c <= 6 && (r === 0 || r === 6)) ||
+                                       (r >= 2 && r <= 4 && c >= 2 && c <= 4);
+                            setMod(rr, cc, on);
+                        }
+                };
+                finder(0, 0); finder(0, size - 7); finder(size - 7, 0);
+
+                for (const r of align) {
+                    for (const c of align) {
+                        if ((r <= 8 && c <= 8) || (r <= 8 && c >= size - 9) || (r >= size - 9 && c <= 8)) continue;
+                        for (let dr = -2; dr <= 2; dr++)
+                            for (let dc = -2; dc <= 2; dc++)
+                                setMod(r + dr, c + dc, Math.max(Math.abs(dr), Math.abs(dc)) !== 1);
+                    }
+                }
+                for (let i = 8; i < size - 8; i++) {
+                    if (!isRes[6][i]) setMod(6, i, i % 2 === 0);
+                    if (!isRes[i][6]) setMod(i, 6, i % 2 === 0);
+                }
+
+                setMod(size - 8, 8, 1);
+                for (let i = 0; i < 9; i++) {
+                    if (!isRes[8][i]) isRes[8][i] = 1;
+                    if (!isRes[i][8]) isRes[i][8] = 1;
+                }
+                for (let i = 0; i < 8; i++) {
+                    isRes[8][size - 1 - i] = 1;
+                    isRes[size - 1 - i][8] = 1;
+                }
+                if (ver >= 7) {
+                    for (let i = 0; i < 6; i++)
+                        for (let j = 0; j < 3; j++) {
+                            isRes[i][size - 11 + j] = 1;
+                            isRes[size - 11 + j][i] = 1;
+                        }
+                }
+
+                let bitIdx = 0, totalBits = finalBytes.length * 8;
+                let up = true;
+                for (let right = size - 1; right >= 1; right -= 2) {
+                    if (right === 6) right = 5;
+                    for (let vert = 0; vert < size; vert++) {
+                        const r = up ? size - 1 - vert : vert;
+                        for (let j = 0; j < 2; j++) {
+                            const c = right - j;
+                            if (!isRes[r][c]) {
+                                let bit = 0;
+                                if (bitIdx < totalBits) {
+                                    bit = (finalBytes[bitIdx >> 3] >> (7 - (bitIdx & 7))) & 1;
+                                    bitIdx++;
+                                }
+                                if (((r + c) & 1) === 0) bit ^= 1;
+                                mat[r][c] = bit;
+                            }
+                        }
+                    }
+                    up = !up;
+                }
+
+                const fmt = 0x77c4;
+                const fPosR = [8,8,8,8,8,8,8,8,7,5,4,3,2,1,0];
+                const fPosC = [0,1,2,3,4,5,7,8,8,8,8,8,8,8,8];
+                for (let i = 0; i < 15; i++) {
+                    const b = (fmt >> i) & 1;
+                    mat[fPosR[i]][fPosC[i]] = b;
+                    if (i < 8) mat[8][size - 1 - i] = b;
+                    else mat[size - 15 + i][8] = b;
+                }
+                if (ver >= 7) {
+                    let vInfo = ver << 12;
+                    for (let i = 5; i >= 0; i--) if (vInfo & (1 << (i + 12))) vInfo ^= 0x1f25 << i;
+                    vInfo |= ver << 12;
+                    for (let i = 0; i < 18; i++) {
+                        const b = (vInfo >> i) & 1;
+                        const r = Math.floor(i / 3), c = size - 11 + (i % 3);
+                        mat[r][c] = b; mat[c][r] = b;
+                    }
+                }
+                return mat;
+            }
+
+            function toSvg(text, sizePx = 200) {
+                const mat = makeMatrix(text);
+                if (!mat) return '<div style="padding:20px;color:#09111e;font-weight:900;">الكود كبير</div>';
+                const n = mat.length, q = 3, total = n + q * 2;
+                let path = '';
+                for (let r = 0; r < n; r++)
+                    for (let c = 0; c < n; c++)
+                        if (mat[r][c]) path += `M${c + q},${r + q}h1v1h-1z`;
+                return `<svg id="activeSquadQrSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${total} ${total}" width="${sizePx}" height="${sizePx}" shape-rendering="crispEdges" style="display:block;border-radius:12px;background:#ffffff;"><path d="${path}" fill="#000000"/></svg>`;
+            }
+
+            return { toSvg, makeMatrix };
+        })();
+
+        // صيغة مضغوطة وخفيفة جداً (~95 بايت) تولد QR Version 5 فائق الوضوح تلتقطه أي كاميرا فوراً
+        function buildCompactQrInviteString() {
+            const acc = state.squadAccount;
+            const slot = state.activeTableSlot === 'table2' ? '2' : '1';
+            const cleanNames = state.players.map(p => String(p || '').replace(/[|,]/g, ' ').trim()).join(',');
+            const tx = state.trix.indivScores.join(',');
+            const cx = state.complex.indivScores.join(',');
+            const sy = state.syrian41.scores.join(',');
+            const cl = state.classic.scores.join(',');
+            return `SHILLA|${acc.squadCode || 'SHILLA-2026'}|${acc.squadPass || '2026'}|${slot}|${cleanNames}|${tx}|${cx}|${sy}|${cl}`;
+        }
+
+        function ensureSavedSquadsList() {
+            if (!Array.isArray(state.savedSquads)) {
+                state.savedSquads = [
+                    {
+                        squadCode: state.squadAccount.squadCode || 'SHILLA-2026',
+                        squadPass: state.squadAccount.squadPass || '2026',
+                        deviceName: state.squadAccount.deviceName || 'موبايل الشلة',
+                        avatar: state.squadAccount.avatar || '🦁',
+                        lastUsed: Date.now()
+                    }
+                ];
+            }
+            const curCode = (state.squadAccount.squadCode || 'SHILLA-2026').toUpperCase();
+            const existing = state.savedSquads.find(s => (s.squadCode || '').toUpperCase() === curCode);
+            if (existing) {
+                existing.squadPass = state.squadAccount.squadPass;
+                existing.deviceName = state.squadAccount.deviceName;
+                existing.avatar = state.squadAccount.avatar || '🦁';
+            } else {
+                state.savedSquads.unshift({
+                    squadCode: curCode,
+                    squadPass: state.squadAccount.squadPass || '2026',
+                    deviceName: state.squadAccount.deviceName || 'موبايل الشلة',
+                    avatar: state.squadAccount.avatar || '🦁',
+                    lastUsed: Date.now()
+                });
+            }
+        }
+
+        function switchSavedSquadProfile(idx) {
+            ensureSavedSquadsList();
+            const target = state.savedSquads[idx];
+            if (!target) return;
+            state.squadAccount.squadCode = target.squadCode;
+            state.squadAccount.squadPass = target.squadPass;
+            state.squadAccount.deviceName = target.deviceName || state.squadAccount.deviceName;
+            state.squadAccount.avatar = target.avatar || '🦁';
+            target.lastUsed = Date.now();
+            onlineDevicesMap = {};
+            saveState('players', true);
+            connectSquadRealtimeBridge();
+            setTimeout(() => pullCloudHistorySnapshot(false), 600);
+            renderAll();
+            showToast(`🦁 تم التبديل إلى حساب (${target.squadCode}) وجاري تحميل النتائج...`);
+        }
+
+        function deleteSavedSquadProfile(idx, ev) {
+            if (ev) ev.stopPropagation();
+            ensureSavedSquadsList();
+            if (state.savedSquads.length <= 1) {
+                showToast('⚠️ لا يمكن حذف الحساب الوحيد النشط');
+                return;
+            }
+            const removed = state.savedSquads.splice(idx, 1)[0];
+            if (removed && removed.squadCode === state.squadAccount.squadCode) {
+                const first = state.savedSquads[0];
+                state.squadAccount.squadCode = first.squadCode;
+                state.squadAccount.squadPass = first.squadPass;
+                connectSquadRealtimeBridge();
+            }
+            saveState('players', true);
+            renderAll();
+            showToast('🗑️ تم حذف الحساب من القائمة');
+        }
+
+        function createNewRandomSquadRoom() {
+            const randNum = Math.floor(100 + Math.random() * 900);
+            const newCode = 'SHILLA-' + randNum;
+            const newPass = String(Math.floor(1000 + Math.random() * 9000));
+            state.squadAccount.squadCode = newCode;
+            state.squadAccount.squadPass = newPass;
+            ensureSavedSquadsList();
+            onlineDevicesMap = {};
+            saveState('players', true);
+            connectSquadRealtimeBridge();
+            renderAll();
+            showToast(`🎉 تم إنشاء غرفة شلة جديدة (${newCode}) وتوليد كود الـ QR الخاص بها!`);
+        }
+
+        async function pullCloudHistorySnapshot(manualNotify) {
+            if (!navigator.onLine) {
+                if (manualNotify) showToast('⚠️ لا يوجد اتصال بالإنترنت حالياً');
+                return;
+            }
+            try {
+                if (manualNotify) showToast('⏳ جاري سحب أحدث النتائج والأرشيف من السحابة...');
+                await ensureSquadKeys();
+                const topic = getSquadTopicHash();
+                const res = await fetch(`https://ntfy.sh/${topic}/json?poll=1&since=12h`);
+                if (!res.ok) throw new Error('Cloud fetch failed');
+                const text = await res.text();
+                const lines = text.split('\n').filter(Boolean);
+                let mergedCount = 0;
+                for (const line of lines) {
+                    try {
+                        const wrapper = JSON.parse(line);
+                        if (wrapper && wrapper.event === 'message' && wrapper.message) {
+                            const pkt = await unsealPacket(wrapper.message);
+                            if (pkt) {
+                                mergeIncomingSquadPacket(pkt);
+                                mergedCount++;
+                            }
+                        }
+                    } catch (e) {}
+                }
+                const badge = document.getElementById('lastCloudSyncTimeBadge');
+                if (badge) badge.textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString('ar-SY', { hour: '2-digit', minute: '2-digit' });
+                if (manualNotify) {
+                    if (mergedCount > 0) showToast(`✅ تم تحميل ودمج أحدث النتائج من السحابة (${mergedCount} تحديث)!`);
+                    else showToast('✨ جهازك محدّث بالفعل بآخر نتائج الشلة');
+                }
+            } catch (e) {
+                if (manualNotify) showToast('⚠️ تعذّر السحب المباشر، ستصل التحديثات عبر الاتصال الحي');
+            }
+        }
+
+        function applyScannedQrOrInviteData(rawStr) {
+            if (!rawStr) return false;
+            const clean = String(rawStr).trim();
+            try {
+                // 1) قراءة صيغة الـ QR الخفيفة السريعة: SHILLA|CODE|PASS|SLOT|names|tx|cx|sy|cl
+                if (clean.includes('SHILLA|')) {
+                    const line = clean.slice(clean.indexOf('SHILLA|')).split(/\r?\n/)[0].trim();
+                    const parts = line.split('|');
+                    if (parts.length >= 3) {
+                        state.squadAccount.squadCode = parts[1].trim().toUpperCase();
+                        state.squadAccount.squadPass = parts[2].trim();
+                        if (parts[3]) state.activeTableSlot = parts[3] === '2' ? 'table2' : 'table1';
+                        if (parts[4]) {
+                            const names = parts[4].split(',');
+                            if (names.length === 4) state.players = names;
+                        }
+                        if (parts[5]) {
+                            const s = parts[5].split(',').map(Number);
+                            if (s.length === 4) {
+                                state.trix.indivScores = s;
+                                state.trix.teamScores = [s[0] + s[1], s[2] + s[3]];
+                            }
+                        }
+                        if (parts[6]) {
+                            const s = parts[6].split(',').map(Number);
+                            if (s.length === 4) {
+                                state.complex.indivScores = s;
+                                state.complex.teamScores = [s[0] + s[1], s[2] + s[3]];
+                            }
+                        }
+                        if (parts[7]) {
+                            const s = parts[7].split(',').map(Number);
+                            if (s.length === 4) state.syrian41.scores = s;
+                        }
+                        if (parts[8]) {
+                            const s = parts[8].split(',').map(Number);
+                            if (s.length === 2) state.classic.scores = s;
+                        }
+                        ensureSavedSquadsList();
+                        saveState('players', true);
+                        connectSquadRealtimeBridge();
+                        setTimeout(() => pullCloudHistorySnapshot(true), 400);
+                        renderAll();
+                        showToast(`🎉 تم ربط حساب (${state.squadAccount.squadCode}) وتحميل النتائج فوراً!`, 4500);
+                        return true;
+                    }
+                }
+                // 2) دعم الصيغ السابقة أو الروابط
+                let b64Part = null;
+                if (clean.includes('SHILLAQR:')) {
+                    b64Part = clean.split('SHILLAQR:')[1].trim().split(/\s+/)[0];
+                } else if (clean.includes('shilla_invite=')) {
+                    b64Part = clean.split('shilla_invite=')[1].trim().split(/[&#\s]/)[0];
+                }
+                if (b64Part) {
+                    const obj = JSON.parse(decodeURIComponent(escape(atob(b64Part))));
+                    if (obj && obj.c && obj.p) {
+                        state.squadAccount.squadCode = String(obj.c).trim().toUpperCase();
+                        state.squadAccount.squadPass = String(obj.p).trim();
+                        if (Array.isArray(obj.pl) && obj.pl.length === 4) state.players = obj.pl;
+                        if (Array.isArray(obj.tm) && obj.tm.length === 2) state.teams = obj.tm;
+                        if (Array.isArray(obj.tx) && obj.tx.length === 4) {
+                            state.trix.indivScores = obj.tx.map(Number);
+                            state.trix.teamScores = [state.trix.indivScores[0] + state.trix.indivScores[1], state.trix.indivScores[2] + state.trix.indivScores[3]];
+                        }
+                        if (Array.isArray(obj.cx) && obj.cx.length === 4) {
+                            state.complex.indivScores = obj.cx.map(Number);
+                            state.complex.teamScores = [state.complex.indivScores[0] + state.complex.indivScores[1], state.complex.indivScores[2] + state.complex.indivScores[3]];
+                        }
+                        if (Array.isArray(obj.sy) && obj.sy.length === 4) state.syrian41.scores = obj.sy.map(Number);
+                        if (Array.isArray(obj.cl) && obj.cl.length === 2) state.classic.scores = obj.cl.map(Number);
+
+                        ensureSavedSquadsList();
+                        saveState('players', true);
+                        connectSquadRealtimeBridge();
+                        setTimeout(() => pullCloudHistorySnapshot(true), 450);
+                        renderAll();
+                        showToast(`🎉 تم الدخول لحساب (${state.squadAccount.squadCode}) وتحميل النتائج فوراً!`, 4500);
+                        return true;
+                    }
+                }
+                // 3) دعم حزمة النتائج الكاملة Base64
+                const pkt = JSON.parse(decodeURIComponent(escape(atob(clean))));
+                if (pkt && (pkt.tableSlots || pkt.archiveByGame)) {
+                    pkt.senderId = 'QR-SCAN-IMPORT';
+                    mergeIncomingSquadPacket(pkt);
+                    showToast('✅ تم استيراد كامل النتائج والأرشيف بنجاح!');
+                    return true;
+                }
+            } catch (e) {}
+            return false;
+        }
+
+        let _qrStream = null, _qrScanTimer = null;
+        async function toggleCameraQrScanner() {
+            const area = document.getElementById('qrCameraScannerArea');
+            if (!area) return;
+            if (!area.classList.contains('hidden')) {
+                stopCameraQrScanner();
+                return;
+            }
+            area.classList.remove('hidden');
+            const video = document.getElementById('qrScannerVideo');
+            const hint = document.getElementById('qrScannerHint');
+            try {
+                _qrStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: { ideal: 'environment' }, width: { ideal: 640 }, height: { ideal: 640 } },
+                    audio: false
+                });
+                video.srcObject = _qrStream;
+                await video.play();
+
+                if ('BarcodeDetector' in window) {
+                    const detector = new BarcodeDetector({ formats: ['qr_code'] });
+                    _qrScanTimer = setInterval(async () => {
+                        if (video.readyState >= 2) {
+                            try {
+                                const codes = await detector.detect(video);
+                                if (codes && codes.length > 0 && codes[0].rawValue) {
+                                    const ok = applyScannedQrOrInviteData(codes[0].rawValue);
+                                    if (ok) stopCameraQrScanner();
+                                }
+                            } catch (e) {}
+                        }
+                    }, 280);
+                } else {
+                    if (hint) hint.textContent = '💡 كاميرتك شغالة! إذا ما لقطت تلقائياً على هاد الجهاز، صوّر الـ QR واضغط "قراءة QR من صورة".';
+                }
+            } catch (err) {
+                area.classList.add('hidden');
+                showToast('⚠️ تعذّر فتح الكاميرا — تأكد من إذن الكاميرا أو استخدم زر "قراءة QR من صورة"');
+            }
+        }
+
+        function stopCameraQrScanner() {
+            if (_qrScanTimer) { clearInterval(_qrScanTimer); _qrScanTimer = null; }
+            if (_qrStream) {
+                _qrStream.getTracks().forEach(t => t.stop());
+                _qrStream = null;
+            }
+            const video = document.getElementById('qrScannerVideo');
+            if (video) video.srcObject = null;
+            const area = document.getElementById('qrCameraScannerArea');
+            if (area) area.classList.add('hidden');
+        }
+
+        async function scanQrFromUploadedImage(ev) {
+            const file = ev.target.files && ev.target.files[0];
+            ev.target.value = '';
+            if (!file) return;
+            try {
+                const bmp = await createImageBitmap(file);
+                if ('BarcodeDetector' in window) {
+                    const detector = new BarcodeDetector({ formats: ['qr_code'] });
+                    const codes = await detector.detect(bmp);
+                    if (codes && codes.length > 0 && codes[0].rawValue) {
+                        if (applyScannedQrOrInviteData(codes[0].rawValue)) return;
+                    }
+                }
+                showToast('⚠️ لم يتم العثور على QR واضح بالصورة — جرّب نسخ كود الحزمة أو تقريب الصورة');
+            } catch (e) {
+                showToast('⚠️ تعذّر قراءة الصورة على هذا الجهاز');
+            }
+        }
+
+        async function shareSquadQrCardAsImage() {
+            const acc = state.squadAccount;
+            const qrPayload = buildCompactQrInviteString();
+            const mat = QRGen.makeMatrix(qrPayload);
+            if (!mat) { showToast('⚠️ تعذّر إنشاء بطاقة الـ QR'); return; }
+
+            const W = 800, H = 980;
+            const canvas = document.createElement('canvas');
+            canvas.width = W; canvas.height = H;
+            const ctx = canvas.getContext('2d');
+
+            const grad = ctx.createLinearGradient(0, 0, W, H);
+            grad.addColorStop(0, '#132347');
+            grad.addColorStop(0.5, '#091229');
+            grad.addColorStop(1, '#040814');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, W, H);
+
+            ctx.strokeStyle = '#fbbf24';
+            ctx.lineWidth = 6;
+            ctx.strokeRect(24, 24, W - 48, H - 48);
+
+            ctx.textAlign = 'center';
+            ctx.direction = 'rtl';
+            ctx.fillStyle = '#fde047';
+            ctx.font = 'bold 46px Arial';
+            ctx.fillText('👑 بطاقة دخول شِلّة بلس', W / 2, 105);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 34px Arial';
+            ctx.fillText(`حساب الشلة: ${acc.squadCode}`, W / 2, 165);
+
+            ctx.fillStyle = '#6ee7b7';
+            ctx.font = 'bold 26px Arial';
+            ctx.fillText(`🔑 كلمة السر: ${acc.squadPass}  •  ${state.activeTableSlot === 'table2' ? 'طاولة 2' : 'طاولة 1'}`, W / 2, 215);
+
+            const qrBoxSize = 460;
+            const qx = (W - qrBoxSize) / 2, qy = 255;
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(qx, qy, qrBoxSize, qrBoxSize);
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 8;
+            ctx.strokeRect(qx, qy, qrBoxSize, qrBoxSize);
+
+            const n = mat.length, quiet = 3;
+            const cell = qrBoxSize / (n + quiet * 2);
+            ctx.fillStyle = '#060d1a';
+            for (let r = 0; r < n; r++) {
+                for (let c = 0; c < n; c++) {
+                    if (mat[r][c]) {
+                        ctx.fillRect(
+                            Math.floor(qx + (c + quiet) * cell),
+                            Math.floor(qy + (r + quiet) * cell),
+                            Math.ceil(cell),
+                            Math.ceil(cell)
+                        );
+                    }
+                }
+            }
+
+            const st = computeRankedStandings(state.players, state.trix.indivScores);
+            ctx.fillStyle = '#fde68a';
+            ctx.font = 'bold 26px Arial';
+            ctx.fillText(`🥇 الأول: ${st[0].name} (${st[0].score})  |  🥈 الثاني: ${st[1].name} (${st[1].score})`, W / 2, 775);
+            ctx.fillText(`🥉 الثالث: ${st[2].name} (${st[2].score})  |  4️⃣ الرابع: ${st[3].name} (${st[3].score})`, W / 2, 820);
+
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = 'bold 22px Arial';
+            ctx.fillText('امسح الكود من داخل تطبيق شِلّة بلس لتحميل الحساب والنتائج فوراً', W / 2, 885);
+
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText('BY : karemyseer 2026  •  TECH ZONE STORE', W / 2, 930);
+
+            const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
+            if (!blob) return;
+            const file = new File([blob], `shilla-qr-${acc.squadCode}.png`, { type: 'image/png' });
+            try {
+                if (navigator.canShare && navigator.canShare({ files: [file] }) && navigator.share) {
+                    await navigator.share({ title: `بطاقة QR شلة ${acc.squadCode}`, text: `امسح الكود للانضمام لحساب الشلة (${acc.squadCode}) وتحميل النتائج!`, files: [file] });
+                } else {
+                    const url = URL.createObjectURL(blob), a = document.createElement('a');
+                    a.href = url; a.download = file.name; document.body.appendChild(a); a.click(); a.remove();
+                    setTimeout(() => URL.revokeObjectURL(url), 3000);
+                    showToast('🖼️ تم تنزيل بطاقة الـ QR كصورة جاهزة للمشاركة!');
+                }
+            } catch (e) {}
+        }
+
+        function shareSquadInviteLinkWhatsApp() {
+            const acc = state.squadAccount;
+            const qrCodeStr = buildCompactQrInviteString();
+            const st = computeRankedStandings(state.players, state.trix.indivScores);
+            const msg = `👑 *دعوة سريعة — شِلّة بلس*\n` +
+                `🔹 كود الشلة: *${acc.squadCode}*\n` +
+                `🔑 كلمة السر: *${acc.squadPass}*\n` +
+                `🏆 المتصدر حالياً: *${st[0].name} (${st[0].score})*\n\n` +
+                `📋 الصق هاد الكود الذكي داخل قسم (الأونلاين) بالتطبيق ليدخلك بالحساب ويحمّل النتائج فوراً:\n` +
+                `${qrCodeStr}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
         function renderLiveSection() {
+            ensureSavedSquadsList();
             const ind = document.getElementById('liveHeaderIndicator');
             const code = state.squadAccount.squadCode || 'SHILLA-2026';
             if (ind) {
@@ -3371,7 +5011,9 @@
             const hl = document.getElementById('headerAccountLabel');
             if (hl) hl.textContent = `${state.squadAccount.avatar || '🦁'} ${code} (${state.squadAccount.deviceName})`;
             const lm = document.getElementById('liveMyAccountName');
-            if (lm) lm.textContent = `حساب الشلة: ${code} • ${state.squadAccount.deviceName}`;
+            if (lm) lm.textContent = `${state.squadAccount.avatar || '🦁'} ${code} • ${state.squadAccount.deviceName}`;
+            const avBox = document.getElementById('liveMyAvatarBox');
+            if (avBox) avBox.textContent = state.squadAccount.avatar || '🦁';
 
             const cg = document.getElementById('liveGamesConcurrentGrid');
             if (cg) {
@@ -3382,14 +5024,46 @@
                     { key: 'classic', title: '🃏 طرنيب عادي', rounds: state.classic.history.length, summary: `${state.teams[0]}:${state.classic.scores[0]} | ${state.teams[1]}:${state.classic.scores[1]}` }
                 ];
                 cg.innerHTML = gamesInfo.map(g => `
-                    <div onclick="switchTab('${g.key}')" class="panel" style="padding: 7px; cursor: pointer; border-color: ${g.rounds > 0 ? 'var(--emerald)' : 'var(--border-subtle)'};">
+                    <div onclick="switchTab('${g.key}')" class="panel" style="padding: 8px; cursor: pointer; border-color: ${g.rounds > 0 ? 'var(--emerald)' : 'var(--border-subtle)'};">
                         <div class="row" style="margin-bottom: 3px;">
-                            <span style="font-size: 11px; font-weight: 900; color: var(--gold-bright);">${g.title}</span>
-                            <span class="badge ${g.rounds > 0 ? 'badge-emerald' : 'badge-gold'}" style="font-size: 9px; padding: 1px 6px;">${g.rounds > 0 ? `${g.rounds} جولة نشطة` : 'جاهزة'}</span>
+                            <span style="font-size: 11.5px; font-weight: 900; color: var(--gold-bright);">${g.title}</span>
+                            <span class="badge ${g.rounds > 0 ? 'badge-emerald' : 'badge-gold'}" style="font-size: 9.5px; padding: 2px 7px;">${g.rounds > 0 ? `${g.rounds} جولة` : 'جاهزة'}</span>
                         </div>
-                        <div style="font-size: 9.5px; color: #cbd5e1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${E(g.summary)}</div>
+                        <div style="font-size: 10.5px; color: #e2e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 800;">${E(g.summary)}</div>
                     </div>
                 `).join('');
+            }
+
+            const qrBox = document.getElementById('squadQrDisplayBox');
+            if (qrBox) {
+                const qrData = buildCompactQrInviteString();
+                qrBox.innerHTML = QRGen.toSvg(qrData, 196);
+            }
+            const qrCap = document.getElementById('squadQrCaptionText');
+            if (qrCap) {
+                qrCap.innerHTML = `🔹 الكود: <span style="color:#fff;">${E(code)}</span> &nbsp;|&nbsp; 🔑 السر: <span style="color:#6ee7b7;">${E(state.squadAccount.squadPass)}</span>`;
+            }
+
+            const savedBox = document.getElementById('savedSquadProfilesList');
+            if (savedBox) {
+                savedBox.innerHTML = state.savedSquads.map((sq, idx) => {
+                    const isAct = (sq.squadCode || '').toUpperCase() === code.toUpperCase();
+                    return `
+                        <div onclick="switchSavedSquadProfile(${idx})" class="squad-saved-pill ${isAct ? 'active-squad' : ''}">
+                            <div class="row" style="gap: 9px;">
+                                <span style="font-size: 20px;">${E(sq.avatar || '🦁')}</span>
+                                <div>
+                                    <div style="font-size: 13.5px; font-weight: 950; color: #fff;">${E(sq.squadCode)} ${isAct ? '<span class="badge badge-emerald" style="font-size:9.5px;padding:2px 7px;">نشط الآن</span>' : ''}</div>
+                                    <div style="font-size: 11px; color: var(--text-secondary);">السر: ${E(sq.squadPass)} • جهاز: ${E(sq.deviceName || 'موبايل')}</div>
+                                </div>
+                            </div>
+                            <div class="row" style="gap: 5px;">
+                                ${!isAct ? `<span class="badge badge-gold" style="font-size:10.5px;">تفعيل ⬅️</span>` : ''}
+                                ${state.savedSquads.length > 1 ? `<button onclick="deleteSavedSquadProfile(${idx}, event)" class="btn-dark" style="min-height:32px;padding:4px 8px;color:var(--crimson);">✖</button>` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
             }
 
             onlineDevicesMap[state.squadAccount.deviceId] = {
@@ -3408,31 +5082,49 @@
             }
         }
 
+        function selectSquadAvatar(emoji) {
+            state.squadAccount.avatar = emoji;
+            document.querySelectorAll('.avatar-chip').forEach(el => {
+                el.classList.toggle('selected', el.dataset.emoji === emoji);
+            });
+        }
+
         function openSyncModal() {
             const b = document.getElementById('syncModalBody');
             if (!b) return;
             const acc = state.squadAccount;
+            const avatars = ['🦁', '👑', '🦅', '🐺', '🔥', '⚡', '🃏', '🎯'];
+            const qrSvg = QRGen.toSvg(buildCompactQrInviteString(), 165);
             b.innerHTML = `
-                <div class="panel" style="margin-bottom: 10px; font-size: 11.5px; color: #a7f3d0; line-height: 1.6;">
-                    💡 <strong>نظام الحساب الموحد للشلة:</strong><br>
-                    اكتب نفس <strong>كود الشلة</strong> ونفس <strong>كلمة السر</strong> على كل موبايلات الشباب. أي لعبة أو طاولة تفتحونها أو تحفظونها بالأرشيف ستظهر وتُحفظ عند الجميع تلقائياً حتى داخل تطبيق <strong>APK</strong>.
+                <div class="panel" style="margin-bottom: 10px; text-align: center; border-color: rgba(251,191,36,0.4);">
+                    <div style="font-size: 12px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">📲 امسح الـ QR من موبايل رفيقك للربط وتحميل النتائج فوراً</div>
+                    <div style="display:inline-block;padding:8px;background:#fff;border-radius:16px;border:2px solid var(--gold-bright);">${qrSvg}</div>
                 </div>
-                <div style="display: grid; gap: 8px; margin-bottom: 12px;">
+                <div style="display: grid; gap: 9px; margin-bottom: 12px;">
                     <div>
-                        <label style="font-size: 11px; color: var(--gold-bright); font-weight: 800;">1. كود / اسم حساب الشلة الموحد:</label>
-                        <input id="inpSquadCode" type="text" value="${E(acc.squadCode)}" placeholder="مثال: SHILLA-2026" class="input-box" style="text-align: center; font-size: 15px; letter-spacing: 1px;">
+                        <label style="font-size: 11.5px; color: var(--gold-bright); font-weight: 900;">1. كود غرفة / حساب الشلة الموحد:</label>
+                        <div class="row" style="gap: 6px; margin-top: 4px;">
+                            <input id="inpSquadCode" type="text" value="${E(acc.squadCode)}" placeholder="مثال: SHILLA-2026" class="input-box" style="text-align: center; font-size: 15px; letter-spacing: 1px;">
+                            <button onclick="document.getElementById('inpSquadCode').value='SHILLA-'+Math.floor(100+Math.random()*900)" class="btn-dark" style="white-space:nowrap;font-size:11.5px;">🎲 توليد</button>
+                        </div>
                     </div>
                     <div>
-                        <label style="font-size: 11px; color: var(--gold-bright); font-weight: 800;">2. كلمة سر الشلة المشتركة:</label>
-                        <input id="inpSquadPass" type="text" value="${E(acc.squadPass)}" placeholder="مثال: 2026" class="input-box" style="text-align: center;">
+                        <label style="font-size: 11.5px; color: var(--gold-bright); font-weight: 900;">2. كلمة سر الشلة المشتركة:</label>
+                        <input id="inpSquadPass" type="text" value="${E(acc.squadPass)}" placeholder="مثال: 2026" class="input-box" style="text-align: center; margin-top: 4px;">
                     </div>
                     <div>
-                        <label style="font-size: 11px; color: var(--text-muted);">3. اسم هذا الموبايل:</label>
-                        <input id="inpDeviceName" type="text" value="${E(acc.deviceName)}" placeholder="مثال: موبايل كريم" class="input-box">
+                        <label style="font-size: 11.5px; color: var(--text-secondary); font-weight: 800;">3. اسم موبايلك وأيقونتك بالشلة:</label>
+                        <input id="inpDeviceName" type="text" value="${E(acc.deviceName)}" placeholder="مثال: موبايل كريم" class="input-box" style="margin-top: 4px;">
+                        <div class="avatar-picker-grid">
+                            ${avatars.map(em => `<button type="button" data-emoji="${em}" onclick="selectSquadAvatar('${em}')" class="avatar-chip ${(acc.avatar || '🦁') === em ? 'selected' : ''}">${em}</button>`).join('')}
+                        </div>
                     </div>
                 </div>
-                <button onclick="saveSquadUnifiedAccount()" class="btn-emerald" style="width: 100%; padding: 11px; margin-bottom: 8px;">✅ حفظ والاتصال بحساب الشلة فوراً</button>
-                <button onclick="shareSquadCredentialsWhatsApp()" class="btn-gold" style="width: 100%; padding: 9px; font-size: 11.5px;">📲 إرسال كود الحساب للشباب على واتساب</button>
+                <button onclick="saveSquadUnifiedAccount()" class="btn-emerald" style="width: 100%; padding: 12px; margin-bottom: 8px;">✅ حفظ الحساب وتحميل النتائج من السحابة</button>
+                <div class="grid-2">
+                    <button onclick="shareSquadQrCardAsImage()" class="btn-gold" style="font-size: 12px; padding: 9px;">🖼️ مشاركة صورة QR</button>
+                    <button onclick="shareSquadInviteLinkWhatsApp()" class="btn-dark" style="font-size: 12px; padding: 9px;">📲 إرسال دعوة واتساب</button>
+                </div>
             `;
             openModal('syncModal');
         }
@@ -3448,18 +5140,18 @@
             state.squadAccount.squadCode = code;
             state.squadAccount.squadPass = pass;
             if (dev) state.squadAccount.deviceName = dev;
+            ensureSavedSquadsList();
             onlineDevicesMap = {};
             saveState('players', true);
             connectSquadRealtimeBridge();
+            setTimeout(() => pullCloudHistorySnapshot(true), 450);
             renderAll();
             closeModal('syncModal');
-            showToast(`🟢 تم ربط الموبايل بحساب الشلة (${code})!`);
+            showToast(`🟢 تم ربط الموبايل بحساب (${code}) وجاري سحب النتائج!`);
         }
 
         function shareSquadCredentialsWhatsApp() {
-            const acc = state.squadAccount;
-            const msg = `👑 *شلة متعوب عليها*\nادخلوا على نفس حساب الشلة الموحد لتكون النتائج والأرشيف مشتركة عند الكل:\n🔹 كود الشلة: *${acc.squadCode}*\n🔑 كلمة السر: *${acc.squadPass}*`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+            shareSquadInviteLinkWhatsApp();
         }
 
         function copySyncPacketCode() {
@@ -3468,27 +5160,23 @@
             tmp.value = packet;
             document.body.appendChild(tmp);
             tmp.select();
-            try { document.execCommand('copy'); showToast('📋 تم نسخ حزمة النتائج والأرشيف للحافظة!'); } catch (e) {}
+            try { document.execCommand('copy'); showToast('📋 تم نسخ حزمة الحساب والنتائج الكاملة للحافظة!'); } catch (e) {}
             tmp.remove();
         }
 
         function applyPastedSyncPacket() {
             const raw = document.getElementById('pasteSyncPacketInput').value.trim();
             if (!raw) return;
-            try {
-                const pkt = JSON.parse(decodeURIComponent(escape(atob(raw))));
-                pkt.senderId = 'MANUAL-PASTE';
-                mergeIncomingSquadPacket(pkt);
+            if (applyScannedQrOrInviteData(raw)) {
                 document.getElementById('pasteSyncPacketInput').value = '';
-                showToast('✅ تم استلام ودمج النتائج والأرشيف بنجاح!');
-            } catch (e) {
-                showToast('⚠️ الكود غير صالح');
+                return;
             }
+            showToast('⚠️ الكود غير صالح — تأكد من نسخ كود الشلة أو الحزمة بالكامل');
         }
 
         function shareRoomOnWhatsApp() {
             const st = computeRankedStandings(state.players, state.trix.indivScores);
-            const text = `👑 شلة متعوب عليها (${state.squadAccount.squadCode})\n🥇 الأول: ${st[0].name} (${st[0].score})\n🥈 الثاني: ${st[1].name} (${st[1].score})\n🥉 الثالث: ${st[2].name} (${st[2].score})`;
+            const text = `👑 شِلّة بلس (${state.squadAccount.squadCode})\n🥇 الأول: ${st[0].name} (${st[0].score})\n🥈 الثاني: ${st[1].name} (${st[1].score})\n🥉 الثالث: ${st[2].name} (${st[2].score})`;
             window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
         }
 
@@ -3502,9 +5190,10 @@
             openModal('devPortalModal');
         }
 
-        function verifyDevPin() {
+        async function pinOk(p) { const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('shilla-dev:' + p)); return [...new Uint8Array(d)].map(b => b.toString(16).padStart(2, '0')).join('') === '66cc6ee31e794de989123f8da18c8e65174c412e16f8dd50c74e007c2e92e21a'; }
+        async function verifyDevPin() {
             const pin = document.getElementById('devPinInput').value.trim();
-            if (pin === '1970') {
+            if (await pinOk(pin)) {
                 document.getElementById('devPinEntryBox').classList.add('hidden');
                 document.getElementById('devUnlockedBox').classList.remove('hidden');
                 const fb = window.SHILLA_FIREBASE || {};
@@ -3605,7 +5294,7 @@
         function downloadFullZipPackage() {
             const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
             const manifestObj = {
-                name: "شلة متعوب عليها",
+                name: "شِلّة بلس",
                 short_name: "شلة متعوب",
                 lang: "ar",
                 dir: "rtl",
@@ -3675,16 +5364,43 @@
             });
         }
 
+        document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeTrixVerticalHistory(); });
+        window.addEventListener('online', () => { connectSquadRealtimeBridge(); syncNow(false); });
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible' && navigator.onLine) {
+                if (!wsConnected) connectSquadRealtimeBridge();
+                syncNow(false);
+            }
+        });
         window.addEventListener('DOMContentLoaded', () => {
             try {
                 const savedFb = JSON.parse(localStorage.getItem('SHILLA_CUSTOM_FIREBASE') || 'null');
                 if (savedFb && savedFb.apiKey) window.SHILLA_FIREBASE = savedFb;
             } catch (e) {}
+            buildGameSetupScreens(); buildExtraSetupScreens(); switchTab('home');
             renderAll();
+            switchTab('home');
             loadArchiveFromIndexedDB();
             initAudioLibrary();
             connectSquadRealtimeBridge();
         });
-    </script>
+    
+        function enhanceGameMenuTiles() {
+            const gameLabel = /(التركس|تركس|الطرنيب|طرنيب|البلوت|بلوت|البلوط|اللطوش|اللّطوش|المدادي|البنات|شيخ الكبة|التات)/;
+            document.querySelectorAll('button').forEach(btn => {
+                if (btn.closest('.media-remote-dock') || btn.closest('.tabs-bar')) return;
+                const label = (btn.innerText || btn.textContent || '').replace(/\s+/g,' ').trim();
+                if (gameLabel.test(label) && label.length < 55) btn.classList.add('game-menu-tile');
+            });
+        }
+        const gameTileObserver = new MutationObserver(() => enhanceGameMenuTiles());
+        gameTileObserver.observe(document.documentElement, {childList:true,subtree:true});
+        document.addEventListener('DOMContentLoaded', enhanceGameMenuTiles);
+
+document.addEventListener('click', ev => {
+            const d = document.getElementById('mediaRemoteDock');
+            if (d && !isMediaDockMinimized && !d.contains(ev.target)) { isMediaDockMinimized = true; applyDockMin(); document.body.classList.remove('music-pop'); }
+        });
+</script>
 </body>
 </html>
