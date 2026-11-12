@@ -48,7 +48,7 @@ jobs:
         run: |
           MANIFEST="android/app/src/main/AndroidManifest.xml"
           if [ -f "$MANIFEST" ] && ! grep -q "android.permission.CAMERA" "$MANIFEST"; then
-            sed -i 's|<application|<uses-permission android:name="android.permission.CAMERA" />\n    <uses-feature android:name="android.hardware.camera" android:required="false" />\n    <application|' "$MANIFEST"
+            sed -i 's|<application|<uses-permission android:name="android.permission.CAMERA" />\n    <uses-permission android:name="android.permission.WAKE_LOCK" />\n    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29" />\n    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />\n    <uses-feature android:name="android.hardware.camera" android:required="false" />\n    <application|' "$MANIFEST"
           fi
 
       - name: Build Android APK (Debug)
@@ -60,5 +60,5 @@ jobs:
       - name: Upload Ready APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: shilla-plus-v12-apk
+          name: shilla-plus-v13-2-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk

@@ -9,7 +9,10 @@ BG = (4, 8, 20, 255)           # #040814
 BG_HEX = "#040814"
 ROOT = Path(__file__).resolve().parent.parent
 RES = ROOT / "android" / "app" / "src" / "main" / "res"
-LOGO = Image.open(ROOT / "www" / "icons" / "icon-512.png").convert("RGBA")
+icons_dir = ROOT / "www" / "icons"
+logo_p = icons_dir / "icon-512.png"
+if not logo_p.exists(): logo_p = icons_dir / "icon-512.jpg" if (icons_dir / "icon-512.jpg").exists() else (icons_dir / "icon-192.png")
+LOGO = Image.open(logo_p).convert("RGBA")
 
 def fit(img, size):
     return img.resize((size, size), Image.LANCZOS)

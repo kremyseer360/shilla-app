@@ -1,0 +1,45 @@
+name: Deploy Shilla Plus Web & iPhone (GitHub Pages)
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python & Prepare Static Music
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate www/assets/music/manifest.json
+        run: |
+          python3 prepare_music.py
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload www folder as Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'www'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

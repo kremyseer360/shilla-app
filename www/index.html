@@ -571,8 +571,37 @@
 
         .home-tools-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 9px;
+        }
+        .std-calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            direction: ltr;
+        }
+        .std-calc-btn {
+            min-height: 50px;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: 900;
+            background: rgba(24, 40, 74, 0.92);
+            color: #fff;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+        .std-calc-btn.op {
+            background: rgba(245, 158, 11, 0.22);
+            color: #fde047;
+            border-color: rgba(251, 191, 36, 0.45);
+        }
+        .std-calc-btn.eq {
+            background: linear-gradient(135deg, #fde047, #f59e0b);
+            color: #060d1a;
+        }
+        .std-calc-btn.clr {
+            background: rgba(244, 63, 94, 0.25);
+            color: #fda4af;
+            border-color: rgba(244, 63, 94, 0.45);
         }
         .home-tools-grid button {
             display: flex;
@@ -1125,7 +1154,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 <div>
                     <div class="row-wrap" style="justify-content: flex-start; gap: 5px;">
                         <h1 style="font-size: 16.5px; font-weight: 900; color: var(--gold-bright);">شِلّة بلس</h1>
-                        <span class="badge badge-cyan" style="font-size: 9px; padding: 2px 7px;">v12.1 Android & QR</span>
+                        <span class="badge badge-cyan" style="font-size: 9px; padding: 2px 7px;">v13.2 Pro • Jawaker & QR</span>
                         <span id="liveHeaderIndicator" onclick="switchTab('live')" class="badge badge-emerald" style="cursor: pointer; font-size: 9.5px;">🟢 متصل</span>
                     </div>
                     <p style="font-size: 10.5px; color: var(--text-muted); font-weight: 800; margin-top: 2px;">
@@ -1144,7 +1173,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
     </header>
 
     <!-- 2. شريط اختيار الألعاب الأربع + شريط التنقل السفلي الدائم -->
-    <nav class="tabs-bar">
+    <nav class="tabs-bar hidden">
         <button onclick="switchTab('trix')" id="tab-trix" class="tab-btn active">👑<br>تركس</button>
         <button onclick="switchTab('complex')" id="tab-complex" class="tab-btn">⚡<br>كمبلكس</button>
         <button onclick="switchTab('syrian41')" id="tab-syrian41" class="tab-btn">🔥<br>سوري 41</button>
@@ -1180,6 +1209,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             <button onclick="switchTab('challenges')"><span>🏆</span><strong>التحديات</strong><small>نافس الشِلّة</small></button>
             <button onclick="switchTab('draw8')"><span>🎲</span><strong>القرعة</strong><small>وزّع اللاعبين</small></button>
             <button onclick="switchTab('archive')"><span>◷</span><strong>الأرشيف</strong><small>نتائجك السابقة</small></button>
+            <button onclick="openStdCalcModal()"><span>🧮</span><strong>حاسبة عادية</strong><small>حسابات سريعة</small></button>
         </div>
         <div class="home-footer-note"><span>♬</span> موسيقاك بترافقك بكل الجلسات من المشغّل السفلي</div>
     </section>
@@ -1286,7 +1316,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             <div class="row" style="margin-bottom: 8px;">
                 <div>
                     <h2 style="font-size: 14px; font-weight: 900; color: var(--gold-bright);">🔥 الطرنيب السوري (41)</h2>
-                    <p style="font-size: 10.5px; color: var(--text-muted);">شرط الفوز: وصول لاعب إلى 41+ وشريكه صفر أو موجب</p>
+                    <p style="font-size: 10.5px; color: var(--text-muted);">قانون جواكر: وصول لاعب إلى 41+ وشريكه أكثر من 0 (1 فما فوق)</p>
                 </div>
                 <span id="syrianTotalBidsBadge" class="badge badge-emerald">مجموع الطلبات: 12</span>
             </div>
@@ -1324,18 +1354,30 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 </div>
             </div>
 
+            <div class="row panel" style="margin-bottom: 8px; padding: 7px 10px;">
+                <span style="font-size: 11px; font-weight: 800; color: var(--gold-bright);">⚖️ نظام الاحتساب:</span>
+                <select id="classicJawakerRuleSel" onchange="state.classic.jawakerStrict=(this.value==='jawaker');saveState('classic');" class="input-box" style="width: auto; padding: 4px 8px; font-size: 11px;">
+                    <option value="jawaker" selected>قانون جواكر الرسمي (المشتري فقط عند النجاح)</option>
+                    <option value="both">احتساب أكلات الفريقين معاً عند النجاح</option>
+                </select>
+            </div>
+            <div class="panel" style="margin-bottom: 8px; padding: 7px 10px; font-size: 10.5px; color: var(--text-secondary); border-color: rgba(56,189,248,0.35);">
+                📌 <strong>قانون جواكر للـ 13:</strong> إذا جاب الفريق <strong>13 أكلة بدون طلبها</strong> يأخذ <strong>+16</strong> • إذا طلب <strong>13 (كبوت) ونجح</strong> يأخذ <strong>+26</strong> • إذا طلب <strong>13 وانكسر</strong> يُخصم <strong>-16</strong> ويأخذ الخصم أكلاته (أو +16 إذا أكلها كلها).
+            </div>
             <div id="classicLeaderBanner" class="panel" style="margin-bottom: 10px; font-size: 11.5px; text-align: center; border-color: var(--gold);"></div>
 
             <div class="grid-2" style="margin-bottom: 10px;">
-                <div onclick="openNamesModal()" class="score-box" style="border-color: var(--emerald);">
-                    <div id="clTeam0Title" style="font-size: 13px; font-weight: 900; color: var(--emerald);">فريق لنا</div>
+                <div class="score-box" style="border-color: var(--emerald);">
+                    <div onclick="openNamesModal()" id="clTeam0Title" style="font-size: 13px; font-weight: 900; color: var(--emerald);">فريق لنا</div>
                     <div id="clTeam0Players" style="font-size: 10px; color: var(--text-muted);"></div>
                     <div id="clTeam0Score" class="score-num pos-score">0</div>
+                    <button onclick="openScoreAdjustModal('classic', 0)" class="badge badge-gold" style="margin-top:6px; cursor:pointer; font-size:10px;">⚖️ تزويل / تعديل</button>
                 </div>
-                <div onclick="openNamesModal()" class="score-box" style="border-color: var(--crimson);">
-                    <div id="clTeam1Title" style="font-size: 13px; font-weight: 900; color: var(--crimson);">فريق لهم</div>
+                <div class="score-box" style="border-color: var(--crimson);">
+                    <div onclick="openNamesModal()" id="clTeam1Title" style="font-size: 13px; font-weight: 900; color: var(--crimson);">فريق لهم</div>
                     <div id="clTeam1Players" style="font-size: 10px; color: var(--text-muted);"></div>
                     <div id="clTeam1Score" class="score-num pos-score">0</div>
+                    <button onclick="openScoreAdjustModal('classic', 1)" class="badge badge-gold" style="margin-top:6px; cursor:pointer; font-size:10px;">⚖️ تزويل / تعديل</button>
                 </div>
             </div>
 
@@ -1567,7 +1609,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
 
     <footer class="text-center" style="margin: 14px 0 32px 0; position: relative; z-index: 1;">
         <div onclick="openDevPortalModal()" class="badge badge-gold" style="padding: 8px 18px; font-size: 12px; cursor: pointer;">
-            👑 شِلّة بلس • <span style="color: #22d3ee;">v12.1 Android & QR</span> • <strong>SHILLA PLUS</strong> • <span style="color:#fde047;">BY : karemyseer 2026</span><br><span style="display:block;margin-top:7px;font-size:11px;line-height:1.9;color:var(--text-muted);">للتواصل: <a href="tel:0991134433" style="color:var(--cyan);text-decoration:none;direction:ltr;display:inline-block;">0991134433</a><br><strong style="color:var(--gold-bright);letter-spacing:.5px;">TECH ZONE STORE</strong></span>
+            👑 شِلّة بلس • <span style="color: #22d3ee;">v13.2 Pro • Jawaker & QR</span> • <strong>SHILLA PLUS</strong> • <span style="color:#fde047;">BY : karemyseer 2026</span><br><span style="display:block;margin-top:7px;font-size:11px;line-height:1.9;color:var(--text-muted);">للتواصل: <a href="tel:0991134433" style="color:var(--cyan);text-decoration:none;direction:ltr;display:inline-block;">0991134433</a><br><strong style="color:var(--gold-bright);letter-spacing:.5px;">TECH ZONE STORE</strong></span>
         </div>
     </footer>
 
@@ -1705,7 +1747,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
         </div>
     </div>
 
-    <!-- بوابة المطور السرية (1970) -->
+    <!-- بوابة المطور الخاصة -->
     <div id="devPortalModal" class="modal-backdrop hidden">
         <div class="modal-card" style="border-color: var(--cyan);">
             <div class="row" style="margin-bottom: 10px;">
@@ -1713,15 +1755,36 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 <button onclick="closeModal('devPortalModal')" class="btn-dark">✖</button>
             </div>
             <div id="devPinEntryBox">
-                <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 8px;">أدخل الرقم السري للمطور (1970) للوصول إلى حزمة الـ ZIP وإعدادات السيرفر:</p>
+                <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 8px;">أدخل الرقم السري الخاص بالمطور للوصول إلى لوحة التحكم والإعلانات:</p>
                 <div class="row" style="gap: 6px;">
                     <input id="devPinInput" type="password" placeholder="••••" class="input-box" style="text-align: center; font-size: 16px; letter-spacing: 4px;">
                     <button onclick="verifyDevPin()" class="btn-gold">دخول</button>
                 </div>
             </div>
             <div id="devUnlockedBox" class="hidden">
+                <!-- قسم نشر إعلان منبثق لكل النسخ أونلاين -->
+                <div class="panel" style="margin-bottom: 10px; border-color: var(--gold-bright);">
+                    <div style="font-size: 12.5px; font-weight: 950; color: var(--gold-bright); margin-bottom: 6px;">📢 إعلان مصور فوري لكل مستخدمي التطبيق (أونلاين)</div>
+                    <p style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 8px;">بمجرد اختيار صورة من جهازك سيتم ضغطها ونشرها مباشرة لكل النسخ أونلاين بدون أي خطوات إضافية.</p>
+                    <label class="btn-gold" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-size:13px;padding:12px;margin-bottom:8px;">
+                        🚀 اختر صورة الإعلان للنشر المباشر الآن
+                        <input type="file" accept="image/*" class="hidden" onchange="encodeAndPublishAdDirectly(event)">
+                    </label>
+                    <details style="margin-bottom: 8px;">
+                        <summary style="font-size: 11px; color: var(--cyan); cursor: pointer; font-weight: 800;">⚙️ خيارات إضافية للإعلان (عنوان / رابط / ثواني التلاشي)</summary>
+                        <div style="margin-top: 8px; display: grid; gap: 6px;">
+                            <input id="devAdTitleInput" class="input-box" placeholder="عنوان الإعلان (اختياري)" style="font-size: 11.5px;">
+                            <input id="devAdImageUrlInput" class="input-box" placeholder="أو رابط صورة مباشر (اختياري)" style="font-size: 11.5px; direction: ltr;">
+                            <input id="devAdLinkUrlInput" class="input-box" placeholder="رابط عند الضغط على الصورة (اختياري)" style="font-size: 11.5px; direction: ltr;">
+                            <input id="devAdDurationInput" type="number" min="3" max="30" value="8" class="input-box" placeholder="ثواني التلاشي (8)" style="font-size: 11.5px; text-align: center;">
+                            <button onclick="publishGlobalAdNow(true)" class="btn-emerald" style="padding: 8px; font-size: 11.5px;">نشر الرابط يدوياً</button>
+                        </div>
+                    </details>
+                    <button onclick="publishGlobalAdNow(false)" class="btn-crimson" style="width:100%; padding: 9px; font-size: 11.5px;">🗑️ إيقاف وحذف الإعلان الحالي من جميع الأجهزة</button>
+                </div>
+
                 <div class="panel" style="margin-bottom: 10px;">
-                    <div style="font-size: 12px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">📦 تصدير حزمة التطبيق للـ APK (WebIntoApp / Capacitor)</div>
+                    <div style="font-size: 12px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">📦 تصدير حزمة التطبيق للـ APK (Capacitor)</div>
                     <div class="grid-2">
                         <button onclick="downloadFullZipPackage()" class="btn-emerald" style="padding: 10px; font-size: 11.5px;">📦 تنزيل shilla-app.zip</button>
                         <button onclick="downloadStandaloneHtml()" class="btn-gold" style="padding: 10px; font-size: 11.5px;">📄 تنزيل index.html</button>
@@ -1734,6 +1797,86 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                     <button onclick="saveCustomFirebaseKeys()" class="btn-dark" style="width: 100%; padding: 8px;">💾 حفظ مفاتيح Firebase في الجهاز</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- زر الموسيقى العائم الدائم أثناء اللعب -->
+    <button id="floatingMusicFab" onclick="event.stopPropagation();toggleFloatingMusicBar()" title="مشغل الموسيقى" style="position:fixed; bottom:calc(74px + env(safe-area-inset-bottom, 0px)); left:14px; z-index:85; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#fde047,#d97706); color:#060d1a; border:2px solid #fff; box-shadow:0 8px 24px rgba(245,158,11,0.6); display:none; align-items:center; justify-content:center; font-size:22px; font-weight:950;">
+        🎵
+    </button>
+
+    <!-- نافذة تزويل / تعديل النقاط اليدوي (في حال الخربطة أو العقوبات) -->
+    <div id="scoreAdjustModal" class="modal-backdrop hidden">
+        <div class="modal-card" style="border-color: var(--gold-bright); max-width: 390px;">
+            <div class="row" style="margin-bottom: 10px;">
+                <h3 id="scoreAdjustTitle" style="font-size: 15px; font-weight: 950; color: var(--gold-bright);">⚖️ تزويل / تعديل النقاط</h3>
+                <button onclick="closeModal('scoreAdjustModal')" class="btn-dark" style="min-height:36px;padding:6px 10px;">✖</button>
+            </div>
+            <p id="scoreAdjustSubtitle" style="font-size: 11.5px; color: var(--text-secondary); margin-bottom: 10px;"></p>
+            <div class="grid-4" style="margin-bottom: 10px;">
+                <button type="button" onclick="applyQuickScoreDelta(-5)" class="btn-crimson">-5</button>
+                <button type="button" onclick="applyQuickScoreDelta(-1)" class="btn-crimson">-1</button>
+                <button type="button" onclick="applyQuickScoreDelta(1)" class="btn-emerald">+1</button>
+                <button type="button" onclick="applyQuickScoreDelta(5)" class="btn-emerald">+5</button>
+            </div>
+            <div style="margin-bottom: 10px;">
+                <label style="font-size: 11px; color: var(--text-muted);">أو أدخل قيمة مخصصة (مثال: -3 أو +10):</label>
+                <input id="customDeltaScoreInput" type="number" placeholder="مثال: -2" class="input-box" style="text-align: center; margin-top: 4px;">
+            </div>
+            <button type="button" onclick="applyCustomScoreDeltaFromInput()" class="btn-gold" style="width: 100%; padding: 11px;">✅ اعتماد التعديل على النتيجة</button>
+        </div>
+    </div>
+
+    <!-- نافذة الحاسبة العادية الإضافية -->
+    <div id="stdCalcModal" class="modal-backdrop hidden">
+        <div class="modal-card" style="border-color: var(--gold-bright); max-width: 370px;">
+            <div class="row" style="margin-bottom: 10px;">
+                <h3 style="font-size: 15px; font-weight: 950; color: var(--gold-bright);">🧮 الحاسبة السريعة</h3>
+                <button onclick="closeModal('stdCalcModal')" class="btn-dark" style="min-height:36px;padding:6px 10px;">✖</button>
+            </div>
+            <div class="panel" style="margin-bottom: 10px; text-align: left; direction: ltr; background: #050b18; border-color: rgba(251,191,36,0.35);">
+                <div id="stdCalcHistory" style="font-size: 12px; color: var(--text-muted); min-height: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></div>
+                <div id="stdCalcDisplay" style="font-size: 30px; font-weight: 950; color: #ffffff; overflow-x: auto; margin-top: 4px;">0</div>
+            </div>
+            <div class="std-calc-grid">
+                <button type="button" onclick="stdCalcPress('C')" class="std-calc-btn clr">C</button>
+                <button type="button" onclick="stdCalcPress('DEL')" class="std-calc-btn clr">⌫</button>
+                <button type="button" onclick="stdCalcPress('%')" class="std-calc-btn op">%</button>
+                <button type="button" onclick="stdCalcPress('/')" class="std-calc-btn op">÷</button>
+
+                <button type="button" onclick="stdCalcPress('7')" class="std-calc-btn">7</button>
+                <button type="button" onclick="stdCalcPress('8')" class="std-calc-btn">8</button>
+                <button type="button" onclick="stdCalcPress('9')" class="std-calc-btn">9</button>
+                <button type="button" onclick="stdCalcPress('*')" class="std-calc-btn op">×</button>
+
+                <button type="button" onclick="stdCalcPress('4')" class="std-calc-btn">4</button>
+                <button type="button" onclick="stdCalcPress('5')" class="std-calc-btn">5</button>
+                <button type="button" onclick="stdCalcPress('6')" class="std-calc-btn">6</button>
+                <button type="button" onclick="stdCalcPress('-')" class="std-calc-btn op">−</button>
+
+                <button type="button" onclick="stdCalcPress('1')" class="std-calc-btn">1</button>
+                <button type="button" onclick="stdCalcPress('2')" class="std-calc-btn">2</button>
+                <button type="button" onclick="stdCalcPress('3')" class="std-calc-btn">3</button>
+                <button type="button" onclick="stdCalcPress('+')" class="std-calc-btn op">+</button>
+
+                <button type="button" onclick="stdCalcPress('00')" class="std-calc-btn">00</button>
+                <button type="button" onclick="stdCalcPress('0')" class="std-calc-btn">0</button>
+                <button type="button" onclick="stdCalcPress('.')" class="std-calc-btn">.</button>
+                <button type="button" onclick="stdCalcPress('=')" class="std-calc-btn eq">=</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة الإعلان المنبثق عند فتح التطبيق (مع زر X وتلاشي تلقائي) -->
+    <div id="globalPromoAdOverlay" class="modal-backdrop hidden" style="z-index: 300; transition: opacity 0.6s ease;">
+        <div class="modal-card" style="position:relative; padding:12px; max-width:400px; text-align:center; border:2px solid var(--gold-bright); background:#071022;">
+            <button onclick="dismissGlobalPromoAd()" style="position:absolute; top:10px; left:10px; width:38px; height:38px; min-height:38px; border-radius:50%; background:rgba(244,63,94,0.96); color:#fff; font-size:17px; font-weight:950; z-index:5; box-shadow:0 4px 14px rgba(0,0,0,0.6);">✖</button>
+            <div id="globalPromoAdCountdown" class="badge badge-gold" style="position:absolute; top:12px; right:12px; z-index:5; font-size:11px;">يتلاشى خلال 8ث</div>
+            <div id="globalPromoAdTitle" style="font-size:14.5px; font-weight:950; color:var(--gold-bright); margin: 6px 40px 10px 40px;"></div>
+            <a id="globalPromoAdAnchor" href="#" target="_blank" style="display:block; text-decoration:none;" onclick="if(!this.getAttribute('href') || this.getAttribute('href')==='#') return false;">
+                <img id="globalPromoAdImg" src="" alt="إعلان" style="width:100%; max-height:66vh; object-fit:contain; border-radius:14px; border:1px solid rgba(251,191,36,0.35); display:block; margin:0 auto;">
+            </a>
+            <div style="font-size:10px; color:var(--text-muted); margin-top:8px;">BY : karemyseer 2026 | TECH ZONE STORE</div>
         </div>
     </div>
 
@@ -1789,6 +1932,9 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                         sheikhDoubled: false,
                         sheikhOwner: 1,
                         banatCount: [1, 1, 1, 1],
+                        banatDoubledCount: 0,
+                        banatDoubleEater: 0,
+                        banatDoubleOwner: 1,
                         dinariCount: [4, 3, 3, 3],
                         latooshCount: [4, 3, 3, 3],
                         trixRank: []
@@ -2789,12 +2935,23 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             if (cx.activeContract === 'complexAll') {
                 const t = cx.temp;
                 calc.innerHTML = `
-                    <div style="font-size: 12px; font-weight: 900; color: var(--cyan); margin-bottom: 6px;">1. من أكل شيخ الكبة؟</div>
-                    <div class="grid-4" style="margin-bottom: 8px;">
+                    <div style="font-size: 12px; font-weight: 900; color: var(--cyan); margin-bottom: 6px;">1. من أكل شيخ الكبة (-75 / مدبل -150)؟</div>
+                    <div class="grid-4" style="margin-bottom: 6px;">
                         ${state.players.map((p, i) => `
                             <button onclick="state.complex.temp.sheikhEater=${i};renderComplexSection();" class="btn-dark ${t.sheikhEater === i ? 'active' : ''}">${E(p)}</button>
                         `).join('')}
                     </div>
+                    <button onclick="state.complex.temp.sheikhDoubled=!state.complex.temp.sheikhDoubled;renderComplexSection();" class="btn-dark ${t.sheikhDoubled ? 'active' : ''}" style="width:100%; margin-bottom:6px; font-size:11.5px;">
+                        🔥 تدبيل شيخ الكبة (الآكل -150 وصاحب الورقة +75)
+                    </button>
+                    ${t.sheikhDoubled ? `
+                        <div style="font-size: 11px; font-weight: 800; color: var(--emerald); margin-bottom: 4px;">✨ صاحب شيخ الكبة (+75):</div>
+                        <div class="grid-4" style="margin-bottom: 8px;">
+                            ${state.players.map((p, i) => `
+                                <button onclick="state.complex.temp.sheikhOwner=${i};renderComplexSection();" class="btn-dark ${t.sheikhOwner === i ? 'active' : ''}">${E(p)}</button>
+                            `).join('')}
+                        </div>
+                    ` : ''}
                     <div style="font-size: 12px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">2. توزيع البنات والديناري واللطوش لكل لاعب:</div>
                     <div class="grid-2" style="margin-bottom: 8px;">
                         ${state.players.map((p, i) => `
@@ -2859,7 +3016,16 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 if (sum(t.banatCount) !== 4) { showToast('⚠️ مجموع البنات لازم يكون 4'); return; }
                 if (sum(t.dinariCount) !== 13) { showToast('⚠️ مجموع الديناري لازم يكون 13'); return; }
                 if (sum(t.latooshCount) !== 13) { showToast('⚠️ مجموع اللطوش لازم يكون 13'); return; }
-                delta[t.sheikhEater] -= 75;
+                if (!t.sheikhDoubled) {
+                    delta[t.sheikhEater] -= 75;
+                } else {
+                    if (isSameSide(t.sheikhEater, t.sheikhOwner, cx.mode)) {
+                        delta[t.sheikhEater] -= (state.selfDoubleRule === 'net' ? 75 : 150);
+                    } else {
+                        delta[t.sheikhEater] -= 150;
+                        delta[t.sheikhOwner] += 75;
+                    }
+                }
                 for (let i = 0; i < 4; i++) {
                     delta[i] += (t.banatCount[i] * -25) + (t.dinariCount[i] * -10) + (t.latooshCount[i] * -15);
                 }
@@ -2930,8 +3096,9 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                     <div class="panel">
                         <div class="row" style="margin-bottom: 4px;">
                             <span onclick="openNamesModal()" style="font-size: 12.5px; font-weight: 900; cursor: pointer;">${rankMedalByIdx[p] || ''} ${E(p)}</span>
-                            <span style="font-size: 9.5px; color: var(--text-muted);">شريك ${E(partnerName)}</span>
+                            <button onclick="openScoreAdjustModal('syrian41', ${idx})" class="badge badge-gold" style="padding:2px 6px; font-size:9.5px; min-height:24px;">⚖️ تعديل</button>
                         </div>
+                        <div style="font-size: 9.5px; color: var(--text-muted); margin-bottom:2px;">شريك ${E(partnerName)}</div>
                         <div class="score-num ${sc >= 0 ? 'pos-score' : 'neg-score'}" style="margin-bottom: 6px;">${sc}</div>
                         <div style="font-size: 10px; color: var(--gold-bright); margin-bottom: 4px;">الطلب (الحد الأدنى ${minB}):</div>
                         <div class="counter-ctrl" style="margin-bottom: 6px;">
@@ -2973,7 +3140,13 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             const delta = [0, 0, 0, 0];
             for (let i = 0; i < 4; i++) {
                 const mult = sy.doubled[i] ? 2 : 1;
-                delta[i] = (sy.won[i] ? sy.bids[i] : -sy.bids[i]) * mult;
+                if (sy.won[i]) {
+                    const winVal = (sy.bids[i] === 13) ? 26 : sy.bids[i];
+                    delta[i] = winVal * mult;
+                } else {
+                    const lossVal = (sy.bids[i] === 13) ? 16 : sy.bids[i];
+                    delta[i] = -lossVal * mult;
+                }
                 sy.scores[i] += delta[i];
                 if (sy.scores[i] >= 45) autoCompleteChallenge('ch_sy45', state.players[i]);
             }
@@ -2986,8 +3159,20 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             saveState('syrian41');
             renderSyrian41Section();
             showToast('✅ تم تسجيل جولة الطرنيب السوري 41');
-            const mx = Math.max(...sy.scores);
-            if (mx >= 41) showToast(`🏆 🥇 المتصدر ${state.players[sy.scores.indexOf(mx)]} وصل ${mx} — فاز! احفظ المباراة بالأرشيف`, 8000);
+
+            // قانون جواكر الرسمي للسوري 41: وصول لاعب إلى 41+ وشريكه أكثر من 0 (1 فما فوق)
+            let winnersFound = [];
+            for (let i = 0; i < 4; i++) {
+                const partnerIdx = (i % 2 === 0) ? (i + 1) : (i - 1);
+                if (sy.scores[i] >= 41 && sy.scores[partnerIdx] > 0) {
+                    winnersFound.push({ idx: i, score: sy.scores[i], partnerIdx });
+                }
+            }
+            if (winnersFound.length > 0) {
+                winnersFound.sort((a, b) => b.score - a.score);
+                const w = winnersFound[0];
+                showToast(`🏆 مبروك الفوز حسب جواكر! ${state.players[w.idx]} وصل (${w.score}) وشريكه ${state.players[w.partnerIdx]} فوق الصفر (${sy.scores[w.partnerIdx]})!`, 8500);
+            }
         }
 
         function undoSyrianRound() {
@@ -3045,23 +3230,36 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             const bTeam = cl.bidder;
             const oTeam = 1 - bTeam;
             const delta = [0, 0];
+            const jawakerStrict = (cl.jawakerStrict !== false);
 
             if (cl.tricks >= cl.bid) {
-                delta[bTeam] = cl.tricks === 13 ? (cl.bid === 13 ? 26 : 16) : cl.tricks;
-                delta[oTeam] = 13 - cl.tricks;
+                if (cl.bid === 13 && cl.tricks === 13) {
+                    delta[bTeam] = 26; // طلب كبوت 13 وجابها
+                } else if (cl.tricks === 13) {
+                    delta[bTeam] = 16; // جاب 13 بدون ما يطلب كبوت
+                } else {
+                    delta[bTeam] = cl.tricks; // يأخذ عدد أكلاته
+                }
+                delta[oTeam] = (jawakerStrict || cl.tricks === 13) ? 0 : (13 - cl.tricks);
                 if (cl.tricks === 13) autoCompleteChallenge('ch_kaboot', state.teams[bTeam]);
             } else {
-                delta[bTeam] = -(cl.bid === 13 ? 26 : cl.bid);
-                delta[oTeam] = 13 - cl.tricks;
+                // انكسر الفريق المشتري:
+                delta[bTeam] = -(cl.bid === 13 ? 16 : cl.bid);
+                const oppTricks = 13 - cl.tricks;
+                // إذا أكل الخصم الـ 13 أكلة كاملة (المشتري 0 أكلات) يأخذ الخصم 16 نقطة كبوت!
+                delta[oTeam] = (oppTricks === 13) ? 16 : oppTricks;
             }
             cl.scores[0] += delta[0];
             cl.scores[1] += delta[1];
-            cl.history.unshift({ delta });
+            cl.history.unshift({ delta, bidder: bTeam, bid: cl.bid, tricks: cl.tricks });
             saveState('classic');
             renderClassicSection();
-            showToast('✅ تم تسجيل جولة الطرنيب العادي');
-            const mx = Math.max(...cl.scores);
-            if (mx >= cl.target) showToast(`🏆 🥇 الفائز: ${state.teams[cl.scores.indexOf(mx)]} (${mx}/${cl.target}) — احفظ المباراة بالأرشيف`, 8000);
+            showToast(`✅ طرنيب: ${state.teams[0]} (${delta[0] >= 0 ? '+' + delta[0] : delta[0]}) | ${state.teams[1]} (${delta[1] >= 0 ? '+' + delta[1] : delta[1]})`);
+            const s0 = cl.scores[0], s1 = cl.scores[1];
+            if ((s0 >= cl.target || s1 >= cl.target) && s0 !== s1) {
+                const winIdx = s0 > s1 ? 0 : 1;
+                showToast(`🏆 انتهت اللعبة! 🥇 الفائز: ${state.teams[winIdx]} (${cl.scores[winIdx]} مقابل ${cl.scores[1 - winIdx]})`, 8000);
+            }
         }
 
         function undoClassicRound() {
@@ -3492,13 +3690,29 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             a.addEventListener('play', () => { isRemotePlaying = true; updateMediaDockUI(); renderCuratedTarabList(); });
             a.addEventListener('pause', () => { isRemotePlaying = false; updateMediaDockUI(); renderCuratedTarabList(); });
             a.addEventListener('ended', () => {
-                if (repeatMode === 'one') { a.currentTime = 0; a.play(); return; }
-                if (repeatMode === 'off' && !shuffleOn && curIdx >= curQ().length - 1) {
+                const q = curQ();
+                if (!q || !q.length) {
                     isRemotePlaying = false;
                     updateMediaDockUI();
                     return;
                 }
-                stepTrack(1);
+                if (repeatMode === 'one') {
+                    a.currentTime = 0;
+                    a.play().catch(() => {});
+                    return;
+                }
+                if (repeatMode === 'off' && !shuffleOn && curIdx >= q.length - 1) {
+                    isRemotePlaying = false;
+                    updateMediaDockUI();
+                    return;
+                }
+                setTimeout(() => stepTrack(1), 150);
+            });
+            a.addEventListener('error', () => {
+                const q = curQ();
+                if (q && q.length > 1 && isRemotePlaying) {
+                    setTimeout(() => stepTrack(1), 300);
+                }
             });
         }
         function mediaRemoteCommand(cmd) {
@@ -3575,7 +3789,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                     .map((t,i) => {
                         const file = String(t.file).replace(/^\/+/, '');
                         const filenameTitle = decodeURIComponent(file.split('/').pop()).replace(/\.(mp3|m4a|aac|wav|ogg|opus|flac)$/i, '').replace(/[_]+/g, ' ').trim();
-                        return { id: t.id || `static-${i}`, title: t.title || filenameTitle || `مقطوعة ${i+1}`, artist: '', url: 'assets/music/' + file.split('/').map(encodeURIComponent).join('/') };
+                        return { id: t.id || `static-${i}`, title: t.title || filenameTitle || `مقطوعة ${i+1}`, artist: 'شِلّة بلس', url: 'assets/music/' + file.split('/').map(s => encodeURIComponent(decodeURIComponent(s))).join('/') };
                     });
             staticStatus = staticTracks.length ? 'ok' : 'empty';
             } catch (e) { staticTracks = []; staticStatus = 'error'; }
@@ -3634,7 +3848,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             const _sec = document.getElementById('sec-' + k); if (_sec) _sec.classList.toggle('setup-on', sv);
             document.body.classList.toggle('in-game', !sv);
             document.body.classList.remove('music-pop');
-            const nav = document.querySelector('.tabs-bar'); if (nav) nav.classList.toggle('hidden', !sv);
+            const nav = document.querySelector('.tabs-bar'); if (nav) nav.classList.add('hidden');
         }
         function buildExtraSetupScreens() {
             const mk = (key, icon, title, sub, controls) => {
@@ -3656,7 +3870,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             mk('classic', '🃏', 'إعداد الطرنيب', 'اختار سقف الفوز قبل البدء', '<div class="setup-label">🏁 سقف الفوز</div><div id="classicSetupModes" class="row" style="gap:8px;"></div>');
             const cm = document.getElementById('classicSetupModes');
             if (cm) ['clTarget31', 'clTarget61'].forEach(id => { const b = document.getElementById(id); if (b) cm.appendChild(b); });
-            mk('syrian41', '🔥', 'إعداد سوري 41', 'شرط الفوز: وصول لاعب إلى 41+ وشريكه صفر أو موجب', '');
+            mk('syrian41', '🔥', 'إعداد سوري 41', 'قانون جواكر: وصول لاعب إلى 41+ وشريكه أكثر من 0 (1 فما فوق)', '');
         }
         function showGameMusic() { isMediaDockMinimized = false; applyDockMin(); document.body.classList.add('music-pop'); }
         function openGamePlayScreen(key) {
@@ -5400,6 +5614,397 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
 document.addEventListener('click', ev => {
             const d = document.getElementById('mediaRemoteDock');
             if (d && !isMediaDockMinimized && !d.contains(ev.target)) { isMediaDockMinimized = true; applyDockMin(); document.body.classList.remove('music-pop'); }
+        });
+
+        // =================================================================
+        // 12. منع إطفاء الشاشة (Screen Wake Lock) + الزر العائم للموسيقى
+        // =================================================================
+        let _wakeLockSentinel = null;
+        async function requestKeepScreenAwake() {
+            try {
+                if ('wakeLock' in navigator && document.visibilityState === 'visible') {
+                    _wakeLockSentinel = await navigator.wakeLock.request('screen');
+                }
+            } catch (e) {}
+        }
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') requestKeepScreenAwake();
+        });
+        document.addEventListener('click', () => {
+            if (!_wakeLockSentinel) requestKeepScreenAwake();
+        }, { passive: true });
+
+        function toggleFloatingMusicBar() {
+            const isPop = document.body.classList.contains('music-pop');
+            if (isPop) {
+                isMediaDockMinimized = true;
+                applyDockMin();
+                document.body.classList.remove('music-pop');
+            } else {
+                isMediaDockMinimized = false;
+                applyDockMin();
+                document.body.classList.add('music-pop');
+            }
+        }
+
+        const _origSyncGameChrome = syncGameChrome;
+        syncGameChrome = function(k) {
+            _origSyncGameChrome(k);
+            const fab = document.getElementById('floatingMusicFab');
+            if (fab) fab.style.display = 'inline-flex';
+        };
+        const _origSwitchTab = switchTab;
+        switchTab = function(tabId) {
+            _origSwitchTab(tabId);
+            const isGame = ['trix','complex','syrian41','classic'].includes(tabId);
+            const fab = document.getElementById('floatingMusicFab');
+            if (fab) fab.style.display = isGame ? 'inline-flex' : 'none';
+        };
+
+        // =================================================================
+        // 13. نافذة تزويل / تعديل النقاط اليدوي (في حال الخربطة)
+        // =================================================================
+        let _adjGameKey = 'classic', _adjTargetIdx = 0;
+        function openScoreAdjustModal(gameKey, targetIdx) {
+            _adjGameKey = gameKey;
+            _adjTargetIdx = targetIdx;
+            const targetName = (gameKey === 'classic') ? state.teams[targetIdx] : state.players[targetIdx];
+            const curVal = (gameKey === 'classic') ? state.classic.scores[targetIdx] : state.syrian41.scores[targetIdx];
+            document.getElementById('scoreAdjustTitle').textContent = `⚖️ تزويل / تعديل: ${targetName}`;
+            document.getElementById('scoreAdjustSubtitle').textContent = `الرصيد الحالي: ${curVal} — اختر قيمة التعديل أو الخصم (تزويل):`;
+            document.getElementById('customDeltaScoreInput').value = '';
+            openModal('scoreAdjustModal');
+        }
+        function applyQuickScoreDelta(deltaVal) {
+            const d = Number(deltaVal) || 0;
+            if (!d) return;
+            if (_adjGameKey === 'classic') {
+                state.classic.scores[_adjTargetIdx] += d;
+                const histDelta = [0, 0];
+                histDelta[_adjTargetIdx] = d;
+                state.classic.history.unshift({ delta: histDelta });
+                saveState('classic');
+                renderClassicSection();
+            } else if (_adjGameKey === 'syrian41') {
+                state.syrian41.scores[_adjTargetIdx] += d;
+                const histDelta = [0, 0, 0, 0];
+                histDelta[_adjTargetIdx] = d;
+                state.syrian41.history.unshift({
+                    delta: histDelta,
+                    summary: `⚖️ تعديل يدوي على ${state.players[_adjTargetIdx]} (${d >= 0 ? '+' + d : d})`
+                });
+                saveState('syrian41');
+                renderSyrian41Section();
+            }
+            closeModal('scoreAdjustModal');
+            showToast(`✅ تم تعديل النقاط (${d >= 0 ? '+' + d : d}) بنجاح!`);
+        }
+        function applyCustomScoreDeltaFromInput() {
+            const val = parseInt(document.getElementById('customDeltaScoreInput').value, 10);
+            if (!val) { showToast('⚠️ أدخل رقم صحيح (مثال: -3 أو +5)'); return; }
+            applyQuickScoreDelta(val);
+        }
+
+        // =================================================================
+        // 14. إصلاح حفظ ومشاركة الصور داخل تطبيق الأندرويد APK (WebView)
+        // =================================================================
+        async function saveOrShareCanvasBlob(blob, fileName, titleText) {
+            if (!blob) { showToast('⚠️ تعذّر تجهيز الصورة'); return; }
+            const file = new File([blob], fileName, { type: 'image/png' });
+            if (navigator.canShare && navigator.canShare({ files: [file] }) && navigator.share) {
+                try {
+                    await navigator.share({ title: titleText, text: titleText, files: [file] });
+                    return;
+                } catch (err) {
+                    if (err && err.name === 'AbortError') return;
+                }
+            }
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const dataUrl = reader.result;
+                const a = document.createElement('a');
+                a.href = dataUrl;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                showToast('🖼️ تم حفظ الصورة في جهازك بنجاح!');
+            };
+            reader.readAsDataURL(blob);
+        }
+
+        shareArchiveAsImage = async function() {
+            const list = (state.archiveFilter && state.archiveFilter !== 'all')
+                ? (state.archiveByGame[state.archiveFilter] || []) : getAllArchivedMatches();
+            if (!list.length) { showToast('⚠️ ما في نتائج محفوظة لمشاركتها'); return; }
+            const selected = list.slice(0, 10);
+            const width = 1080, headerH = 230, cardH = 300, gap = 22;
+            const canvas = document.createElement('canvas');
+            canvas.width = width; canvas.height = headerH + selected.length * (cardH + gap) + 55;
+            const ctx = canvas.getContext('2d');
+            const grad = ctx.createLinearGradient(0,0,width,canvas.height);
+            grad.addColorStop(0,'#102c3d'); grad.addColorStop(1,'#030a12');
+            ctx.fillStyle = grad; ctx.fillRect(0,0,width,canvas.height);
+            ctx.textAlign='center'; ctx.direction='rtl';
+            ctx.fillStyle='#fbbf24'; ctx.font='bold 56px Arial';
+            ctx.fillText('شِلّة بلس | SHILLA PLUS',width/2,82);
+            ctx.fillStyle='#e2e8f0'; ctx.font='bold 31px Arial';
+            ctx.fillText('سجل نتائج المباريات',width/2,140);
+            selected.forEach((m,idx)=>{
+                const y=headerH+idx*(cardH+gap);
+                ctx.fillStyle='rgba(255,255,255,.06)'; ctx.fillRect(42,y,width-84,cardH);
+                ctx.strokeStyle='rgba(251,191,36,.48)'; ctx.lineWidth=2; ctx.strokeRect(42,y,width-84,cardH);
+                ctx.textAlign='right'; ctx.fillStyle='#fbbf24'; ctx.font='bold 31px Arial';
+                ctx.fillText(String(m.game||'مباراة')+(m.tableSlot?' • '+m.tableSlot:''),width-76,y+48);
+                ctx.textAlign='left'; ctx.fillStyle='#94a3b8'; ctx.font='21px Arial';
+                ctx.fillText(String(m.date||''),72,y+48);
+                const parts=String(m.summary||'').split('|').map(x=>x.trim()).filter(Boolean).slice(0,4);
+                const colW=(width-150)/Math.max(1,parts.length);
+                parts.forEach((part,i)=>{
+                    const cut=part.lastIndexOf(':');
+                    const name=cut>=0?part.slice(0,cut).trim():part;
+                    const score=cut>=0?part.slice(cut+1).trim():'—';
+                    const x=width-75-i*colW, top=y+82;
+                    ctx.fillStyle='rgba(3,14,24,.78)'; ctx.fillRect(x-colW+12,top,colW-12,190);
+                    ctx.textAlign='center'; ctx.fillStyle='#f8fafc'; ctx.font='bold 25px Arial';
+                    ctx.fillText(name.slice(0,18),x-colW/2+6,top+65);
+                    ctx.fillStyle='#34d399'; ctx.font='bold 42px Arial';
+                    ctx.fillText(score.slice(0,12),x-colW/2+6,top+135);
+                });
+            });
+            const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+            await saveOrShareCanvasBlob(blob, `shilla-results-${Date.now()}.png`, 'نتائج شِلّة بلس');
+        };
+
+        // =================================================================
+        // 15. الحاسبة العادية الإضافية (Standard Calculator)
+        // =================================================================
+        let _stdCalcExpr = '';
+        function openStdCalcModal() {
+            _stdCalcExpr = '';
+            document.getElementById('stdCalcDisplay').textContent = '0';
+            document.getElementById('stdCalcHistory').textContent = '';
+            openModal('stdCalcModal');
+        }
+        function stdCalcPress(key) {
+            const disp = document.getElementById('stdCalcDisplay');
+            const hist = document.getElementById('stdCalcHistory');
+            if (key === 'C') {
+                _stdCalcExpr = '';
+                disp.textContent = '0';
+                hist.textContent = '';
+                return;
+            }
+            if (key === 'DEL') {
+                _stdCalcExpr = _stdCalcExpr.slice(0, -1);
+                disp.textContent = _stdCalcExpr || '0';
+                return;
+            }
+            if (key === '%') {
+                try {
+                    const val = Function('"use strict";return (' + (_stdCalcExpr || '0') + ')')();
+                    _stdCalcExpr = String(Number((val / 100).toFixed(6)));
+                    disp.textContent = _stdCalcExpr;
+                } catch (e) {}
+                return;
+            }
+            if (key === '=') {
+                if (!_stdCalcExpr) return;
+                try {
+                    const safeExpr = _stdCalcExpr.replace(/[^0-9+\-*/.()]/g, '');
+                    const res = Function('"use strict";return (' + safeExpr + ')')();
+                    if (!isFinite(res)) throw new Error('Math error');
+                    const finalStr = String(Number(res.toFixed(6)));
+                    hist.textContent = _stdCalcExpr + ' =';
+                    _stdCalcExpr = finalStr;
+                    disp.textContent = finalStr;
+                } catch (e) {
+                    disp.textContent = 'خطأ';
+                    _stdCalcExpr = '';
+                }
+                return;
+            }
+            if ('+-*/'.includes(key) && _stdCalcExpr && '+-*/'.includes(_stdCalcExpr.slice(-1))) {
+                _stdCalcExpr = _stdCalcExpr.slice(0, -1) + key;
+            } else {
+                _stdCalcExpr += key;
+            }
+            disp.textContent = _stdCalcExpr;
+        }
+
+        // =================================================================
+        // 16. نظام الإعلانات الأونلاين المباشر بمجرد اختيار الصورة
+        // =================================================================
+        const GLOBAL_AD_TOPIC = 'shilla_plus_global_ads_karemyseer_2026';
+        let _adFadeInterval = null;
+
+        function encodeAndPublishAdDirectly(ev) {
+            const file = ev.target.files && ev.target.files[0];
+            ev.target.value = '';
+            if (!file) return;
+            if (!navigator.onLine) { showToast('⚠️ يجب أن تكون متصلاً بالإنترنت لنشر الإعلان'); return; }
+            showToast('⏳ جاري ضغط الصورة ونشر الإعلان مباشرة لجميع النسخ...');
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = async () => {
+                    try {
+                        // 1. محاولة رفع الصورة عالية الدقة كملف مباشر على سيرفر ntfy للحصول على رابط CDN سريع
+                        const maxW = 680;
+                        const scale = Math.min(1, maxW / img.width);
+                        const c = document.createElement('canvas');
+                        c.width = Math.round(img.width * scale);
+                        c.height = Math.round(img.height * scale);
+                        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+
+                        const blob = await new Promise(res => c.toBlob(res, 'image/jpeg', 0.78));
+                        let finalImageUrl = '';
+
+                        try {
+                            const upRes = await fetch(`https://ntfy.sh/${GLOBAL_AD_TOPIC}`, {
+                                method: 'PUT',
+                                headers: { 'Filename': 'shilla_ad.jpg' },
+                                body: blob
+                            });
+                            if (upRes.ok) {
+                                const upJson = await upRes.json();
+                                if (upJson && upJson.attachment && upJson.attachment.url) {
+                                    finalImageUrl = upJson.attachment.url;
+                                }
+                            }
+                        } catch (uploadErr) {}
+
+                        // 2. إذا لم يتوفر رابط مرفق، نضغطها لـ DataURL خفيف (< 3.4KB) لضمان قبولها 100%
+                        if (!finalImageUrl) {
+                            const smallScale = Math.min(1, 220 / img.width);
+                            const c2 = document.createElement('canvas');
+                            c2.width = Math.round(img.width * smallScale);
+                            c2.height = Math.round(img.height * smallScale);
+                            c2.getContext('2d').drawImage(img, 0, 0, c2.width, c2.height);
+                            finalImageUrl = c2.toDataURL('image/jpeg', 0.45);
+                        }
+
+                        document.getElementById('devAdImageUrlInput').value = finalImageUrl;
+                        await publishGlobalAdNow(true);
+                    } catch (err) {
+                        showToast('⚠️ تعذّر معالجة الصورة، حاول مرة أخرى');
+                    }
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function publishGlobalAdNow(active) {
+            if (!navigator.onLine) { showToast('⚠️ يجب أن تكون متصلاً بالإنترنت لنشر الإعلان'); return; }
+            const title = (document.getElementById('devAdTitleInput').value || '').trim();
+            const imgUrl = (document.getElementById('devAdImageUrlInput').value || '').trim();
+            const linkUrl = (document.getElementById('devAdLinkUrlInput').value || '').trim();
+            const duration = Math.max(3, Math.min(30, parseInt(document.getElementById('devAdDurationInput').value, 10) || 8));
+            if (active && !imgUrl) { showToast('⚠️ اختر صورة الإعلان أولاً'); return; }
+
+            const adPayload = {
+                id: 'ad_' + Date.now(),
+                active: !!active,
+                title: title || 'إعلان خاص — شِلّة بلس',
+                imgUrl: active ? imgUrl : '',
+                linkUrl: active ? linkUrl : '',
+                duration: duration,
+                ts: Date.now()
+            };
+            try {
+                const postRes = await fetch(`https://ntfy.sh/${GLOBAL_AD_TOPIC}`, {
+                    method: 'POST',
+                    body: JSON.stringify(adPayload)
+                });
+                if (!postRes.ok) throw new Error('Publish rejected');
+                localStorage.setItem('SHILLA_GLOBAL_AD_CACHE', JSON.stringify(adPayload));
+                if (active) {
+                    closeModal('devPortalModal');
+                    showToast('🚀 تم نشر الإعلان مباشرة لكل نسخ التطبيق أونلاين!');
+                    displayGlobalPromoAdModal(adPayload);
+                } else {
+                    showToast('🗑️ تم إيقاف وحذف الإعلان من جميع الأجهزة');
+                }
+            } catch (e) {
+                showToast('⚠️ فشل إرسال الإعلان، تأكد من الاتصال');
+            }
+        }
+
+        function displayGlobalPromoAdModal(ad) {
+            if (!ad || !ad.active || !ad.imgUrl) return;
+            const overlay = document.getElementById('globalPromoAdOverlay');
+            const img = document.getElementById('globalPromoAdImg');
+            const titleEl = document.getElementById('globalPromoAdTitle');
+            const countEl = document.getElementById('globalPromoAdCountdown');
+            const anchor = document.getElementById('globalPromoAdAnchor');
+            if (!overlay || !img) return;
+
+            titleEl.textContent = ad.title || '';
+            img.src = ad.imgUrl;
+            if (anchor) anchor.setAttribute('href', ad.linkUrl || '#');
+            overlay.style.opacity = '1';
+            overlay.classList.remove('hidden');
+
+            let left = Number(ad.duration) || 8;
+            countEl.textContent = `يتلاشى خلال ${left}ث`;
+            clearInterval(_adFadeInterval);
+            _adFadeInterval = setInterval(() => {
+                left--;
+                if (left > 0) {
+                    countEl.textContent = `يتلاشى خلال ${left}ث`;
+                } else {
+                    clearInterval(_adFadeInterval);
+                    dismissGlobalPromoAd();
+                }
+            }, 1000);
+        }
+
+        function dismissGlobalPromoAd() {
+            clearInterval(_adFadeInterval);
+            const overlay = document.getElementById('globalPromoAdOverlay');
+            if (!overlay) return;
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.classList.add('hidden'), 550);
+        }
+
+        async function checkAndShowGlobalPromoAdOnStartup() {
+            try {
+                const cached = JSON.parse(localStorage.getItem('SHILLA_GLOBAL_AD_CACHE') || 'null');
+                if (cached && cached.active && cached.imgUrl) {
+                    displayGlobalPromoAdModal(cached);
+                }
+            } catch (e) {}
+
+            if (!navigator.onLine) return;
+            try {
+                const res = await fetch(`https://ntfy.sh/${GLOBAL_AD_TOPIC}/json?poll=1&since=72h`);
+                if (!res.ok) return;
+                const rawText = await res.text();
+                const lines = rawText.split(/\r?\n/).filter(Boolean);
+                let latestAd = null;
+                for (const line of lines) {
+                    try {
+                        const w = JSON.parse(line);
+                        if (w && w.event === 'message' && w.message) {
+                            const parsed = JSON.parse(w.message);
+                            if (parsed && parsed.ts) latestAd = parsed;
+                        }
+                    } catch (e) {}
+                }
+                if (latestAd) {
+                    const prev = JSON.parse(localStorage.getItem('SHILLA_GLOBAL_AD_CACHE') || '{}');
+                    localStorage.setItem('SHILLA_GLOBAL_AD_CACHE', JSON.stringify(latestAd));
+                    if (latestAd.active && latestAd.id !== prev.id) {
+                        displayGlobalPromoAdModal(latestAd);
+                    }
+                }
+            } catch (e) {}
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            requestKeepScreenAwake();
+            setTimeout(checkAndShowGlobalPromoAdOnStartup, 1100);
         });
 </script>
 </body>
