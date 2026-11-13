@@ -603,6 +603,15 @@
             color: #fda4af;
             border-color: rgba(244, 63, 94, 0.45);
         }
+        .victory-lock-banner {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.28) 0%, rgba(245, 158, 11, 0.26) 100%);
+            border: 2px solid var(--gold-bright);
+            border-radius: 18px;
+            padding: 14px;
+            margin-bottom: 12px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
+        }
         .home-tools-grid button {
             display: flex;
             flex-direction: column;
@@ -1154,7 +1163,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 <div>
                     <div class="row-wrap" style="justify-content: flex-start; gap: 5px;">
                         <h1 style="font-size: 16.5px; font-weight: 900; color: var(--gold-bright);">شِلّة بلس</h1>
-                        <span class="badge badge-cyan" style="font-size: 9px; padding: 2px 7px;">v13.2 Pro • Jawaker & QR</span>
+                        <span class="badge badge-cyan" style="font-size: 9px; padding: 2px 7px;">v14.0 Pro • APK & iOS</span>
                         <span id="liveHeaderIndicator" onclick="switchTab('live')" class="badge badge-emerald" style="cursor: pointer; font-size: 9.5px;">🟢 متصل</span>
                     </div>
                     <p style="font-size: 10.5px; color: var(--text-muted); font-weight: 800; margin-top: 2px;">
@@ -1164,7 +1173,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             </div>
             <div class="row" style="gap: 4px;">
                 <button id="tableToggleBtn" onclick="toggleActiveTableSlot()" class="btn-dark active" style="padding: 7px 8px; font-size: 10.5px;" title="تبديل الطاولة عند فتح طاولتين بموبايلين">🃏 طاولة 1</button>
-                <button onclick="event.stopPropagation();showGameMusic()" class="btn-dark hdr-music" style="padding: 8px 10px; font-size: 14px;">🎵</button>
+                <button onclick="event.stopPropagation();openStdCalcModal()" class="btn-dark hdr-music" style="padding: 8px 10px; font-size: 15px;" title="الحاسبة السريعة">🧮</button>
                 <button onclick="openNamesModal()" class="btn-gold" style="padding: 8px 9px; font-size: 11px;">✏️ الأسماء</button>
             </div>
         </div>
@@ -1316,10 +1325,13 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             <div class="row" style="margin-bottom: 8px;">
                 <div>
                     <h2 style="font-size: 14px; font-weight: 900; color: var(--gold-bright);">🔥 الطرنيب السوري (41)</h2>
-                    <p style="font-size: 10.5px; color: var(--text-muted);">قانون جواكر: وصول لاعب إلى 41+ وشريكه أكثر من 0 (1 فما فوق)</p>
+                    <p style="font-size: 10.5px; color: var(--text-muted);">شرط الفوز: وصول لاعب إلى 41+ وشريكه أكثر من 0 (1 فما فوق)</p>
                 </div>
                 <span id="syrianTotalBidsBadge" class="badge badge-emerald">مجموع الطلبات: 12</span>
             </div>
+
+            <!-- إعلان إيقاف اللعبة عند الفوز -->
+            <div id="syrianVictoryBanner" class="victory-lock-banner hidden"></div>
 
             <!-- منصة متصدري السوري 41 الحية -->
             <div id="syrianLivePodium"></div>
@@ -1332,7 +1344,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
 
             <div class="row" style="gap: 6px;">
                 <button onclick="undoSyrianRound()" class="btn-dark">↩️ تراجع</button>
-                <button onclick="commitSyrian41Round()" class="btn-gold" style="flex: 1.5; padding: 10px;">✅ تسجيل جولة السوري 41</button>
+                <button id="commitSyrianBtn" onclick="commitSyrian41Round()" class="btn-gold" style="flex: 1.5; padding: 10px;">✅ تسجيل جولة السوري 41</button>
                 <button onclick="saveMatchToArchive('syrian41', 'طرنيب سوري 41')" class="btn-emerald">💾 حفظ بالأرشيف</button>
             </div>
         </div>
@@ -1354,16 +1366,12 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 </div>
             </div>
 
-            <div class="row panel" style="margin-bottom: 8px; padding: 7px 10px;">
-                <span style="font-size: 11px; font-weight: 800; color: var(--gold-bright);">⚖️ نظام الاحتساب:</span>
-                <select id="classicJawakerRuleSel" onchange="state.classic.jawakerStrict=(this.value==='jawaker');saveState('classic');" class="input-box" style="width: auto; padding: 4px 8px; font-size: 11px;">
-                    <option value="jawaker" selected>قانون جواكر الرسمي (المشتري فقط عند النجاح)</option>
-                    <option value="both">احتساب أكلات الفريقين معاً عند النجاح</option>
-                </select>
+            <div class="row" style="margin-bottom: 8px;">
+                <span id="classicActiveRuleBadge" class="badge badge-cyan" style="font-size: 10.5px;">⚖️ النظام القياسي</span>
+                <button onclick="openGameSetupScreen('classic')" class="badge badge-gold" style="cursor: pointer; font-size: 10.5px;">⚙️ تغيير النظام والسقف</button>
             </div>
-            <div class="panel" style="margin-bottom: 8px; padding: 7px 10px; font-size: 10.5px; color: var(--text-secondary); border-color: rgba(56,189,248,0.35);">
-                📌 <strong>قانون جواكر للـ 13:</strong> إذا جاب الفريق <strong>13 أكلة بدون طلبها</strong> يأخذ <strong>+16</strong> • إذا طلب <strong>13 (كبوت) ونجح</strong> يأخذ <strong>+26</strong> • إذا طلب <strong>13 وانكسر</strong> يُخصم <strong>-16</strong> ويأخذ الخصم أكلاته (أو +16 إذا أكلها كلها).
-            </div>
+
+            <div id="classicVictoryBanner" class="victory-lock-banner hidden"></div>
             <div id="classicLeaderBanner" class="panel" style="margin-bottom: 10px; font-size: 11.5px; text-align: center; border-color: var(--gold);"></div>
 
             <div class="grid-2" style="margin-bottom: 10px;">
@@ -1388,8 +1396,13 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                     <button id="clBidder1Btn" onclick="setClassicBidder(1)" class="btn-dark">فريق لهم</button>
                 </div>
 
-                <div style="font-size: 11.5px; font-weight: 800; margin-bottom: 6px;">2. قيمة الطلب (7 إلى 13 كبوت):</div>
-                <div id="classicBidGrid" class="grid-7" style="margin-bottom: 10px;"></div>
+                <div id="classicForced10Banner" class="panel hidden" style="margin-bottom: 8px; padding: 8px 10px; border-color: var(--crimson); background: rgba(244,63,94,0.14); font-size: 11px;">
+                    <div style="color: #fda4af; font-weight: 900; margin-bottom: 5px;">🔒 هذا الفريق وصل 50+ نقطة — مجبر يضمن 10 على الأقل أو يمرر الضمان!</div>
+                    <button type="button" onclick="setClassicBidder(1 - state.classic.bidder)" class="btn-dark" style="width: 100%; min-height: 36px; padding: 6px; font-size: 11.5px; border-color: var(--gold-bright); color: var(--gold-bright);">🔄 عدم الضمان (تمرير الضمان للفريق الآخر)</button>
+                </div>
+
+                <div style="font-size: 11.5px; font-weight: 800; margin-bottom: 6px;">2. قيمة الطلب (7 إلى 13 أو كبوت):</div>
+                <div id="classicBidGrid" class="grid-4" style="margin-bottom: 10px;"></div>
 
                 <div style="font-size: 11.5px; font-weight: 800; margin-bottom: 6px;">3. كم أكلة جاب الفريق المشتري؟</div>
                 <div id="classicTricksGrid" class="grid-5"></div>
@@ -1397,7 +1410,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
 
             <div class="row" style="gap: 6px;">
                 <button onclick="undoClassicRound()" class="btn-dark">↩️ تراجع</button>
-                <button onclick="commitClassicTarneebRound()" class="btn-gold" style="flex: 1.5; padding: 10px;">✅ تسجيل الجولة</button>
+                <button id="commitClassicBtn" onclick="commitClassicTarneebRound()" class="btn-gold" style="flex: 1.5; padding: 10px;">✅ تسجيل الجولة</button>
                 <button onclick="saveMatchToArchive('classic', 'طرنيب عادي')" class="btn-emerald">💾 حفظ بالأرشيف</button>
             </div>
         </div>
@@ -1609,7 +1622,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
 
     <footer class="text-center" style="margin: 14px 0 32px 0; position: relative; z-index: 1;">
         <div onclick="openDevPortalModal()" class="badge badge-gold" style="padding: 8px 18px; font-size: 12px; cursor: pointer;">
-            👑 شِلّة بلس • <span style="color: #22d3ee;">v13.2 Pro • Jawaker & QR</span> • <strong>SHILLA PLUS</strong> • <span style="color:#fde047;">BY : karemyseer 2026</span><br><span style="display:block;margin-top:7px;font-size:11px;line-height:1.9;color:var(--text-muted);">للتواصل: <a href="tel:0991134433" style="color:var(--cyan);text-decoration:none;direction:ltr;display:inline-block;">0991134433</a><br><strong style="color:var(--gold-bright);letter-spacing:.5px;">TECH ZONE STORE</strong></span>
+            👑 شِلّة بلس • <span style="color: #22d3ee;">v14.0 Pro • APK & iOS</span> • <strong>SHILLA PLUS</strong> • <span style="color:#fde047;">BY : karemyseer 2026</span><br><span style="display:block;margin-top:7px;font-size:11px;line-height:1.9;color:var(--text-muted);">للتواصل: <a href="tel:0991134433" style="color:var(--cyan);text-decoration:none;direction:ltr;display:inline-block;">0991134433</a><br><strong style="color:var(--gold-bright);letter-spacing:.5px;">TECH ZONE STORE</strong></span>
         </div>
     </footer>
 
@@ -1739,11 +1752,12 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 <button onclick="clearLibrary()" class="btn-dark" style="font-size: 11px;">🗑️ مسح المكتبة</button>
             </div>
             <input id="libFilterInput" type="text" placeholder="🔍 فلتر بالمكتبة..." oninput="renderCuratedTarabList()" class="input-box" style="font-size: 11.5px; margin-bottom: 8px;">
-            <div id="curatedTarabListContainer" style="max-height: 300px; overflow-y: auto; margin-bottom: 10px;"></div>
-            <div class="panel" style="margin:8px 0;">
-                <div style="font-size:12px;font-weight:900;color:var(--gold-bright);margin-bottom:6px;">🎧 أغاني شِلّة المضمّنة داخل التطبيق</div>
-                <div id="staticMusicListContainer" style="max-height:150px;overflow-y:auto;"><span style="font-size:11px;color:var(--text-muted);">الأغاني الثابتة تُضاف بوضع ملفات MP3 داخل www/assets/music ثم تشغيل prepare_music.py قبل بناء التطبيق.</span></div>
+            <div class="panel" style="margin:8px 0; border-color: rgba(251,191,36,0.45);">
+                <div style="font-size:13px;font-weight:950;color:var(--gold-bright);margin-bottom:8px;">🎧 أغاني شِلّة المضمّنة داخل التطبيق</div>
+                <div id="staticMusicListContainer" style="max-height:330px; min-height:180px; overflow-y:auto;"><span style="font-size:11px;color:var(--text-muted);">الأغاني الثابتة تُضاف بوضع ملفات MP3 داخل www/assets/music ثم تشغيل prepare_music.py قبل بناء التطبيق.</span></div>
             </div>
+            <div style="font-size:12px;font-weight:900;color:var(--cyan);margin:8px 0 5px 0;">📱 أغاني إضافية من جهازك:</div>
+            <div id="curatedTarabListContainer" style="max-height: 220px; overflow-y: auto; margin-bottom: 10px;"></div>
         </div>
     </div>
 
@@ -1757,30 +1771,43 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             <div id="devPinEntryBox">
                 <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 8px;">أدخل الرقم السري الخاص بالمطور للوصول إلى لوحة التحكم والإعلانات:</p>
                 <div class="row" style="gap: 6px;">
-                    <input id="devPinInput" type="password" placeholder="••••" class="input-box" style="text-align: center; font-size: 16px; letter-spacing: 4px;">
+                    <input id="devPinInput" type="password" placeholder="•••••••" class="input-box" style="text-align: center; font-size: 16px; letter-spacing: 4px;">
                     <button onclick="verifyDevPin()" class="btn-gold">دخول</button>
                 </div>
             </div>
             <div id="devUnlockedBox" class="hidden">
-                <!-- قسم نشر إعلان منبثق لكل النسخ أونلاين -->
+                <!-- قسم البث العام: إعلان مصور + مقطع صوتي/موسيقى عند فتح التطبيق لكل النسخ -->
                 <div class="panel" style="margin-bottom: 10px; border-color: var(--gold-bright);">
-                    <div style="font-size: 12.5px; font-weight: 950; color: var(--gold-bright); margin-bottom: 6px;">📢 إعلان مصور فوري لكل مستخدمي التطبيق (أونلاين)</div>
-                    <p style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 8px;">بمجرد اختيار صورة من جهازك سيتم ضغطها ونشرها مباشرة لكل النسخ أونلاين بدون أي خطوات إضافية.</p>
-                    <label class="btn-gold" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-size:13px;padding:12px;margin-bottom:8px;">
-                        🚀 اختر صورة الإعلان للنشر المباشر الآن
-                        <input type="file" accept="image/*" class="hidden" onchange="encodeAndPublishAdDirectly(event)">
-                    </label>
+                    <div style="font-size: 12.5px; font-weight: 950; color: var(--gold-bright); margin-bottom: 6px;">📢 البث العام لكل مستخدمي التطبيق (إعلان مصور + صوت ترحيبي)</div>
+                    <p style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 8px;">اختر صورة للإعلان أو مقطع صوتي/موسيقى؛ سيُحفظ بشكل دائم ويظهر تلقائياً عند فتح التطبيق لدى جميع المستخدمين أونلاين.</p>
+
+                    <div class="grid-2" style="margin-bottom: 8px;">
+                        <label class="btn-gold" style="display:flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;font-size:12px;padding:11px 6px;">
+                            🖼️ نشر صورة إعلان
+                            <input type="file" accept="image/*" class="hidden" onchange="encodeAndPublishAdDirectly(event)">
+                        </label>
+                        <label class="btn-emerald" style="display:flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;font-size:12px;padding:11px 6px;">
+                            🎵 نشر مقطع صوت/موسيقى
+                            <input type="file" accept="audio/*,.mp3,.m4a,.ogg,.wav,.aac" class="hidden" onchange="encodeAndPublishStartupAudio(event)">
+                        </label>
+                    </div>
+
                     <details style="margin-bottom: 8px;">
-                        <summary style="font-size: 11px; color: var(--cyan); cursor: pointer; font-weight: 800;">⚙️ خيارات إضافية للإعلان (عنوان / رابط / ثواني التلاشي)</summary>
+                        <summary style="font-size: 11px; color: var(--cyan); cursor: pointer; font-weight: 800;">⚙️ خيارات إضافية للبث (عنوان / رابط / ثواني التلاشي)</summary>
                         <div style="margin-top: 8px; display: grid; gap: 6px;">
-                            <input id="devAdTitleInput" class="input-box" placeholder="عنوان الإعلان (اختياري)" style="font-size: 11.5px;">
-                            <input id="devAdImageUrlInput" class="input-box" placeholder="أو رابط صورة مباشر (اختياري)" style="font-size: 11.5px; direction: ltr;">
+                            <input id="devAdTitleInput" class="input-box" placeholder="عنوان الإعلان أو المقطع الصوتي (اختياري)" style="font-size: 11.5px;">
+                            <input id="devAdImageUrlInput" class="input-box" placeholder="رابط صورة مباشر (اختياري)" style="font-size: 11.5px; direction: ltr;">
+                            <input id="devAdAudioUrlInput" class="input-box" placeholder="رابط ملف صوت MP3 مباشر (اختياري)" style="font-size: 11.5px; direction: ltr;">
                             <input id="devAdLinkUrlInput" class="input-box" placeholder="رابط عند الضغط على الصورة (اختياري)" style="font-size: 11.5px; direction: ltr;">
                             <input id="devAdDurationInput" type="number" min="3" max="30" value="8" class="input-box" placeholder="ثواني التلاشي (8)" style="font-size: 11.5px; text-align: center;">
-                            <button onclick="publishGlobalAdNow(true)" class="btn-emerald" style="padding: 8px; font-size: 11.5px;">نشر الرابط يدوياً</button>
+                            <button onclick="publishGlobalBroadcastNow(true)" class="btn-dark" style="padding: 8px; font-size: 11.5px; border-color: var(--gold-bright);">🚀 حفظ ونشر الإعدادات يدوياً</button>
                         </div>
                     </details>
-                    <button onclick="publishGlobalAdNow(false)" class="btn-crimson" style="width:100%; padding: 9px; font-size: 11.5px;">🗑️ إيقاف وحذف الإعلان الحالي من جميع الأجهزة</button>
+
+                    <div class="grid-2">
+                        <button onclick="clearGlobalAdImageOnly()" class="btn-dark" style="padding: 8px; font-size: 11px; color: #fda4af;">🗑️ إيقاف الصورة فقط</button>
+                        <button onclick="publishGlobalBroadcastNow(false)" class="btn-crimson" style="padding: 8px; font-size: 11px;">⛔ إيقاف الصورة والصوت معاً</button>
+                    </div>
                 </div>
 
                 <div class="panel" style="margin-bottom: 10px;">
@@ -1805,7 +1832,41 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
         🎵
     </button>
 
-    <!-- نافذة تزويل / تعديل النقاط اليدوي (في حال الخربطة أو العقوبات) -->
+    <!-- شريط المقطع الصوتي / الموسيقى الترحيبي عند فتح التطبيق -->
+    <div id="startupBroadcastAudioBar" class="hidden" style="position:fixed; top:calc(12px + env(safe-area-inset-top, 0px)); left:12px; right:12px; max-width:696px; margin:0 auto; z-index:290; background:linear-gradient(135deg,#132347,#091229); border:2px solid var(--gold-bright); border-radius:18px; padding:10px 14px; box-shadow:0 12px 30px rgba(0,0,0,0.85);">
+        <div class="row">
+            <div class="row" style="gap:8px; overflow:hidden; flex:1;">
+                <span style="font-size:20px;">🔊</span>
+                <div style="overflow:hidden;">
+                    <div id="startupAudioTitleText" style="font-size:12.5px; font-weight:950; color:var(--gold-bright); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">مقطع ترحيبي من شِلّة بلس</div>
+                    <div id="startupAudioSubText" style="font-size:10.5px; color:var(--text-secondary);">جاري التشغيل...</div>
+                </div>
+            </div>
+            <div class="row" style="gap:6px;">
+                <button type="button" id="startupAudioPlayToggleBtn" onclick="toggleStartupBroadcastAudio()" class="btn-gold" style="min-height:36px; padding:6px 12px; font-size:12px;">⏸ إيقاف مؤقت</button>
+                <button type="button" onclick="stopAndHideStartupBroadcastAudio()" class="btn-crimson" style="min-height:36px; padding:6px 10px; font-size:12px;">✖</button>
+            </div>
+        </div>
+        <audio id="startupBroadcastAudioEl" playsinline></audio>
+    </div>
+
+    <!-- نافذة معاينة وحفظ الصورة المضمونة للأندرويد APK -->
+    <div id="imageSavePreviewModal" class="modal-backdrop hidden" style="z-index: 280;">
+        <div class="modal-card" style="border-color: var(--emerald); max-width: 440px; text-align: center;">
+            <div class="row" style="margin-bottom: 10px;">
+                <h3 style="font-size: 14.5px; font-weight: 950; color: var(--emerald);">🖼️ صورة النتائج جاهزة</h3>
+                <button onclick="closeModal('imageSavePreviewModal')" class="btn-dark" style="min-height:36px;padding:6px 10px;">✖</button>
+            </div>
+            <p style="font-size: 11.5px; color: var(--gold-bright); font-weight: 800; margin-bottom: 8px;">💡 اضغط مطوّلاً على الصورة بالأسفل واختر (حفظ الصورة) أو استخدم زر المشاركة:</p>
+            <img id="imageSavePreviewImg" src="" alt="نتائج شلة بلس" style="width:100%; max-height:58vh; object-fit:contain; border-radius:14px; border:2px solid var(--gold-bright); margin-bottom: 10px; -webkit-touch-callout: default; user-select: auto;">
+            <div class="grid-2">
+                <button type="button" id="imageSaveNativeShareBtn" class="btn-emerald" style="font-size: 12.5px;">📤 مشاركة / حفظ بالمعرض</button>
+                <a id="imageSaveDirectDownloadLink" href="#" download="shilla-results.png" class="btn-gold" style="display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:12.5px;border-radius:14px;">⬇️ تنزيل الملف</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة تزويل / تعديل النقاط اليدوي -->
     <div id="scoreAdjustModal" class="modal-backdrop hidden">
         <div class="modal-card" style="border-color: var(--gold-bright); max-width: 390px;">
             <div class="row" style="margin-bottom: 10px;">
@@ -1932,9 +1993,6 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                         sheikhDoubled: false,
                         sheikhOwner: 1,
                         banatCount: [1, 1, 1, 1],
-                        banatDoubledCount: 0,
-                        banatDoubleEater: 0,
-                        banatDoubleOwner: 1,
                         dinariCount: [4, 3, 3, 3],
                         latooshCount: [4, 3, 3, 3],
                         trixRank: []
@@ -3074,13 +3132,71 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             return 2;
         }
 
+        function checkSyrian41WinnerState(sy) {
+            let winnersFound = [];
+            for (let i = 0; i < 4; i++) {
+                const partnerIdx = (i % 2 === 0) ? (i + 1) : (i - 1);
+                if (sy.scores[i] >= 41 && sy.scores[partnerIdx] > 0) {
+                    winnersFound.push({ idx: i, score: sy.scores[i], partnerIdx, partnerScore: sy.scores[partnerIdx] });
+                }
+            }
+            if (winnersFound.length > 0) {
+                winnersFound.sort((a, b) => b.score - a.score);
+                const w = winnersFound[0];
+                sy.gameOver = true;
+                sy.winnerInfo = {
+                    winnerName: state.players[w.idx],
+                    winnerScore: w.score,
+                    partnerName: state.players[w.partnerIdx],
+                    partnerScore: w.partnerScore
+                };
+                return sy.winnerInfo;
+            }
+            sy.gameOver = false;
+            sy.winnerInfo = null;
+            return null;
+        }
+
         function renderSyrian41Section() {
             const sy = state.syrian41;
+            const winInfo = checkSyrian41WinnerState(sy);
+            const vBanner = document.getElementById('syrianVictoryBanner');
+            const commitBtn = document.getElementById('commitSyrianBtn');
+
+            if (vBanner) {
+                if (winInfo) {
+                    vBanner.classList.remove('hidden');
+                    vBanner.innerHTML = `
+                        <div style="font-size: 16px; font-weight: 950; color: var(--gold-bright); margin-bottom: 4px;">🏆 انتهت المباراة! مبروك الفوز</div>
+                        <div style="font-size: 13px; font-weight: 900; color: #fff; margin-bottom: 10px;">
+                            🥇 الفائز: <span style="color:var(--emerald-bright);">${E(winInfo.winnerName)} (${winInfo.winnerScore})</span> + شريكه <span style="color:var(--emerald-bright);">${E(winInfo.partnerName)} (${winInfo.partnerScore})</span>
+                        </div>
+                        <div class="grid-2">
+                            <button type="button" onclick="saveMatchToArchive('syrian41', 'طرنيب سوري 41')" class="btn-emerald" style="font-size: 12px; padding: 10px;">💾 حفظ بالأرشيف وبدء جولة جديدة</button>
+                            <button type="button" onclick="undoSyrianRound()" class="btn-dark" style="font-size: 12px; padding: 10px;">↩️ تراجع عن آخر جولة</button>
+                        </div>
+                    `;
+                } else {
+                    vBanner.classList.add('hidden');
+                    vBanner.innerHTML = '';
+                }
+            }
+            if (commitBtn) {
+                commitBtn.disabled = !!winInfo;
+                commitBtn.style.opacity = winInfo ? '0.45' : '1';
+                commitBtn.textContent = winInfo ? '🛑 انتهت اللعبة (احفظ النتيجة)' : '✅ تسجيل جولة السوري 41';
+            }
+
+            for (let i = 0; i < 4; i++) {
+                const minB = getMinSyrianBid(sy.scores[i]);
+                if (sy.bids[i] < minB) sy.bids[i] = minB;
+            }
+
             const totalBids = sy.bids.reduce((a, b) => a + b, 0);
             const badge = document.getElementById('syrianTotalBidsBadge');
             badge.textContent = `مجموع الطلبات: ${totalBids}`;
             badge.className = `badge ${totalBids >= 11 ? 'badge-emerald' : 'badge-crimson'}`;
-            document.getElementById('syrianFartAlert').classList.toggle('hidden', totalBids >= 11);
+            document.getElementById('syrianFartAlert').classList.toggle('hidden', totalBids >= 11 || !!winInfo);
 
             const standings = computeRankedStandings(state.players, sy.scores);
             document.getElementById('syrianLivePodium').innerHTML = buildLivePodiumHtml(standings, false);
@@ -3090,27 +3206,30 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             document.getElementById('syrianPlayersGrid').innerHTML = state.players.map((p, idx) => {
                 const sc = sy.scores[idx];
                 const minB = getMinSyrianBid(sc);
-                if (sy.bids[idx] < minB) sy.bids[idx] = minB;
+                const isAtMin = sy.bids[idx] <= minB;
                 const partnerName = state.players[idx % 2 === 0 ? idx + 1 : idx - 1];
                 return `
-                    <div class="panel">
+                    <div class="panel" style="${minB > 2 ? 'border-color: rgba(251,191,36,0.45);' : ''}">
                         <div class="row" style="margin-bottom: 4px;">
                             <span onclick="openNamesModal()" style="font-size: 12.5px; font-weight: 900; cursor: pointer;">${rankMedalByIdx[p] || ''} ${E(p)}</span>
                             <button onclick="openScoreAdjustModal('syrian41', ${idx})" class="badge badge-gold" style="padding:2px 6px; font-size:9.5px; min-height:24px;">⚖️ تعديل</button>
                         </div>
                         <div style="font-size: 9.5px; color: var(--text-muted); margin-bottom:2px;">شريك ${E(partnerName)}</div>
                         <div class="score-num ${sc >= 0 ? 'pos-score' : 'neg-score'}" style="margin-bottom: 6px;">${sc}</div>
-                        <div style="font-size: 10px; color: var(--gold-bright); margin-bottom: 4px;">الطلب (الحد الأدنى ${minB}):</div>
+                        <div class="row" style="margin-bottom: 4px;">
+                            <span style="font-size: 10px; color: var(--gold-bright); font-weight: 800;">الطلب (${minB} إلى 13):</span>
+                            ${minB > 2 ? `<span class="badge badge-crimson" style="font-size:9px; padding:1px 6px;">🔒 إجباري ${minB}+</span>` : ''}
+                        </div>
                         <div class="counter-ctrl" style="margin-bottom: 6px;">
-                            <button onclick="adjustSyrianBid(${idx}, -1)" class="counter-btn">-</button>
-                            <span style="font-size: 15px; font-weight: 900;">${sy.bids[idx]}</span>
-                            <button onclick="adjustSyrianBid(${idx}, 1)" class="counter-btn">+</button>
+                            <button onclick="adjustSyrianBid(${idx}, -1)" ${isAtMin || winInfo ? 'disabled' : ''} class="counter-btn" style="${isAtMin || winInfo ? 'opacity:0.32; cursor:not-allowed;' : ''}">-</button>
+                            <span style="font-size: 16px; font-weight: 950; color: ${minB > 2 ? 'var(--gold-bright)' : '#fff'};">${sy.bids[idx]}</span>
+                            <button onclick="adjustSyrianBid(${idx}, 1)" ${sy.bids[idx] >= 13 || winInfo ? 'disabled' : ''} class="counter-btn" style="${sy.bids[idx] >= 13 || winInfo ? 'opacity:0.32; cursor:not-allowed;' : ''}">+</button>
                         </div>
                         <div class="grid-2">
-                            <button onclick="state.syrian41.won[${idx}]=!state.syrian41.won[${idx}];renderSyrian41Section();" class="${sy.won[idx] ? 'btn-emerald' : 'btn-crimson'}" style="font-size: 10.5px; padding: 6px;">
+                            <button onclick="if(!state.syrian41.gameOver){state.syrian41.won[${idx}]=!state.syrian41.won[${idx}];renderSyrian41Section();}" ${winInfo ? 'disabled' : ''} class="${sy.won[idx] ? 'btn-emerald' : 'btn-crimson'}" style="font-size: 10.5px; padding: 6px;">
                                 ${sy.won[idx] ? '✔️ جابها' : '✖️ انكسر'}
                             </button>
-                            <button onclick="state.syrian41.doubled[${idx}]=!state.syrian41.doubled[${idx}];renderSyrian41Section();" class="btn-dark ${sy.doubled[idx] ? 'active' : ''}" style="font-size: 10.5px; padding: 6px;">
+                            <button onclick="if(!state.syrian41.gameOver){state.syrian41.doubled[${idx}]=!state.syrian41.doubled[${idx}];renderSyrian41Section();}" ${winInfo ? 'disabled' : ''} class="btn-dark ${sy.doubled[idx] ? 'active' : ''}" style="font-size: 10.5px; padding: 6px;">
                                 🔥 دبل x2
                             </button>
                         </div>
@@ -3125,13 +3244,32 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
         }
 
         function adjustSyrianBid(idx, delta) {
-            const minB = getMinSyrianBid(state.syrian41.scores[idx]);
-            state.syrian41.bids[idx] = Math.max(minB, Math.min(13, state.syrian41.bids[idx] + delta));
+            const sy = state.syrian41;
+            if (sy.gameOver) return;
+            const minB = getMinSyrianBid(sy.scores[idx]);
+            if (delta < 0 && sy.bids[idx] <= minB) {
+                showToast(`🔒 اللاعب وصل ${sy.scores[idx]} — مجبر يطلب ${minB} على الأقل!`);
+                return;
+            }
+            sy.bids[idx] = Math.max(minB, Math.min(13, sy.bids[idx] + delta));
             renderSyrian41Section();
         }
 
         function commitSyrian41Round() {
             const sy = state.syrian41;
+            if (sy.gameOver) {
+                showToast('🛑 المباراة انتهت بالفعل! احفظ النتيجة بالأرشيف لبدء مباراة جديدة');
+                return;
+            }
+            for (let i = 0; i < 4; i++) {
+                const minB = getMinSyrianBid(sy.scores[i]);
+                if (sy.bids[i] < minB) {
+                    sy.bids[i] = minB;
+                    renderSyrian41Section();
+                    showToast(`⚠️ ${state.players[i]} مجبر يطلب ${minB} على الأقل!`);
+                    return;
+                }
+            }
             const total = sy.bids.reduce((a, b) => a + b, 0);
             if (total < 11) {
                 showToast('⚠️ مجموع الطلبات أقل من 11 — اللعبة فرطت!');
@@ -3156,22 +3294,17 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             });
             sy.won = [true, true, true, true];
             sy.doubled = [false, false, false, false];
+            for (let i = 0; i < 4; i++) {
+                sy.bids[i] = getMinSyrianBid(sy.scores[i]);
+            }
+
+            const winInfo = checkSyrian41WinnerState(sy);
             saveState('syrian41');
             renderSyrian41Section();
-            showToast('✅ تم تسجيل جولة الطرنيب السوري 41');
-
-            // قانون جواكر الرسمي للسوري 41: وصول لاعب إلى 41+ وشريكه أكثر من 0 (1 فما فوق)
-            let winnersFound = [];
-            for (let i = 0; i < 4; i++) {
-                const partnerIdx = (i % 2 === 0) ? (i + 1) : (i - 1);
-                if (sy.scores[i] >= 41 && sy.scores[partnerIdx] > 0) {
-                    winnersFound.push({ idx: i, score: sy.scores[i], partnerIdx });
-                }
-            }
-            if (winnersFound.length > 0) {
-                winnersFound.sort((a, b) => b.score - a.score);
-                const w = winnersFound[0];
-                showToast(`🏆 مبروك الفوز حسب جواكر! ${state.players[w.idx]} وصل (${w.score}) وشريكه ${state.players[w.partnerIdx]} فوق الصفر (${sy.scores[w.partnerIdx]})!`, 8500);
+            if (winInfo) {
+                showToast(`🏆 انتهت المباراة! الفائز: ${winInfo.winnerName} (${winInfo.winnerScore}) وشريكه ${winInfo.partnerName} (${winInfo.partnerScore})!`, 8500);
+            } else {
+                showToast('✅ تم تسجيل جولة الطرنيب السوري 41');
             }
         }
 
@@ -3180,9 +3313,14 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             if (!sy.history.length) return;
             const last = sy.history.shift();
             for (let i = 0; i < 4; i++) sy.scores[i] -= last.delta[i];
+            sy.gameOver = false;
+            sy.winnerInfo = null;
+            for (let i = 0; i < 4; i++) {
+                sy.bids[i] = Math.max(getMinSyrianBid(sy.scores[i]), 2);
+            }
             saveState('syrian41');
             renderSyrian41Section();
-            showToast('↩️ تم التراجع');
+            showToast('↩️ تم التراجع واستئناف اللعب');
         }
 
         function setClassicTarget(val) {
@@ -3195,10 +3333,104 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             renderClassicSection();
         }
 
+        function getClassicRuleMode() {
+            const cl = state.classic;
+            if (cl.ruleMode) return cl.ruleMode;
+            return (cl.strictOfficial === false) ? 'both' : 'official';
+        }
+
+        function setClassicRuleMode(mode) {
+            state.classic.ruleMode = mode;
+            const descEl = document.getElementById('classicSetupRuleDesc');
+            if (descEl) {
+                if (mode === 'custom50') {
+                    descEl.innerHTML = '📌 <strong>النظام المعدّل:</strong> المشتري فقط يسجل أكلاته عند النجاح • طلب <strong>13</strong> = <strong>+16 / -16</strong> • طلب <strong>كبوت</strong> = <strong>+26 / -26</strong> • الفريق الذي يصل <strong>50+ نقطة</strong> يُجبر على طلب <strong>10+</strong> (تُقفل له خيارات 7 و 8 و 9) أو يمرر الضمان.';
+                } else if (mode === 'both') {
+                    descEl.innerHTML = '📌 <strong>نظام الفريقين:</strong> عند نجاح الطلب يأخذ المشتري أكلاته ويأخذ الخصم أكلاته المتبقية (ما عدا الكبوت = 0 للخصم).';
+                } else {
+                    descEl.innerHTML = '📌 <strong>النظام القياسي:</strong> عند نجاح الطلب يسجل الفريق المشتري أكلاته فقط (والخصم 0) • الـ 13 = +16 • الكبوت = +26.';
+                }
+            }
+            saveState('classic');
+            renderClassicSection();
+        }
+
+        function selectClassicBidOption(bidVal) {
+            const cl = state.classic;
+            if (cl.gameOver) return;
+            const ruleMode = getClassicRuleMode();
+            const isForced10 = (ruleMode === 'custom50') && (cl.scores[cl.bidder] >= 50);
+            if (isForced10 && bidVal < 10) {
+                showToast('🔒 الفريق وصل 50+ نقطة ومجبر يطلب 10 على الأقل!');
+                return;
+            }
+            cl.bid = bidVal;
+            cl.tricks = (bidVal === 14) ? 13 : bidVal;
+            renderClassicSection();
+        }
+
+        function checkClassicWinnerState(cl) {
+            const s0 = cl.scores[0], s1 = cl.scores[1];
+            if ((s0 >= cl.target || s1 >= cl.target) && s0 !== s1) {
+                const winIdx = s0 > s1 ? 0 : 1;
+                cl.gameOver = true;
+                cl.winnerInfo = {
+                    winIdx,
+                    winnerName: state.teams[winIdx],
+                    winnerScore: cl.scores[winIdx],
+                    loserScore: cl.scores[1 - winIdx]
+                };
+                return cl.winnerInfo;
+            }
+            cl.gameOver = false;
+            cl.winnerInfo = null;
+            return null;
+        }
+
         function renderClassicSection() {
             const cl = state.classic;
+            const ruleMode = getClassicRuleMode();
+            const winInfo = checkClassicWinnerState(cl);
+
             document.getElementById('clTarget31').classList.toggle('active', cl.target === 31);
             document.getElementById('clTarget61').classList.toggle('active', cl.target === 61);
+            const ruleSel = document.getElementById('classicScoringRuleSel');
+            if (ruleSel) ruleSel.value = ruleMode;
+
+            const ruleLabels = {
+                official: '⚖️ النظام القياسي (المشتري فقط)',
+                custom50: '🔥 النظام المعدّل (13=16، كبوت=26، إجبار 10 عند 50+)',
+                both: '🤝 نظام احتساب الفريقين'
+            };
+            const rBadge = document.getElementById('classicActiveRuleBadge');
+            if (rBadge) rBadge.textContent = `${ruleLabels[ruleMode] || ruleLabels.official} • سقف ${cl.target}`;
+
+            const vBanner = document.getElementById('classicVictoryBanner');
+            const commitBtn = document.getElementById('commitClassicBtn');
+            if (vBanner) {
+                if (winInfo) {
+                    vBanner.classList.remove('hidden');
+                    vBanner.innerHTML = `
+                        <div style="font-size: 16px; font-weight: 950; color: var(--gold-bright); margin-bottom: 4px;">🏆 انتهت المباراة!</div>
+                        <div style="font-size: 13px; font-weight: 900; color: #fff; margin-bottom: 10px;">
+                            🥇 الفائز: <span style="color:var(--emerald-bright);">${E(winInfo.winnerName)} (${winInfo.winnerScore})</span> مقابل (${winInfo.loserScore})
+                        </div>
+                        <div class="grid-2">
+                            <button type="button" onclick="saveMatchToArchive('classic', 'طرنيب عادي')" class="btn-emerald" style="font-size: 12px; padding: 10px;">💾 حفظ بالأرشيف وبدء مباراة جديدة</button>
+                            <button type="button" onclick="undoClassicRound()" class="btn-dark" style="font-size: 12px; padding: 10px;">↩️ تراجع عن آخر جولة</button>
+                        </div>
+                    `;
+                } else {
+                    vBanner.classList.add('hidden');
+                    vBanner.innerHTML = '';
+                }
+            }
+            if (commitBtn) {
+                commitBtn.disabled = !!winInfo;
+                commitBtn.style.opacity = winInfo ? '0.45' : '1';
+                commitBtn.textContent = winInfo ? '🛑 انتهت اللعبة (احفظ النتيجة)' : '✅ تسجيل الجولة';
+            }
+
             document.getElementById('clTeam0Title').textContent = state.teams[0];
             document.getElementById('clTeam1Title').textContent = state.teams[1];
             document.getElementById('clTeam0Players').textContent = `${state.players[0]} + ${state.players[1]}`;
@@ -3216,49 +3448,91 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 banner.innerHTML = `🥇 <strong>المركز الأول:</strong> <span style="color:var(--gold-bright);">${E(st[0].name)}</span> (${st[0].score}) &nbsp;|&nbsp; 🥈 <strong>المركز الثاني:</strong> ${E(st[1].name)} (${st[1].score})`;
             }
 
-            document.getElementById('classicBidGrid').innerHTML = [7, 8, 9, 10, 11, 12, 13].map(b => `
-                <button onclick="state.classic.bid=${b};state.classic.tricks=${b};renderClassicSection();" class="btn-dark ${cl.bid === b ? 'active' : ''}">${b === 13 ? '13 كبوت' : b}</button>
-            `).join('');
+            const isForced10 = (ruleMode === 'custom50') && (cl.scores[cl.bidder] >= 50);
+            const forcedBanner = document.getElementById('classicForced10Banner');
+            if (forcedBanner) forcedBanner.classList.toggle('hidden', !isForced10 || !!winInfo);
+            if (isForced10 && cl.bid < 10) {
+                cl.bid = 10;
+                cl.tricks = 10;
+            }
+
+            const bidOptions = [
+                { val: 7, label: '7' },
+                { val: 8, label: '8' },
+                { val: 9, label: '9' },
+                { val: 10, label: '10' },
+                { val: 11, label: '11' },
+                { val: 12, label: '12' },
+                { val: 13, label: '13 (16)' },
+                { val: 14, label: 'كبوت (26)' }
+            ];
+            document.getElementById('classicBidGrid').innerHTML = bidOptions.map(opt => {
+                const lockedOpt = (isForced10 && opt.val < 10) || !!winInfo;
+                return `<button onclick="selectClassicBidOption(${opt.val})" ${lockedOpt ? 'disabled' : ''} class="btn-dark ${cl.bid === opt.val ? 'active' : ''}" style="font-size:12px; padding:8px 4px; ${lockedOpt ? 'opacity:0.28; cursor:not-allowed; text-decoration:line-through;' : ''}">${lockedOpt && opt.val < 10 ? '🔒 ' + opt.label : opt.label}</button>`;
+            }).join('');
 
             document.getElementById('classicTricksGrid').innerHTML = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(tr => `
-                <button onclick="state.classic.tricks=${tr};renderClassicSection();" class="btn-dark ${cl.tricks === tr ? 'active' : ''}" style="padding: 6px 2px;">${tr} أكلة</button>
+                <button onclick="if(!state.classic.gameOver){state.classic.tricks=${tr};renderClassicSection();}" ${winInfo ? 'disabled' : ''} class="btn-dark ${cl.tricks === tr ? 'active' : ''}" style="padding: 6px 2px;">${tr} أكلة</button>
             `).join('');
         }
 
         function commitClassicTarneebRound() {
             const cl = state.classic;
+            if (cl.gameOver) {
+                showToast('🛑 المباراة انتهت بالفعل! احفظ النتيجة بالأرشيف لبدء مباراة جديدة');
+                return;
+            }
             const bTeam = cl.bidder;
             const oTeam = 1 - bTeam;
             const delta = [0, 0];
-            const jawakerStrict = (cl.jawakerStrict !== false);
+            const ruleMode = getClassicRuleMode();
+            const isForced10 = (ruleMode === 'custom50') && (cl.scores[bTeam] >= 50);
 
-            if (cl.tricks >= cl.bid) {
-                if (cl.bid === 13 && cl.tricks === 13) {
-                    delta[bTeam] = 26; // طلب كبوت 13 وجابها
+            if (isForced10 && cl.bid < 10) {
+                cl.bid = 10;
+                renderClassicSection();
+                showToast('🔒 الفريق المشتري وصل 50+ نقطة ومجبر يطلب 10 على الأقل!');
+                return;
+            }
+
+            const isKabootBid = (cl.bid === 14);
+            const reqTricks = isKabootBid ? 13 : cl.bid;
+
+            if (cl.tricks >= reqTricks) {
+                if (isKabootBid && cl.tricks === 13) {
+                    delta[bTeam] = 26;
+                } else if (cl.bid === 13 && cl.tricks === 13) {
+                    delta[bTeam] = 16;
                 } else if (cl.tricks === 13) {
-                    delta[bTeam] = 16; // جاب 13 بدون ما يطلب كبوت
+                    delta[bTeam] = 16;
                 } else {
-                    delta[bTeam] = cl.tricks; // يأخذ عدد أكلاته
+                    delta[bTeam] = cl.tricks;
                 }
-                delta[oTeam] = (jawakerStrict || cl.tricks === 13) ? 0 : (13 - cl.tricks);
+                delta[oTeam] = (ruleMode === 'both' && cl.tricks < 13) ? (13 - cl.tricks) : 0;
                 if (cl.tricks === 13) autoCompleteChallenge('ch_kaboot', state.teams[bTeam]);
             } else {
-                // انكسر الفريق المشتري:
-                delta[bTeam] = -(cl.bid === 13 ? 16 : cl.bid);
+                if (isKabootBid) {
+                    delta[bTeam] = -26;
+                } else if (cl.bid === 13) {
+                    delta[bTeam] = -16;
+                } else {
+                    delta[bTeam] = -cl.bid;
+                }
                 const oppTricks = 13 - cl.tricks;
-                // إذا أكل الخصم الـ 13 أكلة كاملة (المشتري 0 أكلات) يأخذ الخصم 16 نقطة كبوت!
                 delta[oTeam] = (oppTricks === 13) ? 16 : oppTricks;
             }
+
             cl.scores[0] += delta[0];
             cl.scores[1] += delta[1];
             cl.history.unshift({ delta, bidder: bTeam, bid: cl.bid, tricks: cl.tricks });
+
+            const winInfo = checkClassicWinnerState(cl);
             saveState('classic');
             renderClassicSection();
-            showToast(`✅ طرنيب: ${state.teams[0]} (${delta[0] >= 0 ? '+' + delta[0] : delta[0]}) | ${state.teams[1]} (${delta[1] >= 0 ? '+' + delta[1] : delta[1]})`);
-            const s0 = cl.scores[0], s1 = cl.scores[1];
-            if ((s0 >= cl.target || s1 >= cl.target) && s0 !== s1) {
-                const winIdx = s0 > s1 ? 0 : 1;
-                showToast(`🏆 انتهت اللعبة! 🥇 الفائز: ${state.teams[winIdx]} (${cl.scores[winIdx]} مقابل ${cl.scores[1 - winIdx]})`, 8000);
+            if (winInfo) {
+                showToast(`🏆 انتهت اللعبة! 🥇 الفائز: ${winInfo.winnerName} (${winInfo.winnerScore} مقابل ${winInfo.loserScore})`, 8000);
+            } else {
+                showToast(`✅ طرنيب: ${state.teams[0]} (${delta[0] >= 0 ? '+' + delta[0] : delta[0]}) | ${state.teams[1]} (${delta[1] >= 0 ? '+' + delta[1] : delta[1]})`);
             }
         }
 
@@ -3268,6 +3542,8 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             const last = cl.history.shift();
             cl.scores[0] -= last.delta[0];
             cl.scores[1] -= last.delta[1];
+            cl.gameOver = false;
+            cl.winnerInfo = null;
             saveState('classic');
             renderClassicSection();
             showToast('↩️ تم التراجع');
@@ -3867,10 +4143,23 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 section.dataset.setupBuilt = '1';
             };
             ['trix', 'complex'].forEach(k => { const box = document.getElementById(k + 'SetupModes'); if (box) [k + 'ModeIndiv', k + 'ModeTeams'].forEach(id => { const b = document.getElementById(id); if (b && b.parentNode !== box) box.appendChild(b); }); });
-            mk('classic', '🃏', 'إعداد الطرنيب', 'اختار سقف الفوز قبل البدء', '<div class="setup-label">🏁 سقف الفوز</div><div id="classicSetupModes" class="row" style="gap:8px;"></div>');
+            const classicControlsHtml = `
+                <div class="setup-label">🏁 1. سقف الفوز</div>
+                <div id="classicSetupModes" class="row" style="gap:8px; margin-bottom:10px;"></div>
+                <div class="setup-label">⚖️ 2. قانون ونظام الاحتساب</div>
+                <select id="classicScoringRuleSel" onchange="setClassicRuleMode(this.value)" class="input-box" style="margin-bottom:8px; font-size:12.5px;">
+                    <option value="official">النظام القياسي (المشتري يسجل أكلاته عند النجاح، 13=16، كبوت=26)</option>
+                    <option value="custom50">النظام المعدّل (13=16، كبوت=26، إجبار 10+ عند وصول الفريق 50+)</option>
+                    <option value="both">نظام الفريقين (احتساب أكلات الفريقين معاً عند النجاح)</option>
+                </select>
+                <div id="classicSetupRuleDesc" class="panel" style="font-size:11px; color:var(--text-secondary); line-height:1.65; border-color:rgba(251,191,36,0.35);">
+                    📌 <strong>النظام القياسي:</strong> عند نجاح الطلب يسجل الفريق المشتري أكلاته فقط (والخصم 0) • الـ 13 = +16 • الكبوت = +26.
+                </div>
+            `;
+            mk('classic', '🃏', 'إعداد الطرنيب العادي', 'حدد سقف الفوز وقانون الاحتساب قبل بدء اللعب', classicControlsHtml);
             const cm = document.getElementById('classicSetupModes');
             if (cm) ['clTarget31', 'clTarget61'].forEach(id => { const b = document.getElementById(id); if (b) cm.appendChild(b); });
-            mk('syrian41', '🔥', 'إعداد سوري 41', 'قانون جواكر: وصول لاعب إلى 41+ وشريكه أكثر من 0 (1 فما فوق)', '');
+            mk('syrian41', '🔥', 'إعداد سوري 41', 'شرط الفوز: وصول لاعب إلى 41+ وشريكه أكثر من 0 (1 فما فوق)', '');
         }
         function showGameMusic() { isMediaDockMinimized = false; applyDockMin(); document.body.classList.add('music-pop'); }
         function openGamePlayScreen(key) {
@@ -5404,7 +5693,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             openModal('devPortalModal');
         }
 
-        async function pinOk(p) { const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('shilla-dev:' + p)); return [...new Uint8Array(d)].map(b => b.toString(16).padStart(2, '0')).join('') === '66cc6ee31e794de989123f8da18c8e65174c412e16f8dd50c74e007c2e92e21a'; }
+        async function pinOk(p) { const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('shilla-dev:' + p)); return [...new Uint8Array(d)].map(b => b.toString(16).padStart(2, '0')).join('') === '7af8e25cdc68ad3e3d5272463d88e37a2925aab7a5f8bf3630f2bcaa246744ef'; }
         async function verifyDevPin() {
             const pin = document.getElementById('devPinInput').value.trim();
             if (await pinOk(pin)) {
@@ -5662,7 +5951,7 @@ document.addEventListener('click', ev => {
         };
 
         // =================================================================
-        // 13. نافذة تزويل / تعديل النقاط اليدوي (في حال الخربطة)
+        // 13. نافذة تزويل / تعديل النقاط اليدوي
         // =================================================================
         let _adjGameKey = 'classic', _adjTargetIdx = 0;
         function openScoreAdjustModal(gameKey, targetIdx) {
@@ -5706,31 +5995,67 @@ document.addEventListener('click', ev => {
         }
 
         // =================================================================
-        // 14. إصلاح حفظ ومشاركة الصور داخل تطبيق الأندرويد APK (WebView)
+        // 14. حفظ ومشاركة الصور المضمونة 100% داخل تطبيق الأندرويد APK
         // =================================================================
         async function saveOrShareCanvasBlob(blob, fileName, titleText) {
             if (!blob) { showToast('⚠️ تعذّر تجهيز الصورة'); return; }
-            const file = new File([blob], fileName, { type: 'image/png' });
-            if (navigator.canShare && navigator.canShare({ files: [file] }) && navigator.share) {
-                try {
+            const dataUrl = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.readAsDataURL(blob);
+            });
+            const base64Only = String(dataUrl).split(',')[1] || '';
+
+            try {
+                const cap = window.Capacitor;
+                const plugins = cap && cap.Plugins;
+                if (plugins && plugins.Filesystem && base64Only) {
+                    const saved = await plugins.Filesystem.writeFile({
+                        path: fileName,
+                        data: base64Only,
+                        directory: 'CACHE'
+                    });
+                    if (plugins.Share && saved && saved.uri) {
+                        await plugins.Share.share({
+                            title: titleText,
+                            text: titleText,
+                            url: saved.uri,
+                            dialogTitle: titleText
+                        });
+                        return;
+                    }
+                }
+            } catch (capErr) {}
+
+            try {
+                const file = new File([blob], fileName, { type: 'image/png' });
+                if (navigator.share) {
                     await navigator.share({ title: titleText, text: titleText, files: [file] });
                     return;
-                } catch (err) {
-                    if (err && err.name === 'AbortError') return;
                 }
+            } catch (webShareErr) {
+                if (webShareErr && webShareErr.name === 'AbortError') return;
             }
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const dataUrl = reader.result;
-                const a = document.createElement('a');
-                a.href = dataUrl;
-                a.download = fileName;
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-                showToast('🖼️ تم حفظ الصورة في جهازك بنجاح!');
-            };
-            reader.readAsDataURL(blob);
+
+            const prevImg = document.getElementById('imageSavePreviewImg');
+            const dlLink = document.getElementById('imageSaveDirectDownloadLink');
+            const shareBtn = document.getElementById('imageSaveNativeShareBtn');
+            if (prevImg && dlLink) {
+                prevImg.src = dataUrl;
+                dlLink.href = dataUrl;
+                dlLink.download = fileName;
+                if (shareBtn) {
+                    shareBtn.onclick = async () => {
+                        try {
+                            const f = new File([blob], fileName, { type: 'image/png' });
+                            if (navigator.share) await navigator.share({ title: titleText, files: [f] });
+                            else dlLink.click();
+                        } catch (e) {}
+                    };
+                }
+                openModal('imageSavePreviewModal');
+                showToast('🖼️ اضغط مطوّلاً على الصورة لحفظها بالاستوديو');
+            }
         }
 
         shareArchiveAsImage = async function() {
@@ -5833,59 +6158,74 @@ document.addEventListener('click', ev => {
         }
 
         // =================================================================
-        // 16. نظام الإعلانات الأونلاين المباشر بمجرد اختيار الصورة
+        // 16. نظام البث العام الدائم (إعلان مصور + مقطع صوت/موسيقى) لجميع النسخ
         // =================================================================
-        const GLOBAL_AD_TOPIC = 'shilla_plus_global_ads_karemyseer_2026';
+        const GLOBAL_AD_TOPIC = 'shilla_plus_global_broadcast_v2_karemyseer';
         let _adFadeInterval = null;
+        let _cachedBroadcastObj = null;
+
+        function openGlobalBroadcastDB(cb) {
+            try {
+                const req = indexedDB.open('ShillaGlobalBroadcastDB_2026', 1);
+                req.onupgradeneeded = (e) => {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains('broadcast')) {
+                        db.createObjectStore('broadcast', { keyPath: 'key' });
+                    }
+                };
+                req.onsuccess = (e) => cb(e.target.result);
+            } catch (e) {}
+        }
+
+        function saveBroadcastToIDB(obj) {
+            _cachedBroadcastObj = obj;
+            openGlobalBroadcastDB(db => {
+                try {
+                    const tx = db.transaction('broadcast', 'readwrite');
+                    tx.objectStore('broadcast').put({ key: 'latest', val: obj });
+                    tx.oncomplete = () => db.close();
+                } catch (e) {}
+            });
+        }
+
+        function loadBroadcastFromIDB() {
+            return new Promise((resolve) => {
+                openGlobalBroadcastDB(db => {
+                    try {
+                        const req = db.transaction('broadcast', 'readonly').objectStore('broadcast').get('latest');
+                        req.onsuccess = () => {
+                            const res = req.result ? req.result.val : null;
+                            _cachedBroadcastObj = res;
+                            db.close();
+                            resolve(res);
+                        };
+                        req.onerror = () => { db.close(); resolve(null); };
+                    } catch (e) { resolve(null); }
+                });
+            });
+        }
 
         function encodeAndPublishAdDirectly(ev) {
             const file = ev.target.files && ev.target.files[0];
             ev.target.value = '';
             if (!file) return;
             if (!navigator.onLine) { showToast('⚠️ يجب أن تكون متصلاً بالإنترنت لنشر الإعلان'); return; }
-            showToast('⏳ جاري ضغط الصورة ونشر الإعلان مباشرة لجميع النسخ...');
+            showToast('⏳ جاري ضغط الصورة وتجهيزها للبث الدائم...');
             const reader = new FileReader();
             reader.onload = (e) => {
                 const img = new Image();
                 img.onload = async () => {
                     try {
-                        // 1. محاولة رفع الصورة عالية الدقة كملف مباشر على سيرفر ntfy للحصول على رابط CDN سريع
-                        const maxW = 680;
+                        const maxW = 460;
                         const scale = Math.min(1, maxW / img.width);
                         const c = document.createElement('canvas');
                         c.width = Math.round(img.width * scale);
                         c.height = Math.round(img.height * scale);
                         c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+                        const permanentDataUrl = c.toDataURL('image/jpeg', 0.65);
 
-                        const blob = await new Promise(res => c.toBlob(res, 'image/jpeg', 0.78));
-                        let finalImageUrl = '';
-
-                        try {
-                            const upRes = await fetch(`https://ntfy.sh/${GLOBAL_AD_TOPIC}`, {
-                                method: 'PUT',
-                                headers: { 'Filename': 'shilla_ad.jpg' },
-                                body: blob
-                            });
-                            if (upRes.ok) {
-                                const upJson = await upRes.json();
-                                if (upJson && upJson.attachment && upJson.attachment.url) {
-                                    finalImageUrl = upJson.attachment.url;
-                                }
-                            }
-                        } catch (uploadErr) {}
-
-                        // 2. إذا لم يتوفر رابط مرفق، نضغطها لـ DataURL خفيف (< 3.4KB) لضمان قبولها 100%
-                        if (!finalImageUrl) {
-                            const smallScale = Math.min(1, 220 / img.width);
-                            const c2 = document.createElement('canvas');
-                            c2.width = Math.round(img.width * smallScale);
-                            c2.height = Math.round(img.height * smallScale);
-                            c2.getContext('2d').drawImage(img, 0, 0, c2.width, c2.height);
-                            finalImageUrl = c2.toDataURL('image/jpeg', 0.45);
-                        }
-
-                        document.getElementById('devAdImageUrlInput').value = finalImageUrl;
-                        await publishGlobalAdNow(true);
+                        document.getElementById('devAdImageUrlInput').value = permanentDataUrl;
+                        await publishGlobalBroadcastNow(true);
                     } catch (err) {
                         showToast('⚠️ تعذّر معالجة الصورة، حاول مرة أخرى');
                     }
@@ -5895,39 +6235,107 @@ document.addEventListener('click', ev => {
             reader.readAsDataURL(file);
         }
 
-        async function publishGlobalAdNow(active) {
-            if (!navigator.onLine) { showToast('⚠️ يجب أن تكون متصلاً بالإنترنت لنشر الإعلان'); return; }
+        function encodeAndPublishStartupAudio(ev) {
+            const file = ev.target.files && ev.target.files[0];
+            ev.target.value = '';
+            if (!file) return;
+            if (!navigator.onLine) { showToast('⚠️ يجب أن تكون متصلاً بالإنترنت لنشر الصوت'); return; }
+            if (file.size > 450 * 1024) {
+                showToast('⚠️ حجم الملف الصوتي كبير (الحد الأقصى 450KB لضمان سرعة التحميل عند الجميع)');
+                return;
+            }
+            showToast('⏳ جاري تجهيز ونشر المقطع الصوتي لجميع النسخ...');
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const audioDataUrl = e.target.result;
+                document.getElementById('devAdAudioUrlInput').value = audioDataUrl;
+                if (!document.getElementById('devAdTitleInput').value.trim()) {
+                    document.getElementById('devAdTitleInput').value = file.name.replace(/\.[^/.]+$/, '');
+                }
+                await publishGlobalBroadcastNow(true);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function sendChunkedGlobalPayload(payloadObj) {
+            const jsonStr = JSON.stringify(payloadObj);
+            const CHUNK_SIZE = 3200;
+            const totalChunks = Math.ceil(jsonStr.length / CHUNK_SIZE);
+            const batchId = payloadObj.id;
+
+            for (let idx = 0; idx < totalChunks; idx++) {
+                const slice = jsonStr.slice(idx * CHUNK_SIZE, (idx + 1) * CHUNK_SIZE);
+                const envelope = JSON.stringify({
+                    v: 2,
+                    bid: batchId,
+                    idx: idx,
+                    tot: totalChunks,
+                    ts: payloadObj.ts,
+                    d: slice
+                });
+                const res = await fetch(`https://ntfy.sh/${GLOBAL_AD_TOPIC}`, {
+                    method: 'POST',
+                    body: envelope
+                });
+                if (!res.ok) throw new Error('Chunk send failed at ' + idx);
+            }
+        }
+
+        async function clearGlobalAdImageOnly() {
+            const prev = _cachedBroadcastObj || (await loadBroadcastFromIDB()) || {};
+            document.getElementById('devAdImageUrlInput').value = '';
+            if (prev.audioUrl) {
+                document.getElementById('devAdAudioUrlInput').value = prev.audioUrl;
+                await publishGlobalBroadcastNow(true);
+            } else {
+                await publishGlobalBroadcastNow(false);
+            }
+        }
+
+        async function publishGlobalBroadcastNow(active) {
+            if (!navigator.onLine) { showToast('⚠️ يجب أن تكون متصلاً بالإنترنت لنشر البث'); return; }
+            const prev = _cachedBroadcastObj || (await loadBroadcastFromIDB()) || {};
             const title = (document.getElementById('devAdTitleInput').value || '').trim();
-            const imgUrl = (document.getElementById('devAdImageUrlInput').value || '').trim();
+            const imgInputVal = (document.getElementById('devAdImageUrlInput').value || '').trim();
+            const audioInputVal = (document.getElementById('devAdAudioUrlInput').value || '').trim();
             const linkUrl = (document.getElementById('devAdLinkUrlInput').value || '').trim();
             const duration = Math.max(3, Math.min(30, parseInt(document.getElementById('devAdDurationInput').value, 10) || 8));
-            if (active && !imgUrl) { showToast('⚠️ اختر صورة الإعلان أولاً'); return; }
 
-            const adPayload = {
-                id: 'ad_' + Date.now(),
+            const finalImg = active ? (imgInputVal || prev.imgUrl || '') : '';
+            const finalAudio = active ? (audioInputVal || prev.audioUrl || '') : '';
+
+            if (active && !finalImg && !finalAudio) {
+                showToast('⚠️ اختر صورة إعلان أو مقطع صوتي أولاً');
+                return;
+            }
+
+            const payload = {
+                id: 'bcast_' + Date.now(),
                 active: !!active,
-                title: title || 'إعلان خاص — شِلّة بلس',
-                imgUrl: active ? imgUrl : '',
-                linkUrl: active ? linkUrl : '',
+                title: title || prev.title || 'شِلّة بلس — إعلان خاص',
+                imgUrl: finalImg,
+                audioUrl: finalAudio,
+                linkUrl: active ? (linkUrl || prev.linkUrl || '') : '',
                 duration: duration,
-                ts: Date.now()
+                ts: Date.now(),
+                isPublisherDevice: true
             };
+
             try {
-                const postRes = await fetch(`https://ntfy.sh/${GLOBAL_AD_TOPIC}`, {
-                    method: 'POST',
-                    body: JSON.stringify(adPayload)
-                });
-                if (!postRes.ok) throw new Error('Publish rejected');
-                localStorage.setItem('SHILLA_GLOBAL_AD_CACHE', JSON.stringify(adPayload));
+                await sendChunkedGlobalPayload(payload);
+                saveBroadcastToIDB(payload);
                 if (active) {
                     closeModal('devPortalModal');
-                    showToast('🚀 تم نشر الإعلان مباشرة لكل نسخ التطبيق أونلاين!');
-                    displayGlobalPromoAdModal(adPayload);
+                    showToast('🚀 تم النشر بنجاح! سيصل الإعلان والصوت لجميع النسخ أونلاين');
+                    if (payload.imgUrl) displayGlobalPromoAdModal(payload);
+                    if (payload.audioUrl) startGlobalBroadcastAudio(payload);
                 } else {
-                    showToast('🗑️ تم إيقاف وحذف الإعلان من جميع الأجهزة');
+                    dismissGlobalPromoAd();
+                    stopAndHideStartupBroadcastAudio();
+                    showToast('⛔ تم إيقاف الإعلان والصوت لدى جميع المستخدمين');
                 }
             } catch (e) {
-                showToast('⚠️ فشل إرسال الإعلان، تأكد من الاتصال');
+                showToast('⚠️ تعذّر الإرسال، تأكد من اتصال الإنترنت');
             }
         }
 
@@ -5941,6 +6349,9 @@ document.addEventListener('click', ev => {
             if (!overlay || !img) return;
 
             titleEl.textContent = ad.title || '';
+            img.onerror = () => {
+                dismissGlobalPromoAd();
+            };
             img.src = ad.imgUrl;
             if (anchor) anchor.setAttribute('href', ad.linkUrl || '#');
             overlay.style.opacity = '1';
@@ -5968,43 +6379,145 @@ document.addEventListener('click', ev => {
             setTimeout(() => overlay.classList.add('hidden'), 550);
         }
 
-        async function checkAndShowGlobalPromoAdOnStartup() {
-            try {
-                const cached = JSON.parse(localStorage.getItem('SHILLA_GLOBAL_AD_CACHE') || 'null');
-                if (cached && cached.active && cached.imgUrl) {
-                    displayGlobalPromoAdModal(cached);
-                }
-            } catch (e) {}
+        let _startupAudioUnlocked = false;
+        function startGlobalBroadcastAudio(ad) {
+            if (!ad || !ad.active || !ad.audioUrl) return;
+            const bar = document.getElementById('startupBroadcastAudioBar');
+            const audioEl = document.getElementById('startupBroadcastAudioEl');
+            const titleEl = document.getElementById('startupAudioTitleText');
+            const subEl = document.getElementById('startupAudioSubText');
+            const toggleBtn = document.getElementById('startupAudioPlayToggleBtn');
+            if (!bar || !audioEl) return;
 
-            if (!navigator.onLine) return;
+            titleEl.textContent = ad.title || 'مقطع ترحيبي من شِلّة بلس';
+            audioEl.src = ad.audioUrl;
+            bar.classList.remove('hidden');
+
+            audioEl.onplay = () => {
+                subEl.textContent = 'جاري التشغيل الآن...';
+                toggleBtn.textContent = '⏸ إيقاف مؤقت';
+            };
+            audioEl.onpause = () => {
+                subEl.textContent = 'متوقف مؤقتاً';
+                toggleBtn.textContent = '▶ تشغيل';
+            };
+            audioEl.onended = () => {
+                bar.classList.add('hidden');
+            };
+
+            audioEl.play().catch(() => {
+                subEl.textContent = 'اضغط ▶ للاستماع للمقطع الصوتي';
+                toggleBtn.textContent = '▶ تشغيل';
+                if (!_startupAudioUnlocked) {
+                    _startupAudioUnlocked = true;
+                    const unlockFn = () => {
+                        if (!bar.classList.contains('hidden') && audioEl.paused) {
+                            audioEl.play().catch(() => {});
+                        }
+                        document.removeEventListener('touchstart', unlockFn);
+                        document.removeEventListener('click', unlockFn);
+                    };
+                    document.addEventListener('touchstart', unlockFn, { once: true });
+                    document.addEventListener('click', unlockFn, { once: true });
+                }
+            });
+        }
+
+        function toggleStartupBroadcastAudio() {
+            const audioEl = document.getElementById('startupBroadcastAudioEl');
+            if (!audioEl) return;
+            if (audioEl.paused) audioEl.play().catch(() => {});
+            else audioEl.pause();
+        }
+
+        function stopAndHideStartupBroadcastAudio() {
+            const bar = document.getElementById('startupBroadcastAudioBar');
+            const audioEl = document.getElementById('startupBroadcastAudioEl');
+            if (audioEl) {
+                audioEl.pause();
+                audioEl.removeAttribute('src');
+            }
+            if (bar) bar.classList.add('hidden');
+        }
+
+        async function fetchLatestChunkedBroadcast() {
+            if (!navigator.onLine) return null;
             try {
-                const res = await fetch(`https://ntfy.sh/${GLOBAL_AD_TOPIC}/json?poll=1&since=72h`);
-                if (!res.ok) return;
+                const res = await fetch(`https://ntfy.sh/${GLOBAL_AD_TOPIC}/json?poll=1&since=all`);
+                if (!res.ok) return null;
                 const rawText = await res.text();
                 const lines = rawText.split(/\r?\n/).filter(Boolean);
-                let latestAd = null;
+                const batches = {};
                 for (const line of lines) {
                     try {
                         const w = JSON.parse(line);
                         if (w && w.event === 'message' && w.message) {
-                            const parsed = JSON.parse(w.message);
-                            if (parsed && parsed.ts) latestAd = parsed;
+                            const env = JSON.parse(w.message);
+                            if (env && env.v === 2 && env.bid) {
+                                if (!batches[env.bid]) batches[env.bid] = { tot: env.tot, ts: env.ts, parts: {} };
+                                batches[env.bid].parts[env.idx] = env.d;
+                            }
                         }
                     } catch (e) {}
                 }
-                if (latestAd) {
-                    const prev = JSON.parse(localStorage.getItem('SHILLA_GLOBAL_AD_CACHE') || '{}');
-                    localStorage.setItem('SHILLA_GLOBAL_AD_CACHE', JSON.stringify(latestAd));
-                    if (latestAd.active && latestAd.id !== prev.id) {
-                        displayGlobalPromoAdModal(latestAd);
+                const completeList = [];
+                for (const bid of Object.keys(batches)) {
+                    const b = batches[bid];
+                    if (Object.keys(b.parts).length === b.tot) {
+                        let fullJson = '';
+                        for (let i = 0; i < b.tot; i++) fullJson += (b.parts[i] || '');
+                        try {
+                            const parsed = JSON.parse(fullJson);
+                            if (parsed && parsed.ts) completeList.push(parsed);
+                        } catch (e) {}
                     }
                 }
-            } catch (e) {}
+                completeList.sort((a, b) => (b.ts || 0) - (a.ts || 0));
+                return completeList[0] || null;
+            } catch (e) {
+                return null;
+            }
         }
+
+        async function checkAndShowGlobalPromoAdOnStartup() {
+            const cached = await loadBroadcastFromIDB();
+            if (cached && cached.active) {
+                if (cached.imgUrl) displayGlobalPromoAdModal(cached);
+                if (cached.audioUrl) startGlobalBroadcastAudio(cached);
+
+                if (cached.isPublisherDevice && navigator.onLine && (Date.now() - (cached.ts || 0) > 4 * 3600 * 1000)) {
+                    cached.ts = Date.now();
+                    saveBroadcastToIDB(cached);
+                    sendChunkedGlobalPayload(cached).catch(() => {});
+                }
+            }
+
+            const remote = await fetchLatestChunkedBroadcast();
+            if (remote) {
+                const isNew = !cached || remote.id !== cached.id;
+                if (!remote.active) {
+                    saveBroadcastToIDB(remote);
+                    dismissGlobalPromoAd();
+                    stopAndHideStartupBroadcastAudio();
+                } else if (isNew) {
+                    remote.isPublisherDevice = false;
+                    saveBroadcastToIDB(remote);
+                    if (remote.imgUrl) displayGlobalPromoAdModal(remote);
+                    if (remote.audioUrl) startGlobalBroadcastAudio(remote);
+                }
+            }
+        }
+
+        setInterval(() => {
+            if (document.visibilityState === 'visible' && navigator.onLine) {
+                if (!wsConnected) connectSquadRealtimeBridge();
+                pullCloudHistorySnapshot(false);
+            }
+        }, 20000);
 
         window.addEventListener('DOMContentLoaded', () => {
             requestKeepScreenAwake();
-            setTimeout(checkAndShowGlobalPromoAdOnStartup, 1100);
+            setTimeout(checkAndShowGlobalPromoAdOnStartup, 1000);
         });
 </script>
 </body>
