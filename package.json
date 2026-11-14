@@ -1,6 +1,6 @@
 {
   "name": "shilla-plus",
-  "version": "14.0.0",
+  "version": "15.0.0",
   "private": true,
   "scripts": {
     "prepare:music": "python3 prepare_music.py || python prepare_music.py",

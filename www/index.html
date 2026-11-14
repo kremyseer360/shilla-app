@@ -1163,7 +1163,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 <div>
                     <div class="row-wrap" style="justify-content: flex-start; gap: 5px;">
                         <h1 style="font-size: 16.5px; font-weight: 900; color: var(--gold-bright);">شِلّة بلس</h1>
-                        <span class="badge badge-cyan" style="font-size: 9px; padding: 2px 7px;">v14.0 Pro • APK & iOS</span>
+                        <span class="badge badge-cyan" style="font-size: 9px; padding: 2px 7px;">v15.0 Pro • APK & iOS</span>
                         <span id="liveHeaderIndicator" onclick="switchTab('live')" class="badge badge-emerald" style="cursor: pointer; font-size: 9.5px;">🟢 متصل</span>
                     </div>
                     <p style="font-size: 10.5px; color: var(--text-muted); font-weight: 800; margin-top: 2px;">
@@ -1463,16 +1463,29 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
         </div>
 
         <div id="draw8CardBox" class="card">
-            <h3 style="font-size: 14px; font-weight: 900; color: var(--gold-bright); margin-bottom: 4px;">🎲 قرعة الـ 8 أشخاص (تقسيم السهرة إلى طاولتين 4 و 4)</h3>
-            <p style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 8px;">عدّل الأسماء واضغط سحب القرعة لتوزيع الـ 8 شباب على طاولتين بالعدل (طاولة 1 وطاولة 2)</p>
+            <div class="row" style="margin-bottom: 4px;">
+                <h3 style="font-size: 14px; font-weight: 900; color: var(--gold-bright);">🎲 قرعة السهرة (من 4 إلى 8 أشخاص)</h3>
+                <button type="button" onclick="clearEightPlayersInputs()" class="badge badge-crimson" style="cursor: pointer; font-size: 10px;">🗑️ تفريغ الخانات</button>
+            </div>
+            <p style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 8px;">اكتب الأسماء المتوفرة فقط (مثلاً 5 أو 6 أو 7 أو 8) واترك الباقي فارغاً؛ إذا كانوا أقل من 8 سيختار التطبيق 4 لاعبين عشوائياً والباقي احتياط، وإذا كانوا 8 يقسمهم لطاولتين.</p>
             <div id="eightPlayersInputGrid" class="grid-2" style="margin-bottom: 10px;"></div>
-            <button onclick="run8PlayerDraw()" class="btn-gold" style="width: 100%; padding: 10px; margin-bottom: 10px;">🎰 سحب قرعة الـ 8 لطاولتين (4 و 4)</button>
+            <button onclick="run8PlayerDraw()" class="btn-gold" style="width: 100%; padding: 10px; margin-bottom: 10px;">🎰 سحب القرعة من الأسماء المكتوبة</button>
             <div id="eightPlayersResultsArea" class="grid-2"></div>
         </div>
     </section>
 
     <!-- القسم 7: نظام الأونلاين المطور + بطاقة QR للشلة + الحسابات المتعددة -->
     <section id="sec-live" class="hidden anim-in">
+        <!-- تنبيه إنشاء حساب للمستخدمين الجدد -->
+        <div id="unconfiguredAccountBanner" class="card" style="border: 2px solid var(--gold-bright); text-align: center; background: linear-gradient(145deg, rgba(245,158,11,0.18), rgba(14,23,45,0.96));">
+            <div style="font-size: 28px; margin-bottom: 4px;">👑</div>
+            <h3 style="font-size: 16px; font-weight: 950; color: var(--gold-bright); margin-bottom: 4px;">أنشئ حساب شلّتك الخاص الآن!</h3>
+            <p style="font-size: 11.5px; color: var(--text-secondary); margin-bottom: 12px;">لتلعب مع رفقاتك أونلاين وتزامن النتائج والأرشيف على كل موبايلاتكم، أنشئ كود شلة خاص بك أو امسح كود QR من موبايل رفيقك.</p>
+            <div class="grid-2">
+                <button onclick="openSyncModal()" class="btn-gold" style="font-size: 12.5px; padding: 11px;">➕ إنشاء / دخول حساب</button>
+                <button onclick="toggleCameraQrScanner()" class="btn-emerald" style="font-size: 12.5px; padding: 11px;">📷 مسح QR للانضمام</button>
+            </div>
+        </div>
         <!-- البطاقة 1: حالة الاتصال والمزامنة الفورية -->
         <div class="card" style="border-color: var(--emerald);">
             <div class="row-wrap" style="justify-content: space-between; margin-bottom: 12px;">
@@ -1622,7 +1635,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
 
     <footer class="text-center" style="margin: 14px 0 32px 0; position: relative; z-index: 1;">
         <div onclick="openDevPortalModal()" class="badge badge-gold" style="padding: 8px 18px; font-size: 12px; cursor: pointer;">
-            👑 شِلّة بلس • <span style="color: #22d3ee;">v14.0 Pro • APK & iOS</span> • <strong>SHILLA PLUS</strong> • <span style="color:#fde047;">BY : karemyseer 2026</span><br><span style="display:block;margin-top:7px;font-size:11px;line-height:1.9;color:var(--text-muted);">للتواصل: <a href="tel:0991134433" style="color:var(--cyan);text-decoration:none;direction:ltr;display:inline-block;">0991134433</a><br><strong style="color:var(--gold-bright);letter-spacing:.5px;">TECH ZONE STORE</strong></span>
+            👑 شِلّة بلس • <span style="color: #22d3ee;">v15.0 Pro • APK & iOS</span> • <strong>SHILLA PLUS</strong> • <span style="color:#fde047;">BY : karemyseer 2026</span><br><span style="display:block;margin-top:7px;font-size:11px;line-height:1.9;color:var(--text-muted);">للتواصل: <a href="tel:0991134433" style="color:var(--cyan);text-decoration:none;direction:ltr;display:inline-block;">0991134433</a><br><strong style="color:var(--gold-bright);letter-spacing:.5px;">TECH ZONE STORE</strong></span>
         </div>
     </footer>
 
@@ -1850,6 +1863,40 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
         <audio id="startupBroadcastAudioEl" playsinline></audio>
     </div>
 
+    <!-- نافذة الترحيب والإعداد السريع عند فتح التطبيق لأول مرة -->
+    <div id="welcomeOnboardingModal" class="modal-backdrop hidden" style="z-index: 260;">
+        <div class="modal-card" style="border: 2px solid var(--gold-bright); max-width: 440px;">
+            <div style="text-align: center; margin-bottom: 12px;">
+                <div style="font-size: 32px; margin-bottom: 4px;">👑</div>
+                <h3 style="font-size: 17px; font-weight: 950; color: var(--gold-bright);">أهلاً بك في شِلّة بلس!</h3>
+                <p style="font-size: 11.5px; color: var(--text-secondary); margin-top: 3px;">جهّز أسماء اللاعبين وحساب الشلة الخاص فيكم (تقدر تعدلهم بأي وقت)</p>
+            </div>
+
+            <div class="panel" style="margin-bottom: 10px;">
+                <div style="font-size: 12px; font-weight: 900; color: var(--emerald-bright); margin-bottom: 6px;">1. أسماء اللاعبين الأربعة:</div>
+                <div class="grid-2">
+                    <input id="onbP0" type="text" placeholder="لاعب 1" class="input-box" style="font-size: 12.5px; padding: 8px;">
+                    <input id="onbP1" type="text" placeholder="لاعب 2 (شريك 1)" class="input-box" style="font-size: 12.5px; padding: 8px;">
+                    <input id="onbP2" type="text" placeholder="لاعب 3" class="input-box" style="font-size: 12.5px; padding: 8px;">
+                    <input id="onbP3" type="text" placeholder="لاعب 4 (شريك 3)" class="input-box" style="font-size: 12.5px; padding: 8px;">
+                </div>
+            </div>
+
+            <div class="panel" style="margin-bottom: 12px; border-color: rgba(56,189,248,0.4);">
+                <div style="font-size: 12px; font-weight: 900; color: var(--cyan); margin-bottom: 6px;">2. حساب الشلة للأونلاين (اختياري):</div>
+                <input id="onbDeviceName" type="text" placeholder="اسم جهازك (مثال: موبايل كريم)" class="input-box" style="font-size: 12px; padding: 8px; margin-bottom: 6px;">
+                <div class="row" style="gap: 6px; margin-bottom: 6px;">
+                    <input id="onbSquadCode" type="text" placeholder="كود الشلة (مثال: SHILLA-501)" class="input-box" style="font-size: 12.5px; padding: 8px; text-align: center;">
+                    <button type="button" onclick="document.getElementById('onbSquadCode').value='SHILLA-'+Math.floor(100+Math.random()*900)" class="btn-dark" style="min-height: 40px; padding: 6px 10px; font-size: 11px; white-space: nowrap;">🎲 توليد</button>
+                </div>
+                <input id="onbSquadPass" type="text" placeholder="كلمة سر الشلة (مثال: 1234)" class="input-box" style="font-size: 12.5px; padding: 8px; text-align: center;">
+            </div>
+
+            <button type="button" onclick="completeWelcomeOnboarding(true)" class="btn-gold" style="width: 100%; padding: 12px; margin-bottom: 8px;">✅ حفظ البيانات وبدء اللعب</button>
+            <button type="button" onclick="completeWelcomeOnboarding(false)" class="btn-dark" style="width: 100%; padding: 9px; font-size: 12px; color: var(--text-muted);">⏭️ تخطي واللعب أوفلاين بدون حساب حالياً</button>
+        </div>
+    </div>
+
     <!-- نافذة معاينة وحفظ الصورة المضمونة للأندرويد APK -->
     <div id="imageSavePreviewModal" class="modal-backdrop hidden" style="z-index: 280;">
         <div class="modal-card" style="border-color: var(--emerald); max-width: 440px; text-align: center;">
@@ -1942,7 +1989,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
     </div>
 
     <script>
-        const STORAGE_KEY = 'SHILLA_KAREMYSEER_2026_V6_CHAMPIONS';
+        const STORAGE_KEY = 'SHILLA_PLUS_V15_CLEAN_2026';
         const E = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
         const DEFAULT_CHALLENGES = [
@@ -1956,7 +2003,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
 
         function makeFreshGamesObject() {
             return {
-                players: ['أبو جانتي', 'عصام', 'أبو ليلى', 'حكمت'],
+                players: ['لاعب 1', 'لاعب 2', 'لاعب 3', 'لاعب 4'],
                 teams: ['فريق لنا', 'فريق لهم'],
                 trix: {
                     mode: 'individual',
@@ -2017,13 +2064,13 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
         }
 
         const defaultState = Object.assign(makeFreshGamesObject(), {
-            eightPlayers: ['أبو جانتي', 'عصام', 'أبو ليلى', 'حكمت', 'أبو شهاب', 'معتز', 'أبو حاتم', 'النمس'],
+            eightPlayers: ['', '', '', '', '', '', '', ''],
             selfDoubleRule: 'net',
             activeTableSlot: 'table1',
             tableSlots: {
                 table1: makeFreshGamesObject(),
                 table2: Object.assign(makeFreshGamesObject(), {
-                    players: ['أبو شهاب', 'معتز', 'أبو حاتم', 'النمس'],
+                    players: ['لاعب 5', 'لاعب 6', 'لاعب 7', 'لاعب 8'],
                     teams: ['طاولة2 فريق1', 'طاولة2 فريق2']
                 })
             },
@@ -2032,12 +2079,15 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 table2: { trix: 0, complex: 0, syrian41: 0, classic: 0, players: 0 }
             },
             squadAccount: {
-                squadCode: 'SHILLA-2026',
-                squadPass: '2026',
-                deviceName: 'موبايل ' + Math.floor(10 + Math.random() * 89),
+                isConfigured: false,
+                squadCode: '',
+                squadPass: '',
+                deviceName: '',
                 deviceId: 'DEV-' + Math.random().toString(36).slice(2, 9).toUpperCase(),
                 avatar: '🦁'
             },
+            savedSquads: [],
+            onboardingDone: false,
             challenges: JSON.parse(JSON.stringify(DEFAULT_CHALLENGES)),
             archiveFilter: 'all',
             archiveByGame: {
@@ -2047,9 +2097,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 classic: []
             },
             archive: [],
-            debts: [
-                { id: 1, text: 'عصام مديون للشلة بعزيمة شاورما 🥙', done: false }
-            ],
+            debts: [],
             lastSyncTimestamp: 0
         });
 
@@ -2132,9 +2180,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
 
         function loadState() {
             try {
-                const raw = localStorage.getItem(STORAGE_KEY)
-                    || localStorage.getItem('SHILLA_KAREMYSEER_2026_V5_SQUAD')
-                    || localStorage.getItem('SHILLA_KAREMYSEER_2026_V4_CLEAN');
+                const raw = localStorage.getItem(STORAGE_KEY);
                 if (!raw) return JSON.parse(JSON.stringify(defaultState));
                 const parsed = JSON.parse(raw);
                 const merged = Object.assign(JSON.parse(JSON.stringify(defaultState)), parsed);
@@ -3720,7 +3766,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 g4.innerHTML = state.players.map((p, idx) => `
                     <div class="row panel" style="padding: 6px 9px;">
                         <span style="font-size: 11px; color: var(--emerald); font-weight: 900;">${idx + 1}.</span>
-                        <input type="text" value="${E(p)}" oninput="state.players[${idx}]=this.value;saveState('players');renderTopPlayersBar();" class="input-box" style="padding: 5px 8px; font-size: 12px;">
+                        <input type="text" value="${E(p)}" placeholder="لاعب ${idx + 1}" oninput="state.players[${idx}]=this.value;saveState('players');renderTopPlayersBar();" class="input-box" style="padding: 5px 8px; font-size: 12px;">
                     </div>
                 `).join('');
             }
@@ -3730,10 +3776,19 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 g8.innerHTML = state.eightPlayers.map((name, idx) => `
                     <div class="row panel" style="padding: 6px 9px;">
                         <span style="font-size: 11px; color: var(--gold-bright); font-weight: 900;">${idx + 1}.</span>
-                        <input type="text" value="${E(name)}" oninput="state.eightPlayers[${idx}]=this.value;saveState('players');" class="input-box" style="padding: 5px 8px; font-size: 12px;">
+                        <input type="text" value="${E(name)}" placeholder="اسم ${idx + 1} (اختياري)" oninput="state.eightPlayers[${idx}]=this.value;saveState('players', true);" class="input-box" style="padding: 5px 8px; font-size: 12px;">
                     </div>
                 `).join('');
             }
+        }
+
+        function clearEightPlayersInputs() {
+            state.eightPlayers = ['', '', '', '', '', '', '', ''];
+            const res = document.getElementById('eightPlayersResultsArea');
+            if (res) res.innerHTML = '';
+            saveState('players', true);
+            renderDraw8Section();
+            showToast('🗑️ تم تفريغ الخانات');
         }
 
         function run4PlayerAnimatedDraw() {
@@ -3757,24 +3812,51 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
         }
 
         function run8PlayerDraw() {
-            const arr = [...state.eightPlayers];
+            const validNames = state.eightPlayers.map(s => String(s || '').trim()).filter(Boolean);
+            if (validNames.length < 4) {
+                showToast('⚠️ اكتب 4 أسماء على الأقل لسحب القرعة!');
+                return;
+            }
+            const arr = [...validNames];
             for (let i = arr.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [arr[i], arr[j]] = [arr[j], arr[i]];
             }
-            const table1 = arr.slice(0, 4);
-            const table2 = arr.slice(4, 8);
-            window._drawnTables = [table1, table2];
 
-            document.getElementById('eightPlayersResultsArea').innerHTML = [table1, table2].map((tbl, tIdx) => `
-                <div class="panel anim-in" style="border-color: ${tIdx === 0 ? 'var(--emerald)' : 'var(--gold)'};">
-                    <div style="font-size: 13px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">🃏 الطاولة ${tIdx + 1}</div>
-                    <div style="font-size: 11.5px; margin-bottom: 4px;">🤝 <strong>فريق 1:</strong> ${E(tbl[0])} + ${E(tbl[1])}</div>
-                    <div style="font-size: 11.5px; margin-bottom: 8px;">🤝 <strong>فريق 2:</strong> ${E(tbl[2])} + ${E(tbl[3])}</div>
-                    <button onclick="applyDrawnTableToCalculator(${tIdx})" class="btn-emerald" style="width: 100%; font-size: 11px; padding: 7px;">اعتماد في طاولة ${tIdx + 1}</button>
-                </div>
-            `).join('');
-            showToast('🎰 تم توزيع الـ 8 لاعبين على طاولتين!');
+            const resArea = document.getElementById('eightPlayersResultsArea');
+            if (arr.length === 8) {
+                const table1 = arr.slice(0, 4);
+                const table2 = arr.slice(4, 8);
+                window._drawnTables = [table1, table2];
+                resArea.innerHTML = [table1, table2].map((tbl, tIdx) => `
+                    <div class="panel anim-in" style="border-color: ${tIdx === 0 ? 'var(--emerald)' : 'var(--gold)'};">
+                        <div style="font-size: 13px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">🃏 الطاولة ${tIdx + 1}</div>
+                        <div style="font-size: 11.5px; margin-bottom: 4px;">🤝 <strong>فريق 1:</strong> ${E(tbl[0])} + ${E(tbl[1])}</div>
+                        <div style="font-size: 11.5px; margin-bottom: 8px;">🤝 <strong>فريق 2:</strong> ${E(tbl[2])} + ${E(tbl[3])}</div>
+                        <button onclick="applyDrawnTableToCalculator(${tIdx})" class="btn-emerald" style="width: 100%; font-size: 11px; padding: 7px;">اعتماد في طاولة ${tIdx + 1}</button>
+                    </div>
+                `).join('');
+                showToast('🎰 تم توزيع الـ 8 لاعبين على طاولتين!');
+            } else {
+                const table1 = arr.slice(0, 4);
+                const reserve = arr.slice(4);
+                window._drawnTables = [table1];
+                resArea.innerHTML = `
+                    <div class="panel anim-in" style="border-color: var(--emerald);">
+                        <div style="font-size: 13px; font-weight: 900; color: var(--emerald-bright); margin-bottom: 6px;">🃏 المختارون للعب (4 من ${arr.length})</div>
+                        <div style="font-size: 11.5px; margin-bottom: 4px;">🤝 <strong>فريق 1:</strong> ${E(table1[0])} + ${E(table1[1])}</div>
+                        <div style="font-size: 11.5px; margin-bottom: 8px;">🤝 <strong>فريق 2:</strong> ${E(table1[2])} + ${E(table1[3])}</div>
+                        <button onclick="applyDrawnTableToCalculator(0)" class="btn-emerald" style="width: 100%; font-size: 11px; padding: 7px;">اعتماد في طاولة 1</button>
+                    </div>
+                    <div class="panel anim-in" style="border-color: var(--gold);">
+                        <div style="font-size: 13px; font-weight: 900; color: var(--gold-bright); margin-bottom: 6px;">⏳ الاحتياط (${reserve.length})</div>
+                        <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.7;">
+                            ${reserve.length ? reserve.map((n, idx) => `• ${idx + 1}. <strong>${E(n)}</strong>`).join('<br>') : 'لا يوجد احتياط'}
+                        </div>
+                    </div>
+                `;
+                showToast(`🎲 تم اختيار 4 لاعبين عشوائياً من أصل ${arr.length}!`);
+            }
         }
 
         function applyDrawnTableToCalculator(tIdx) {
@@ -4236,7 +4318,8 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                     req.onsuccess = () => {
                         const items = req.result || [];
                         if (items.length) {
-                            state.archive = items;
+                            const existing = getAllArchivedMatches();
+                            state.archive = [...items, ...existing];
                             normalizeArchiveCategories(state);
                             renderArchiveSection();
                         }
@@ -4826,14 +4909,14 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             }, _wsReconnectDelay);
             _wsReconnectDelay = Math.min(30000, Math.round(_wsReconnectDelay * 1.7));
         }
-        async function connectSquadRealtimeBridge() { try { await ensureSquadKeys(); } catch (e) {} _connectSquadBridgeCore(); }
+        async function connectSquadRealtimeBridge() { if (!isSquadAccountActive()) return; try { await ensureSquadKeys(); } catch (e) {} _connectSquadBridgeCore(); }
         function _connectSquadBridgeCore() {
             try {
                 if (!navigator.onLine) return;
                 if (squadWs && (squadWs.readyState === WebSocket.OPEN || squadWs.readyState === WebSocket.CONNECTING)) return;
                 if (squadWs) { try { squadWs.close(); } catch (e) {} }
                 const topic = getSquadTopicHash();
-                const wsUrl = `wss://ntfy.sh/${topic}/ws?since=12h`;
+                const wsUrl = `wss://ntfy.sh/${topic}/ws?since=all`;
                 const socket = new WebSocket(wsUrl);
                 squadWs = socket;
                 socket.onopen = () => {
@@ -4878,9 +4961,10 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
 
         let _broadcastTimer = null;
         function broadcastSquadUpdate(changedKey) {
+            if (!isSquadAccountActive()) return;
             clearTimeout(_broadcastTimer);
             _broadcastTimer = setTimeout(async () => {
-                if (!navigator.onLine) return;
+                if (!navigator.onLine || !isSquadAccountActive()) return;
                 await ensureSquadKeys();
                 const topic = getSquadTopicHash();
                 const payload = buildSquadSyncPayload(changedKey);
@@ -5120,19 +5204,15 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             return `SHILLA|${acc.squadCode || 'SHILLA-2026'}|${acc.squadPass || '2026'}|${slot}|${cleanNames}|${tx}|${cx}|${sy}|${cl}`;
         }
 
+        function isSquadAccountActive() {
+            const acc = state.squadAccount || {};
+            return !!(acc.isConfigured && (acc.squadCode || '').trim() && (acc.squadPass || '').trim());
+        }
+
         function ensureSavedSquadsList() {
-            if (!Array.isArray(state.savedSquads)) {
-                state.savedSquads = [
-                    {
-                        squadCode: state.squadAccount.squadCode || 'SHILLA-2026',
-                        squadPass: state.squadAccount.squadPass || '2026',
-                        deviceName: state.squadAccount.deviceName || 'موبايل الشلة',
-                        avatar: state.squadAccount.avatar || '🦁',
-                        lastUsed: Date.now()
-                    }
-                ];
-            }
-            const curCode = (state.squadAccount.squadCode || 'SHILLA-2026').toUpperCase();
+            if (!Array.isArray(state.savedSquads)) state.savedSquads = [];
+            if (!isSquadAccountActive()) return;
+            const curCode = (state.squadAccount.squadCode || '').trim().toUpperCase();
             const existing = state.savedSquads.find(s => (s.squadCode || '').toUpperCase() === curCode);
             if (existing) {
                 existing.squadPass = state.squadAccount.squadPass;
@@ -5141,7 +5221,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             } else {
                 state.savedSquads.unshift({
                     squadCode: curCode,
-                    squadPass: state.squadAccount.squadPass || '2026',
+                    squadPass: state.squadAccount.squadPass,
                     deviceName: state.squadAccount.deviceName || 'موبايل الشلة',
                     avatar: state.squadAccount.avatar || '🦁',
                     lastUsed: Date.now()
@@ -5189,8 +5269,10 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
             const randNum = Math.floor(100 + Math.random() * 900);
             const newCode = 'SHILLA-' + randNum;
             const newPass = String(Math.floor(1000 + Math.random() * 9000));
+            state.squadAccount.isConfigured = true;
             state.squadAccount.squadCode = newCode;
             state.squadAccount.squadPass = newPass;
+            if (!state.squadAccount.deviceName) state.squadAccount.deviceName = 'موبايل ' + Math.floor(10 + Math.random() * 89);
             ensureSavedSquadsList();
             onlineDevicesMap = {};
             saveState('players', true);
@@ -5200,6 +5282,10 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
         }
 
         async function pullCloudHistorySnapshot(manualNotify) {
+            if (!isSquadAccountActive()) {
+                if (manualNotify) { showToast('⚠️ أنشئ حساب شلة أو انضم لغرفة أولاً'); openSyncModal(); }
+                return;
+            }
             if (!navigator.onLine) {
                 if (manualNotify) showToast('⚠️ لا يوجد اتصال بالإنترنت حالياً');
                 return;
@@ -5208,7 +5294,7 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 if (manualNotify) showToast('⏳ جاري سحب أحدث النتائج والأرشيف من السحابة...');
                 await ensureSquadKeys();
                 const topic = getSquadTopicHash();
-                const res = await fetch(`https://ntfy.sh/${topic}/json?poll=1&since=12h`);
+                const res = await fetch(`https://ntfy.sh/${topic}/json?poll=1&since=all`);
                 if (!res.ok) throw new Error('Cloud fetch failed');
                 const text = await res.text();
                 const lines = text.split('\n').filter(Boolean);
@@ -5245,8 +5331,10 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                     const line = clean.slice(clean.indexOf('SHILLA|')).split(/\r?\n/)[0].trim();
                     const parts = line.split('|');
                     if (parts.length >= 3) {
+                        state.squadAccount.isConfigured = true;
                         state.squadAccount.squadCode = parts[1].trim().toUpperCase();
                         state.squadAccount.squadPass = parts[2].trim();
+                        if (!state.squadAccount.deviceName) state.squadAccount.deviceName = 'موبايل ' + Math.floor(10 + Math.random() * 89);
                         if (parts[3]) state.activeTableSlot = parts[3] === '2' ? 'table2' : 'table1';
                         if (parts[4]) {
                             const names = parts[4].split(',');
@@ -5505,16 +5593,38 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
 
         function renderLiveSection() {
             ensureSavedSquadsList();
+            const hasAcc = isSquadAccountActive();
             const ind = document.getElementById('liveHeaderIndicator');
-            const code = state.squadAccount.squadCode || 'SHILLA-2026';
+            const code = hasAcc ? state.squadAccount.squadCode : 'بدون حساب';
             if (ind) {
-                ind.textContent = wsConnected ? `🟢 ${code}` : (navigator.onLine ? `🟡 ${code}` : '⚪ أوفلاين');
-                ind.className = 'badge ' + (wsConnected ? 'badge-emerald' : 'badge-gold');
+                if (!hasAcc) {
+                    ind.textContent = '⚪ أوفلاين';
+                    ind.className = 'badge badge-gold';
+                } else {
+                    ind.textContent = wsConnected ? `🟢 ${code}` : (navigator.onLine ? `🟡 ${code}` : '⚪ أوفلاين');
+                    ind.className = 'badge ' + (wsConnected ? 'badge-emerald' : 'badge-gold');
+                }
             }
             const hl = document.getElementById('headerAccountLabel');
-            if (hl) hl.textContent = `${state.squadAccount.avatar || '🦁'} ${code} (${state.squadAccount.deviceName})`;
+            if (hl) {
+                hl.textContent = hasAcc
+                    ? `${state.squadAccount.avatar || '🦁'} ${code} (${state.squadAccount.deviceName})`
+                    : '👤 إنشاء / دخول حساب شلة';
+            }
             const lm = document.getElementById('liveMyAccountName');
-            if (lm) lm.textContent = `${state.squadAccount.avatar || '🦁'} ${code} • ${state.squadAccount.deviceName}`;
+            if (lm) {
+                lm.textContent = hasAcc
+                    ? `${state.squadAccount.avatar || '🦁'} ${code} • ${state.squadAccount.deviceName}`
+                    : '🔐 لم تقم بإنشاء حساب شلة بعد';
+            }
+            const pingTxt = document.getElementById('liveCloudPingText');
+            if (pingTxt) {
+                pingTxt.textContent = hasAcc ? 'متصل ومشفر تلقائياً 🔒' : 'وضع محلي — أنشئ حساباً للمزامنة';
+            }
+            const unconfBanner = document.getElementById('unconfiguredAccountBanner');
+            if (unconfBanner) unconfBanner.classList.toggle('hidden', hasAcc);
+            const qrCard = document.querySelector('.qr-pass-card');
+            if (qrCard) qrCard.classList.toggle('hidden', !hasAcc);
             const avBox = document.getElementById('liveMyAvatarBox');
             if (avBox) avBox.textContent = state.squadAccount.avatar || '🦁';
 
@@ -5640,9 +5750,10 @@ body.in-game #topPlayersBar,body.in-game #headerAccountLabel{display:none!import
                 showToast('⚠️ أدخل كود الشلة وكلمة السر أولاً');
                 return;
             }
+            state.squadAccount.isConfigured = true;
             state.squadAccount.squadCode = code;
             state.squadAccount.squadPass = pass;
-            if (dev) state.squadAccount.deviceName = dev;
+            state.squadAccount.deviceName = dev || state.squadAccount.deviceName || ('موبايل ' + Math.floor(10 + Math.random() * 89));
             ensureSavedSquadsList();
             onlineDevicesMap = {};
             saveState('players', true);
@@ -5936,18 +6047,21 @@ document.addEventListener('click', ev => {
             }
         }
 
+        function updateFloatingMusicFabVisibility() {
+            const fab = document.getElementById('floatingMusicFab');
+            if (!fab) return;
+            const inActivePlay = document.body.classList.contains('in-game');
+            fab.style.display = inActivePlay ? 'inline-flex' : 'none';
+        }
         const _origSyncGameChrome = syncGameChrome;
         syncGameChrome = function(k) {
             _origSyncGameChrome(k);
-            const fab = document.getElementById('floatingMusicFab');
-            if (fab) fab.style.display = 'inline-flex';
+            updateFloatingMusicFabVisibility();
         };
         const _origSwitchTab = switchTab;
         switchTab = function(tabId) {
             _origSwitchTab(tabId);
-            const isGame = ['trix','complex','syrian41','classic'].includes(tabId);
-            const fab = document.getElementById('floatingMusicFab');
-            if (fab) fab.style.display = isGame ? 'inline-flex' : 'none';
+            updateFloatingMusicFabVisibility();
         };
 
         // =================================================================
@@ -6485,7 +6599,7 @@ document.addEventListener('click', ev => {
                 if (cached.imgUrl) displayGlobalPromoAdModal(cached);
                 if (cached.audioUrl) startGlobalBroadcastAudio(cached);
 
-                if (cached.isPublisherDevice && navigator.onLine && (Date.now() - (cached.ts || 0) > 4 * 3600 * 1000)) {
+                if (cached.isPublisherDevice && navigator.onLine && (Date.now() - (cached.ts || 0) > 3600 * 1000)) {
                     cached.ts = Date.now();
                     saveBroadcastToIDB(cached);
                     sendChunkedGlobalPayload(cached).catch(() => {});
@@ -6515,9 +6629,41 @@ document.addEventListener('click', ev => {
             }
         }, 20000);
 
+        function completeWelcomeOnboarding(withSave) {
+            state.onboardingDone = true;
+            if (withSave) {
+                for (let i = 0; i < 4; i++) {
+                    const v = (document.getElementById('onbP' + i).value || '').trim();
+                    if (v) state.players[i] = v;
+                }
+                const dev = (document.getElementById('onbDeviceName').value || '').trim();
+                const code = (document.getElementById('onbSquadCode').value || '').trim().toUpperCase();
+                const pass = (document.getElementById('onbSquadPass').value || '').trim();
+                if (code && pass) {
+                    state.squadAccount.isConfigured = true;
+                    state.squadAccount.squadCode = code;
+                    state.squadAccount.squadPass = pass;
+                    state.squadAccount.deviceName = dev || ('موبايل ' + Math.floor(10 + Math.random() * 89));
+                    ensureSavedSquadsList();
+                    connectSquadRealtimeBridge();
+                    setTimeout(() => pullCloudHistorySnapshot(false), 500);
+                } else if (dev) {
+                    state.squadAccount.deviceName = dev;
+                }
+            }
+            saveState('players', !isSquadAccountActive());
+            closeModal('welcomeOnboardingModal');
+            renderAll();
+            showToast('👑 أهلاً بكم في شِلّة بلس!');
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
+            try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {}); } catch (e) {}
             requestKeepScreenAwake();
             setTimeout(checkAndShowGlobalPromoAdOnStartup, 1000);
+            if (!state.onboardingDone) {
+                setTimeout(() => openModal('welcomeOnboardingModal'), 450);
+            }
         });
 </script>
 </body>
